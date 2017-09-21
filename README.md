@@ -1,4 +1,5 @@
-# FormeFrontend
+# Forme Frontend
+Application web de gestion de devis, factures et missions pour un auto-entrepreneur
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.2.
 
