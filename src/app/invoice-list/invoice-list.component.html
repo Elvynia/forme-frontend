@@ -1,0 +1,13 @@
+<div class="fm-list">
+	<h3>{{title}}</h3>
+	<table>
+		<tbody>
+			<tr *ngFor="let invoice of filteredData | async | slice:0:limit; let i = index;">
+				<td>{{invoice.id}}</td>
+				<td>CLIENT</td>
+				<td>MONTANT €</td>
+			</tr>
+		</tbody>
+	</table>
+	<p class="fm-moreless" *ngIf="showMoreLess"><a (click)="switchLimit()">{{ limitOn ? 'Plus' : 'Moins' }} d'entreprises</a></p>
+</div>
