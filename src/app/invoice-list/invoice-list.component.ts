@@ -2,6 +2,8 @@ import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/cor
 
 import { Observable } from 'rxjs/Rx';
 
+import { Event, EVENT } from '../event';
+import { Company } from '../company';
 import { InvoiceService } from '../invoice.service';
 
 @Component({
@@ -22,7 +24,7 @@ export class InvoiceListComponent implements OnInit, OnChanges {
 		return this.limitOn ? this._limit : this.data.length;
 	}
 
-	constructor(private companyService: InvoiceService) {
+	constructor(private invoiceService: InvoiceService) {
 		this._limit = 5;
 		this.limitOn = true;
 		this.showMoreLess = true;
@@ -30,10 +32,16 @@ export class InvoiceListComponent implements OnInit, OnChanges {
 
 	ngOnInit() {
 		this.refreshLimit();
-		this.companyService.list().subscribe((data: any[]) => {
-			this.data = data;
-			this.reloadFilter();
-		});
+		this.invoiceService.list()
+			.subscribe((data: any) => {
+				this.data = data;
+				this.reloadFilter();
+			});
+		this.invoiceService.eventsByType(EVENT.ADD)
+			.subscribe((data: any) => {
+				this.data.push(data);
+				this.reloadFilter();
+			});
 	}
 
 	ngOnChanges(changes: SimpleChanges) {

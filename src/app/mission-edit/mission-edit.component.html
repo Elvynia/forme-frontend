@@ -1,0 +1,46 @@
+<h2>Créer une nouvelle mission</h2>
+<form (ngSubmit)="submit()" #model="ngForm" [ngClass]="{'submitted': model.form.valid}">
+	<div class="form-group">
+		<label for="clientId">Client : </label>
+		<select id="clientId" name="clientId" class="form-control"
+			[(ngModel)]="mission.clientId">
+			<option value="">Sélectionner...</option>
+			<option *ngFor="let company of companies" [value]="company.id">{{company.name}} ({{company.trigram}})</option>
+		</select>
+	</div>
+	<div class="form-group">
+		<label for="duration">Durée (en heures) : </label>
+		<input type="number" id="duration" name="duration" class="form-control"
+			[(ngModel)]="mission.duration" min="O" required />
+	</div>
+	<div class="form-group">
+		<label for="tjm">TJM (€/j) : </label>
+		<input type="number" id="tjm" name="tjm" class="form-control" [(ngModel)]="mission.tjm" min="O" required />
+	</div>
+	<div class="form-group">
+		<label for="label">Label : </label>
+		<input id="label" name="label" class="form-control" [(ngModel)]="mission.label" required />
+	</div>
+	<div class="form-group">
+		<label for="title">Titre : </label>
+		<input id="title" name="title" class="form-control" [(ngModel)]="mission.title" required />
+	</div>
+	<div class="form-group">
+		<label for="place">Adresse : </label>
+		<input id="place" name="place" class="form-control" [(ngModel)]="mission.place" required />
+	</div>
+	<div class="form-group">
+		<label for="type">Type : </label>
+		<select id="type" name="type" class="form-control">
+			<option value="0">DEV</option>
+			<option value="1" selected>Formation</option>
+		</select>
+	</div>
+	<div class="form-group">
+		<label class="checkbox-inline">
+			<input type="checkbox" name="travelCosts" [(ngModel)]="mission.travelCosts" required />
+			Frais de déplacement
+		</label>
+	</div>
+	<button class="btn btn-primary">Valider</button>
+</form>

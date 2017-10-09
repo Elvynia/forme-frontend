@@ -1,11 +1,24 @@
 <div class="fm-list">
 	<h3>{{title}}</h3>
-	<table>
+	<table class="table table-stripe">
+		<thead>
+			<tr>
+				<td>Id</td>
+				<td>Client</td>
+				<td>Montant</td>
+				<td>En attente</td>
+				<td>Payée</td>
+			</tr>
+		</thead>
 		<tbody>
-			<tr *ngFor="let invoice of filteredData | async | slice:0:limit; let i = index;">
-				<td>{{invoice.id}}</td>
-				<td>CLIENT</td>
-				<td>MONTANT €</td>
+			<tr *ngFor="let invoice of filteredData | async | slice:0:limit;">
+				<td>{{ invoice.id }}</td>
+				<td>
+					<app-company-ref [id]="invoice.clientId"></app-company-ref>
+				</td>
+				<td>{{ invoice.amount }} €</td>
+				<td>{{ invoice.pending ? 'Y' : 'N' }}</td>
+				<td>{{ invoice.received ? 'Y' : 'N' }}</td>
 			</tr>
 		</tbody>
 	</table>

@@ -1,26 +1,15 @@
 import { Injectable } from '@angular/core';
-
-import { Observable } from 'rxjs/Rx';
+import { HttpClient } from '@angular/common/http';
 
 import { Invoice } from './invoice';
+import { BaseService } from './base.service';
 
 @Injectable()
-export class InvoiceService {
-
-  constructor() { }
-
-  create(invoice: Invoice): Observable<Invoice> {
-  	return Observable.of(new Invoice(Math.random()));
-  }
-
-  list(): Observable<Array<Invoice>> {
-  	return Observable.of([
-  		new Invoice(1),
-  		new Invoice(2),
-  		new Invoice(3),
-  		new Invoice(4),
-  		new Invoice(5),
-  		new Invoice(6)
-  		]);
-  }
+export class InvoiceService extends BaseService<Invoice> {
+	
+	constructor(HttpClient: HttpClient) {
+		super();
+		this.httpClient = HttpClient;
+		this.apiPath += '/invoice';
+	}
 }

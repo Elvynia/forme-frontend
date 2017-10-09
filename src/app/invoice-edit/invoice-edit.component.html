@@ -1,3 +1,34 @@
-<p>
-  invoice-edit works!
-</p>
+<h2>Créer une nouvelle facture</h2>
+<form (ngSubmit)="submit()" #model="ngForm" [ngClass]="{'submitted': model.form.valid}">
+	<div class="form-group">
+		<label for="clientId">Client : </label>
+		<select id="clientId" name="clientId" class="form-control"
+			[(ngModel)]="invoice.clientId">
+			<option value="">Sélectionner...</option>
+			<option *ngFor="let company of companies" [value]="company.id">{{company.name}} ({{company.trigram}})</option>
+		</select>
+	</div>
+	<div class="form-group">
+		<label for="amount">Montant : </label>
+		<input type="number" id="amount" name="amount" class="form-control"
+			[(ngModel)]="invoice.amount" min="O" required />
+	</div>
+	<div class="form-group">
+		<label for="creationDate">Date de création :</label>
+		<input type="date" id="creationDate" name="creationDate" class="form-control"
+			[(ngModel)]="invoice.creationDate" />
+	</div>
+	<div class="form-group">
+		<label for="pending" class="checkbox-inline">
+			<input type="checkbox" id="pending" name="pending"
+				[(ngModel)]="invoice.pending" />
+			En attente
+		</label>
+		<label for="received" class="checkbox-inline">
+			<input type="checkbox" id="received" name="received"
+				[(ngModel)]="invoice.received" />
+			Payée
+		</label>
+	</div>
+	<button class="btn btn-primary" [disabled]="!model.form.valid">Valider</button>
+</form>
