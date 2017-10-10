@@ -1,0 +1,24 @@
+<app-layout-list title="Toutes les missions" [data]="data" [template]="entityTemplate">
+	<ng-container>
+		<th>Id</th>
+		<th>Type</th>
+		<th>Client</th>
+		<th>Durée (h)</th>
+		<th>TJM (€/j)</th>
+		<th>Label</th>
+		<th>Titre</th>
+		<th>Frais</th>
+	</ng-container>
+	<ng-template let-entity #entityTemplate>
+		<td>{{ entity.id }}</td>
+		<td>{{ entity.type }}</td>
+		<td>
+			<app-company-ref [id]="entity.clientId"></app-company-ref>
+		</td>
+		<td>{{ entity.duration }}</td>
+		<td>{{ entity.tjm }}</td>
+		<td>{{ entity.label }}</td>
+		<td>{{ entity.title }}</td>
+		<td>{{ entity.travelCosts ? 'Y' : 'N' }}</td>
+	</ng-template>
+</app-layout-list>

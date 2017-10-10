@@ -1,0 +1,16 @@
+<app-layout-list title="Tous les clients" [data]="data" [template]="entityTemplate">
+	<ng-container>
+		<th>Id</th>
+		<th>Trigramme</th>
+		<th>Nom</th>
+		<th>SIREN</th>
+		<th>RCS</th>
+	</ng-container>
+	<ng-template let-entity #entityTemplate>
+		<td>{{ entity.id }}</td>
+		<td>{{ entity.trigram }}</td>
+		<td>{{ entity.name }}</td>
+		<td>{{ entity.siren }}</td>
+		<td>{{ entity.rcs }}</td>
+	</ng-template>
+</app-layout-list>

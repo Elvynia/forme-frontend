@@ -4,15 +4,10 @@ export class Estimate implements Entity {
 	id: number;
 	amount: number;
 	date: number;
-	private client: any;
+	signed: boolean;
+	clientId: number;
 
-	public get clientId(): number {
-		return this.client && this.client.id;
-	}
-
-	public set clientId(id: number) {
-		this.client = {
-			id: id
-		};
+	constructor(id?: number) {
+		this.id = id;
 	}
 }

@@ -1,0 +1,38 @@
+.fm-list {
+	margin: 10px;
+	border: 1px solid #ccc;
+	padding: 20px;
+	border-radius: 5px;
+	box-shadow: 2px 4px 8px #ccc;
+}
+
+.fm-list tr {
+	background-color: rgba(96, 125, 139, 0.18);
+}
+
+.fm-list tr:nth-child(2n) {
+	background-color: rgba(96, 125, 139, 0.55);
+}
+
+/* Colonne 2 des tableaux => entreprises */
+.fm-list tr td:nth-child(2n) {
+	width: 250px;
+}
+
+.fm-list td {
+	padding: 5px;
+}
+
+.fm-list table {
+	width: 100%;
+}
+
+.fm-moreless {
+	padding-top: 10px;
+	margin-top: 10px;
+	border-top: 1px dotted #aaa;
+}
+
+.fm-moreless:hover {
+	cursor: pointer;
+}

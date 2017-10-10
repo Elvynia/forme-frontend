@@ -26,31 +26,34 @@ export abstract class BaseService<ENTITY extends Entity> {
       .map((event: Event) => event.data);
   }
 
-  create(entity: ENTITY): Observable<any> {
+  create(entity: ENTITY): Observable<ENTITY> {
     this.httpClient.post(this.apiPath, entity)
       .subscribe((entity) => {
         this.subject.next(new Event(EVENT.ADD, entity));
       });
-  	return this.eventsByType(EVENT.ADD);
+  	return this.eventsByType(EVENT.ADD)
+      .filter((data:ENTITY) => data.id === entity.id);
   }
 
-  delete(entity: ENTITY): Observable<any> {
+  delete(entity: ENTITY): Observable<ENTITY> {
     this.httpClient.delete(this.apiPath + '/' + entity.id)
       .subscribe((entity: Entity) => {
         this.subject.next(new Event(EVENT.DELETE, entity));
       })
-    return this.eventsByType(EVENT.DELETE);
+    return this.eventsByType(EVENT.DELETE)
+      .filter((data:ENTITY) => data.id === entity.id);
   }
 
-  get(id: number): Observable<any> {
+  get(id: number): Observable<ENTITY> {
     this.httpClient.get(this.apiPath + '/' + id)
-      .subscribe((data: any) => {
+      .subscribe((data: ENTITY) => {
         this.subject.next(new Event(EVENT.GET, data));
       });
-    return this.eventsByType(EVENT.GET);
+    return this.eventsByType(EVENT.GET)
+      .filter((data:ENTITY) => data.id === id);
   }
 
-  list(): Observable<any> {
+  list(): Observable<Array<ENTITY>> {
     this.httpClient.get(this.apiPath)
       .subscribe((list: Array<Entity>) => {
         this.subject.next(new Event(EVENT.LIST, list));
@@ -58,11 +61,12 @@ export abstract class BaseService<ENTITY extends Entity> {
   	return this.eventsByType(EVENT.LIST);
   }
 
-  update(entity: ENTITY): Observable<any> {
+  update(entity: ENTITY): Observable<ENTITY> {
     this.httpClient.put(this.apiPath, entity)
       .subscribe((entity: Entity) => {
         this.subject.next(new Event(EVENT.UPDATE, entity));
       })
-    return this.eventsByType(EVENT.LIST);
+    return this.eventsByType(EVENT.LIST)
+      .filter((data:ENTITY) => data.id === entity.id);
   }
 }

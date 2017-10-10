@@ -1,3 +1,18 @@
-<p>
-  estimate-list works!
-</p>
+<app-layout-list title="Tous les devis" [data]="data" [template]="entityTemplate">
+	<ng-container>
+		<td>Id</td>
+		<td>Client</td>
+		<td>Montant</td>
+		<td>Date</td>
+		<td>Signé ?</td>
+	</ng-container>
+	<ng-template let-estimate #entityTemplate>
+		<td>{{ estimate.id }}</td>
+		<td>
+			<app-company-ref [id]="estimate.clientId"></app-company-ref>
+		</td>
+		<td>{{ estimate.amount }} €</td>
+		<td>{{ estimate.date | date }}</td>
+		<td>{{ estimate.signed ? 'Y' : 'N' }}</td>
+	</ng-template>
+</app-layout-list>

@@ -1,3 +1,29 @@
-<p>
-  estimate-edit works!
-</p>
+<h2>Créer un nouveau devis</h2>
+<form (ngSubmit)="submit()" #model="ngForm">
+	<div class="form-group">
+		<label for="clientId">Client : </label>
+		<select id="clientId" name="clientId" class="form-control"
+			[(ngModel)]="estimate.clientId">
+			<option value="">Sélectionner...</option>
+			<option *ngFor="let company of companies" [value]="company.id">{{company.name}} ({{company.trigram}})</option>
+		</select>
+	</div>
+	<div class="form-group">
+		<label for="amount">Montant : </label>
+		<input type="number" id="amount" name="amount" class="form-control"
+			[(ngModel)]="estimate.amount" min="O" required />
+	</div>
+	<div class="form-group">
+		<label for="date">Date :</label>
+		<input type="date" id="date" name="date" class="form-control"
+			[(ngModel)]="estimate.date" />
+	</div>
+	<div class="form-group">
+		<label for="signed" class="checkbox-inline">
+			<input type="checkbox" id="signed" name="signed"
+				[(ngModel)]="estimate.signed" />
+			Signé
+		</label>
+	</div>
+	<button class="btn btn-primary" [disabled]="!model.form.valid">Valider</button>
+</form>

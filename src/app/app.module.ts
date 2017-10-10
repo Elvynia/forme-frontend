@@ -20,6 +20,9 @@ import { MessageService } from './message.service';
 import { ROUTES } from './routes';
 import { CompanyRefComponent } from './company-ref/company-ref.component';
 import { MissionEditComponent } from './mission-edit/mission-edit.component';
+import { LayoutListComponent } from './layout-list/layout-list.component';
+import { MissionListComponent } from './mission-list/mission-list.component';
+import { CompanyListComponent } from './company-list/company-list.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,10 @@ import { MissionEditComponent } from './mission-edit/mission-edit.component';
     InvoiceEditComponent,
     CompanyEditComponent,
     CompanyRefComponent,
-    MissionEditComponent
+    MissionEditComponent,
+    LayoutListComponent,
+    MissionListComponent,
+    CompanyListComponent
   ],
   imports: [
     BrowserModule,

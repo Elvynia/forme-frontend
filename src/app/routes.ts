@@ -7,7 +7,7 @@ import { MissionEditComponent } from './mission-edit/mission-edit.component';
 
 export const ROUTES: Array<Route> = [
 	{
-		path: '',
+		path: 'invoice',
 		component: InvoiceEditComponent
 	},
 	{

@@ -1,26 +1,18 @@
-<div class="fm-list">
-	<h3>{{title}}</h3>
-	<table class="table table-stripe">
-		<thead>
-			<tr>
-				<td>Id</td>
-				<td>Client</td>
-				<td>Montant</td>
-				<td>En attente</td>
-				<td>Payée</td>
-			</tr>
-		</thead>
-		<tbody>
-			<tr *ngFor="let invoice of filteredData | async | slice:0:limit;">
-				<td>{{ invoice.id }}</td>
-				<td>
-					<app-company-ref [id]="invoice.clientId"></app-company-ref>
-				</td>
-				<td>{{ invoice.amount }} €</td>
-				<td>{{ invoice.pending ? 'Y' : 'N' }}</td>
-				<td>{{ invoice.received ? 'Y' : 'N' }}</td>
-			</tr>
-		</tbody>
-	</table>
-	<p class="fm-moreless" *ngIf="showMoreLess"><a (click)="switchLimit()">{{ limitOn ? 'Plus' : 'Moins' }} d'entreprises</a></p>
-</div>
+<app-layout-list title="Toutes les factures" [data]="data" [template]="entityTemplate">
+	<ng-container>
+		<th>Id</th>
+		<th>Client</th>
+		<th>Montant</th>
+		<th>En attente</th>
+		<th>Payée</th>
+	</ng-container>
+	<ng-template let-entity #entityTemplate>
+		<td>{{ entity.id }}</td>
+		<td>
+			<app-company-ref [id]="entity.clientId"></app-company-ref>
+		</td>
+		<td>{{ entity.amount }} €</td>
+		<td>{{ entity.pending ? 'Y' : 'N' }}</td>
+		<td>{{ entity.received ? 'Y' : 'N' }}</td>
+	</ng-template>
+</app-layout-list>

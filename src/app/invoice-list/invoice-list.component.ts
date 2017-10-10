@@ -11,58 +11,16 @@ import { InvoiceService } from '../invoice.service';
   templateUrl: './invoice-list.component.html',
   styleUrls: ['./invoice-list.component.css']
 })
-export class InvoiceListComponent implements OnInit, OnChanges {
-	@Input() title: string;
-	@Input() filter: (a:any, b:any) => number;
-	@Input() _limit: number;
-	private data: any[];
-	filteredData: Observable<any[]>;
-	limitOn: boolean;
-	showMoreLess: boolean;
-
-	get limit(): number {
-		return this.limitOn ? this._limit : this.data.length;
-	}
+export class InvoiceListComponent implements OnInit {
+	data: any[];
 
 	constructor(private invoiceService: InvoiceService) {
-		this._limit = 5;
-		this.limitOn = true;
-		this.showMoreLess = true;
 	}
 
 	ngOnInit() {
-		this.refreshLimit();
 		this.invoiceService.list()
-			.subscribe((data: any) => {
-				this.data = data;
-				this.reloadFilter();
-			});
+			.subscribe((data: any) => this.data = data);
 		this.invoiceService.eventsByType(EVENT.ADD)
-			.subscribe((data: any) => {
-				this.data.push(data);
-				this.reloadFilter();
-			});
-	}
-
-	ngOnChanges(changes: SimpleChanges) {
-		if (changes['limit']) {
-			this.refreshLimit();
-		}
-	}
-
-	public switchLimit() {
-		this.limitOn = !this.limitOn;
-	}
-
-	private refreshLimit() {
-		if (this._limit <= 0) {
-			this.showMoreLess = false;
-		} else {
-			this.showMoreLess = true;
-		}
-	}
-
-	private reloadFilter() {
-		this.filteredData = Observable.of(this.data).map((list) => list.sort(this.filter));
+			.subscribe((data: any) => this.data.push(data));
 	}
 }

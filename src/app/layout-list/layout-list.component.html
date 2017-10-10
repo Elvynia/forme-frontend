@@ -1,0 +1,16 @@
+<div class="fm-list">
+	<h3>{{title}}</h3>
+	<table class="table table-stripe">
+		<thead>
+			<tr>
+				<ng-content select="th"></ng-content>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let entity of filteredData | async | slice:0:limit;">				
+				<ng-container *ngTemplateOutlet="template; context: {$implicit: entity}"></ng-container>
+			</tr>
+		</tbody>
+	</table>
+	<p class="fm-moreless" *ngIf="showMoreLess"><a (click)="switchLimit()">{{ limitOn ? 'Plus' : 'Moins' }} de résultats</a></p>
+</div>
