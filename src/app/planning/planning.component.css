@@ -1,0 +1,9 @@
+div.planning-month h2 {
+	text-align: center;
+}
+
+div.planning-month {
+    width: 45%;
+    float: left;
+    margin-left: 60px;
+}

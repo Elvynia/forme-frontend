@@ -1,5 +1,8 @@
 <div class="fm-list">
-	<h3>{{title}}</h3>
+	<h3>
+		{{title}}
+		<app-edit-toolbar [data]="selectedData" (onModify)="modify($event)" (onDelete)="delete($event)"></app-edit-toolbar>
+	</h3>
 	<table class="table table-stripe">
 		<thead>
 			<tr>
@@ -7,7 +10,8 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr *ngFor="let entity of filteredData | async | slice:0:limit;">				
+			<tr *ngFor="let entity of filteredData | async | slice:0:limit;index as i"
+				(click)="selected(entity, i)" [ngClass]="{ selected: selectedData[i] }">
 				<ng-container *ngTemplateOutlet="template; context: {$implicit: entity}"></ng-container>
 			</tr>
 		</tbody>

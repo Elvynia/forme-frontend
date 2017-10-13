@@ -1,6 +1,6 @@
-import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, Output, OnInit, OnChanges, SimpleChanges, EventEmitter } from '@angular/core';
 
-import { Observable } from 'rxjs/Rx';
+import { Observable, BehaviorSubject } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-layout-list',
@@ -8,12 +8,16 @@ import { Observable } from 'rxjs/Rx';
   styleUrls: ['./layout-list.component.css']
 })
 export class LayoutListComponent implements OnInit {
-	@Input() title: string;
+	@Input('listTitle') title: string;
 	@Input() filter: (a:any, b:any) => number;
 	@Input('limit') _limit: number;
 	@Input() data: any[];
 	@Input() template: any;
+	@Output() onModify: EventEmitter<any>;
+	@Output() onDelete: EventEmitter<any>;
+	@Output() onSelection: BehaviorSubject<any>;
 	filteredData: Observable<any[]>;
+	selectedData: any[];
 	limitOn: boolean;
 	showMoreLess: boolean;
 
@@ -25,6 +29,10 @@ export class LayoutListComponent implements OnInit {
 		this._limit = 5;
 		this.limitOn = true;
 		this.showMoreLess = true;
+		this.selectedData = [];
+		this.onModify = new EventEmitter();
+		this.onDelete = new EventEmitter();
+		this.onSelection = new BehaviorSubject(null);
 	}
 
 	ngOnInit() {
@@ -38,11 +46,35 @@ export class LayoutListComponent implements OnInit {
 		}
 		if (changes['data']) {
 			this.reloadFilter();
+			this.selectedData = [];
+			this.nextSelection();
 		}
 	}
 
-	public switchLimit() {
+	selected(selectedData: any, index: number) {
+		if(this.selectedData[index]) {
+			this.selectedData[index] = null;
+		} else {
+			this.selectedData[index] = selectedData;
+		}
+		this.nextSelection();
+	}
+
+	switchLimit() {
 		this.limitOn = !this.limitOn;
+	}
+
+	modify(selectedData: any[]) {
+		this.onModify.next(selectedData.filter((data) => data));
+	}
+
+	delete(selectedData: any[]) {
+		this.onDelete.next(selectedData.filter((data) => data));
+	}
+
+	private nextSelection() {
+		let current = this.selectedData.filter((data) => data);
+		this.onSelection.next(current);
 	}
 
 	private refreshLimit() {

@@ -14,6 +14,10 @@
 	background-color: rgba(96, 125, 139, 0.55);
 }
 
+.fm-list tr.selected {
+	background-color: #1cc;
+}
+
 /* Colonne 2 des tableaux => entreprises */
 .fm-list tr td:nth-child(2n) {
 	width: 250px;

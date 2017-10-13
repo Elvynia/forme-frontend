@@ -1,4 +1,5 @@
 import { Component, OnInit, OnChanges, Input, SimpleChanges } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { Event, EVENT } from '../event';
 import { Company } from '../company';
@@ -17,7 +18,8 @@ export class EstimateEditComponent implements OnInit {
 	companies: Array<Company>;
 
 	constructor(private estimateService: EstimateService,
-		private companyService: CompanyService) {
+		private companyService: CompanyService,
+		private route: ActivatedRoute) {
 		this.new = true;
 		this.estimate = new Estimate();
 	}
@@ -27,6 +29,13 @@ export class EstimateEditComponent implements OnInit {
 		.subscribe((data: Array<Company>) => {
 			this.companies = data;
 		});
+		this.route.paramMap.subscribe((paramMap: ParamMap) => {
+            if (paramMap.has('id')) {
+                this.new = false;
+                this.estimateService.get(parseInt(paramMap.get('id')))
+                    .subscribe((estimate: Estimate) => this.estimate = estimate);
+            }
+        });
 	}
 
 	ngOnChanges(changes: SimpleChanges) {

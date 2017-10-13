@@ -1,4 +1,5 @@
-<app-layout-list title="Toutes les missions" [data]="data" [template]="entityTemplate">
+<app-layout-list listTitle="Toutes les missions" [data]="data" [template]="entityTemplate"
+	(onModify)="modifySelected($event)" (onDelete)="deleteSelected($event)">
 	<ng-container>
 		<th>Id</th>
 		<th>Type</th>

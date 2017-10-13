@@ -7,7 +7,7 @@ import { Estimate } from './estimate';
 @Injectable()
 export class EstimateService extends BaseService<Estimate> {
 
-  constructor(HttpClient: HttpClient) {
+	constructor(HttpClient: HttpClient) {
 		super();
 		this.httpClient = HttpClient;
 		this.apiPath += '/estimate';

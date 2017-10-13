@@ -37,7 +37,7 @@ export abstract class BaseService<ENTITY extends Entity> {
 
   delete(entity: ENTITY): Observable<ENTITY> {
     this.httpClient.delete(this.apiPath + '/' + entity.id)
-      .subscribe((entity: Entity) => {
+      .subscribe(() => {
         this.subject.next(new Event(EVENT.DELETE, entity));
       })
     return this.eventsByType(EVENT.DELETE)
