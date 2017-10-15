@@ -1,11 +1,38 @@
+app-planning {
+	position: fixed;
+	left: 0;
+	top: 80px;
+	right: 0;
+	bottom: 0;
+
+}
+
 div.planning-month h2 {
 	text-align: center;
 }
 
 div.planning-month {
+	position: absolute;
+	left: 50%;
+	top: 50%;
 	width: 45%;
-	float: left;
-	margin-left: 60px;
+	height: 45%;
+}
+
+div.planning-month:nth-child(1) {
+	transform: translate(-105%, -100%);
+}
+
+div.planning-month:nth-child(2) {
+	transform: translate(5%, -100%);
+}
+
+div.planning-month:nth-child(3) {
+	transform: translate(-105%, 0%);
+}
+
+div.planning-month:nth-child(4) {
+	transform: translate(5%, 0%);
 }
 
 .planning-nav {

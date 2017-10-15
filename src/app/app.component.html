@@ -23,12 +23,13 @@
 				<a class="nav-link" routerLink="/agenda">Agenda</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" routerLink="/planning">Planning</a>
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
+					routerLink="/planning">Planning<span class="caret"></span></a>
 				<ul class="dropdown-menu" role="menu">
+					<li class="nav-item">
+						<a class="nav-link" routerLink="/event">Créer un événement</a>
+					</li>
 				</ul>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" routerLink="/event">Créer un événement</a>
 			</li>
 		</ul>
 		<form class="navbar-form navbar-right" role="search">

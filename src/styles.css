@@ -3,14 +3,17 @@
 
 @import url('../node_modules/angular-calendar/dist/css/angular-calendar.css');
 
-/* Dashboard */
-div.dashboard {
-	margin: 0 3%;
-	width: 100%;
-	display: inline-block;
-}
-
 div.dashboard div.fm-list {
 	float: left;
 	width: 45%;
+}
+
+.cal-month-view .cal-cell-top {
+	height: 55px;
+	min-height: 0 !important;
+}
+
+.cal-month-view .cal-day-cell {
+	height: 55px;
+    min-height: 0 !important;
 }

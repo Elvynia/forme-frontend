@@ -6,3 +6,11 @@ nav a img {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+/* Dashboard */
+
+div.dashboard {
+	margin: 0 3%;
+	width: 100%;
+	display: inline-block;
+}
