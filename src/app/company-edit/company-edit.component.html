@@ -1,4 +1,4 @@
-<h2>Créer un nouveau client</h2>
+<h2>{{ new ? 'Créer un nouveau client' : 'Mettre un client à jour' }}</h2>
 <form (ngSubmit)="submit()" #model="ngForm" [ngClass]="{'submitted': model.form.valid}">
 	<div class="form-group">
 		<label for="name">Nom :</label>
@@ -18,7 +18,7 @@
 	<div class="form-group">
 		<label for="siret">SIRET :</label>
 		<input id="siret" name="siret" class="form-control"
-			[(ngModel)]="company.siret" minlength="13" maxlength="13">
+			[(ngModel)]="company.siret" minlength="14" maxlength="14">
 	</div>
 	<div class="form-group">
 		<label for="rcs">RCS :</label>

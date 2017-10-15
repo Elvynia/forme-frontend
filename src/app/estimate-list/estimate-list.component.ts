@@ -23,14 +23,23 @@ export class EstimateListComponent implements OnInit {
 		this.estimateService.eventsByType(EVENT.ADD)
 			.subscribe((data: any) => this.data.push(data));
 		this.estimateService.eventsByType(EVENT.DELETE)
-			.subscribe((data: any) => {
-				let index = this.data.findIndex((search) => search.id === data.id);
-				if (index && index >= 0) {
-					this.data.splice(index, 1);
-					this.data = this.data.slice();
-				}
-			});
+			.subscribe((data: any) => this.update(data.id));
+		this.estimateService.eventsByType(EVENT.UPDATE)
+			.subscribe((data: any) => this.update(data.id, data));
 	}
+
+	private update(id: number, estimate?: Estimate) {
+		let index = this.data.findIndex((search) => search.id === id);
+		if (index && index >= 0) {
+			if (estimate) {
+				this.data.splice(index, 1, estimate);
+			} else {
+				this.data.splice(index, 1);
+			}
+			this.data = this.data.slice();
+		}
+	}
+
 
 	modifySelected(selected: any[]) {
 		if (selected && selected[0]) {

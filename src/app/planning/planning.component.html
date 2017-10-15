@@ -6,3 +6,9 @@
 	<mwl-calendar-month-view [viewDate]="calendar.viewDate" [events]="calendar.events" (click)="onDaySelect($event)"
 		(eventClicked)="onEventSelect($event)"></mwl-calendar-month-view>
 </div>
+<div class="planning-nav nav-prev" (click)="incrMonthOffset(-1)">
+	<span><</span>
+</div>
+<div class="planning-nav nav-next" (click)="incrMonthOffset(1)">
+	<span>></span>
+</div>

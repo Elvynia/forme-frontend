@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { Router} from '@angular/router';
+
+import { Observable } from 'rxjs/Rx';
 
 import * as moment from 'moment';
 
@@ -14,10 +16,13 @@ import { EventService } from '../event.service';
 })
 export class PlanningComponent implements OnInit {
 	calendars: Array<Calendar>;
+	events: Array<MissionEvent>;
 	selectedEvents: Array<MissionEvent>;
+	@Input() monthOffset: number;
 
 	constructor(private eventService: EventService,
 		private router: Router) {
+		this.monthOffset = 0;
 		this.calendars = new Array();
 		this.selectedEvents = new Array();
 	}
@@ -25,19 +30,15 @@ export class PlanningComponent implements OnInit {
 	ngOnInit() {
 		this.eventService.list()
 			.subscribe((events: Array<MissionEvent>) => {
-				for (let i = 0; i < events.length; ++i) {
-					events[i] = MissionEvent.build(events[i]);
-				}
-				let today: moment.Moment = moment();
-				let current = new Calendar(today.toDate(), events);
-				let previous = new Calendar(moment().subtract(1, 'months').toDate(), events);
-				this.calendars = [
-					previous,
-					current, 
-					new Calendar(today.add(1, 'months').toDate(), events),
-					new Calendar(today.add(1, 'months').toDate(), events)
-				];
+				this.events = events
+				this.recalculateView()
 			});
+	}
+
+	ngOnChanges(changes: SimpleChanges) {
+		if (changes['viewMonth']) {
+			this.recalculateView();
+		}
 	}
 
 	onEventSelect(data: any) {
@@ -65,8 +66,35 @@ export class PlanningComponent implements OnInit {
 
 	deleteEvents() {
 		if (this.selectedEvents) {
-			this.selectedEvents.forEach((event: MissionEvent) => this.eventService.delete(event));
+			for (let i = 0; i < this.selectedEvents.length; ++i) {
+				let toDelete = this.selectedEvents[i];
+				this.eventService.delete(toDelete);
+				let index = this.events.findIndex((event:MissionEvent) => event.id === toDelete.id);
+				this.events.splice(index, 1);
+			}
 			this.selectedEvents = new Array();
+			this.recalculateView();
 		}
+	}
+
+	incrMonthOffset(offset: number) {
+		this.monthOffset += offset;
+		this.recalculateView();
+	}
+
+	private recalculateView() {
+		let events = [];
+		for (let i = 0; i < this.events.length; ++i) {
+			events[i] = MissionEvent.build(this.events[i]);
+		}
+		let today: moment.Moment = moment().add(this.monthOffset, 'months');
+		let current = new Calendar(today.toDate(), events);
+		let previous = new Calendar(today.subtract(1, 'months').toDate(), events);
+		this.calendars = [
+			previous,
+			current, 
+			new Calendar(today.add(2, 'months').toDate(), events),
+			new Calendar(today.add(1, 'months').toDate(), events)
+		];
 	}
 }

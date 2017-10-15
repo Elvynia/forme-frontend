@@ -5,3 +5,7 @@ form {
 form.submitted input.ng-invalid {
 	border-color: red;
 }
+
+#swapDurationType:hover {
+	cursor: pointer;
+}

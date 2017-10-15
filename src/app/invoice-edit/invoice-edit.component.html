@@ -1,4 +1,4 @@
-<h2>Créer une nouvelle facture</h2>
+<h2>{{ new ? 'Créer une nouvelle facture' : 'Mettre une facture à jour' }}</h2>
 <form (ngSubmit)="submit()" #model="ngForm" [ngClass]="{'submitted': model.form.valid}">
 	<div class="form-group">
 		<label for="clientId">Client : </label>
@@ -16,7 +16,12 @@
 	<div class="form-group">
 		<label for="creationDate">Date de création :</label>
 		<input type="date" id="creationDate" name="creationDate" class="form-control"
-			[(ngModel)]="invoice.creationDate" />
+			[(ngModel)]="invoice.creationDateValue" />
+	</div>
+	<div class="form-group">
+		<label for="label">Label :</label>
+		<input id="label" name="label" class="form-control"
+			[(ngModel)]="invoice.label" />
 	</div>
 	<div class="form-group">
 		<label for="pending" class="checkbox-inline">
@@ -28,6 +33,11 @@
 			<input type="checkbox" id="received" name="received"
 				[(ngModel)]="invoice.received" />
 			Payée
+		</label>
+		<label for="travelC" class="checkbox-inline">
+			<input type="checkbox" id="travelC" name="travelC"
+				[(ngModel)]="invoice.travelCosts" />
+			Frais
 		</label>
 	</div>
 	<button class="btn btn-primary" [disabled]="!model.form.valid">Valider</button>

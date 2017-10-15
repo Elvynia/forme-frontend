@@ -15,6 +15,8 @@ export class MissionEditComponent implements OnInit {
     @Input() mission: Mission;
     @Input() new: boolean;
     companies: Array<Company>;
+    durationH: boolean;
+    duration: number;
 
     constructor(private missionService: MissionService,
         private companyService: CompanyService,
@@ -32,7 +34,10 @@ export class MissionEditComponent implements OnInit {
             if (paramMap.has('id')) {
                 this.new = false;
                 this.missionService.get(parseInt(paramMap.get('id')))
-                    .subscribe((mission: Mission) => this.mission = mission);
+                    .subscribe((mission: Mission) => {
+                        this.mission = mission;
+                        this.updateDuration();
+                    });
             }
         });
     }
@@ -40,15 +45,29 @@ export class MissionEditComponent implements OnInit {
     ngOnChanges(changes: SimpleChanges) {
         if (changes['mission']) {
             this.new = this.mission.id === undefined || this.mission.id === null;
+            this.updateDuration();
         }
     }
 
     submit() {
+        this.mission.duration = this.durationH ? this.duration : this.duration * 7;
         if (this.new) {
             this.missionService.create(this.mission);
+            this.mission = new Mission();
+            this.duration = null;
         } else {
             this.missionService.update(this.mission);
         }
-        this.mission = new Mission();
+    }
+
+    swapDurationType() {
+        this.durationH = !this.durationH;
+    }
+
+    private updateDuration() {
+        this.duration = this.mission.duration;
+        if (!this.durationH) {
+            this.duration /= 7;
+        }
     }
 }

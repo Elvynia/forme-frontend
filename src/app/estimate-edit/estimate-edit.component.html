@@ -1,4 +1,4 @@
-<h2>Créer un nouveau devis</h2>
+<h2>{{ new ? 'Créer un nouveau devis' : 'Mettre un devis à jour' }}</h2>
 <form (ngSubmit)="submit()" #model="ngForm">
 	<div class="form-group">
 		<label for="clientId">Client : </label>

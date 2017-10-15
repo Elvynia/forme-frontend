@@ -25,14 +25,23 @@ export class InvoiceListComponent implements OnInit {
 		this.invoiceService.eventsByType(EVENT.ADD)
 			.subscribe((data: any) => this.data.push(data));
 		this.invoiceService.eventsByType(EVENT.DELETE)
-			.subscribe((data: any) => {
-				let index = this.data.findIndex((search) => search.id === data.id);
-				if (index && index >= 0) {
-					this.data.splice(index, 1);
-					this.data = this.data.slice();
-				}
-			});
+			.subscribe((data: any) => this.update(data.id));
+		this.invoiceService.eventsByType(EVENT.UPDATE)
+			.subscribe((data: any) => this.update(data.id, data));
 	}
+
+	private update(id: number, invoice?: Invoice) {
+		let index = this.data.findIndex((search) => search.id === id);
+		if (index && index >= 0) {
+			if (invoice) {
+				this.data.splice(index, 1, invoice);
+			} else {
+				this.data.splice(index, 1);
+			}
+			this.data = this.data.slice();
+		}
+	}
+
 
 	modifySelected(selected: any[]) {
 		if (selected && selected[0]) {

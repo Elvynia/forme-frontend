@@ -1,4 +1,4 @@
-<h2>Créer une nouvelle mission</h2>
+<h2>{{ new ? 'Créer une nouvelle mission' : 'Mettre une mission à jour' }}</h2>
 <form (ngSubmit)="submit()" #model="ngForm" [ngClass]="{'submitted': model.form.valid}">
 	<div class="form-group">
 		<label for="clientId">Client : </label>
@@ -9,9 +9,16 @@
 		</select>
 	</div>
 	<div class="form-group">
-		<label for="duration">Durée (en heures) : </label>
+		<label for="duration">
+			<span>Durée (</span>
+			<a id="swapDurationType" (click)="swapDurationType()"
+				[title]="durationH ? 'changer en jours' : 'changer en heures'">
+				{{ durationH ? 'en heures' : 'en jours' }}
+			</a>
+			<span>) : </span>
+		</label>
 		<input type="number" id="duration" name="duration" class="form-control"
-			[(ngModel)]="mission.duration" min="O" required />
+			[(ngModel)]="duration" min="O" required />
 	</div>
 	<div class="form-group">
 		<label for="tjm">TJM (€/j) : </label>

@@ -3,7 +3,33 @@ div.planning-month h2 {
 }
 
 div.planning-month {
-    width: 45%;
-    float: left;
-    margin-left: 60px;
+	width: 45%;
+	float: left;
+	margin-left: 60px;
+}
+
+.planning-nav {
+	position: absolute;
+	top: 50%;
+}
+
+.planning-nav.nav-next {
+	right: 0;
+}
+
+.planning-nav.nav-prev {
+	left: 0;
+}
+
+.planning-nav span {
+	font-size: 5em;
+	color: grey;
+}
+
+.planning-nav:hover {
+	cursor: pointer;
+}
+
+.planning-nav:hover span {
+	color: lightgrey;
 }

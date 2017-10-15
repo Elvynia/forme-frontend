@@ -23,13 +23,21 @@ export class MissionListComponent implements OnInit {
 		this.missionService.eventsByType(EVENT.ADD)
 			.subscribe((data: any) => this.data.push(data));
 		this.missionService.eventsByType(EVENT.DELETE)
-			.subscribe((data: any) => {
-				let index = this.data.findIndex((search) => search.id === data.id);
-				if (index && index >= 0) {
-					this.data.splice(index, 1);
-					this.data = this.data.slice();
-				}
-			});
+			.subscribe((data: any) => this.update(data.id));
+		this.missionService.eventsByType(EVENT.UPDATE)
+			.subscribe((data: any) => this.update(data.id, data));
+	}
+
+	private update(id: number, mission?: Mission) {
+		let index = this.data.findIndex((search) => search.id === id);
+		if (index && index >= 0) {
+			if (mission) {
+				this.data.splice(index, 1, mission);
+			} else {
+				this.data.splice(index, 1);
+			}
+			this.data = this.data.slice();
+		}
 	}
 
 	modifySelected(selected: any[]) {

@@ -35,12 +35,10 @@ export class MissionEvent implements Entity {
 	}
 
 	public set startValue(start: any) {
-		console.log('setting start value with %s', start);
 		this.start = start;
 	}
 
 	public set endValue(end: any) {
-		console.log('setting start value with %s', end);
 		this.end = end;
 	}
 

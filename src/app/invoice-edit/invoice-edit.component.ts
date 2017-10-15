@@ -33,7 +33,7 @@ export class InvoiceEditComponent implements OnInit, OnChanges {
             if (paramMap.has('id')) {
                 this.new = false;
                 this.invoiceService.get(parseInt(paramMap.get('id')))
-                .subscribe((invoice: Invoice) => this.invoice = invoice);
+                .subscribe((invoice: any) => this.invoice = Invoice.build(invoice));
             }
         });
     }
@@ -46,12 +46,8 @@ export class InvoiceEditComponent implements OnInit, OnChanges {
 
     submit() {
         if (this.new) {
-            this.invoice.creationDate = new Date().getTime();
             this.invoiceService.create(this.invoice);
         } else {
-            if (this.invoice.received && !this.invoice.receptionDate) {
-                this.invoice.receptionDate = new Date().getTime();
-            }
             this.invoiceService.update(this.invoice);
         }
         this.invoice = new Invoice();

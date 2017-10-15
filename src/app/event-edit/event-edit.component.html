@@ -1,10 +1,11 @@
+<h2>{{ new ? 'Créer un nouvel événement' : 'Mettre un événement à jour' }}</h2>
 <form (ngSubmit)="submit()">
 	<div class="form-group">
 		<label for="missionId">Mission :</label>
 		<select id="missionId" name="missionId" class="form-control"
 			[(ngModel)]="event.missionId">
 			<option *ngFor="let mission of missions" [value]="mission.id">
-				{{ mission.label }}
+				{{ mission.label }} - {{ mission.title }}
 			</option>
 		</select>
 	</div>
