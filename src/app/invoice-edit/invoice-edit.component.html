@@ -11,7 +11,7 @@
 	<div class="form-group">
 		<label for="amount">Montant : </label>
 		<input type="number" id="amount" name="amount" class="form-control"
-			[(ngModel)]="invoice.amount" min="O" required />
+			[(ngModel)]="invoice.amount" min="O" step=0.05 required />
 	</div>
 	<div class="form-group">
 		<label for="creationDate">Date de création :</label>

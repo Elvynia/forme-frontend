@@ -6,10 +6,10 @@ export class Invoice implements Entity {
 	id: number;
 	amount: number;
 	clientId: number;
-	creationDate: string;
+	creationDate: number;
 	pending: boolean;
 	received: boolean;
-	receptionDate: string;
+	receptionDate: number;
 	travelCosts: boolean;
 	label: string;
 
@@ -26,28 +26,6 @@ export class Invoice implements Entity {
 			instance.label = obj.label;
 		}
 		return instance;
-	}
-
-	public get creationDateValue() {
-		if (!this.creationDate) {
-			this.creationDate = moment().format();
-		}
-		return moment(this.creationDate).format('YYYY-MM-DD');
-	}
-
-	public get receptionDateValue() {
-		if (!this.receptionDate) {
-			this.receptionDate = moment().format();
-		}
-		return moment(this.receptionDate).format('YYYY-MM-DD');
-	}
-
-	public set creationDateValue(creationDate: any) {
-		this.creationDate = creationDate;
-	}
-
-	public set receptionDateValue(receptionDate: any) {
-		this.receptionDate = receptionDate;
 	}
 
 	constructor(id?: number) {

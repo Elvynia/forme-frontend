@@ -7,6 +7,7 @@ import * as moment from 'moment';
 
 import { Calendar } from '../calendar';
 import { MissionEvent } from '../mission-event';
+import { MissionService } from '../mission.service';
 import { EventService } from '../event.service';
 
 @Component({
@@ -18,20 +19,23 @@ export class PlanningComponent implements OnInit {
 	calendars: Array<Calendar>;
 	events: Array<MissionEvent>;
 	selectedEvents: Array<MissionEvent>;
+	newEvent: MissionEvent;
 	@Input() monthOffset: number;
 
 	constructor(private eventService: EventService,
+		private missionService: MissionService,
 		private router: Router) {
 		this.monthOffset = 0;
 		this.calendars = new Array();
 		this.selectedEvents = new Array();
+		this.newEvent = new MissionEvent(null, false);
 	}
 
 	ngOnInit() {
 		this.eventService.list()
 			.subscribe((events: Array<MissionEvent>) => {
-				this.events = events
-				this.recalculateView()
+				this.events = events;
+				this.recalculateView();
 			});
 	}
 
@@ -48,11 +52,29 @@ export class PlanningComponent implements OnInit {
 		} else {
 			this.selectedEvents.push(data.event);
 		}
-		console.log('Selected events : ' + JSON.stringify(this.selectedEvents));
+		// console.log('Selected events : ' + JSON.stringify(this.selectedEvents));
 	}
 
 	onDaySelect(event: any, calendar: Calendar) {
-		console.log(event);
+		if (event.target.children.length === 1) {
+			let day = event.target.children[0].textContent;
+			let m: Date = moment(calendar.viewDate).date(day).toDate();
+			if (this.newEvent.start) {
+				this.newEvent.end = m;
+			} else {
+				this.newEvent.start = m;
+			}
+			console.log(day, this.newEvent);
+		}
+	}
+
+	addEvent() {
+		if (this.newEvent.start && this.newEvent.end) {
+			this.eventService.create(this.newEvent).subscribe((event: MissionEvent) => {
+				console.log('WTF ?', event);
+				this.router.navigate(['event', event.id]);
+			});
+		}
 	}
 
 	modifyEvent() {
@@ -82,10 +104,24 @@ export class PlanningComponent implements OnInit {
 		this.recalculateView();
 	}
 
+	isInNew(date: string): boolean {
+		let current = moment(date);
+		if (this.newEvent.start && !this.newEvent.end) {
+			return moment(this.newEvent.start).isSame(current);
+		} else if (this.newEvent.end) {
+			return (moment(this.newEvent.start).isBefore(current) || moment(this.newEvent.start).isSame(current, 'days'))
+				&& (moment(this.newEvent.end).isAfter(current) || moment(this.newEvent.end).isSame(current, 'days'));
+		}
+		return false;
+	}
+
 	private recalculateView() {
 		let events = [];
 		for (let i = 0; i < this.events.length; ++i) {
 			events[i] = MissionEvent.build(this.events[i]);
+			if (events[i].missionId) {
+				events[i].missionLabel = this.missionService.get(events[i].missionId).pluck('label');
+			}
 		}
 		let today: moment.Moment = moment().add(this.monthOffset, 'months');
 		let current = new Calendar(today.toDate(), events);

@@ -31,8 +31,7 @@ export abstract class BaseService<ENTITY extends Entity> {
       .subscribe((entity) => {
         this.subject.next(new Event(EVENT.ADD, entity));
       });
-  	return this.eventsByType(EVENT.ADD)
-      .filter((data:ENTITY) => data.id === entity.id);
+  	return this.eventsByType(EVENT.ADD);
   }
 
   delete(entity: ENTITY): Observable<ENTITY> {

@@ -4,7 +4,14 @@ app-planning {
 	top: 80px;
 	right: 0;
 	bottom: 0;
+}
 
+div.planning-toolbar {
+	position: fixed;
+	top: 80px;
+	width: 120px;
+	left: 50%;
+	transform: translate(-50%, 0);
 }
 
 div.planning-month h2 {
@@ -59,4 +66,12 @@ div.planning-month:nth-child(4) {
 
 .planning-nav:hover span {
 	color: lightgrey;
+}
+
+div.new-event {
+	background-color: red;
+}
+
+.cal-events {
+	position: absolute;
 }
