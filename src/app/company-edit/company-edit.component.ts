@@ -35,6 +35,13 @@ export class CompanyEditComponent implements OnInit, OnChanges {
         }
     }
 
+    addAddressLine() {
+        if (!this.company.address) {
+            this.company.address = new Array<string>();
+        }
+        this.company.address.push('');
+    }
+
     submit() {
         if (this.new) {
             this.companyService.create(this.company);

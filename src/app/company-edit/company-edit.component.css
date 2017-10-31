@@ -5,3 +5,7 @@ form {
 form.submitted input.ng-invalid {
 	border-color: red;
 }
+
+form input.address-line {
+	margin-top: 10px;
+}

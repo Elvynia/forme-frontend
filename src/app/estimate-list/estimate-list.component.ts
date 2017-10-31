@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Event, EVENT } from '../event';
 import { Estimate } from '../estimate';
 import { EstimateService } from '../estimate.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-estimate-list',
@@ -14,18 +15,21 @@ export class EstimateListComponent implements OnInit {
 	data: Estimate[];
 
 	constructor(private estimateService: EstimateService,
+		private authService: AuthService,
 		private router: Router) {
 	}
 
 	ngOnInit() {
-		this.estimateService.list()
-			.subscribe((data: any) => this.data = data);
-		this.estimateService.eventsByType(EVENT.ADD)
-			.subscribe((data: any) => this.data.push(data));
-		this.estimateService.eventsByType(EVENT.DELETE)
-			.subscribe((data: any) => this.update(data.id));
-		this.estimateService.eventsByType(EVENT.UPDATE)
-			.subscribe((data: any) => this.update(data.id, data));
+		this.authService.loggedIn.subscribe(() => {
+			this.estimateService.list()
+				.subscribe((data: any) => this.data = data);
+			this.estimateService.eventsByType(EVENT.ADD)
+				.subscribe((data: any) => this.data.push(data));
+			this.estimateService.eventsByType(EVENT.DELETE)
+				.subscribe((data: any) => this.update(data.id));
+			this.estimateService.eventsByType(EVENT.UPDATE)
+				.subscribe((data: any) => this.update(data.id, data));
+		});
 	}
 
 	private update(id: number, estimate?: Estimate) {

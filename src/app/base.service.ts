@@ -1,23 +1,39 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable, BehaviorSubject } from 'rxjs/Rx';
 
 import { Entity } from './entity';
 import { Event, EVENT } from './event';
 import { environment as ENV } from '../environments/environment';
+import { AuthService } from './auth.service';
 
 export abstract class BaseService<ENTITY extends Entity> {
   protected apiPath: string;
-  protected httpClient: HttpClient
+  protected httpClient: HttpClient;
+  protected authService: AuthService;
   private subject: BehaviorSubject<Event>;
+  private _headers: HttpHeaders;
 
   public get events(): Observable<Event> {
     return this.subject.asObservable();
   }
 
+  public get headers(): HttpHeaders {
+    return this._headers;
+  }
+
   constructor() {
     this.apiPath = ENV.apiUrl;
     this.subject = new BehaviorSubject<Event>(new Event(EVENT.INIT));
+    this._headers = new HttpHeaders();
+  }
+
+  protected initialize() {
+    this.authService.loggedIn.subscribe((account) => {
+      this._headers = new HttpHeaders({
+        'Authorization': 'Bearer ' + account.token
+      });
+    });
   }
 
   eventsByType(type: EVENT): Observable<any> {
@@ -27,7 +43,7 @@ export abstract class BaseService<ENTITY extends Entity> {
   }
 
   create(entity: ENTITY): Observable<ENTITY> {
-    this.httpClient.post(this.apiPath, entity)
+    this.httpClient.post(this.apiPath, entity, {headers: this.headers})
       .subscribe((entity) => {
         this.subject.next(new Event(EVENT.ADD, entity));
       });
@@ -35,7 +51,7 @@ export abstract class BaseService<ENTITY extends Entity> {
   }
 
   delete(entity: ENTITY): Observable<ENTITY> {
-    this.httpClient.delete(this.apiPath + '/' + entity.id)
+    this.httpClient.delete(this.apiPath + '/' + entity.id, {headers: this.headers})
       .subscribe(() => {
         this.subject.next(new Event(EVENT.DELETE, entity));
       })
@@ -44,7 +60,7 @@ export abstract class BaseService<ENTITY extends Entity> {
   }
 
   get(id: number): Observable<ENTITY> {
-    this.httpClient.get(this.apiPath + '/' + id)
+    this.httpClient.get(this.apiPath + '/' + id, {headers: this.headers})
       .subscribe((data: ENTITY) => {
         this.subject.next(new Event(EVENT.GET, data));
       });
@@ -53,7 +69,7 @@ export abstract class BaseService<ENTITY extends Entity> {
   }
 
   list(): Observable<Array<ENTITY>> {
-    this.httpClient.get(this.apiPath)
+    this.httpClient.get(this.apiPath, {headers: this.headers})
       .subscribe((list: Array<Entity>) => {
         this.subject.next(new Event(EVENT.LIST, list));
       });
@@ -61,7 +77,7 @@ export abstract class BaseService<ENTITY extends Entity> {
   }
 
   update(entity: ENTITY): Observable<ENTITY> {
-    this.httpClient.put(this.apiPath, entity)
+    this.httpClient.put(this.apiPath, entity, {headers: this.headers})
       .subscribe((entity: Entity) => {
         this.subject.next(new Event(EVENT.UPDATE, entity));
       })

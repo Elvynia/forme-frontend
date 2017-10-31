@@ -3,13 +3,16 @@ import { HttpClient } from '@angular/common/http';
 
 import { Invoice } from './invoice';
 import { BaseService } from './base.service';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class InvoiceService extends BaseService<Invoice> {
 	
-	constructor(HttpClient: HttpClient) {
+	constructor(httpClient: HttpClient, authService: AuthService) {
 		super();
-		this.httpClient = HttpClient;
+		this.httpClient = httpClient;
+		this.authService = authService
 		this.apiPath += '/invoice';
+		this.initialize();
 	}
 }

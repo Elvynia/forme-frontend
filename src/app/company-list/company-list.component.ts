@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { Company } from '../company';
 import { CompanyService } from '../company.service';
+import { AuthService } from '../auth.service';
 import { EVENT } from '../event';
 
 @Component({
@@ -14,18 +15,21 @@ export class CompanyListComponent implements OnInit {
 	data: any[];
 
 	constructor(private companyService: CompanyService,
+		private authService: AuthService,
 		private router: Router) {
 	}
 
 	ngOnInit() {
-		this.companyService.list()
-			.subscribe((data: any) => this.data = data);
-		this.companyService.eventsByType(EVENT.ADD)
-			.subscribe((data: any) => this.data.push(data));
-		this.companyService.eventsByType(EVENT.DELETE)
-			.subscribe((data: any) => this.update(data.id));
-		this.companyService.eventsByType(EVENT.UPDATE)
-			.subscribe((data: any) => this.update(data.id, data));
+		this.authService.loggedIn.subscribe(() => {
+			this.companyService.list()
+				.subscribe((data: any) => this.data = data);
+			this.companyService.eventsByType(EVENT.ADD)
+				.subscribe((data: any) => this.data.push(data));
+			this.companyService.eventsByType(EVENT.DELETE)
+				.subscribe((data: any) => this.update(data.id));
+			this.companyService.eventsByType(EVENT.UPDATE)
+				.subscribe((data: any) => this.update(data.id, data));
+		});
 	}
 
 	private update(id: number, company?: Company) {

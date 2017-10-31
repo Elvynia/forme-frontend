@@ -2,7 +2,7 @@ import { Entity } from './entity';
 
 export class Company implements Entity {
 	id: number;
-	address: string;
+	address: Array<string>;
 	name: string;
 	trigram: string;
 	siren?: string;

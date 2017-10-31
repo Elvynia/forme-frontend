@@ -44,9 +44,3 @@
 <div id="main" [ngClass]="{ 'container': !wideScreen }">
 	<router-outlet></router-outlet>
 </div>
-<div class="dashboard" *ngIf="!wideScreen">
-	<app-invoice-list></app-invoice-list>
-	<app-mission-list></app-mission-list>
-	<app-company-list></app-company-list>
-	<app-estimate-list></app-estimate-list>
-</div>

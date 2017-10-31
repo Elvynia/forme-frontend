@@ -18,6 +18,9 @@ import { CompanyService } from './company.service';
 import { MissionService } from './mission.service';
 import { MessageService } from './message.service';
 import { EventService } from './event.service';
+import { AuthService } from './auth.service';
+
+import { AuthGuard } from './auth-gard';
 
 import { ROUTES } from './routes';
 import { CompanyRefComponent } from './company-ref/company-ref.component';
@@ -29,6 +32,8 @@ import { EditToolbarComponent } from './edit-toolbar/edit-toolbar.component';
 import { AgendaComponent } from './agenda/agenda.component';
 import { PlanningComponent } from './planning/planning.component';
 import { EventEditComponent } from './event-edit/event-edit.component';
+import { LoginComponent } from './login/login.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +51,9 @@ import { EventEditComponent } from './event-edit/event-edit.component';
     EditToolbarComponent,
     AgendaComponent,
     PlanningComponent,
-    EventEditComponent
+    EventEditComponent,
+    LoginComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +62,8 @@ import { EventEditComponent } from './event-edit/event-edit.component';
     RouterModule.forRoot(ROUTES),
     CalendarModule.forRoot()
   ],
-  providers: [InvoiceService, EstimateService, CompanyService, MissionService, MessageService, EventService],
+  providers: [InvoiceService, EstimateService, CompanyService, MissionService, 
+    MessageService, EventService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

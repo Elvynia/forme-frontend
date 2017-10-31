@@ -7,49 +7,74 @@ import { EstimateEditComponent } from './estimate-edit/estimate-edit.component';
 import { InvoiceEditComponent } from './invoice-edit/invoice-edit.component';
 import { MissionEditComponent } from './mission-edit/mission-edit.component';
 import { EventEditComponent } from './event-edit/event-edit.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { LoginComponent } from './login/login.component';
+
+import { AuthGuard } from './auth-gard';
 
 export const ROUTES: Array<Route> = [
 	{
+		path: '',
+		component: DashboardComponent,
+		data: {
+			'wideScreen': true
+		},
+		canActivate: [AuthGuard]
+	},
+	{
+		path: 'login',
+		component: LoginComponent
+	},
+	{
 		path: 'invoice',
-		component: InvoiceEditComponent
+		component: InvoiceEditComponent,
+		canActivate: [AuthGuard]
 	}, {
 		path: 'invoice/:id',
-		component: InvoiceEditComponent
+		component: InvoiceEditComponent,
+		canActivate: [AuthGuard]
 	}, {
 		path: 'company',
-		component: CompanyEditComponent
+		component: CompanyEditComponent,
+		canActivate: [AuthGuard]
 	}, {
 		path: 'company/:id',
-		component: CompanyEditComponent
+		component: CompanyEditComponent,
+		canActivate: [AuthGuard]
 	}, {
 		path: 'estimate',
-		component: EstimateEditComponent
+		component: EstimateEditComponent,
+		canActivate: [AuthGuard]
 	}, {
 		path: 'estimate/:id',
-		component: EstimateEditComponent
+		component: EstimateEditComponent,
+		canActivate: [AuthGuard]
 	}, {
 		path: 'mission',
-		component: MissionEditComponent
+		component: MissionEditComponent,
+		canActivate: [AuthGuard]
 	}, {
 		path: 'mission/:id',
-		component: MissionEditComponent
+		component: MissionEditComponent,
+		canActivate: [AuthGuard]
 	}, {
 		path: 'event',
-		component: EventEditComponent
+		component: EventEditComponent,
+		canActivate: [AuthGuard]
 	}, {
 		path: 'event/:id',
-		component: EventEditComponent
+		component: EventEditComponent,
+		canActivate: [AuthGuard]
 	}, {
 		path: 'agenda',
 		component: AgendaComponent,
-		data: {
-			'wideScreen': false
-		}
+		canActivate: [AuthGuard]
 	}, {
 		path: 'planning',
 		component: PlanningComponent,
 		data: {
 			'wideScreen': true
-		}
+		},
+		canActivate: [AuthGuard]
 	}
 ];

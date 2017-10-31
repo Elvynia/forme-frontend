@@ -3,6 +3,7 @@ import { Router } from 	'@angular/router';
 
 import { Mission } from '../mission';
 import { MissionService } from '../mission.service';
+import { AuthService } from '../auth.service';
 import { EVENT } from '../event';
 
 @Component({
@@ -14,18 +15,21 @@ export class MissionListComponent implements OnInit {
 	data: any[];
 
 	constructor(private missionService: MissionService,
+		private authService: AuthService,
 		private router: Router) {
 	}
 
 	ngOnInit() {
-		this.missionService.list()
-			.subscribe((data: any) => this.data = data);
-		this.missionService.eventsByType(EVENT.ADD)
-			.subscribe((data: any) => this.data.push(data));
-		this.missionService.eventsByType(EVENT.DELETE)
-			.subscribe((data: any) => this.update(data.id));
-		this.missionService.eventsByType(EVENT.UPDATE)
-			.subscribe((data: any) => this.update(data.id, data));
+		this.authService.loggedIn.subscribe(() => {
+			this.missionService.list()
+				.subscribe((data: any) => this.data = data);
+			this.missionService.eventsByType(EVENT.ADD)
+				.subscribe((data: any) => this.data.push(data));
+			this.missionService.eventsByType(EVENT.DELETE)
+				.subscribe((data: any) => this.update(data.id));
+			this.missionService.eventsByType(EVENT.UPDATE)
+				.subscribe((data: any) => this.update(data.id, data));
+		});
 	}
 
 	private update(id: number, mission?: Mission) {

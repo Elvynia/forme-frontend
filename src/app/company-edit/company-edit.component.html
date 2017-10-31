@@ -25,5 +25,13 @@
 		<input id="rcs" name="rcs" class="form-control"
 			[(ngModel)]="company.rcs">
 	</div>
+	<div class="form-group">
+		<label>Adresse :</label>
+		<button type="button" (click)="addAddressLine()">Ajouter une ligne</button>
+		<ng-container *ngFor="let address of company.address; index as i;">
+			<input name="address{{i}}" class="form-control address-line"
+				[(ngModel)]="company.address[i]">
+		</ng-container>
+	</div>
 	<button class="btn btn-primary" [disabled]="!model.form.valid">Valider</button>
 </form>
