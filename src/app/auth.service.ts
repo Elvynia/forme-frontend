@@ -12,6 +12,10 @@ export const LSK_ACCOUNT = 'account';
 export class AuthService {
 	private _account: BehaviorSubject<Account>;
 
+	private get storageAccount(): Account {
+		return JSON.parse(localStorage.getItem(LSK_ACCOUNT));
+	}
+
 	public get accounts(): Observable<Account> {
 		return this._account.asObservable();
 	}
@@ -25,7 +29,7 @@ export class AuthService {
 	}
 
 	constructor(private httpClient: HttpClient) {
-		this._account = new BehaviorSubject(null);
+		this._account = new BehaviorSubject(this.check() ? this.storageAccount : null);
 		this._account.subscribe((account: Account) => {
 			if (account) {
 				localStorage.setItem(LSK_ACCOUNT, JSON.stringify(account));
