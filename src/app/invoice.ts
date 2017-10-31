@@ -6,10 +6,10 @@ export class Invoice implements Entity {
 	id: number;
 	amount: number;
 	clientId: number;
-	creationDate: number;
+	creationDate: Date;
 	pending: boolean;
 	received: boolean;
-	receptionDate: number;
+	receptionDate: Date;
 	travelCosts: boolean;
 	label: string;
 
@@ -17,7 +17,7 @@ export class Invoice implements Entity {
 		let instance: Invoice = new Invoice(obj.id);
 		if (instance) {
 			instance.creationDate = obj.creationDate;
-			instance.receptionDate = obj.receptionDate;
+			instance.receptionDate = obj.receptionDate || new Date();
 			instance.amount = obj.amount;
 			instance.clientId = obj.clientId;
 			instance.pending = obj.pending;
@@ -30,5 +30,7 @@ export class Invoice implements Entity {
 
 	constructor(id?: number) {
 		this.id = id;
+		this.creationDate = new Date();
+		this.receptionDate = new Date();
 	}
 }

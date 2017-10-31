@@ -16,12 +16,19 @@
 	<div class="form-group">
 		<label for="creationDate">Date de création :</label>
 		<input type="date" id="creationDate" name="creationDate" class="form-control"
-			[(ngModel)]="invoice.creationDateValue" />
+			[ngModel]="invoice.creationDate | date:'yyyy-MM-dd'" (ngModelChange)="invoice.creationDate = $event"
+			required />
 	</div>
 	<div class="form-group">
 		<label for="label">Label :</label>
 		<input id="label" name="label" class="form-control"
-			[(ngModel)]="invoice.label" />
+			[(ngModel)]="invoice.label" required />
+	</div>
+	<div class="form-group" *ngIf="invoice.received">
+		<label for="label">Reception du paiement au :</label>
+		<input type="date" id="receptionDate" name="receptionDate" class="form-control"
+			[ngModel]="invoice.receptionDate | date:'yyyy-MM-dd'" (ngModelChange)="invoice.receptionDate = $event"
+			required />
 	</div>
 	<div class="form-group">
 		<label for="pending" class="checkbox-inline">

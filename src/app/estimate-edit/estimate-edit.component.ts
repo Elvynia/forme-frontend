@@ -46,9 +46,6 @@ export class EstimateEditComponent implements OnInit {
 
 	submit() {
 		if (this.new) {
-			if (!this.estimate.date) {
-				this.estimate.date = new Date().getTime();
-			}
 			this.estimateService.create(this.estimate);
 		} else {
 			this.estimateService.update(this.estimate);
