@@ -1,12 +1,11 @@
 <app-layout-list listTitle="Toutes les factures" [data]="data" [template]="entityTemplate"
 	(onModify)="modifySelected($event)" (onDelete)="deleteSelected($event)">
-	<ng-container>
-		<th>Id</th>
-		<th>Client</th>
-		<th>Montant</th>
-		<th>En attente</th>
-		<th>Payée</th>
-	</ng-container>
+	<th>Id</th>
+	<th>Client</th>
+	<th>Label</th>
+	<th>Montant</th>
+	<th>En attente</th>
+	<th>Payée</th>
 	<ng-template let-entity #entityTemplate>
 		<td>{{ entity.id }}</td>
 		<td>

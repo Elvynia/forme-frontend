@@ -1,12 +1,10 @@
 <app-layout-list listTitle="Tous les devis" [data]="data" [template]="entityTemplate"
 	(onModify)="modifySelected($event)" (onDelete)="deleteSelected($event)">
-	<ng-container>
-		<td>Id</td>
-		<td>Client</td>
-		<td>Montant</td>
-		<td>Date</td>
-		<td>Signé ?</td>
-	</ng-container>
+	<th>Id</th>
+	<th>Client</th>
+	<th>Montant</th>
+	<th>Date</th>
+	<th>Signé ?</th>
 	<ng-template let-estimate #entityTemplate>
 		<td>{{ estimate.id }}</td>
 		<td>

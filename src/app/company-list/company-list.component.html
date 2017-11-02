@@ -1,12 +1,10 @@
 <app-layout-list listTitle="Tous les clients" [data]="data" [template]="entityTemplate"
 	(onModify)="modifySelected($event)" (onDelete)="deleteSelected($event)">
-	<ng-container>
-		<th>Id</th>
-		<th>Trigramme</th>
-		<th>Nom</th>
-		<th>SIREN</th>
-		<th>RCS</th>
-	</ng-container>
+	<th>Id</th>
+	<th>Trigramme</th>
+	<th>Nom</th>
+	<th>SIREN</th>
+	<th>RCS</th>
 	<ng-template let-entity #entityTemplate>
 		<td>{{ entity.id }}</td>
 		<td>{{ entity.trigram }}</td>
