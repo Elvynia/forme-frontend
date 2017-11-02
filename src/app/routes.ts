@@ -18,8 +18,7 @@ export const ROUTES: Array<Route> = [
 		component: DashboardComponent,
 		data: {
 			'wideScreen': true
-		},
-		canActivate: [AuthGuard]
+		}
 	},
 	{
 		path: 'login',

@@ -1,6 +1,9 @@
 <div class="dashboard">
-	<app-invoice-list></app-invoice-list>
-	<app-mission-list></app-mission-list>
-	<app-company-list></app-company-list>
-	<app-estimate-list></app-estimate-list>
+	<ng-container *ngIf="isAdmin || isClient; else noAuthTmpl">
+		<app-admin-dashboard *ngIf="isAdmin"></app-admin-dashboard>
+		<app-client-dashboard *ngIf="isClient"></app-client-dashboard>
+	</ng-container>
+	<ng-template #noAuthTmpl>
+		<div id="noAuth" class="container alert alert-danger">Veuillez vous authentifier pour voir cette page.</div>
+	</ng-template>
 </div>

@@ -34,6 +34,8 @@ import { PlanningComponent } from './planning/planning.component';
 import { EventEditComponent } from './event-edit/event-edit.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { ClientDashboardComponent } from './client-dashboard/client-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     PlanningComponent,
     EventEditComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    AdminDashboardComponent,
+    ClientDashboardComponent
   ],
   imports: [
     BrowserModule,
