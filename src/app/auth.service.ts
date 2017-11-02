@@ -41,10 +41,7 @@ export class AuthService {
 
 	login(user: Account): Observable<Account> {
 		this.httpClient.post(ENV.loginUrl, user)
-			.subscribe((data: any) => {
-				let account = new Account();
-				account.token = data.token;
-				account.username = user.username;
+			.subscribe((account: Account) => {
 				this._account.next(account);
 			});
 			return this.accounts;
