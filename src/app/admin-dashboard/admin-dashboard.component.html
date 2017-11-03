@@ -12,10 +12,10 @@
 	</div>
 	<div id="turnovers">
 		<div id="last" class="turnover">
-			Année {{ currentYear - 1 }} : {{ calculateTurnover(currentYear - 1) | currency:'EUR' }}
+			Année {{ currentYear - 1 }} : {{ calculateTurnover(currentYear - 1) | currency:'EUR':'symbol':'4.2-2' }}
 		</div>
 		<div id="current" class="turnover">
-			Année {{ currentYear }} : {{ calculateTurnover(currentYear) | currency:'EUR' }}
+			Année {{ currentYear }} : {{ calculateTurnover(currentYear) | currency:'EUR':'symbol':'4.2-2' }}
 		</div>
 	</div>
 </div>
