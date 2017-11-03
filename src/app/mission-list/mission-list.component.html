@@ -1,5 +1,5 @@
-<app-layout-list listTitle="Toutes les missions" [data]="data" [template]="entityTemplate"
-	(onModify)="modifySelected($event)" (onDelete)="deleteSelected($event)">
+<app-layout-list [listTitle]="details.title || 'Toute les missions'" [filter]="details.filter" [sort]="details.sort"
+	[data]="data" [template]="entityTemplate" (onModify)="modifySelected($event)" (onDelete)="deleteSelected($event)">
 	<th>Id</th>
 	<th>Type</th>
 	<th>Client</th>

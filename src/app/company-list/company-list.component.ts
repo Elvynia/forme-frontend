@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Company } from '../company';
@@ -12,6 +12,7 @@ import { EVENT } from '../event';
   styleUrls: ['./company-list.component.css']
 })
 export class CompanyListComponent implements OnInit {
+	@Input() details: any;
 	data: any[];
 
 	constructor(private companyService: CompanyService,

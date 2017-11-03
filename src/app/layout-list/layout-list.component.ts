@@ -2,6 +2,12 @@ import { Component, Input, Output, OnInit, OnChanges, SimpleChanges, EventEmitte
 
 import { Observable, BehaviorSubject } from 'rxjs/Rx';
 
+export type ListDetails = {
+	title: string,
+	sort: (a:any, b:any) => number,
+	filter: (a:any, b:number) => boolean
+};
+
 @Component({
   selector: 'app-layout-list',
   templateUrl: './layout-list.component.html',
@@ -9,7 +15,8 @@ import { Observable, BehaviorSubject } from 'rxjs/Rx';
 })
 export class LayoutListComponent implements OnInit {
 	@Input('listTitle') title: string;
-	@Input() filter: (a:any, b:any) => number;
+	@Input() sort: (a:any, b:any) => number;
+	@Input() filter: (a:any, b:number, list?: Array<any>) => boolean;
 	@Input('limit') _limit: number;
 	@Input() data: any[];
 	@Input() template: any;
@@ -87,7 +94,14 @@ export class LayoutListComponent implements OnInit {
 
 	private reloadFilter() {
 		if (this.data) {
-			this.filteredData = Observable.of(this.data).map((list) => list.sort(this.filter));
+			let obs = Observable.of(this.data);
+			if (this.filter) {
+				obs = obs.map((list) => list.filter(this.filter));
+			}
+			if (this.sort) {
+				obs = obs.map((list) => list.sort(this.sort));
+			}
+			this.filteredData = obs;
 		}
 	}
 }

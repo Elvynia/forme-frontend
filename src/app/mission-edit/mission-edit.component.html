@@ -45,8 +45,12 @@
 	</div>
 	<div class="form-group">
 		<label class="checkbox-inline">
-			<input type="checkbox" name="travelCosts" [(ngModel)]="mission.travelCosts" required />
+			<input type="checkbox" name="travelCosts" [(ngModel)]="mission.travelCosts" />
 			Frais de déplacement
+		</label>
+		<label class="checkbox-inline">
+			<input type="checkbox" name="closed" [(ngModel)]="mission.closed" />
+			Terminée
 		</label>
 	</div>
 	<button class="btn btn-primary">Valider</button>

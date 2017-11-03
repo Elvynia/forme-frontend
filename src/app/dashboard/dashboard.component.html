@@ -1,9 +1,9 @@
-<div class="dashboard">
-	<ng-container *ngIf="isAdmin || isClient; else noAuthTmpl">
-		<app-admin-dashboard *ngIf="isAdmin"></app-admin-dashboard>
-		<app-client-dashboard *ngIf="isClient"></app-client-dashboard>
-	</ng-container>
-	<ng-template #noAuthTmpl>
+<ng-container *ngIf="isAdmin || isClient; else noAuthTmpl">
+	<app-admin-dashboard *ngIf="isAdmin"></app-admin-dashboard>
+	<app-client-dashboard *ngIf="isClient"></app-client-dashboard>
+</ng-container>
+<ng-template #noAuthTmpl>
+	<div class="dashboard">
 		<div id="noAuth" class="container alert alert-danger">Veuillez vous authentifier pour voir cette page.</div>
-	</ng-template>
-</div>
+	</div>
+</ng-template>

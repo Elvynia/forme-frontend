@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Event, EVENT } from '../event';
@@ -12,6 +12,7 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./estimate-list.component.css']
 })
 export class EstimateListComponent implements OnInit {
+	@Input() details: any;
 	data: Estimate[];
 
 	constructor(private estimateService: EstimateService,

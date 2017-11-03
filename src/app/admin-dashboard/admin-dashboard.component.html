@@ -1,3 +1,26 @@
-<p>
-  admin-dashboard works!
-</p>
+<div id="status" #container>
+	<hr />
+	<div class="invoice-wrapper" *ngFor="let invoiceGroup of invoices"
+		[ngStyle]="{left: getMonthPos(container.clientWidth, invoiceGroup[0])}">
+		<div class="invoice" *ngFor="let invoice of invoiceGroup[1]; index as i;">
+			{{ invoice.id }}
+		</div>
+	</div>
+	<div class="month" *ngFor="let month of months; index as i;"
+		[ngStyle]="{'left': getMonthPos(container.clientWidth, i) }">
+		<span>{{ month }}</span>
+	</div>
+	<div id="turnovers">
+		<div id="last" class="turnover">
+			Année {{ currentYear - 1 }} : {{ calculateTurnover(currentYear - 1) | currency:'EUR' }}
+		</div>
+		<div id="current" class="turnover">
+			Année {{ currentYear }} : {{ calculateTurnover(currentYear) | currency:'EUR' }}
+		</div>
+	</div>
+</div>
+<div id="infos" class="dashboard">
+	<app-invoice-list [details]="{title: 'Factures à déclarer', filter: toDeclareFilter}"></app-invoice-list>
+	<app-invoice-list [details]="{title: 'Factures en attente', filter: pendingFilter}"></app-invoice-list>
+	<app-mission-list [details]="{title: 'Mission en cours', filter: missionFilter}"></app-mission-list>
+</div>

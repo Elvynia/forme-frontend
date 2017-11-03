@@ -1,5 +1,5 @@
-<app-layout-list listTitle="Toutes les factures" [data]="data" [template]="entityTemplate"
-	(onModify)="modifySelected($event)" (onDelete)="deleteSelected($event)">
+<app-layout-list [listTitle]="details?.title || 'Toutes les factures'" [filter]="details?.filter" [sort]="details?.sort"
+	[data]="data" [template]="entityTemplate" (onModify)="modifySelected($event)" (onDelete)="deleteSelected($event)">
 	<th>Id</th>
 	<th>Client</th>
 	<th>Label</th>

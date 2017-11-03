@@ -1,0 +1,70 @@
+div#status {
+	position: relative;
+	margin: 0 40px;
+	height: 35vh;
+	/*background-color: blue;*/
+}
+
+div#info {
+	display: inline-block;
+}
+
+hr {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	right: 0;
+	margin: 0;
+}
+
+div.month, div.invoice {
+	top: 50%;
+}
+
+div.month {
+	position: absolute;
+	height: 30px;
+	border-left: 1px solid black;
+	transform: translate(0, -50%);
+}
+
+div.month span {
+	position: absolute;
+	transform: translate(-50%, 130%);
+}
+
+div.invoice-wrapper {
+	display: inline-block;
+	position: absolute;
+	top: 50%;
+	transform: translate(0, -20px);
+	width: 300px;
+}
+
+div.invoice {
+	float: left;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: lightblue;
+}
+
+div#turnovers {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 50px;
+}
+
+div.turnover {
+	font-size: 20px;
+}
+
+div#last {
+	float: left;
+}
+
+div#current {
+	float: right;
+}

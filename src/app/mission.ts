@@ -10,6 +10,7 @@ export class Mission implements Entity {
 	place: string;
 	travelCosts: boolean;
 	type: number;
+	closed: boolean;
 
 	constructor(id?: number) {
 		this.id = id;

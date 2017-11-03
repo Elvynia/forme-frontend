@@ -8,6 +8,11 @@ div.dashboard div.fm-list {
 	width: 45%;
 }
 
+div#infos div.fm-list {
+	float: left;
+	width: 31%;
+}
+
 .cal-month-view .cal-cell-top {
 	height: 55px;
 	min-height: 0 !important;
