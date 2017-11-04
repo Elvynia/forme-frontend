@@ -18,6 +18,7 @@ export class EstimateListComponent implements OnInit {
 	constructor(private estimateService: EstimateService,
 		private authService: AuthService,
 		private router: Router) {
+		this.data = [];
 	}
 
 	ngOnInit() {

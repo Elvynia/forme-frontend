@@ -21,6 +21,7 @@ export class InvoiceListComponent implements OnInit {
 	constructor(private invoiceService: InvoiceService,
 		private authService: AuthService,
 		private router: Router) {
+		this.data = [];
 	}
 
 	ngOnInit() {

@@ -7,7 +7,7 @@
 		</div>
 	</div>
 	<div class="month" *ngFor="let month of months; index as i;"
-		[ngStyle]="{'left': getMonthPos(container.clientWidth, i) }">
+		[ngStyle]="{'left': getMonthPos(container.clientWidth, i), 'width': container.clientWidth / months.length + 'px' }">
 		<span>{{ month }}</span>
 	</div>
 	<div id="turnovers">

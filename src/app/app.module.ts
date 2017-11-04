@@ -1,9 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CalendarModule } from 'angular-calendar';
+import { MatTabsModule, MatFormFieldModule, MatInputModule, MatDialogModule, MatSelectModule, MatOptionModule, MatCheckboxModule} from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { EstimateListComponent } from './estimate-list/estimate-list.component';
@@ -61,10 +63,18 @@ import { ClientDashboardComponent } from './client-dashboard/client-dashboard.co
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot(ROUTES),
-    CalendarModule.forRoot()
+    CalendarModule.forRoot(),
+    MatFormFieldModule,
+    MatInputModule,
+    MatDialogModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatCheckboxModule,
+    MatTabsModule
   ],
   providers: [InvoiceService, EstimateService, CompanyService, MissionService, 
     MessageService, EventService, AuthService, AuthGuard],

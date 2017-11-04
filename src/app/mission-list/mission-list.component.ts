@@ -18,6 +18,7 @@ export class MissionListComponent implements OnInit {
 	constructor(private missionService: MissionService,
 		private authService: AuthService,
 		private router: Router) {
+		this.data = [];
 	}
 
 	ngOnInit() {

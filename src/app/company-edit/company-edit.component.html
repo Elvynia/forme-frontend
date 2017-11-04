@@ -1,37 +1,30 @@
 <h2>{{ new ? 'Créer un nouveau client' : 'Mettre un client à jour' }}</h2>
 <form (ngSubmit)="submit()" #model="ngForm" [ngClass]="{'submitted': model.form.valid}">
-	<div class="form-group">
-		<label for="name">Nom :</label>
-		<input id="name" name="name" class="form-control"
+	<mat-form-field>
+		<input matInput id="name" name="name" placeholder="Nom"
 			[(ngModel)]="company.name" required>
-	</div>
-	<div class="form-group">
-		<label for="tr">Trigramme :</label>
-		<input id="tr" name="tr" class="form-control"
+	</mat-form-field>
+	<mat-form-field>
+		<input matInput id="tr" name="tr" placeholder="Trigramme"
 			[(ngModel)]="company.trigram" required>
-	</div>
-	<div class="form-group">
-		<label for="siren">SIREN :</label>
-		<input id="siren" name="siren" class="form-control"
+	</mat-form-field>
+	<mat-form-field>
+		<input matInput id="siren" name="siren" placeholder="SIREN"
 			[(ngModel)]="company.siren" minlength="9" maxlength="9">
-	</div>
-	<div class="form-group">
-		<label for="siret">SIRET :</label>
-		<input id="siret" name="siret" class="form-control"
+	</mat-form-field>
+	<mat-form-field>
+		<input matInput id="siret" name="siret" placeholder="SIRET"
 			[(ngModel)]="company.siret" minlength="14" maxlength="14">
-	</div>
-	<div class="form-group">
-		<label for="rcs">RCS :</label>
-		<input id="rcs" name="rcs" class="form-control"
+	</mat-form-field>
+	<mat-form-field>
+		<input matInput id="rcs" name="rcs" placeholder="RCS"
 			[(ngModel)]="company.rcs">
-	</div>
-	<div class="form-group">
-		<label>Adresse :</label>
-		<button type="button" (click)="addAddressLine()">Ajouter une ligne</button>
-		<ng-container *ngFor="let address of company.address; index as i;">
-			<input name="address{{i}}" class="form-control address-line"
-				[(ngModel)]="company.address[i]">
-		</ng-container>
-	</div>
+	</mat-form-field>
+	<mat-form-field>
+		<textarea matInput name="address{{i}}" class="address-line" placeholder="Adresse" 
+			[ngModel]="company.address ? company.address.join('\n') : company.address"
+			(ngModelChange)="company.address = $event.length > 0 ? $event.split('\n') : $event">
+		</textarea>
+	</mat-form-field>
 	<button class="btn btn-primary" [disabled]="!model.form.valid">Valider</button>
 </form>

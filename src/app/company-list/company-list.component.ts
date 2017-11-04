@@ -18,6 +18,7 @@ export class CompanyListComponent implements OnInit {
 	constructor(private companyService: CompanyService,
 		private authService: AuthService,
 		private router: Router) {
+		this.data = [];
 	}
 
 	ngOnInit() {

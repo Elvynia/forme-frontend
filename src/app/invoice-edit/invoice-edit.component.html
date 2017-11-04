@@ -1,51 +1,40 @@
 <h2>{{ new ? 'Créer une nouvelle facture' : 'Mettre une facture à jour' }}</h2>
 <form (ngSubmit)="submit()" #model="ngForm" [ngClass]="{'submitted': model.form.valid}">
-	<div class="form-group">
-		<label for="clientId">Client : </label>
-		<select id="clientId" name="clientId" class="form-control"
+	<mat-form-field>
+		<mat-select id="clientId" name="clientId" placeholder="Client"
 			[(ngModel)]="invoice.clientId">
-			<option value="">Sélectionner...</option>
-			<option *ngFor="let company of companies" [value]="company.id">{{company.name}} ({{company.trigram}})</option>
-		</select>
-	</div>
-	<div class="form-group">
-		<label for="amount">Montant : </label>
-		<input type="number" id="amount" name="amount" class="form-control"
+			<mat-option value="">Sélectionner...</mat-option>
+			<mat-option *ngFor="let company of companies" [value]="company.id">{{company.name}} ({{company.trigram}})</mat-option>
+		</mat-select>
+	</mat-form-field>
+	<mat-form-field>
+		<input matInput type="number" id="amount" name="amount" placeholder="Montant" 
 			[(ngModel)]="invoice.amount" min="O" step=0.05 required />
-	</div>
-	<div class="form-group">
-		<label for="creationDate">Date de création :</label>
-		<input type="date" id="creationDate" name="creationDate" class="form-control"
+	</mat-form-field>
+	<mat-form-field>
+		<input matInput type="date" id="creationDate" name="creationDate" placeholder="Date de création" 
 			[ngModel]="invoice.creationDate | date:'yyyy-MM-dd'" (ngModelChange)="invoice.creationDate = $event"
 			required />
-	</div>
-	<div class="form-group">
-		<label for="label">Label :</label>
-		<input id="label" name="label" class="form-control"
+	</mat-form-field>
+	<mat-form-field>
+		<input matInput id="label" name="label" placeholder="Label" 
 			[(ngModel)]="invoice.label" required />
-	</div>
-	<div class="form-group" *ngIf="invoice.received">
-		<label for="label">Reception du paiement au :</label>
-		<input type="date" id="receptionDate" name="receptionDate" class="form-control"
+	</mat-form-field>
+	<mat-form-field *ngIf="invoice.received">
+		<input matInput type="date" id="receptionDate" name="receptionDate" placeholder="Reception du paiement" 
 			[ngModel]="invoice.receptionDate | date:'yyyy-MM-dd'" (ngModelChange)="invoice.receptionDate = $event"
 			required />
-	</div>
-	<div class="form-group">
-		<label for="pending" class="checkbox-inline">
-			<input type="checkbox" id="pending" name="pending"
-				[(ngModel)]="invoice.pending" />
+	</mat-form-field>
+	<section>
+		<mat-checkbox id="pending" name="pending" [(ngModel)]="invoice.pending">
 			En attente
-		</label>
-		<label for="received" class="checkbox-inline">
-			<input type="checkbox" id="received" name="received"
-				[(ngModel)]="invoice.received" />
+		</mat-checkbox>
+		<mat-checkbox id="received" name="received" [(ngModel)]="invoice.received">
 			Payée
-		</label>
-		<label for="travelC" class="checkbox-inline">
-			<input type="checkbox" id="travelC" name="travelC"
-				[(ngModel)]="invoice.travelCosts" />
+		</mat-checkbox>
+		<mat-checkbox id="travelC" name="travelC" [(ngModel)]="invoice.travelCosts">
 			Frais
-		</label>
-	</div>
+		</mat-checkbox>
+	</section>
 	<button class="btn btn-primary" [disabled]="!model.form.valid">Valider</button>
 </form>

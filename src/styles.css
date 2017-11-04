@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('../node_modules/bootstrap/dist/css/bootstrap.min.css');
-
-@import url('../node_modules/angular-calendar/dist/css/angular-calendar.css');
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '~angular-calendar/dist/css/angular-calendar.css';
 
 div.dashboard div.fm-list {
 	float: left;
@@ -20,5 +20,27 @@ div#infos div.fm-list {
 
 .cal-month-view .cal-day-cell {
 	height: 55px;
-    min-height: 0 !important;
+	min-height: 0 !important;
+}
+
+form {
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+}
+
+form > *.mat-form-field {
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+form > section {
+	display: flex;
+	align-content: center;
+	align-items: center;
+	height: 60px;
+}
+
+form > section > mat-checkbox {
+	margin: 0 10px;
 }
