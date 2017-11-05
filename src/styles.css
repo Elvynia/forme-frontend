@@ -3,12 +3,14 @@
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 @import '~angular-calendar/dist/css/angular-calendar.css';
 
-div.dashboard div.fm-list {
+div.dashboard .table-wrapper {
 	float: left;
-	width: 45%;
+	width: 42%;
+	margin-left: 40px;
+	margin-right: 20px;
 }
 
-div#infos div.fm-list {
+div#infos mat-table {
 	float: left;
 	width: 31%;
 }
@@ -43,4 +45,8 @@ form > section {
 
 form > section > mat-checkbox {
 	margin: 0 10px;
+}
+
+.mat-row-selected {
+	background-color: lightblue;
 }

@@ -1,3 +1,10 @@
+:host {
+	position: absolute;
+	top: 50%;
+	right: 0;
+	transform: translate(0, -50%);
+}
+
 img {
 	height: 25px;
 	width: 25px;

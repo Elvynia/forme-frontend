@@ -1,5 +1,9 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 
+import { Observable } from 'rxjs/Rx';
+
+import * as $ from 'jquery';
+
 import { AngularSubject } from '../angular-subject';
 
 @Component({
@@ -9,6 +13,8 @@ import { AngularSubject } from '../angular-subject';
 })
 export class EditToolbarComponent implements OnInit {
 	@Input() data: any;
+	@Input() select: string;
+	@Input() refreshOn: Observable<any>;
 	shouldAdd: boolean;
 	shouldModify: boolean;
 	shouldDelete: boolean;
@@ -29,6 +35,11 @@ export class EditToolbarComponent implements OnInit {
 		this.onAdd.onSubscribe((isSubscribed) => this.shouldAdd = isSubscribed);
 		this.onModify.onSubscribe((isSubscribed) => this.shouldModify = isSubscribed);
 		this.onDelete.onSubscribe((isSubscribed) => this.shouldDelete = isSubscribed);
+		if (this.refreshOn) {
+			this.refreshOn.delay(200).subscribe(() => this.reloadSelectListeners());
+		} else {
+			setTimeout(() => this.reloadSelectListeners(), 200);
+		}
 	}
 
 	fireAdd() {
@@ -43,4 +54,41 @@ export class EditToolbarComponent implements OnInit {
 		this.onDelete.emit(this.data);
 	}
 
+	private reloadSelectListeners(oldValue?: string) {
+		if (oldValue) {
+			this.data = null;
+			let elements = document.querySelectorAll(oldValue);
+			for (let i = 0; i < elements.length; ++i) {
+				elements[i].removeEventListener('click', this.selectListener);
+			}
+		}
+		if (this.select) {
+			this.data = new Array();
+			let elements = document.querySelectorAll(this.select);
+			for (let i = 0; i < elements.length; ++i) {
+				elements[i].addEventListener('click', (event) => this.selectListener(event));
+			}
+		}
+	}
+
+	private selectListener(event: Event) {
+		let result;
+		let path:any = (<any> event).path;
+		for (let el of path) {
+			if (el.nodeName === 'MAT-ROW') {
+				result = el;
+				break;
+			}
+		}
+		if (result) {
+			let index = this.data.findIndex((data: any) => data === result.title);
+			if (index >= 0) {
+				this.data.splice(index, 1);
+				$(result).removeClass('mat-row-selected');
+			} else {
+				this.data.push(result.title);
+				$(result).addClass('mat-row-selected');
+			}
+		}
+	}
 }

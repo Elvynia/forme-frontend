@@ -1,8 +1,10 @@
-import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatSort, MatPaginator } from '@angular/material';
 
 import { Observable } from 'rxjs/Rx';
 
+import { FormeDataSource } from '../forme-data-source';
 import { Event, EVENT } from '../event';
 import { Invoice } from '../invoice';
 import { InvoiceService } from '../invoice.service';
@@ -16,50 +18,42 @@ import { AuthService } from '../auth.service';
 })
 export class InvoiceListComponent implements OnInit {
 	@Input() details: any;
-	data: any[];
+	dataSource: FormeDataSource<Invoice>;
+	displayedColumns = ['id', 'clientId', 'label', 'amount', 'pending', 'received'];
+	@ViewChild(MatSort) sort: MatSort;
+	@ViewChild(MatPaginator) paginator: MatPaginator;
 
 	constructor(private invoiceService: InvoiceService,
 		private authService: AuthService,
 		private router: Router) {
-		this.data = [];
+		
 	}
 
 	ngOnInit() {
 		this.authService.loggedIn.subscribe(() => {
 			this.invoiceService.list()
-				.subscribe((data: any) => this.data = data);
+				.subscribe((data: any) => this.dataSource.publish(data));
 			this.invoiceService.eventsByType(EVENT.ADD)
-				.subscribe((data: any) => this.data.push(data));
+				.subscribe((data: any) => this.dataSource.add(data));
 			this.invoiceService.eventsByType(EVENT.DELETE)
-				.subscribe((data: any) => this.update(data.id));
+				.subscribe((data: any) => this.dataSource.update(data.id));
 			this.invoiceService.eventsByType(EVENT.UPDATE)
-				.subscribe((data: any) => this.update(data.id, data));
+				.subscribe((data: any) => this.dataSource.update(data.id, data));
 		});
-	}
-
-	private update(id: number, invoice?: Invoice) {
-		let index = this.data.findIndex((search) => search.id === id);
-		if (index && index >= 0) {
-			if (invoice) {
-				this.data.splice(index, 1, invoice);
-			} else {
-				this.data.splice(index, 1);
-			}
-			this.data = this.data.slice();
-		}
+		this.dataSource = new FormeDataSource(this.paginator, this.sort);
 	}
 
 
 	modifySelected(selected: any[]) {
 		if (selected && selected[0]) {
-			this.router.navigate(['/invoice/', selected[0].id]);
+			this.router.navigate(['/invoice/', selected[0]]);
 		}
 	}
 
 	deleteSelected(selected: any[]) {
 		if (selected) {
-			selected.forEach((invoice: Invoice) => {
-				this.invoiceService.delete(invoice);
+			selected.forEach((id: number) => {
+				this.invoiceService.delete(new Invoice(id));
 			});
 		}
 	}
