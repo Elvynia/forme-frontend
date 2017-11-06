@@ -1,10 +1,13 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Router } from 	'@angular/router';
+import { MatSort, MatPaginator } from '@angular/material';
 
+import { FormeDataSource } from '../forme-data-source';
 import { Mission } from '../mission';
 import { MissionService } from '../mission.service';
 import { AuthService } from '../auth.service';
 import { EVENT } from '../event';
+import { Uuid } from '../uuid';
 
 @Component({
   selector: 'app-mission-list',
@@ -13,49 +16,46 @@ import { EVENT } from '../event';
 })
 export class MissionListComponent implements OnInit {
 	@Input() details: any;
-	data: any[];
+	dataSource: FormeDataSource<Mission>;
+	displayedColumns = ['id', 'clientId', 'type', 'duration', 'tjm', 'label', 'title', 'travelCosts'];
+	@ViewChild(MatSort) sort: MatSort;
+	@ViewChild(MatPaginator) paginator: MatPaginator;
+	uuid: Uuid;
+
+	public get id(): string {
+		return this.uuid.value;
+	}
 
 	constructor(private missionService: MissionService,
 		private authService: AuthService,
 		private router: Router) {
-		this.data = [];
+		this.uuid = new Uuid();
 	}
 
 	ngOnInit() {
 		this.authService.loggedIn.subscribe(() => {
 			this.missionService.list()
-				.subscribe((data: any) => this.data = data);
+				.subscribe((data: any) => this.dataSource && this.dataSource.publish(data));
 			this.missionService.eventsByType(EVENT.ADD)
-				.subscribe((data: any) => this.data.push(data));
+				.subscribe((data: any) => this.dataSource && this.dataSource.add(data));
 			this.missionService.eventsByType(EVENT.DELETE)
-				.subscribe((data: any) => this.update(data.id));
+				.subscribe((data: any) => this.dataSource && this.dataSource.update(data.id));
 			this.missionService.eventsByType(EVENT.UPDATE)
-				.subscribe((data: any) => this.update(data.id, data));
+				.subscribe((data: any) => this.dataSource && this.dataSource.update(data.id, data));
 		});
-	}
-
-	private update(id: number, mission?: Mission) {
-		let index = this.data.findIndex((search) => search.id === id);
-		if (index && index >= 0) {
-			if (mission) {
-				this.data.splice(index, 1, mission);
-			} else {
-				this.data.splice(index, 1);
-			}
-			this.data = this.data.slice();
-		}
+		this.dataSource = new FormeDataSource(this.paginator, this.sort);
 	}
 
 	modifySelected(selected: any[]) {
 		if (selected && selected[0]) {
-			this.router.navigate(['/mission/', selected[0].id]);
+			this.router.navigate(['/mission/', selected[0]]);
 		}
 	}
 
 	deleteSelected(selected: any[]) {
 		if (selected) {
-			selected.forEach((mission: Mission) => {
-				this.missionService.delete(mission);
+			selected.forEach((id: number) => {
+				this.missionService.delete(new Mission(id));
 			});
 		}
 	}

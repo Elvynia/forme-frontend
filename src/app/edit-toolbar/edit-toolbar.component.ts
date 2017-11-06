@@ -1,6 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
-
-import { Observable } from 'rxjs/Rx';
+import { Component, OnInit, OnChanges, SimpleChanges, Input, Output } from '@angular/core';
 
 import * as $ from 'jquery';
 
@@ -14,7 +12,6 @@ import { AngularSubject } from '../angular-subject';
 export class EditToolbarComponent implements OnInit {
 	@Input() data: any;
 	@Input() select: string;
-	@Input() refreshOn: Observable<any>;
 	shouldAdd: boolean;
 	shouldModify: boolean;
 	shouldDelete: boolean;
@@ -35,10 +32,11 @@ export class EditToolbarComponent implements OnInit {
 		this.onAdd.onSubscribe((isSubscribed) => this.shouldAdd = isSubscribed);
 		this.onModify.onSubscribe((isSubscribed) => this.shouldModify = isSubscribed);
 		this.onDelete.onSubscribe((isSubscribed) => this.shouldDelete = isSubscribed);
-		if (this.refreshOn) {
-			this.refreshOn.delay(200).subscribe(() => this.reloadSelectListeners());
-		} else {
-			setTimeout(() => this.reloadSelectListeners(), 200);
+	}
+
+	ngOnChanges(changes: SimpleChanges) {
+		if (changes['select']) {
+			setTimeout(() => this.reloadSelectListeners(changes['select'].previousValue), 200);
 		}
 	}
 
@@ -57,16 +55,18 @@ export class EditToolbarComponent implements OnInit {
 	private reloadSelectListeners(oldValue?: string) {
 		if (oldValue) {
 			this.data = null;
-			let elements = document.querySelectorAll(oldValue);
-			for (let i = 0; i < elements.length; ++i) {
-				elements[i].removeEventListener('click', this.selectListener);
+			let element = document.querySelector(oldValue);
+			if (element) {
+				element.removeEventListener('click', this.selectListener);
+				element.removeEventListener('DOMSubtreeModified', this.resetListener);
 			}
 		}
 		if (this.select) {
 			this.data = new Array();
-			let elements = document.querySelectorAll(this.select);
-			for (let i = 0; i < elements.length; ++i) {
-				elements[i].addEventListener('click', (event) => this.selectListener(event));
+			let element = document.querySelector(this.select);
+			if (element) {
+				element.addEventListener('click', (event) => this.selectListener(event));
+				element.addEventListener('DOMSubtreeModified', () => this.resetListener());
 			}
 		}
 	}
@@ -89,6 +89,14 @@ export class EditToolbarComponent implements OnInit {
 				this.data.push(result.title);
 				$(result).addClass('mat-row-selected');
 			}
+		}
+	}
+
+	private resetListener() {
+		this.data = [];
+		let elements = document.querySelectorAll(this.select + ' mat-row');
+		for (let i = 0; i < elements.length; ++i) {
+			$(elements[i]).removeClass('mat-row-selected');
 		}
 	}
 }

@@ -5,14 +5,20 @@
 
 div.dashboard .table-wrapper {
 	float: left;
-	width: 42%;
+	width: 45%;
 	margin-left: 40px;
 	margin-right: 20px;
 }
 
-div#infos mat-table {
+div#infos .table-wrapper {
 	float: left;
-	width: 31%;
+	width: 30%;
+}
+
+div.table-wrapper div.header {
+	position: relative;
+	display: inline-flex;
+	width: 100%;
 }
 
 .cal-month-view .cal-cell-top {
@@ -45,6 +51,16 @@ form > section {
 
 form > section > mat-checkbox {
 	margin: 0 10px;
+}
+
+mat-table mat-header-row mat-header-cell.mat-column-id,
+mat-table mat-row mat-cell.mat-column-id {
+	flex: 0.2;
+}
+
+mat-table mat-header-row mat-header-cell.mat-column-title,
+mat-table mat-row mat-cell.mat-column-title {
+	flex: 2;
 }
 
 .mat-row-selected {

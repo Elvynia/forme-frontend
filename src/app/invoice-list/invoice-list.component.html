@@ -1,10 +1,10 @@
-<div class="table-wrapper">
+<div id="invoice-list-{{id}}" class="table-wrapper">
 	<div class="header">
 		<h2>{{ details?.title || 'Toutes les factures' }}</h2>
-		<app-edit-toolbar select="mat-table#invoiceTable mat-row" [refreshOn]="dataSource.refresher"
+		<app-edit-toolbar select="div#invoice-list-{{id}}"
 			(onModify)="modifySelected($event)" (onDelete)="deleteSelected($event)"></app-edit-toolbar>
 	</div>
-	<mat-table id="invoiceTable" [dataSource]="dataSource" matSort>
+	<mat-table id="invoiceTable-{{details?.title}}" [dataSource]="dataSource" matSort>
 		<ng-container matColumnDef="id">
 			<mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
 			<mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>

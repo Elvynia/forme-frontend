@@ -1,10 +1,13 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatSort, MatPaginator } from '@angular/material';
 
+import { FormeDataSource } from '../forme-data-source';
 import { Company } from '../company';
 import { CompanyService } from '../company.service';
 import { AuthService } from '../auth.service';
 import { EVENT } from '../event';
+import { Uuid } from '../uuid';
 
 @Component({
   selector: 'app-company-list',
@@ -13,50 +16,46 @@ import { EVENT } from '../event';
 })
 export class CompanyListComponent implements OnInit {
 	@Input() details: any;
-	data: any[];
+	dataSource: FormeDataSource<Company>;
+	displayedColumns = ['id', 'trigram', 'name', 'siren', 'rcs'];
+	@ViewChild(MatSort) sort: MatSort;
+	@ViewChild(MatPaginator) paginator: MatPaginator;
+	uuid: Uuid;
+
+	public get id(): string {
+		return this.uuid.value;
+	}
 
 	constructor(private companyService: CompanyService,
 		private authService: AuthService,
 		private router: Router) {
-		this.data = [];
+		this.uuid = new Uuid();
 	}
 
 	ngOnInit() {
 		this.authService.loggedIn.subscribe(() => {
 			this.companyService.list()
-				.subscribe((data: any) => this.data = data);
+				.subscribe((data: any) => this.dataSource && this.dataSource.publish(data));
 			this.companyService.eventsByType(EVENT.ADD)
-				.subscribe((data: any) => this.data.push(data));
+				.subscribe((data: any) => this.dataSource && this.dataSource.add(data));
 			this.companyService.eventsByType(EVENT.DELETE)
-				.subscribe((data: any) => this.update(data.id));
+				.subscribe((data: any) => this.dataSource && this.dataSource.update(data.id));
 			this.companyService.eventsByType(EVENT.UPDATE)
-				.subscribe((data: any) => this.update(data.id, data));
+				.subscribe((data: any) => this.dataSource && this.dataSource.update(data.id, data));
 		});
+		this.dataSource = new FormeDataSource(this.paginator, this.sort);
 	}
-
-	private update(id: number, company?: Company) {
-		let index = this.data.findIndex((search) => search.id === id);
-		if (index && index >= 0) {
-			if (company) {
-				this.data.splice(index, 1, company);
-			} else {
-				this.data.splice(index, 1);
-			}
-			this.data = this.data.slice();
-		}
-	}
-
 
 	modifySelected(selected: any[]) {
 		if (selected && selected[0]) {
-			this.router.navigate(['/company/', selected[0].id]);
+			this.router.navigate(['/company/', selected[0]]);
 		}
 	}
 
 	deleteSelected(selected: any[]) {
 		if (selected) {
-			selected.forEach((company: Company) => {
-				this.companyService.delete(company);
+			selected.forEach((id:number) => {
+				this.companyService.delete(new Company(id));
 			});
 		}
 	}
