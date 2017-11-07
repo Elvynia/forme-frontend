@@ -1,8 +1,10 @@
 <div id="company-list-{{id}}" class="table-wrapper" #wrapper>
 	<div class="header">
-		<h2>{{ details?.title || 'Toutes les sociétés' }}</h2>
-		<app-edit-toolbar select="div#company-list-{{id}}"
-			(onModify)="modifySelected($event)" (onDelete)="deleteSelected($event)"></app-edit-toolbar>
+		<h2>
+			{{ details?.title || 'Toutes les sociétés' }}
+			<app-edit-toolbar select="div#company-list-{{id}}"
+				(onModify)="modifySelected($event)" (onDelete)="deleteSelected($event)"></app-edit-toolbar>
+		</h2>
 	</div>
 	<mat-table id="companyTable-{{details?.title}}" [dataSource]="dataSource" matSort>
 		<ng-container matColumnDef="id">

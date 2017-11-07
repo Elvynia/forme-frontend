@@ -12,6 +12,7 @@ import { AngularSubject } from '../angular-subject';
 export class EditToolbarComponent implements OnInit {
 	@Input() data: any;
 	@Input() select: string;
+	@Input() float: string;
 	shouldAdd: boolean;
 	shouldModify: boolean;
 	shouldDelete: boolean;

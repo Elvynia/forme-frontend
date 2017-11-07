@@ -1,8 +1,10 @@
 <div id="mission-list-{{id}}" class="table-wrapper">
 	<div class="header">		
-		<h2>{{ details?.title || 'Toutes les missions' }}</h2>
-		<app-edit-toolbar select="div#mission-list-{{id}}"
-			(onModify)="modifySelected($event)" (onDelete)="deleteSelected($event)"></app-edit-toolbar>
+		<h2>
+			{{ details?.title || 'Toutes les missions' }}
+			<app-edit-toolbar select="div#mission-list-{{id}}"
+				(onModify)="modifySelected($event)" (onDelete)="deleteSelected($event)"></app-edit-toolbar>
+		</h2>
 	</div>
 	<mat-table id="missionTable-{{details?.title}}" [dataSource]="dataSource" matSort>
 		<ng-container matColumnDef="id">

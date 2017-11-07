@@ -1,11 +1,14 @@
+div.dashboard {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+}
+
 div#status {
 	position: relative;
 	margin: 0 40px;
 	height: 30vh;
-}
-
-div#info {
-	display: inline-block;
+	margin-bottom: 30px;
 }
 
 hr {
@@ -42,7 +45,7 @@ div.invoice-wrapper {
 }
 
 div.invoice {
-	/*position: relative;*/
+	position: relative;
 	float: left;
 	width: 20px;
 	height: 20px;

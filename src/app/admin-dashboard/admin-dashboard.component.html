@@ -1,7 +1,7 @@
 <div id="status" #container>
 	<hr />
 	<div class="invoice-wrapper" *ngFor="let invoiceGroup of invoices"
-		[ngStyle]="{left: getMonthPos(container.clientWidth, invoiceGroup[0])}">
+		[ngStyle]="{'left': getMonthPos(container.clientWidth, invoiceGroup[0])}">
 		<div class="invoice" *ngFor="let invoice of invoiceGroup[1]; index as i;">
 			{{ invoice.id }}
 		</div>
@@ -19,7 +19,7 @@
 		</div>
 	</div>
 </div>
-<div id="infos" class="dashboard">
+<div class="dashboard">
 	<app-invoice-list [details]="{title: 'Factures à déclarer', filter: toDeclareFilter}"></app-invoice-list>
 	<app-invoice-list [details]="{title: 'Factures en attente', filter: pendingFilter}"></app-invoice-list>
 	<app-mission-list [details]="{title: 'Mission en cours', filter: missionFilter}"></app-mission-list>

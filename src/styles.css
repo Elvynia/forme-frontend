@@ -3,24 +3,6 @@
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 @import '~angular-calendar/dist/css/angular-calendar.css';
 
-div.dashboard .table-wrapper {
-	float: left;
-	width: 45%;
-	margin-left: 40px;
-	margin-right: 20px;
-}
-
-div#infos .table-wrapper {
-	float: left;
-	width: 30%;
-}
-
-div.table-wrapper div.header {
-	position: relative;
-	display: inline-flex;
-	width: 100%;
-}
-
 .cal-month-view .cal-cell-top {
 	height: 55px;
 	min-height: 0 !important;

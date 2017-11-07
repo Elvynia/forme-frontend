@@ -27,7 +27,6 @@ import { AuthGuard } from './auth-gard';
 import { ROUTES } from './routes';
 import { CompanyRefComponent } from './company-ref/company-ref.component';
 import { MissionEditComponent } from './mission-edit/mission-edit.component';
-import { LayoutListComponent } from './layout-list/layout-list.component';
 import { MissionListComponent } from './mission-list/mission-list.component';
 import { CompanyListComponent } from './company-list/company-list.component';
 import { EditToolbarComponent } from './edit-toolbar/edit-toolbar.component';
@@ -49,7 +48,6 @@ import { ClientDashboardComponent } from './client-dashboard/client-dashboard.co
     CompanyEditComponent,
     CompanyRefComponent,
     MissionEditComponent,
-    LayoutListComponent,
     MissionListComponent,
     CompanyListComponent,
     EditToolbarComponent,
