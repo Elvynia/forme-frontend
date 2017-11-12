@@ -27,7 +27,9 @@
 		</ng-container>
 		<ng-container matColumnDef="signed">
 			<mat-header-cell *matHeaderCellDef mat-sort-header> signé </mat-header-cell>
-			<mat-cell *matCellDef="let row"> {{row.signed || 'false'}} </mat-cell>
+			<mat-cell *matCellDef="let row">
+				<app-status-field [status]="row.signed"></app-status-field>
+			</mat-cell>
 		</ng-container>
 
 		<ng-container matColumnDef="expandedDetail">

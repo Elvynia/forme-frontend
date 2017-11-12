@@ -36,7 +36,9 @@
 				<tbody>
 					<tr>
 						<td>Signé</td>
-						<td>{{ estimate.signed || 'false' }}</td>
+						<td>
+						<app-status-field [status]="estimate.signed"></app-status-field>
+						</td>
 					</tr>
 				</tbody>
 			</table>

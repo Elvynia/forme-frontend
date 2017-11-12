@@ -29,8 +29,8 @@
 						<td>{{ mission.tjm }}</td>
 					</tr>
 					<tr>
-						<td>Frais : {{ mission.travelCosts }}</td>
-						<td>Terminée : {{ mission.closed }}</td>
+						<td>Frais : <app-status-field [status]="mission.travelCosts"></app-status-field></td>
+						<td>Terminée : <app-status-field [status]="mission.closed"></app-status-field></td>
 					</tr>
 				</tbody>
 			</table>

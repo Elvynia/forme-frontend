@@ -27,6 +27,10 @@
 			<mat-header-cell *matHeaderCellDef mat-sort-header> RCS </mat-header-cell>
 			<mat-cell *matCellDef="let row"> {{row.rcs }} </mat-cell>
 		</ng-container>
+		<ng-container matColumnDef="travelCosts">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Frais </mat-header-cell>
+			<mat-cell *matCellDef="let row"> {{row.travelCosts || 'false' }} </mat-cell>
+		</ng-container>
 
 		<ng-container matColumnDef="expandedDetail">
 			<mat-cell *matCellDef="let row">

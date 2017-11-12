@@ -47,11 +47,15 @@
 					</tr>
 					<tr>
 						<td>En attente</td>
-						<td>{{ invoice.pending || 'false' }}</td>
+						<td>
+							<app-status-field [status]="invoice.pending"></app-status-field>
+						</td>
 					</tr>
 					<tr>
 						<td>Payée</td>
-						<td>{{ invoice.received || 'false' }}</td>
+						<td>
+							<app-status-field [status]="invoice.received"></app-status-field>
+						</td>
 					</tr>
 				</tbody>
 			</table>

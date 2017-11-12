@@ -41,6 +41,7 @@ import { InvoiceDetailsComponent } from './invoice-details/invoice-details.compo
 import { MissionDetailsComponent } from './mission-details/mission-details.component';
 import { EstimateDetailsComponent } from './estimate-details/estimate-details.component';
 import { CompanyDetailsComponent } from './company-details/company-details.component';
+import { StatusFieldComponent } from './status-field/status-field.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { CompanyDetailsComponent } from './company-details/company-details.compo
     InvoiceDetailsComponent,
     MissionDetailsComponent,
     EstimateDetailsComponent,
-    CompanyDetailsComponent
+    CompanyDetailsComponent,
+    StatusFieldComponent
   ],
   imports: [
     BrowserModule,

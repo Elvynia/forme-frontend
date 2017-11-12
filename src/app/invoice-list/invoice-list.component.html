@@ -25,11 +25,15 @@
 		</ng-container>
 		<ng-container matColumnDef="pending">
 			<mat-header-cell *matHeaderCellDef mat-sort-header> En attente </mat-header-cell>
-			<mat-cell *matCellDef="let row"> {{row.pending || 'false' }} </mat-cell>
+			<mat-cell *matCellDef="let row">
+				<app-status-field [status]="row.pending"></app-status-field>
+			</mat-cell>
 		</ng-container>
 		<ng-container matColumnDef="received">
 			<mat-header-cell *matHeaderCellDef mat-sort-header> Payée </mat-header-cell>
-			<mat-cell *matCellDef="let row"> {{row.received || 'false'}} </mat-cell>
+			<mat-cell *matCellDef="let row">
+				<app-status-field [status]="row.received"></app-status-field>
+			</mat-cell>
 		</ng-container>
 
 		<ng-container matColumnDef="expandedDetail">
