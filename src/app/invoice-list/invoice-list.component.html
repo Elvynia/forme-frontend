@@ -4,7 +4,7 @@
 			{{ details?.title || 'Toutes les factures' }}
 		</h2>
 	</div>
-	<mat-table class="table table-striped" id="invoiceTable-{{details?.title}}" [dataSource]="dataSource" matSort>
+	<mat-table id="invoiceTable-{{details?.title}}" [dataSource]="dataSource" matSort>
 		<ng-container matColumnDef="id">
 			<mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
 			<mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
@@ -34,17 +34,18 @@
 
 		<ng-container matColumnDef="expandedDetail">
 			<mat-cell *matCellDef="let row">
-				<app-invoice-details [id]="row.item.id"></app-invoice-details>
+				<app-invoice-details [ngClass]="{expansible: row.item.id !== expandedElement?.id}"
+					[id]="row.item.id"></app-invoice-details>
 			</mat-cell>
 		</ng-container>
 
 		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-		<mat-row matRipple [matRippleCentered]="true" [title]="row.id" [class.expanded]="expandedInvoice == row"
+		<mat-row matRipple [title]="row.id" [class.expanded]="expandedElement == row"
 			*matRowDef="let row; columns: displayedColumns;"
 			(click)="handleExpanded($event, row)"></mat-row>
-		<mat-row [@detailExpand]="row.item === expandedInvoice ? 'expanded' : 'collapsed'"
-			*matRowDef="let row; columns: ['expandedDetail']; when:isExpansionDetailRow"
-			style="overflow: hidden"></mat-row>
+		<mat-row [@detailExpand]="row.item === expandedElement ? 'expanded' : 'collapsed'"
+			style="height: 0px; min-height: 0px; visibility: hidden;"
+			*matRowDef="let row; columns: ['expandedDetail']; when:isExpansionDetailRow"></mat-row>
 	</mat-table>
 	<mat-paginator [length]="dataSource.length"
 		[pageIndex]="0"

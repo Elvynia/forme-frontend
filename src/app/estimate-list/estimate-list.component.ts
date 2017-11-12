@@ -1,18 +1,24 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
 import { MatSort, MatPaginator } from '@angular/material';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 import { FormeDataSource } from '../forme-data-source';
 import { Event, EVENT } from '../event';
 import { Estimate } from '../estimate';
 import { EstimateService } from '../estimate.service';
 import { AuthService } from '../auth.service';
-import { Uuid } from '../uuid';
 
 @Component({
   selector: 'app-estimate-list',
   templateUrl: './estimate-list.component.html',
-  styleUrls: ['./estimate-list.component.css']
+  styleUrls: ['./estimate-list.component.css'],
+	animations: [
+	trigger('detailExpand', [
+		state('collapsed', style({height: '0px', minHeight: '0', visibility: 'hidden'})),
+		state('expanded', style({height: '*', visibility: 'visible'})),
+		transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)'))
+		])
+	]
 })
 export class EstimateListComponent implements OnInit {
 	@Input() details: any;
@@ -20,16 +26,11 @@ export class EstimateListComponent implements OnInit {
 	displayedColumns = ['id', 'clientId', 'amount', 'date', 'signed'];
 	@ViewChild(MatSort) sort: MatSort;
 	@ViewChild(MatPaginator) paginator: MatPaginator;
-	uuid: Uuid;
-
-	public get id(): string {
-		return this.uuid.value;
-	}
+	isExpansionDetailRow = (index, row:any) => row.hasOwnProperty('detailRow');
+	expandedElement;
 
 	constructor(private estimateService: EstimateService,
-		private authService: AuthService,
-		private router: Router) {
-		this.uuid = new Uuid();
+		private authService: AuthService) {
 	}
 
 	ngOnInit() {
@@ -46,18 +47,13 @@ export class EstimateListComponent implements OnInit {
 		this.dataSource = new FormeDataSource(this.paginator, this.sort);
 	}
 
-	modifySelected(selected: any[]) {
-		if (selected && selected[0]) {
-			this.router.navigate(['/estimate/', selected[0]]);
+	handleExpanded(event, row: any) {
+		if (this.expandedElement && this.expandedElement == row) {
+			this.expandedElement = null;
+		} else {
+			this.expandedElement = row;
 		}
-	}
-
-	deleteSelected(selected: any[]) {
-		if (selected) {
-			selected.forEach((id: number) => {
-				this.estimateService.delete(new Estimate(id));
-			});
-		}
+		event.stopPropagation();
 	}
 
 }

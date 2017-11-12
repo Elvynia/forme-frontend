@@ -1,0 +1,49 @@
+<ng-container *ngIf="estimate">
+	<mat-card>
+		<mat-card-header [hidden]="hideTitle">
+			<div mat-card-avatar class="estimate-details-icon"></div>
+			<mat-card-title>Détails du devis n°{{estimate.id}}</mat-card-title>
+			<mat-card-subtitle>{{ estimate.date | date:'dd/MM/yyyy' }}</mat-card-subtitle>
+		</mat-card-header>
+		<mat-card-content>
+			<table>
+				<thead>
+					<tr>
+						<th class="labels"></th>
+						<th class="values"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Client</td>
+						<td>
+							<app-company-ref [id]="estimate.clientId"></app-company-ref>
+						</td>
+					</tr>
+					<tr>
+						<td>Montant</td>
+						<td>{{ estimate.amount | currency:'€' }}</td>
+					</tr>
+				</tbody>
+			</table>
+			<table>
+				<thead>
+					<tr>
+						<th class="labels"></th>
+						<th class="values"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Signé</td>
+						<td>{{ estimate.signed || 'false' }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</mat-card-content>
+		<mat-card-actions>
+			<app-edit-toolbar (onModify)="modifySelected()"
+				(onDelete)="deleteSelected()"></app-edit-toolbar>
+		</mat-card-actions>
+	</mat-card>
+</ng-container>

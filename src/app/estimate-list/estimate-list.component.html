@@ -30,8 +30,20 @@
 			<mat-cell *matCellDef="let row"> {{row.signed || 'false'}} </mat-cell>
 		</ng-container>
 
+		<ng-container matColumnDef="expandedDetail">
+			<mat-cell *matCellDef="let row">
+				<app-estimate-details [ngClass]="{expansible: row.item.id !== expandedElement?.id}"
+					[id]="row.item.id"></app-estimate-details>
+			</mat-cell>
+		</ng-container>
+
 		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-		<mat-row [title]="row.id" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+		<mat-row matRipple [title]="row.id" [class.expanded]="expandedElement == row"
+			*matRowDef="let row; columns: displayedColumns;"
+			(click)="handleExpanded($event, row)"></mat-row>
+		<mat-row [@detailExpand]="row.item === expandedElement ? 'expanded' : 'collapsed'"
+			style="height: 0px; min-height: 0px; visibility: hidden;"
+			*matRowDef="let row; columns: ['expandedDetail']; when:isExpansionDetailRow"></mat-row>
 	</mat-table>
 	<mat-paginator [length]="dataSource.length"
 		[pageIndex]="0"

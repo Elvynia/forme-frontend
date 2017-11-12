@@ -33,11 +33,10 @@ export class InvoiceDetailsComponent implements OnInit {
 	}
 
 	deleteSelected() {
-		if (this.invoice
-				&& confirm("Voulez-vous vraiment supprimer cette facture ?")) {
-				this.invoiceService.delete(this.invoice);
-			}
+		if (this.invoice &&
+				confirm("Voulez-vous vraiment supprimer cette facture ?")) {
+			this.invoiceService.delete(this.invoice);
 		}
 	}
-
-}
+	
+}	

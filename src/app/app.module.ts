@@ -38,6 +38,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { ClientDashboardComponent } from './client-dashboard/client-dashboard.component';
 import { InvoiceDetailsComponent } from './invoice-details/invoice-details.component';
+import { MissionDetailsComponent } from './mission-details/mission-details.component';
+import { EstimateDetailsComponent } from './estimate-details/estimate-details.component';
+import { CompanyDetailsComponent } from './company-details/company-details.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +62,10 @@ import { InvoiceDetailsComponent } from './invoice-details/invoice-details.compo
     DashboardComponent,
     AdminDashboardComponent,
     ClientDashboardComponent,
-    InvoiceDetailsComponent
+    InvoiceDetailsComponent,
+    MissionDetailsComponent,
+    EstimateDetailsComponent,
+    CompanyDetailsComponent
   ],
   imports: [
     BrowserModule,

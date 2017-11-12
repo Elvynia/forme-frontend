@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, OnChanges, SimpleChanges, Renderer } from '@angular/core';
 import { MatSort, MatPaginator } from '@angular/material';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
@@ -7,20 +7,18 @@ import { Event, EVENT } from '../event';
 import { Invoice } from '../invoice';
 import { InvoiceService } from '../invoice.service';
 import { AuthService } from '../auth.service';
-import { Uuid } from '../uuid';
-
 
 @Component({
-  selector: 'app-invoice-list',
-  templateUrl: './invoice-list.component.html',
-  styleUrls: ['./invoice-list.component.css'],
-  animations: [
-  	trigger('detailExpand', [
-  		state('collapsed', style({height: '0px', minHeight: '0', visibility: 'hidden'})),
-  		state('expanded', style({height: '*', visibility: 'visible'})),
-  		transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)'))
-  	])
-  ]
+	selector: 'app-invoice-list',
+	templateUrl: './invoice-list.component.html',
+	styleUrls: ['./invoice-list.component.css'],
+	animations: [
+	trigger('detailExpand', [
+		state('collapsed', style({height: '0px', minHeight: '0', visibility: 'hidden'})),
+		state('expanded', style({height: '*', visibility: 'visible'})),
+		transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)'))
+		])
+	]
 })
 export class InvoiceListComponent implements OnInit {
 	@Input() details: any;
@@ -28,17 +26,13 @@ export class InvoiceListComponent implements OnInit {
 	displayedColumns = ['id', 'clientId', 'label', 'amount', 'pending', 'received'];
 	@ViewChild(MatSort) sort: MatSort;
 	@ViewChild(MatPaginator) paginator: MatPaginator;
-	uuid: Uuid;
+	@ViewChild('details') detailsComp: any;
 	isExpansionDetailRow = (index, row:any) => row.hasOwnProperty('detailRow');
-	expandedInvoice;
-
-	public get id(): string {
-		return this.uuid.value;
-	}
+	expandedElement;
 
 	constructor(private invoiceService: InvoiceService,
-		private authService: AuthService) {
-		this.uuid = new Uuid();		
+		private authService: AuthService,
+		private renderer: Renderer) {
 	}
 
 	ngOnInit() {
@@ -56,10 +50,10 @@ export class InvoiceListComponent implements OnInit {
 	}
 
 	handleExpanded(event, row: any) {
-		if (this.expandedInvoice && this.expandedInvoice == row) {
-			this.expandedInvoice = null;
+		if (this.expandedElement && this.expandedElement == row) {
+			this.expandedElement = null;
 		} else {
-			this.expandedInvoice = row;
+			this.expandedElement = row;
 		}
 		event.stopPropagation();
 	}

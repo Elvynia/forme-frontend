@@ -13,8 +13,8 @@ mat-card-title {
 	font-size: 16px;
 }
 
-div.invoice-details-icon {
-	background-image: url("/assets/continue.png");
+div.mission-details-icon {
+	background-image: url("/assets/pause.png");
 	background-repeat: no-repeat;
     background-size: cover;
 }

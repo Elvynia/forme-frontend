@@ -1,9 +1,9 @@
-<ng-container *ngIf="invoice">
+<ng-container *ngIf="mission">
 	<mat-card>
 		<mat-card-header [hidden]="hideTitle">
-			<div mat-card-avatar class="invoice-details-icon"></div>
-			<mat-card-title>Détails de la facture n°{{invoice.id}}</mat-card-title>
-			<mat-card-subtitle>{{ invoice.creationDate | date:'dd/MM/yyyy' }}</mat-card-subtitle>
+			<div mat-card-avatar class="mission-details-icon"></div>
+			<mat-card-title>Détails de la mission n°{{mission.id}}</mat-card-title>
+			<mat-card-subtitle>{{ mission.title }}</mat-card-subtitle>
 		</mat-card-header>
 		<mat-card-content>
 			<table>
@@ -17,19 +17,20 @@
 					<tr>
 						<td>Client</td>
 						<td>
-							<app-company-ref [id]="invoice.clientId"></app-company-ref>
+							<app-company-ref [id]="mission.clientId"></app-company-ref>
 						</td>
 					</tr>
 					<tr>
-						<td>Montant</td>
-						<td>{{ invoice.amount | currency:'€' }}</td>
+						<td>Durée</td>
+						<td>{{ mission.duration }}</td>
 					</tr>
 					<tr>
-						<td>Reception</td>
-						<td *ngIf="invoice.received; else elseTmpl"> le {{ invoice.receptionDate | date:'dd/MM/yyyy' }}</td>
-						<ng-template #elseTmpl>
-							<td>false</td>
-						</ng-template>
+						<td>TJM (€/j)</td>
+						<td>{{ mission.tjm }}</td>
+					</tr>
+					<tr>
+						<td>Frais : {{ mission.travelCosts }}</td>
+						<td>Terminée : {{ mission.closed }}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -43,15 +44,15 @@
 				<tbody>
 					<tr>
 						<td>Label</td>
-						<td>{{ invoice.label }}</td>
+						<td>{{ mission.label }}</td>
 					</tr>
 					<tr>
-						<td>En attente</td>
-						<td>{{ invoice.pending || 'false' }}</td>
+						<td>Type</td>
+						<td>{{ mission.type === 0 ? 'Analyse et développements' : 'Formation' }}</td>
 					</tr>
 					<tr>
-						<td>Payée</td>
-						<td>{{ invoice.received || 'false' }}</td>
+						<td>Lieu</td>
+						<td>{{ mission.place }}</td>
 					</tr>
 				</tbody>
 			</table>

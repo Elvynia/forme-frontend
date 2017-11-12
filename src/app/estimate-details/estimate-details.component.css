@@ -5,7 +5,7 @@
 }
 
 mat-card {
-	height: 250px;
+	height: 180px;
 }
 
 mat-card-title {
@@ -13,7 +13,7 @@ mat-card-title {
 	font-size: 16px;
 }
 
-div.invoice-details-icon {
+div.estimate-details-icon {
 	background-image: url("/assets/continue.png");
 	background-repeat: no-repeat;
     background-size: cover;
