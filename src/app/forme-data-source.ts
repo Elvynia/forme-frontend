@@ -64,7 +64,10 @@ export class FormeDataSource<E extends Entity> extends DataSource<E> {
 				});
 			}
 			const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
-			return data.splice(startIndex, this.paginator.pageSize);
+			data = data.splice(startIndex, this.paginator.pageSize)
+			const result = [];
+			data.forEach((item: any) => result.push(item, {detailRow: true, item}));
+			return result;
 		});
 	}
 

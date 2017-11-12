@@ -76,7 +76,7 @@ export class EditToolbarComponent implements OnInit {
 		let result;
 		let path:any = (<any> event).path;
 		for (let el of path) {
-			if (el.nodeName === 'MAT-ROW') {
+			if (el.nodeName === 'MAT-ROW' && el.attributes['matripple']) {
 				result = el;
 				break;
 			}

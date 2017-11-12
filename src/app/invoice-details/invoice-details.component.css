@@ -1,0 +1,50 @@
+:host {
+	background-color: #fafafa;
+	display: block;
+	padding: 20px;
+}
+
+mat-card {
+	height: 210px;
+}
+
+mat-card-title {
+	font-weight: bold;
+	font-size: 16px;
+}
+
+div.invoice-details-icon {
+	background-image: url("/assets/continue.png");
+	background-repeat: no-repeat;
+    background-size: cover;
+}
+
+table {
+	float: left;
+	width: 50%;
+}
+
+tr {
+	margin: 10px 0;
+}
+
+td {
+	padding: 5px;
+}
+
+td:nth-child(1) {
+	font-weight: bold;
+	text-align: right;
+}
+
+td:nth-child(2) {
+	text-align: left;
+}
+
+th.labels {
+	width: 30%;
+}
+
+th.values {
+	width: 60%;
+}

@@ -2,3 +2,7 @@
 	flex: 2;
 	margin: 0 15px;
 }
+
+mat-row[matRipple] {
+	cursor: pointer;
+}

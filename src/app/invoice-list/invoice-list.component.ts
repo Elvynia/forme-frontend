@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
-import { Router } from '@angular/router';
 import { MatSort, MatPaginator } from '@angular/material';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 import { FormeDataSource } from '../forme-data-source';
 import { Event, EVENT } from '../event';
@@ -13,7 +13,14 @@ import { Uuid } from '../uuid';
 @Component({
   selector: 'app-invoice-list',
   templateUrl: './invoice-list.component.html',
-  styleUrls: ['./invoice-list.component.css']
+  styleUrls: ['./invoice-list.component.css'],
+  animations: [
+  	trigger('detailExpand', [
+  		state('collapsed', style({height: '0px', minHeight: '0', visibility: 'hidden'})),
+  		state('expanded', style({height: '*', visibility: 'visible'})),
+  		transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)'))
+  	])
+  ]
 })
 export class InvoiceListComponent implements OnInit {
 	@Input() details: any;
@@ -22,14 +29,15 @@ export class InvoiceListComponent implements OnInit {
 	@ViewChild(MatSort) sort: MatSort;
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	uuid: Uuid;
+	isExpansionDetailRow = (index, row:any) => row.hasOwnProperty('detailRow');
+	expandedInvoice;
 
 	public get id(): string {
 		return this.uuid.value;
 	}
 
 	constructor(private invoiceService: InvoiceService,
-		private authService: AuthService,
-		private router: Router) {
+		private authService: AuthService) {
 		this.uuid = new Uuid();		
 	}
 
@@ -47,18 +55,12 @@ export class InvoiceListComponent implements OnInit {
 		this.dataSource = new FormeDataSource(this.paginator, this.sort);
 	}
 
-
-	modifySelected(selected: any[]) {
-		if (selected && selected[0]) {
-			this.router.navigate(['/invoice/', selected[0]]);
+	handleExpanded(event, row: any) {
+		if (this.expandedInvoice && this.expandedInvoice == row) {
+			this.expandedInvoice = null;
+		} else {
+			this.expandedInvoice = row;
 		}
-	}
-
-	deleteSelected(selected: any[]) {
-		if (selected) {
-			selected.forEach((id: number) => {
-				this.invoiceService.delete(new Invoice(id));
-			});
-		}
+		event.stopPropagation();
 	}
 }

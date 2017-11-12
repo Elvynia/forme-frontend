@@ -2,14 +2,12 @@
 	<div class="header">
 		<h2>
 			{{ details?.title || 'Toutes les factures' }}
-			<app-edit-toolbar select="div#invoice-list-{{id}}"
-				(onModify)="modifySelected($event)" (onDelete)="deleteSelected($event)"></app-edit-toolbar>
 		</h2>
 	</div>
-	<mat-table id="invoiceTable-{{details?.title}}" [dataSource]="dataSource" matSort>
+	<mat-table class="table table-striped" id="invoiceTable-{{details?.title}}" [dataSource]="dataSource" matSort>
 		<ng-container matColumnDef="id">
 			<mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
-			<mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+			<mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
 		</ng-container>
 		<ng-container matColumnDef="clientId">
 			<mat-header-cell *matHeaderCellDef mat-sort-header> Client </mat-header-cell>
@@ -34,8 +32,19 @@
 			<mat-cell *matCellDef="let row"> {{row.received || 'false'}} </mat-cell>
 		</ng-container>
 
+		<ng-container matColumnDef="expandedDetail">
+			<mat-cell *matCellDef="let row">
+				<app-invoice-details [id]="row.item.id"></app-invoice-details>
+			</mat-cell>
+		</ng-container>
+
 		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-		<mat-row [title]="row.id" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+		<mat-row matRipple [matRippleCentered]="true" [title]="row.id" [class.expanded]="expandedInvoice == row"
+			*matRowDef="let row; columns: displayedColumns;"
+			(click)="handleExpanded($event, row)"></mat-row>
+		<mat-row [@detailExpand]="row.item === expandedInvoice ? 'expanded' : 'collapsed'"
+			*matRowDef="let row; columns: ['expandedDetail']; when:isExpansionDetailRow"
+			style="overflow: hidden"></mat-row>
 	</mat-table>
 	<mat-paginator [length]="dataSource.length"
 		[pageIndex]="0"

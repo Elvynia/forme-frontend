@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CalendarModule } from 'angular-calendar';
-import { MatSortModule, MatPaginatorModule, MatTableModule, MatTabsModule, MatFormFieldModule, MatInputModule, MatDialogModule, MatSelectModule, MatOptionModule, MatCheckboxModule} from '@angular/material';
+import { MatCardModule, MatRippleModule, MatSortModule, MatPaginatorModule, MatTableModule, MatTabsModule, MatFormFieldModule, MatInputModule, MatDialogModule, MatSelectModule, MatOptionModule, MatCheckboxModule} from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { EstimateListComponent } from './estimate-list/estimate-list.component';
@@ -37,6 +37,7 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { ClientDashboardComponent } from './client-dashboard/client-dashboard.component';
+import { InvoiceDetailsComponent } from './invoice-details/invoice-details.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { ClientDashboardComponent } from './client-dashboard/client-dashboard.co
     LoginComponent,
     DashboardComponent,
     AdminDashboardComponent,
-    ClientDashboardComponent
+    ClientDashboardComponent,
+    InvoiceDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +77,9 @@ import { ClientDashboardComponent } from './client-dashboard/client-dashboard.co
     MatTabsModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatRippleModule,
+    MatCardModule
   ],
   providers: [InvoiceService, EstimateService, CompanyService, MissionService, 
     MessageService, EventService, AuthService, AuthGuard],

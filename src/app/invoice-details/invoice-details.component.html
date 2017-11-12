@@ -1,0 +1,61 @@
+<ng-container *ngIf="invoice">
+	<mat-card>
+		<mat-card-header [hidden]="hideTitle">
+			<div mat-card-avatar class="invoice-details-icon"></div>
+			<mat-card-title>Détails de la facture</mat-card-title>
+			<mat-card-subtitle>n°{{invoice.id}}</mat-card-subtitle>
+		</mat-card-header>
+		<mat-card-content>
+			<table>
+				<thead>
+					<tr>
+						<th class="labels"></th>
+						<th class="values"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Client</td>
+						<td>
+							<app-company-ref [id]="invoice.clientId"></app-company-ref>
+						</td>
+					</tr>
+					<tr>
+						<td>Label</td>
+						<td>{{ invoice.label }}</td>
+					</tr>
+					<tr>
+						<td>Montant</td>
+						<td>{{ invoice.amount }}</td>
+					</tr>
+				</tbody>
+			</table>
+			<table>
+				<thead>
+					<tr>
+						<th class="labels"></th>
+						<th class="values"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Date de création</td>
+						<td>{{ invoice.creationDate | date:'dd/MM/yyyy' }}</td>
+					</tr>
+					<tr>
+						<td>En attente</td>
+						<td>{{ invoice.pending || 'false' }}</td>
+					</tr>
+					<tr>
+						<td>Payée</td>
+						<td>{{ invoice.received || 'false' }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</mat-card-content>
+		<mat-card-actions>
+			<app-edit-toolbar (onModify)="modifySelected()"
+				(onDelete)="deleteSelected()"></app-edit-toolbar>
+		</mat-card-actions>
+	</mat-card>
+</ng-container>
