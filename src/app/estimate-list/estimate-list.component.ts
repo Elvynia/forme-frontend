@@ -22,8 +22,8 @@ import { AuthService } from '../auth.service';
 })
 export class EstimateListComponent implements OnInit {
 	@Input() details: any;
+	@Input('columns') displayedColumns;
 	dataSource: FormeDataSource<Estimate>;
-	displayedColumns = ['id', 'clientId', 'amount', 'date', 'signed'];
 	@ViewChild(MatSort) sort: MatSort;
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	isExpansionDetailRow = (index, row:any) => row.hasOwnProperty('detailRow');
@@ -31,6 +31,7 @@ export class EstimateListComponent implements OnInit {
 
 	constructor(private estimateService: EstimateService,
 		private authService: AuthService) {
+		this.displayedColumns = ['id', 'clientId', 'amount', 'date', 'signed'];
 	}
 
 	ngOnInit() {

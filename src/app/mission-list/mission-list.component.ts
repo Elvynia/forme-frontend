@@ -23,8 +23,8 @@ import { EVENT } from '../event';
 })
 export class MissionListComponent implements OnInit {
 	@Input() details: any;
+	@Input('columns') displayedColumns;
 	dataSource: FormeDataSource<Mission>;
-	displayedColumns = ['id', 'clientId', 'type', 'duration', 'tjm', 'label', 'title'];
 	@ViewChild(MatSort) sort: MatSort;
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	isExpansionDetailRow = (index, row:any) => row.hasOwnProperty('detailRow');
@@ -33,6 +33,7 @@ export class MissionListComponent implements OnInit {
 	constructor(private missionService: MissionService,
 		private authService: AuthService,
 		private router: Router) {
+		this.displayedColumns = ['id', 'clientId', 'type', 'duration', 'tjm', 'label', 'title'];
 	}
 
 	ngOnInit() {

@@ -23,8 +23,8 @@ import { Uuid } from '../uuid';
 })
 export class CompanyListComponent implements OnInit {
 	@Input() details: any;
+	@Input('columns') displayedColumns;
 	dataSource: FormeDataSource<Company>;
-	displayedColumns = ['id', 'trigram', 'name', 'siren', 'rcs'];
 	@ViewChild(MatSort) sort: MatSort;
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	isExpansionDetailRow = (index, row:any) => row.hasOwnProperty('detailRow');
@@ -32,6 +32,7 @@ export class CompanyListComponent implements OnInit {
 
 	constructor(private companyService: CompanyService,
 		private authService: AuthService) {
+		this.displayedColumns = ['id', 'trigram', 'name', 'siren', 'rcs'];
 	}
 
 	ngOnInit() {

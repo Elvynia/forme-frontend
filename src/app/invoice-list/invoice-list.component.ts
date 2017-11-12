@@ -22,8 +22,8 @@ import { AuthService } from '../auth.service';
 })
 export class InvoiceListComponent implements OnInit {
 	@Input() details: any;
+	@Input('columns') displayedColumns;
 	dataSource: FormeDataSource<Invoice>;
-	displayedColumns = ['id', 'clientId', 'label', 'amount', 'pending', 'received'];
 	@ViewChild(MatSort) sort: MatSort;
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild('details') detailsComp: any;
@@ -33,6 +33,7 @@ export class InvoiceListComponent implements OnInit {
 	constructor(private invoiceService: InvoiceService,
 		private authService: AuthService,
 		private renderer: Renderer) {
+		this.displayedColumns = ['id', 'clientId', 'label', 'amount', 'pending', 'received'];
 	}
 
 	ngOnInit() {
