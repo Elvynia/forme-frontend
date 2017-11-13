@@ -21,7 +21,8 @@ import { AuthService } from '../auth.service';
 	]
 })
 export class EstimateListComponent implements OnInit {
-	@Input() details: any;
+	@Input() listTitle: any;
+	@Input() filter: (item) => boolean;
 	@Input('columns') displayedColumns;
 	dataSource: FormeDataSource<Estimate>;
 	@ViewChild(MatSort) sort: MatSort;
@@ -46,6 +47,9 @@ export class EstimateListComponent implements OnInit {
 				.subscribe((data: any) => this.dataSource && this.dataSource.update(data.id, data));
 		});
 		this.dataSource = new FormeDataSource(this.paginator, this.sort);
+		if (this.filter) {
+			this.dataSource.filter = this.filter;
+		}
 	}
 
 	handleExpanded(event, row: any) {

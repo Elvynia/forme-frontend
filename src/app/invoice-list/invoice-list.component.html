@@ -1,10 +1,10 @@
-<div id="invoice-list-{{id}}" class="table-wrapper">
+<div class="table-wrapper">
 	<div class="header">
 		<h2>
-			{{ details?.title || 'Toutes les factures' }}
+			{{ listTitle || 'Toutes les factures' }}
 		</h2>
 	</div>
-	<mat-table id="invoiceTable-{{details?.title}}" [dataSource]="dataSource" matSort>
+	<mat-table id="invoiceTable-{{listTitle}}" [dataSource]="dataSource" matSort>
 		<ng-container matColumnDef="id">
 			<mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
 			<mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
@@ -51,7 +51,7 @@
 			style="height: 0px; min-height: 0px; visibility: hidden;"
 			*matRowDef="let row; columns: ['expandedDetail']; when:isExpansionDetailRow"></mat-row>
 	</mat-table>
-	<mat-paginator [length]="dataSource.length"
+	<mat-paginator [length]="dataSource.length | async"
 		[pageIndex]="0"
 		[pageSize]="5"
 		[pageSizeOptions]="[5, 10, 15, 20, 25]">

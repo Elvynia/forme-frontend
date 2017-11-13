@@ -7,7 +7,6 @@ import { Company } from '../company';
 import { CompanyService } from '../company.service';
 import { AuthService } from '../auth.service';
 import { EVENT } from '../event';
-import { Uuid } from '../uuid';
 
 @Component({
   selector: 'app-company-list',
@@ -22,7 +21,8 @@ import { Uuid } from '../uuid';
 	]
 })
 export class CompanyListComponent implements OnInit {
-	@Input() details: any;
+	@Input() listTitle: any;
+	@Input() filter: (item) => boolean;
 	@Input('columns') displayedColumns;
 	dataSource: FormeDataSource<Company>;
 	@ViewChild(MatSort) sort: MatSort;
@@ -47,6 +47,9 @@ export class CompanyListComponent implements OnInit {
 				.subscribe((data: any) => this.dataSource && this.dataSource.update(data.id, data));
 		});
 		this.dataSource = new FormeDataSource(this.paginator, this.sort);
+		if (this.filter) {
+			this.dataSource.filter = this.filter;
+		}
 	}
 
 	handleExpanded(event, row: any) {

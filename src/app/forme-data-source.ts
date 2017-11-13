@@ -8,11 +8,11 @@ import { BaseService } from './base.service';
 
 export class FormeDataSource<E extends Entity> extends DataSource<E> {
 	private data: BehaviorSubject<E[]>;
-	private page: any;
-	private sortData: any;
+	private _filter: BehaviorSubject<(item) => boolean>;
+	private _length: BehaviorSubject<number>;
 
-	public get length(): number {
-		return this.data.value.length;
+	public get length(): Observable<number> {
+		return this._length.asObservable();
 	}
 
 	public get refresher(): Observable<any> {
@@ -20,23 +20,33 @@ export class FormeDataSource<E extends Entity> extends DataSource<E> {
 			this.paginator.page,
 			this.sort.sortChange);
 	}
+
+	public get filter(): (item) => boolean {
+		return this._filter.value;
+	}
+
+	public set filter(callback: (item) => boolean) {
+		this._filter.next(callback);
+	}
 	
 	constructor(private paginator?: MatPaginator, private sort?: MatSort) {
 		super();
 		this.data = new BehaviorSubject([]);
+		this._filter = new BehaviorSubject((item) => item);
+		this._length = new BehaviorSubject(0);
 	}
 
-	publish(data: E[]) {
+	public publish(data: E[]) {
 		this.data.next(data);
 	}
 
-	add(data: E) {
+	public add(data: E) {
 		let newList = this.data.value.slice();
 		newList.push(data);
 		this.data.next(newList);
 	}
 
-	update(id: number, data?: E) {
+	public update(id: number, data?: E) {
 		let newList = this.data.value.slice();
 		let index = newList.findIndex((data: E) => data.id === id);
 		if (index >= 0) {
@@ -53,11 +63,13 @@ export class FormeDataSource<E extends Entity> extends DataSource<E> {
 		const displayDataChanges = [
 		this.data.asObservable(),
 		this.paginator.page,
-		this.sort.sortChange
+		this.sort.sortChange,
+		this.filter
 		];
 
 		return Observable.merge(...displayDataChanges).map(() => {
-			let data = this.data.value.slice();
+			let data = this.data.value.slice().filter(this.filter);
+			this._length.next(data.length);
 			if (this.sort.active) {
 				data.sort((a, b) => {
 					return (a[this.sort.active] < b[this.sort.active] ? -1 : 1) * (this.sort.direction == 'asc' ? 1 : -1);

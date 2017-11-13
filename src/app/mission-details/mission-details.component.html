@@ -21,16 +21,16 @@
 						</td>
 					</tr>
 					<tr>
-						<td>Durée</td>
-						<td>{{ mission.duration }}</td>
+						<td>Label</td>
+						<td>{{ mission.label }}</td>
 					</tr>
 					<tr>
-						<td>TJM (€/j)</td>
-						<td>{{ mission.tjm }}</td>
+						<td>Type</td>
+						<td>{{ mission.type === 0 ? 'Analyse et développements' : 'Formation' }}</td>
 					</tr>
 					<tr>
-						<td>Frais : <app-status-field [status]="mission.travelCosts"></app-status-field></td>
-						<td>Terminée : <app-status-field [status]="mission.closed"></app-status-field></td>
+						<td>Lieu</td>
+						<td>{{ mission.place }}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -43,16 +43,22 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td>Label</td>
-						<td>{{ mission.label }}</td>
+						<td>Durée</td>
+						<td>{{ mission.duration }}</td>
 					</tr>
 					<tr>
-						<td>Type</td>
-						<td>{{ mission.type === 0 ? 'Analyse et développements' : 'Formation' }}</td>
+						<td>TJM</td>
+						<td>{{ mission.tjm }} €/j</td>
 					</tr>
 					<tr>
-						<td>Lieu</td>
-						<td>{{ mission.place }}</td>
+						<td class="checkbox-group">
+							Frais : 
+							<app-status-field [status]="mission.travelCosts"></app-status-field>
+						</td>
+						<td class="checkbox-group">
+							Terminée :
+							<app-status-field [status]="mission.closed"></app-status-field>
+						</td>
 					</tr>
 				</tbody>
 			</table>

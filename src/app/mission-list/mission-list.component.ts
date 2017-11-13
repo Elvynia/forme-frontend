@@ -22,7 +22,8 @@ import { EVENT } from '../event';
 	]
 })
 export class MissionListComponent implements OnInit {
-	@Input() details: any;
+	@Input() listTitle: any;
+	@Input() filter: (item) => boolean;
 	@Input('columns') displayedColumns;
 	dataSource: FormeDataSource<Mission>;
 	@ViewChild(MatSort) sort: MatSort;
@@ -48,6 +49,9 @@ export class MissionListComponent implements OnInit {
 				.subscribe((data: any) => this.dataSource && this.dataSource.update(data.id, data));
 		});
 		this.dataSource = new FormeDataSource(this.paginator, this.sort);
+		if (this.filter) {
+			this.dataSource.filter = this.filter;
+		}
 	}
 
 	handleExpanded(event, row: any) {

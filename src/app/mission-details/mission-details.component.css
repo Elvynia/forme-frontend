@@ -44,3 +44,7 @@ th.labels {
 th.values {
 	width: 60%;
 }
+
+td.checkbox-group {
+	width: 50%;
+}

@@ -14,13 +14,16 @@ import { InvoiceService } from '../invoice.service';
 	styleUrls: ['./admin-dashboard.component.css']
 })
 export class AdminDashboardComponent implements OnInit {
-	pendingFilter = (invoice: Invoice) => invoice.pending;
+	pendingFilter = (invoice: Invoice) => invoice.pending ? invoice : null;
 	toDeclareFilter = (invoice: Invoice) => {
 		let rec = moment(invoice.receptionDate);
 		let dec = moment().subtract(1, 'month');
-		return !invoice.received || rec.year() === dec.year() && rec.month() >= dec.month();
+		if (!invoice.received || rec.year() === dec.year() && rec.month() >= dec.month()) {
+			return invoice;
+		}
+		return null;
 	};
-	missionFilter = (mission: Mission) => !mission.closed;
+	missionFilter = (mission: Mission) => mission.closed ? null : mission;
 	months: Array<string>;
 	invoices: Array<[number, Array<Invoice>]>;
 	invoiceList: Array<Invoice>;
