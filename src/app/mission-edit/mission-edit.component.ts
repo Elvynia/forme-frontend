@@ -62,6 +62,11 @@ export class MissionEditComponent implements OnInit {
 
     swapDurationType() {
         this.durationH = !this.durationH;
+        if (this.durationH) {
+            this.duration *= 7;
+        } else {
+            this.duration /= 7;
+        }
     }
 
     private updateDuration() {

@@ -1,0 +1,71 @@
+<ng-container *ngIf="mission">
+	<mat-card>
+		<mat-card-header [hidden]="hideTitle">
+			<div mat-card-avatar class="mission-details-icon"></div>
+			<mat-card-title>Détails de la mission n°{{mission.id}}</mat-card-title>
+			<mat-card-subtitle>{{ mission.title }}</mat-card-subtitle>
+		</mat-card-header>
+		<mat-card-content>
+			<table>
+				<thead>
+					<tr>
+						<th class="labels"></th>
+						<th class="values"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Client</td>
+						<td>
+							<app-company-ref [id]="mission.clientId"></app-company-ref>
+						</td>
+					</tr>
+					<tr>
+						<td>Label</td>
+						<td>{{ mission.label }}</td>
+					</tr>
+					<tr>
+						<td>Type</td>
+						<td>{{ mission.type === 0 ? 'Analyse et développements' : 'Formation' }}</td>
+					</tr>
+					<tr>
+						<td>Lieu</td>
+						<td>{{ mission.place }}</td>
+					</tr>
+				</tbody>
+			</table>
+			<table>
+				<thead>
+					<tr>
+						<th class="labels"></th>
+						<th class="values"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Durée</td>
+						<td>{{ mission.duration }}</td>
+					</tr>
+					<tr>
+						<td>TJM</td>
+						<td>{{ mission.tjm }} €/j</td>
+					</tr>
+					<tr>
+						<td class="checkbox-group">
+							Frais : 
+							<app-status-field [status]="mission.travelCosts"></app-status-field>
+						</td>
+						<td class="checkbox-group">
+							Terminée :
+							<app-status-field [status]="mission.closed"></app-status-field>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</mat-card-content>
+		<mat-card-actions>
+			<app-edit-toolbar (onModify)="modifySelected()"
+				(onDelete)="deleteSelected()"></app-edit-toolbar>
+		</mat-card-actions>
+	</mat-card>
+</ng-container>

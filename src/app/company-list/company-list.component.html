@@ -1,15 +1,53 @@
-<app-layout-list [listTitle]="details?.title || 'Tous les clients'" [filter]="details?.filter" [sort]="details?.sort"
-	[data]="data" [template]="entityTemplate" (onModify)="modifySelected($event)" (onDelete)="deleteSelected($event)">
-	<th>Id</th>
-	<th>Trigramme</th>
-	<th>Nom</th>
-	<th>SIREN</th>
-	<th>RCS</th>
-	<ng-template let-entity #entityTemplate>
-		<td>{{ entity.id }}</td>
-		<td>{{ entity.trigram }}</td>
-		<td>{{ entity.name }}</td>
-		<td>{{ entity.siren }}</td>
-		<td>{{ entity.rcs }}</td>
-	</ng-template>
-</app-layout-list>
+<div class="table-wrapper">
+	<div class="header">
+		<h2>
+			{{ listTitle || 'Toutes les sociétés' }}
+		</h2>
+	</div>
+	<mat-table id="companyTable-{{listTitle}}" [dataSource]="dataSource" matSort>
+		<ng-container matColumnDef="id">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+			<mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="trigram">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Trigramme </mat-header-cell>
+			<mat-cell *matCellDef="let row"> {{row.trigram}} </mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="name">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Nom </mat-header-cell>
+			<mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="siren">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> SIREN </mat-header-cell>
+			<mat-cell *matCellDef="let row"> {{row.siren }} </mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="rcs">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> RCS </mat-header-cell>
+			<mat-cell *matCellDef="let row"> {{row.rcs }} </mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="travelCosts">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Frais </mat-header-cell>
+			<mat-cell *matCellDef="let row"> {{row.travelCosts || 'false' }} </mat-cell>
+		</ng-container>
+
+		<ng-container matColumnDef="expandedDetail">
+			<mat-cell *matCellDef="let row">
+				<app-company-details [ngClass]="{expansible: row.item.id !== expandedElement?.id}"
+					[id]="row.item.id"></app-company-details>
+			</mat-cell>
+		</ng-container>
+
+		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+		<mat-row matRipple [title]="row.id" [class.expanded]="expandedElement == row"
+			*matRowDef="let row; columns: displayedColumns;"
+			(click)="handleExpanded($event, row)"></mat-row>
+		<mat-row [@detailExpand]="row.item === expandedElement ? 'expanded' : 'collapsed'"
+			style="height: 0px; min-height: 0px; visibility: hidden;"
+			*matRowDef="let row; columns: ['expandedDetail']; when:isExpansionDetailRow"></mat-row>
+	</mat-table>
+	<mat-paginator [length]="dataSource.length | async"
+		[pageIndex]="0"
+		[pageSize]="5"
+		[pageSizeOptions]="[5, 10, 15, 20, 25]">
+	</mat-paginator>
+</div>

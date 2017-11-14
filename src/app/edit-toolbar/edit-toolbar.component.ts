@@ -1,4 +1,6 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, Input, Output } from '@angular/core';
+
+import * as $ from 'jquery';
 
 import { AngularSubject } from '../angular-subject';
 
@@ -9,6 +11,8 @@ import { AngularSubject } from '../angular-subject';
 })
 export class EditToolbarComponent implements OnInit {
 	@Input() data: any;
+	@Input() select: string;
+	@Input() float: string;
 	shouldAdd: boolean;
 	shouldModify: boolean;
 	shouldDelete: boolean;
@@ -31,6 +35,12 @@ export class EditToolbarComponent implements OnInit {
 		this.onDelete.onSubscribe((isSubscribed) => this.shouldDelete = isSubscribed);
 	}
 
+	ngOnChanges(changes: SimpleChanges) {
+		if (changes['select']) {
+			setTimeout(() => this.reloadSelectListeners(changes['select'].previousValue), 200);
+		}
+	}
+
 	fireAdd() {
 		this.onAdd.emit(this.data);
 	}
@@ -43,4 +53,51 @@ export class EditToolbarComponent implements OnInit {
 		this.onDelete.emit(this.data);
 	}
 
+	private reloadSelectListeners(oldValue?: string) {
+		if (oldValue) {
+			this.data = null;
+			let element = document.querySelector(oldValue);
+			if (element) {
+				element.removeEventListener('click', this.selectListener);
+				element.removeEventListener('DOMSubtreeModified', this.resetListener);
+			}
+		}
+		if (this.select) {
+			this.data = new Array();
+			let element = document.querySelector(this.select);
+			if (element) {
+				element.addEventListener('click', (event) => this.selectListener(event));
+				element.addEventListener('DOMSubtreeModified', () => this.resetListener());
+			}
+		}
+	}
+
+	private selectListener(event: Event) {
+		let result;
+		let path:any = (<any> event).path;
+		for (let el of path) {
+			if (el.nodeName === 'MAT-ROW' && el.attributes['matripple']) {
+				result = el;
+				break;
+			}
+		}
+		if (result) {
+			let index = this.data.findIndex((data: any) => data === result.title);
+			if (index >= 0) {
+				this.data.splice(index, 1);
+				$(result).removeClass('mat-row-selected');
+			} else {
+				this.data.push(result.title);
+				$(result).addClass('mat-row-selected');
+			}
+		}
+	}
+
+	private resetListener() {
+		this.data = [];
+		let elements = document.querySelectorAll(this.select + ' mat-row');
+		for (let i = 0; i < elements.length; ++i) {
+			$(elements[i]).removeClass('mat-row-selected');
+		}
+	}
 }

@@ -1,6 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { MatSort, MatPaginator } from '@angular/material';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
+import { FormeDataSource } from '../forme-data-source';
 import { Event, EVENT } from '../event';
 import { Estimate } from '../estimate';
 import { EstimateService } from '../estimate.service';
@@ -9,55 +11,54 @@ import { AuthService } from '../auth.service';
 @Component({
   selector: 'app-estimate-list',
   templateUrl: './estimate-list.component.html',
-  styleUrls: ['./estimate-list.component.css']
+  styleUrls: ['./estimate-list.component.css'],
+	animations: [
+	trigger('detailExpand', [
+		state('collapsed', style({height: '0px', minHeight: '0', visibility: 'hidden'})),
+		state('expanded', style({height: '*', visibility: 'visible'})),
+		transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)'))
+		])
+	]
 })
 export class EstimateListComponent implements OnInit {
-	@Input() details: any;
-	data: Estimate[];
+	@Input() listTitle: any;
+	@Input() filter: (item) => boolean;
+	@Input('columns') displayedColumns;
+	dataSource: FormeDataSource<Estimate>;
+	@ViewChild(MatSort) sort: MatSort;
+	@ViewChild(MatPaginator) paginator: MatPaginator;
+	isExpansionDetailRow = (index, row:any) => row.hasOwnProperty('detailRow');
+	expandedElement;
 
 	constructor(private estimateService: EstimateService,
-		private authService: AuthService,
-		private router: Router) {
+		private authService: AuthService) {
+		this.displayedColumns = ['id', 'clientId', 'amount', 'date', 'signed'];
 	}
 
 	ngOnInit() {
 		this.authService.loggedIn.subscribe(() => {
 			this.estimateService.list()
-				.subscribe((data: any) => this.data = data);
+				.subscribe((data: any) => this.dataSource && this.dataSource.publish(data));
 			this.estimateService.eventsByType(EVENT.ADD)
-				.subscribe((data: any) => this.data.push(data));
+				.subscribe((data: any) => this.dataSource && this.dataSource.add(data));
 			this.estimateService.eventsByType(EVENT.DELETE)
-				.subscribe((data: any) => this.update(data.id));
+				.subscribe((data: any) => this.dataSource && this.dataSource.update(data.id));
 			this.estimateService.eventsByType(EVENT.UPDATE)
-				.subscribe((data: any) => this.update(data.id, data));
+				.subscribe((data: any) => this.dataSource && this.dataSource.update(data.id, data));
 		});
-	}
-
-	private update(id: number, estimate?: Estimate) {
-		let index = this.data.findIndex((search) => search.id === id);
-		if (index && index >= 0) {
-			if (estimate) {
-				this.data.splice(index, 1, estimate);
-			} else {
-				this.data.splice(index, 1);
-			}
-			this.data = this.data.slice();
+		this.dataSource = new FormeDataSource(this.paginator, this.sort);
+		if (this.filter) {
+			this.dataSource.filter = this.filter;
 		}
 	}
 
-
-	modifySelected(selected: any[]) {
-		if (selected && selected[0]) {
-			this.router.navigate(['/estimate/', selected[0].id]);
+	handleExpanded(event, row: any) {
+		if (this.expandedElement && this.expandedElement == row) {
+			this.expandedElement = null;
+		} else {
+			this.expandedElement = row;
 		}
-	}
-
-	deleteSelected(selected: any[]) {
-		if (selected) {
-			selected.forEach((estimate: Estimate) => {
-				this.estimateService.delete(estimate);
-			});
-		}
+		event.stopPropagation();
 	}
 
 }

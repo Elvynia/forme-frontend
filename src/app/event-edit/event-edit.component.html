@@ -1,23 +1,20 @@
 <h2>{{ new ? 'Créer un nouvel événement' : 'Mettre un événement à jour' }}</h2>
 <form (ngSubmit)="submit()">
-	<div class="form-group">
-		<label for="missionId">Mission :</label>
-		<select id="missionId" name="missionId" class="form-control"
+	<mat-form-field>
+		<mat-select name="missionId" placeholder="Mission"
 			[(ngModel)]="event.missionId">
-			<option *ngFor="let mission of missions" [value]="mission.id">
+			<mat-option *ngFor="let mission of missions" [value]="mission.id">
 				{{ mission.label }} - {{ mission.title }}
-			</option>
-		</select>
-	</div>
-	<div class="form-group">
-		<label for="start">Début :</label>
-		<input type="date" id="start" name="start" class="form-control"
+			</mat-option>
+		</mat-select>
+	</mat-form-field>
+	<mat-form-field>
+		<input matInput type="date" name="start" placeholder="Début" 
 			[ngModel]="event.start | date:'yyyy-MM-dd'" (ngModelChange)="event.start = $event"/>
-	</div>
-	<div class="form-group">
-		<label for="end">Fin :</label>
-		<input type="date" id="end" name="end" class="form-control"
+	</mat-form-field>
+	<mat-form-field>
+		<input matInput type="date" name="end" placeholder="Fin" 
 			[ngModel]="event.end | date:'yyyy-MM-dd'" (ngModelChange)="event.end = $event"/>
-	</div>
+	</mat-form-field>
 	<button class="btn btn-primary">Valider</button>
 </form>

@@ -1,65 +1,65 @@
-import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input, OnInit, ViewChild, OnChanges, SimpleChanges, Renderer } from '@angular/core';
+import { MatSort, MatPaginator } from '@angular/material';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
-import { Observable } from 'rxjs/Rx';
-
+import { FormeDataSource } from '../forme-data-source';
 import { Event, EVENT } from '../event';
 import { Invoice } from '../invoice';
 import { InvoiceService } from '../invoice.service';
 import { AuthService } from '../auth.service';
 
-
 @Component({
-  selector: 'app-invoice-list',
-  templateUrl: './invoice-list.component.html',
-  styleUrls: ['./invoice-list.component.css']
+	selector: 'app-invoice-list',
+	templateUrl: './invoice-list.component.html',
+	styleUrls: ['./invoice-list.component.css'],
+	animations: [
+	trigger('detailExpand', [
+		state('collapsed', style({height: '0px', minHeight: '0', visibility: 'hidden'})),
+		state('expanded', style({height: '*', visibility: 'visible'})),
+		transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)'))
+		])
+	]
 })
 export class InvoiceListComponent implements OnInit {
-	@Input() details: any;
-	data: any[];
+	@Input() listTitle: any;
+	@Input() filter: (item) => boolean;
+	@Input('columns') displayedColumns;
+	dataSource: FormeDataSource<Invoice>;
+	@ViewChild(MatSort) sort: MatSort;
+	@ViewChild(MatPaginator) paginator: MatPaginator;
+	@ViewChild('details') detailsComp: any;
+	isExpansionDetailRow = (index, row:any) => row.hasOwnProperty('detailRow');
+	expandedElement;
 
 	constructor(private invoiceService: InvoiceService,
 		private authService: AuthService,
-		private router: Router) {
+		private renderer: Renderer) {
+		this.displayedColumns = ['id', 'clientId', 'label', 'amount', 'pending', 'received'];
 	}
 
 	ngOnInit() {
 		this.authService.loggedIn.subscribe(() => {
 			this.invoiceService.list()
-				.subscribe((data: any) => this.data = data);
+				.subscribe((data: any) => this.dataSource && this.dataSource.publish(data));
 			this.invoiceService.eventsByType(EVENT.ADD)
-				.subscribe((data: any) => this.data.push(data));
+				.subscribe((data: any) => this.dataSource && this.dataSource.add(data));
 			this.invoiceService.eventsByType(EVENT.DELETE)
-				.subscribe((data: any) => this.update(data.id));
+				.subscribe((data: any) => this.dataSource && this.dataSource.update(data.id));
 			this.invoiceService.eventsByType(EVENT.UPDATE)
-				.subscribe((data: any) => this.update(data.id, data));
+				.subscribe((data: any) => this.dataSource && this.dataSource.update(data.id, data));
 		});
-	}
-
-	private update(id: number, invoice?: Invoice) {
-		let index = this.data.findIndex((search) => search.id === id);
-		if (index && index >= 0) {
-			if (invoice) {
-				this.data.splice(index, 1, invoice);
-			} else {
-				this.data.splice(index, 1);
-			}
-			this.data = this.data.slice();
+		this.dataSource = new FormeDataSource(this.paginator, this.sort);
+		if (this.filter) {
+			this.dataSource.filter = this.filter;
 		}
 	}
 
-
-	modifySelected(selected: any[]) {
-		if (selected && selected[0]) {
-			this.router.navigate(['/invoice/', selected[0].id]);
+	handleExpanded(event, row: any) {
+		if (this.expandedElement && this.expandedElement == row) {
+			this.expandedElement = null;
+		} else {
+			this.expandedElement = row;
 		}
-	}
-
-	deleteSelected(selected: any[]) {
-		if (selected) {
-			selected.forEach((invoice: Invoice) => {
-				this.invoiceService.delete(invoice);
-			});
-		}
+		event.stopPropagation();
 	}
 }

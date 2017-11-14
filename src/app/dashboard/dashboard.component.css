@@ -1,7 +1,9 @@
-div.dashboard {
-	margin: 0 3%;
+div.dashboard-line {
 	width: 100%;
-	display: inline-block;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	overflow: hidden;
 }
 
 div#noAuth {

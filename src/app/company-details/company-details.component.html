@@ -1,0 +1,55 @@
+<ng-container *ngIf="company">
+	<mat-card>
+		<mat-card-header [hidden]="hideTitle">
+			<div mat-card-avatar class="company-details-icon"></div>
+			<mat-card-title>Détails du client n°{{company.id}}</mat-card-title>
+			<mat-card-subtitle>{{ company.name }}</mat-card-subtitle>
+		</mat-card-header>
+		<mat-card-content>
+			<table>
+				<thead>
+					<tr>
+						<th class="labels"></th>
+						<th class="values"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Trigramme</td>
+						<td>{{ company.trigram }}</td>
+					</tr>
+					<tr>
+						<td>Adresse</td>
+						<td>{{ company.address }}</td>
+					</tr>
+				</tbody>
+			</table>
+			<table>
+				<thead>
+					<tr>
+						<th class="labels"></th>
+						<th class="values"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>SIREN</td>
+						<td>{{ company.siren }}</td>
+					</tr>
+					<tr>
+						<td>SIRET</td>
+						<td>{{ company.siret }}</td>
+					</tr>
+					<tr>
+						<td>RCS</td>
+						<td>{{ company.rcs }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</mat-card-content>
+		<mat-card-actions>
+			<app-edit-toolbar (onModify)="modifySelected()"
+				(onDelete)="deleteSelected()"></app-edit-toolbar>
+		</mat-card-actions>
+	</mat-card>
+</ng-container>

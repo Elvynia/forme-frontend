@@ -1,57 +1,54 @@
 <h2>{{ new ? 'Créer une nouvelle mission' : 'Mettre une mission à jour' }}</h2>
 <form (ngSubmit)="submit()" #model="ngForm" [ngClass]="{'submitted': model.form.valid}">
-	<div class="form-group">
-		<label for="clientId">Client : </label>
-		<select id="clientId" name="clientId" class="form-control"
+	<mat-form-field>
+		<mat-select name="clientId" placeholder="Client"
 			[(ngModel)]="mission.clientId">
-			<option value="">Sélectionner...</option>
-			<option *ngFor="let company of companies" [value]="company.id">{{company.name}} ({{company.trigram}})</option>
-		</select>
-	</div>
-	<div class="form-group">
-		<label for="duration">
-			<span>Durée (</span>
+			<mat-option value="">Sélectionner...</mat-option>
+			<mat-option *ngFor="let company of companies" [value]="company.id">
+				{{company.name}} ({{company.trigram}})
+			</mat-option>
+		</mat-select>
+	</mat-form-field>
+	<mat-form-field>
+		<input matInput type="number" id="duration" name="duration" placeholder="Durée" 
+			[(ngModel)]="duration" min="O" required />
+		<mat-hint>
 			<a id="swapDurationType" (click)="swapDurationType()"
-				[title]="durationH ? 'changer en jours' : 'changer en heures'">
+				[title]="'cliquer pour ' + (durationH ? 'changer en jours' : 'changer en heures')">
 				{{ durationH ? 'en heures' : 'en jours' }}
 			</a>
-			<span>) : </span>
-		</label>
-		<input type="number" id="duration" name="duration" class="form-control"
-			[(ngModel)]="duration" min="O" required />
-	</div>
-	<div class="form-group">
-		<label for="tjm">TJM (€/j) : </label>
-		<input type="number" id="tjm" name="tjm" class="form-control" [(ngModel)]="mission.tjm" min="O" required />
-	</div>
-	<div class="form-group">
-		<label for="label">Label : </label>
-		<input id="label" name="label" class="form-control" [(ngModel)]="mission.label" required />
-	</div>
-	<div class="form-group">
-		<label for="title">Titre : </label>
-		<input id="title" name="title" class="form-control" [(ngModel)]="mission.title" required />
-	</div>
-	<div class="form-group">
-		<label for="place">Adresse : </label>
-		<input id="place" name="place" class="form-control" [(ngModel)]="mission.place" required />
-	</div>
-	<div class="form-group">
-		<label for="type">Type : </label>
-		<select id="type" name="type" class="form-control">
-			<option value="0">DEV</option>
-			<option value="1" selected>Formation</option>
-		</select>
-	</div>
-	<div class="form-group">
-		<label class="checkbox-inline">
-			<input type="checkbox" name="travelCosts" [(ngModel)]="mission.travelCosts" />
+		</mat-hint>
+	</mat-form-field>
+	<mat-form-field>
+		<input matInput type="number" name="tjm" placeholder="TJM (€/j)" 
+			[(ngModel)]="mission.tjm" min="O" required />
+	</mat-form-field>
+	<mat-form-field>
+		<input matInput name="label" placeholder="Label" 
+			[(ngModel)]="mission.label" required />
+	</mat-form-field>
+	<mat-form-field>
+		<input matInput name="title" placeholder="Titre" 
+			[(ngModel)]="mission.title" required />
+	</mat-form-field>
+	<mat-form-field>
+		<input matInput name="place" placeholder="Lieu" 
+			[(ngModel)]="mission.place" required />
+	</mat-form-field>
+	<mat-form-field>
+		<mat-select name="type" placeholder="Type"
+			[(ngModel)]="mission.type">
+			<mat-option value="0">DEV</mat-option>
+			<mat-option value="1" selected>Formation</mat-option>
+		</mat-select>
+	</mat-form-field>
+	<section>
+		<mat-checkbox name="travelCosts" [(ngModel)]="mission.travelCosts">
 			Frais de déplacement
-		</label>
-		<label class="checkbox-inline">
-			<input type="checkbox" name="closed" [(ngModel)]="mission.closed" />
+		</mat-checkbox>
+		<mat-checkbox name="closed" [(ngModel)]="mission.closed">
 			Terminée
-		</label>
-	</div>
+		</mat-checkbox>
+	</section>
 	<button class="btn btn-primary">Valider</button>
 </form>

@@ -1,23 +1,59 @@
-<app-layout-list [listTitle]="details.title || 'Toute les missions'" [filter]="details.filter" [sort]="details.sort"
-	[data]="data" [template]="entityTemplate" (onModify)="modifySelected($event)" (onDelete)="deleteSelected($event)">
-	<th>Id</th>
-	<th>Type</th>
-	<th>Client</th>
-	<th>Durée (h)</th>
-	<th>TJM (€/j)</th>
-	<th>Label</th>
-	<th>Titre</th>
-	<th>Frais</th>
-	<ng-template let-entity #entityTemplate>
-		<td>{{ entity.id }}</td>
-		<td>{{ entity.type }}</td>
-		<td>
-			<app-company-ref [id]="entity.clientId"></app-company-ref>
-		</td>
-		<td>{{ entity.duration }}h ({{entity.duration / 7}}j)</td>
-		<td>{{ entity.tjm }}</td>
-		<td>{{ entity.label }}</td>
-		<td>{{ entity.title }}</td>
-		<td>{{ entity.travelCosts ? 'Y' : 'N' }}</td>
-	</ng-template>
-</app-layout-list>
+<div class="table-wrapper">
+	<div class="header">		
+		<h2>
+			{{ listTitle || 'Toutes les missions' }}
+		</h2>
+	</div>
+	<mat-table id="missionTable-{{listTitle}}" [dataSource]="dataSource" matSort>
+		<ng-container matColumnDef="id">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+			<mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="clientId">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Client </mat-header-cell>
+			<mat-cell *matCellDef="let row">
+				<app-company-ref [id]="row.clientId"></app-company-ref>
+			</mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="type">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Type </mat-header-cell>
+			<mat-cell *matCellDef="let row"> {{row.type === 0 ? 'DEV' : 'Formation'}} </mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="duration">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Durée </mat-header-cell>
+			<mat-cell *matCellDef="let row"> {{row.duration}}h ({{(row.duration / 7)}}j) </mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="tjm">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> TJM (€/j) </mat-header-cell>
+			<mat-cell *matCellDef="let row"> {{row.tjm }} </mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="label">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Label </mat-header-cell>
+			<mat-cell *matCellDef="let row"> {{row.label }} </mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="title">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Titre </mat-header-cell>
+			<mat-cell *matCellDef="let row"> {{row.title }} </mat-cell>
+		</ng-container>
+
+		<ng-container matColumnDef="expandedDetail">
+			<mat-cell *matCellDef="let row">
+				<app-mission-details [ngClass]="{expansible: row.item.id !== expandedElement?.id}"
+					[id]="row.item.id"></app-mission-details>
+			</mat-cell>
+		</ng-container>
+
+		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+		<mat-row matRipple [title]="row.id" [class.expanded]="expandedElement == row"
+			*matRowDef="let row; columns: displayedColumns;"
+			(click)="handleExpanded($event, row)"></mat-row>
+		<mat-row [@detailExpand]="row.item === expandedElement ? 'expanded' : 'collapsed'"
+			style="height: 0px; min-height: 0px; visibility: hidden;"
+			*matRowDef="let row; columns: ['expandedDetail']; when:isExpansionDetailRow"></mat-row>
+	</mat-table>
+	<mat-paginator [length]="dataSource.length | async"
+		[pageIndex]="0"
+		[pageSize]="5"
+		[pageSizeOptions]="[5, 10, 15, 20, 25]">
+	</mat-paginator>
+</div>		

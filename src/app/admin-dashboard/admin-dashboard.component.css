@@ -1,12 +1,15 @@
+div.dashboard {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	overflow: hidden;
+}
+
 div#status {
 	position: relative;
 	margin: 0 40px;
-	height: 35vh;
-	/*background-color: blue;*/
-}
-
-div#info {
-	display: inline-block;
+	height: 30vh;
+	margin-bottom: 30px;
 }
 
 hr {
@@ -30,6 +33,7 @@ div.month {
 
 div.month span {
 	position: absolute;
+	left: 50%;
 	transform: translate(-50%, 130%);
 }
 
@@ -42,6 +46,7 @@ div.invoice-wrapper {
 }
 
 div.invoice {
+	position: relative;
 	float: left;
 	width: 20px;
 	height: 20px;

@@ -1,9 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CalendarModule } from 'angular-calendar';
+import { MatCardModule, MatRippleModule, MatSortModule, MatPaginatorModule, MatTableModule, MatTabsModule, MatFormFieldModule, MatInputModule, MatDialogModule, MatSelectModule, MatOptionModule, MatCheckboxModule} from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { EstimateListComponent } from './estimate-list/estimate-list.component';
@@ -25,7 +27,6 @@ import { AuthGuard } from './auth-gard';
 import { ROUTES } from './routes';
 import { CompanyRefComponent } from './company-ref/company-ref.component';
 import { MissionEditComponent } from './mission-edit/mission-edit.component';
-import { LayoutListComponent } from './layout-list/layout-list.component';
 import { MissionListComponent } from './mission-list/mission-list.component';
 import { CompanyListComponent } from './company-list/company-list.component';
 import { EditToolbarComponent } from './edit-toolbar/edit-toolbar.component';
@@ -36,6 +37,11 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { ClientDashboardComponent } from './client-dashboard/client-dashboard.component';
+import { InvoiceDetailsComponent } from './invoice-details/invoice-details.component';
+import { MissionDetailsComponent } from './mission-details/mission-details.component';
+import { EstimateDetailsComponent } from './estimate-details/estimate-details.component';
+import { CompanyDetailsComponent } from './company-details/company-details.component';
+import { StatusFieldComponent } from './status-field/status-field.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +53,6 @@ import { ClientDashboardComponent } from './client-dashboard/client-dashboard.co
     CompanyEditComponent,
     CompanyRefComponent,
     MissionEditComponent,
-    LayoutListComponent,
     MissionListComponent,
     CompanyListComponent,
     EditToolbarComponent,
@@ -57,14 +62,32 @@ import { ClientDashboardComponent } from './client-dashboard/client-dashboard.co
     LoginComponent,
     DashboardComponent,
     AdminDashboardComponent,
-    ClientDashboardComponent
+    ClientDashboardComponent,
+    InvoiceDetailsComponent,
+    MissionDetailsComponent,
+    EstimateDetailsComponent,
+    CompanyDetailsComponent,
+    StatusFieldComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot(ROUTES),
-    CalendarModule.forRoot()
+    CalendarModule.forRoot(),
+    MatFormFieldModule,
+    MatInputModule,
+    MatDialogModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatCheckboxModule,
+    MatTabsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatRippleModule,
+    MatCardModule
   ],
   providers: [InvoiceService, EstimateService, CompanyService, MissionService, 
     MessageService, EventService, AuthService, AuthGuard],

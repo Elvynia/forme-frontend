@@ -8,4 +8,8 @@ export class Company implements Entity {
 	siren?: string;
 	siret?: string;
 	rcs?: string;
+
+	constructor(id?: number) {
+		this.id = id;
+	}
 }
