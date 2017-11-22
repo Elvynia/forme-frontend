@@ -21,7 +21,15 @@
 		</ng-container>
 		<ng-container matColumnDef="amount">
 			<mat-header-cell *matHeaderCellDef mat-sort-header> Montant </mat-header-cell>
-			<mat-cell *matCellDef="let row"> {{row.amount}} </mat-cell>
+			<mat-cell *matCellDef="let row"> {{row.amount | currency:'€'}} </mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="creationDate">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Création </mat-header-cell>
+			<mat-cell *matCellDef="let row"> {{row.creationDate | date:'dd/MM/yyyy'}} </mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="receptionDate">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Réception </mat-header-cell>
+			<mat-cell *matCellDef="let row"> {{row.receptionDate | date:'dd/MM/yyyy'}} </mat-cell>
 		</ng-container>
 		<ng-container matColumnDef="pending">
 			<mat-header-cell *matHeaderCellDef mat-sort-header> En attente </mat-header-cell>
@@ -44,16 +52,16 @@
 		</ng-container>
 
 		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-		<mat-row matRipple [title]="row.id" [class.expanded]="expandedElement == row"
+		<mat-row matRipple [title]="row.id"
+			[class.expanded]="expandedElement == row"
 			*matRowDef="let row; columns: displayedColumns;"
-			(click)="handleExpanded($event, row)"></mat-row>
+			(click)="handleExpanded($event, row)" #rippleRow></mat-row>
 		<mat-row [@detailExpand]="row.item === expandedElement ? 'expanded' : 'collapsed'"
 			style="height: 0px; min-height: 0px; visibility: hidden;"
 			*matRowDef="let row; columns: ['expandedDetail']; when:isExpansionDetailRow"></mat-row>
 	</mat-table>
 	<mat-paginator [length]="dataSource.length | async"
 		[pageIndex]="0"
-		[pageSize]="5"
-		[pageSizeOptions]="[5, 10, 15, 20, 25]">
+		[pageSize]="5">
 	</mat-paginator>
 </div>

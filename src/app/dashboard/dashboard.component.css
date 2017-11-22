@@ -1,9 +1,12 @@
-div.dashboard-line {
-	width: 100%;
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	overflow: hidden;
+app-mission-list,
+app-invoice-list,
+app-estimate-list,
+app-company-list {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
 }
 
 div#noAuth {

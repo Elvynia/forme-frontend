@@ -1,12 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CalendarModule } from 'angular-calendar';
-import { MatCardModule, MatRippleModule, MatSortModule, MatPaginatorModule, MatTableModule, MatTabsModule, MatFormFieldModule, MatInputModule, MatDialogModule, MatSelectModule, MatOptionModule, MatCheckboxModule} from '@angular/material';
 
+import { AppMaterialModule } from './app-material.module';
 import { AppComponent } from './app.component';
 import { EstimateListComponent } from './estimate-list/estimate-list.component';
 import { EstimateEditComponent } from './estimate-edit/estimate-edit.component';
@@ -76,18 +76,7 @@ import { StatusFieldComponent } from './status-field/status-field.component';
     FormsModule,
     RouterModule.forRoot(ROUTES),
     CalendarModule.forRoot(),
-    MatFormFieldModule,
-    MatInputModule,
-    MatDialogModule,
-    MatSelectModule,
-    MatOptionModule,
-    MatCheckboxModule,
-    MatTabsModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatRippleModule,
-    MatCardModule
+    AppMaterialModule
   ],
   providers: [InvoiceService, EstimateService, CompanyService, MissionService, 
     MessageService, EventService, AuthService, AuthGuard],

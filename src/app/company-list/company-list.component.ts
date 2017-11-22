@@ -58,7 +58,6 @@ export class CompanyListComponent implements OnInit {
 		} else {
 			this.expandedElement = row;
 		}
-		event.stopPropagation();
 	}
 
 }

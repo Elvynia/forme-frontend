@@ -16,10 +16,12 @@ import { InvoiceService } from '../invoice.service';
 export class AdminDashboardComponent implements OnInit {
 	pendingFilter = (invoice: Invoice) => invoice.pending ? invoice : null;
 	toDeclareFilter = (invoice: Invoice) => {
-		let rec = moment(invoice.receptionDate);
-		let dec = moment().subtract(1, 'month');
-		if (!invoice.received || rec.year() === dec.year() && rec.month() >= dec.month()) {
-			return invoice;
+		if (!invoice.travelCosts) {
+			let rec = moment(invoice.receptionDate);
+			let dec = moment().subtract(1, 'month');
+			if (!invoice.received || rec.year() === dec.year() && rec.month() >= dec.month()) {
+				return invoice;
+			}
 		}
 		return null;
 	};
@@ -68,7 +70,7 @@ export class AdminDashboardComponent implements OnInit {
 	calculateTurnover(year: number): number {
 		if (this.invoiceList) {
 			return this.invoiceList.filter(
-			(invoice: Invoice) => invoice.received
+			(invoice: Invoice) => !invoice.travelCosts && invoice.received
 				&& moment(invoice.receptionDate).year() === year)
 			.map((invoice: Invoice) => invoice.amount)
 			.reduce((prev, cur) => prev + cur);

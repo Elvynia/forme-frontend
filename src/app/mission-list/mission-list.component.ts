@@ -60,6 +60,5 @@ export class MissionListComponent implements OnInit {
 		} else {
 			this.expandedElement = row;
 		}
-		event.stopPropagation();
 	}
 }

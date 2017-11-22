@@ -58,7 +58,6 @@ export class EstimateListComponent implements OnInit {
 		} else {
 			this.expandedElement = row;
 		}
-		event.stopPropagation();
 	}
 
 }

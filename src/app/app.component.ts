@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { MatIconRegistry } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
 
 import { AuthService } from './auth.service';
 
@@ -13,12 +15,15 @@ export class AppComponent implements OnInit {
     loggedIn: boolean;
 
     constructor(private router: Router,
-        private authService: AuthService) {
+        private authService: AuthService,
+        private iconService: MatIconRegistry,
+        private domSanitizer: DomSanitizer) {
         this.wideScreen = false;
         this.loggedIn = false;
     }
 
     ngOnInit() {
+        this.registerIcons();
         this.router.events
         .filter(event => event instanceof NavigationEnd)
         .map(_ => this.router.routerState.root)
@@ -42,5 +47,11 @@ export class AppComponent implements OnInit {
     logout() {
         this.authService.logout();
         this.router.navigate(['login']);
+    }
+
+    private registerIcons() {
+        for (let i = 0; i < 3; ++i) {
+            this.iconService.addSvgIcon('brand_' + i, this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/brand_' + i + '.svg'));
+        }
     }
 }

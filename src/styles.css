@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+/*@import '~@angular/material/prebuilt-themes/purple-green.css';*/
 @import '~angular-calendar/dist/css/angular-calendar.css';
 
 .cal-month-view .cal-cell-top {
@@ -37,7 +38,32 @@ form > section > mat-checkbox {
 
 mat-table mat-header-row mat-header-cell.mat-column-id,
 mat-table mat-row mat-cell.mat-column-id {
-	flex: 0.2;
+	flex: 0.5;
+}
+
+mat-table mat-header-row mat-header-cell.mat-column-pending,
+mat-table mat-row mat-cell.mat-column-pending {
+	flex: 0.5;
+}
+
+mat-table mat-header-row mat-header-cell.mat-column-received,
+mat-table mat-row mat-cell.mat-column-received {
+	flex: 0.5;
+}
+
+mat-table mat-header-row mat-header-cell.mat-column-signed,
+mat-table mat-row mat-cell.mat-column-signed {
+	flex: 0.5;
+}
+
+mat-table mat-header-row mat-header-cell.mat-column-amount,
+mat-table mat-row mat-cell.mat-column-amount {
+	flex: 1.2;
+}
+
+mat-table mat-header-row mat-header-cell.mat-column-label,
+mat-table mat-row mat-cell.mat-column-label {
+	flex: 1.5;
 }
 
 mat-table mat-header-row mat-header-cell.mat-column-title,

@@ -60,6 +60,5 @@ export class InvoiceListComponent implements OnInit {
 		} else {
 			this.expandedElement = row;
 		}
-		event.stopPropagation();
 	}
 }

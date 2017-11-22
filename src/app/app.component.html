@@ -1,54 +1,46 @@
-<nav class="navbar navbar-default">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<a class="navbar-brand" routerLink="/">
-				<img src="/assets/brand_1.svg" alt="Forme app" width="35" height="35">
-			</a>
-		</div>
-		<div class="collapse navbar-collapse">
-			<ul class="nav navbar-nav">
-				<li class="nav-item">
-					<a class="nav-link" routerLink="/invoice">Ajouter une facture</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" routerLink="/company">Ajouter un client</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" routerLink="/estimate">Créer un devis</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" routerLink="/mission">Créer une mission</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" routerLink="/agenda">Agenda</a>
-				</li>
-				<li class="nav-item">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
-						routerLink="/planning">Planning<span class="caret"></span></a>
-					<ul class="dropdown-menu" role="menu">
-						<li class="nav-item">
-							<a class="nav-link" routerLink="/event">Créer un événement</a>
-						</li>
-					</ul>
-				</li>
-			</ul>
-			<div class="navbar-default navbar-right">
-				<ng-container *ngIf="loggedIn; else elseTmpl">
-					<button (click)="logout()" class="btn navbar-btn btn-danger">Se déconnecter</button>
-				</ng-container>
-				<ng-template #elseTmpl>
-					<button routerLink="/login" class="btn navbar-btn btn-success">Se connecter</button>
-				</ng-template>
+<mat-toolbar class="navbar-collapse">
+	<mat-toolbar-row>
+		<div id="brand" routerLink="/">
+			<mat-icon svgIcon="brand_1"></mat-icon>
+			<div>
+				Forme application
 			</div>
-			<form class="navbar-form navbar-right" role="search">
-				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Search">
-				</div>
-				<!-- <button type="submit" class="btn btn-default">Submit</button> -->
-			</form>
 		</div>
-	</div>
-</nav>
+		<div id="menu">
+			<span id="wrapper">
+				<span>
+					<button mat-button color="primary" routerLink="/invoice">Factures</button>
+				</span>
+				<span>
+					<button mat-button color="primary" routerLink="/company">Clients</button>
+				</span>
+				<span>
+					<button mat-button color="primary" routerLink="/estimate">Devis</button>
+				</span>
+				<span>
+					<button mat-button color="primary" routerLink="/mission">Missions</button>
+				</span>
+				<span>
+					<button mat-button color="primary" routerLink="/agenda">Agenda</button>
+				</span>
+				<span>
+					<button mat-button color="primary" routerLink="/planning">Planning</button>
+				</span>
+				<span>
+					<button mat-button color="primary" routerLink="/event">Créer un événement</button>
+				</span>
+			</span>
+		</div>
+		<div class="user-infos">
+			<ng-container *ngIf="loggedIn; else elseTmpl">
+				<button mat-button color="primary" (click)="logout()" mat-raised-button color="warn">Se déconnecter</button>
+			</ng-container>
+			<ng-template #elseTmpl>
+				<button mat-button color="primary" routerLink="/login" mat-raised-button color="primary">Se connecter</button>
+			</ng-template>
+		</div>
+	</mat-toolbar-row>
+</mat-toolbar>
 <div id="main" [ngClass]="{ 'container': !wideScreen }">
 	<router-outlet></router-outlet>
 </div>

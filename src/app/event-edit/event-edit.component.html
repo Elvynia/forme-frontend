@@ -16,5 +16,5 @@
 		<input matInput type="date" name="end" placeholder="Fin" 
 			[ngModel]="event.end | date:'yyyy-MM-dd'" (ngModelChange)="event.end = $event"/>
 	</mat-form-field>
-	<button class="btn btn-primary">Valider</button>
+	<button mat-raised-button color="primary" [disabled]="!model.form.valid">Valider</button>
 </form>

@@ -20,8 +20,10 @@
 	</div>
 </div>
 <div class="dashboard">
-	<app-invoice-list listTitle="Factures à déclarer" [filter]="toDeclareFilter"></app-invoice-list>
-	<app-invoice-list listTitle="Factures en attente" [filter]="pendingFilter"></app-invoice-list>
+	<app-invoice-list listTitle="Factures à déclarer" [filter]="toDeclareFilter"
+		[columns]="['label', 'amount', 'received']"></app-invoice-list>
+	<app-invoice-list listTitle="Factures en attente" [filter]="pendingFilter"
+		[columns]="['clientId', 'label', 'creationDate']"></app-invoice-list>
 	<app-mission-list listTitle="Mission en cours" [filter]="missionFilter"
 		[columns]="['clientId', 'title', 'duration', 'tjm']"></app-mission-list>
 </div>

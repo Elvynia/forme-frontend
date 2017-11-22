@@ -1,8 +1,50 @@
-/* Header */
+div#brand {
+	flex: 1;
+	outline: none;
+	height: 32px;
+	display: inline-flex;
+}
 
-nav a img {
+div#brand:hover {
+	cursor: pointer;
+}
+
+div#brand mat-icon {
+	flex: 1;
+	width: 32px;
+	height: 32px;
+}
+
+div#brand div {
+	flex: 3;
+}
+
+div#menu {
 	position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+	flex-grow: 5;
+	height: 64px;
+}
+
+span#wrapper {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+div#menu span#wrapper span {
+	margin: 5px 10px;
+}
+
+div#menu button {
+	font-size: 18px;
+	border-radius: 60% 30%;
+}
+
+div.user-infos {
+	flex-grow: 1;
+}
+
+div.user-infos button {
+	float: right;
 }

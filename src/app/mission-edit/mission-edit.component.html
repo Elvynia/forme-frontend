@@ -50,5 +50,5 @@
 			Terminée
 		</mat-checkbox>
 	</section>
-	<button class="btn btn-primary">Valider</button>
+	<button mat-raised-button color="primary" [disabled]="!model.form.valid">Valider</button>
 </form>
