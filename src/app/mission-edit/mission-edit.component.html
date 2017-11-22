@@ -1,5 +1,5 @@
 <h2>{{ new ? 'Créer une nouvelle mission' : 'Mettre une mission à jour' }}</h2>
-<form (ngSubmit)="submit()" #model="ngForm" [ngClass]="{'submitted': model.form.valid}">
+<form (ngSubmit)="submit(model)" #model="ngForm" [ngClass]="{'submitted': model.form.valid}">
 	<mat-form-field>
 		<mat-select name="clientId" placeholder="Client"
 			[(ngModel)]="mission.clientId">

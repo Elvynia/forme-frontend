@@ -1,5 +1,5 @@
 <h2>{{ new ? 'Créer une nouvelle facture' : 'Mettre une facture à jour' }}</h2>
-<form (ngSubmit)="submit()" #model="ngForm" [ngClass]="{'submitted': model.form.valid}">
+<form (ngSubmit)="submit(model)" #model="ngForm" [ngClass]="{'submitted': model.form.valid}">
 	<mat-form-field>
 		<mat-select id="clientId" name="clientId" placeholder="Client"
 			[(ngModel)]="invoice.clientId">

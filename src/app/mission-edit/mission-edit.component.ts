@@ -49,15 +49,15 @@ export class MissionEditComponent implements OnInit {
         }
     }
 
-    submit() {
+    submit(form) {
         this.mission.duration = this.durationH ? this.duration : this.duration * 7;
         if (this.new) {
             this.missionService.create(this.mission);
-            this.mission = new Mission();
-            this.duration = null;
         } else {
             this.missionService.update(this.mission);
         }
+        this.duration = null;
+        form.resetForm(new Mission());
     }
 
     swapDurationType() {

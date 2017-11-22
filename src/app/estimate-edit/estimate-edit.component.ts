@@ -44,13 +44,13 @@ export class EstimateEditComponent implements OnInit {
 		}
 	}
 
-	submit() {
+	submit(form) {
 		if (this.new) {
 			this.estimateService.create(this.estimate);
 		} else {
 			this.estimateService.update(this.estimate);
 		}
-		this.estimate = new Estimate();
+		form.resetForm(new Estimate());
 	}
 
 }

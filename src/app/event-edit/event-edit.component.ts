@@ -42,13 +42,13 @@ export class EventEditComponent implements OnInit, OnChanges {
         }
     }
 
-	submit() {
+	submit(form) {
 		if (this.new) {
 			this.eventService.create(this.event);
 		} else {
 			this.eventService.update(this.event);
 		}
-		this.event = new MissionEvent();
+		form.resetForm(new MissionEvent());
 	}
 
 }

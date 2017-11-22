@@ -1,5 +1,5 @@
 <h2>{{ new ? 'Créer un nouveau client' : 'Mettre un client à jour' }}</h2>
-<form (ngSubmit)="submit()" #model="ngForm" [ngClass]="{'submitted': model.form.valid}">
+<form (ngSubmit)="submit(model)" #model="ngForm" [ngClass]="{'submitted': model.form.valid}">
 	<mat-form-field>
 		<input matInput id="name" name="name" placeholder="Nom"
 			[(ngModel)]="company.name" required>

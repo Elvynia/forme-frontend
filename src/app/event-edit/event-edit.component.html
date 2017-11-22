@@ -1,5 +1,5 @@
 <h2>{{ new ? 'Créer un nouvel événement' : 'Mettre un événement à jour' }}</h2>
-<form (ngSubmit)="submit()">
+<form (ngSubmit)="submit(model)" #model="ngForm">
 	<mat-form-field>
 		<mat-select name="missionId" placeholder="Mission"
 			[(ngModel)]="event.missionId">

@@ -1,5 +1,5 @@
 <h2>{{ new ? 'Créer un nouveau devis' : 'Mettre un devis à jour' }}</h2>
-<form (ngSubmit)="submit()" #model="ngForm">
+<form (ngSubmit)="submit(model)" #model="ngForm">
 	<mat-form-field>
 		<mat-select name="clientId" placeholder="Client"
 			[(ngModel)]="estimate.clientId">

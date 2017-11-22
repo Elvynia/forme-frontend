@@ -44,13 +44,13 @@ export class InvoiceEditComponent implements OnInit, OnChanges {
         }
     }
 
-    submit() {
+    submit(form) {
         if (this.new) {
             this.invoiceService.create(this.invoice);
         } else {
             this.invoiceService.update(this.invoice);
         }
-        this.invoice = new Invoice();
+        form.resetForm(new Invoice());
     }
 
 }

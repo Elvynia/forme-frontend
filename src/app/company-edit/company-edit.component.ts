@@ -42,13 +42,13 @@ export class CompanyEditComponent implements OnInit, OnChanges {
         this.company.address.push('');
     }
 
-    submit() {
+    submit(form) {
         if (this.new) {
             this.companyService.create(this.company);
         } else {
             this.companyService.update(this.company);
         }
-        this.company = new Company();
+        form.resetForm(new Company());
     }
 
 }
