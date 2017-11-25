@@ -1,0 +1,45 @@
+<div class="table-wrapper">
+	<div class="header">
+		<h2>
+			{{ listTitle || 'Tous les comptes' }}
+		</h2>
+	</div>
+	<mat-table id="companyTable-{{listTitle}}" [dataSource]="dataSource" matSort>
+		<ng-container matColumnDef="id">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+			<mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="username">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Nom d'utilisateur </mat-header-cell>
+			<mat-cell *matCellDef="let row"> {{row.username}} </mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="role">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Role </mat-header-cell>
+			<mat-cell *matCellDef="let row"> {{row.role.name}} </mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="actions">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Actions </mat-header-cell>
+			<mat-cell *matCellDef="let row">
+				<app-edit-toolbar (onModify)="editAccount(row)" (onDelete)="deleteAccount(row)"></app-edit-toolbar>
+			</mat-cell>
+		</ng-container>
+
+		<ng-container matColumnDef="expandedDetail">
+			<mat-cell *matCellDef="let row">
+ 				{{ row }}
+			</mat-cell>
+		</ng-container>
+
+		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+		<mat-row matRipple [title]="row.id" [class.expanded]="expandedElement == row"
+			*matRowDef="let row; columns: displayedColumns;"
+			(click)="handleExpanded($event, row)"></mat-row>
+		<mat-row [@detailExpand]="row.item === expandedElement ? 'expanded' : 'collapsed'"
+			style="height: 0px; min-height: 0px; visibility: hidden;"
+			*matRowDef="let row; columns: ['expandedDetail']; when:isExpansionDetailRow"></mat-row>
+	</mat-table>
+	<mat-paginator [length]="dataSource.length | async"
+		[pageIndex]="0"
+		[pageSize]="5">
+	</mat-paginator>
+</div>

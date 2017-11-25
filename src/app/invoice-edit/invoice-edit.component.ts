@@ -1,11 +1,14 @@
 import { Component, OnInit, OnChanges, Input, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { FormControl } from '@angular/forms';
 
 import { Event, EVENT } from '../event';
 import { Company } from '../company';
 import { Invoice } from '../invoice';
 import { InvoiceService } from '../invoice.service';
 import { CompanyService } from '../company.service';
+
+import { Observable } from 'rxjs/Rx';
 
 @Component({
     selector: 'app-invoice-edit',
@@ -15,13 +18,20 @@ import { CompanyService } from '../company.service';
 export class InvoiceEditComponent implements OnInit, OnChanges {
     @Input() invoice: Invoice;
     @Input() new: boolean;
+    clientControl: FormControl;
     companies: Array<Company>;
+    filteredCompanies: Observable<Company[]>;
 
     constructor(private invoiceService: InvoiceService,
         private companyService: CompanyService,
         private route: ActivatedRoute) {
         this.new = true;
+        this.companies = [];
         this.invoice = new Invoice();
+        this.clientControl = new FormControl();
+        this.filteredCompanies = this.clientControl.valueChanges
+            .startWith(null)
+            .map((value: string) => value ? this.filterCompanies(value) : this.companies.slice());
     }
 
     ngOnInit() {
@@ -53,4 +63,7 @@ export class InvoiceEditComponent implements OnInit, OnChanges {
         form.resetForm(new Invoice());
     }
 
+    filterCompanies(filter: string) {
+        return this.companies.filter((company: Company) => company.trigram.indexOf(filter.toUpperCase()) >= 0);
+    }
 }

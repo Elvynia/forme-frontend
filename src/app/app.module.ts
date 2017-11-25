@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CalendarModule } from 'angular-calendar';
@@ -20,7 +20,9 @@ import { CompanyService } from './company.service';
 import { MissionService } from './mission.service';
 import { MessageService } from './message.service';
 import { EventService } from './event.service';
+import { AccountService } from './account.service';
 import { AuthService } from './auth.service';
+import { RoleService } from './role.service';
 
 import { AuthGuard } from './auth-gard';
 
@@ -30,7 +32,6 @@ import { MissionEditComponent } from './mission-edit/mission-edit.component';
 import { MissionListComponent } from './mission-list/mission-list.component';
 import { CompanyListComponent } from './company-list/company-list.component';
 import { EditToolbarComponent } from './edit-toolbar/edit-toolbar.component';
-import { AgendaComponent } from './agenda/agenda.component';
 import { PlanningComponent } from './planning/planning.component';
 import { EventEditComponent } from './event-edit/event-edit.component';
 import { LoginComponent } from './login/login.component';
@@ -42,6 +43,9 @@ import { MissionDetailsComponent } from './mission-details/mission-details.compo
 import { EstimateDetailsComponent } from './estimate-details/estimate-details.component';
 import { CompanyDetailsComponent } from './company-details/company-details.component';
 import { StatusFieldComponent } from './status-field/status-field.component';
+import { AccountListComponent } from './account-list/account-list.component';
+import { AccountEditComponent } from './account-edit/account-edit.component';
+import { AccountAdminComponent } from './account-admin/account-admin.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +60,6 @@ import { StatusFieldComponent } from './status-field/status-field.component';
     MissionListComponent,
     CompanyListComponent,
     EditToolbarComponent,
-    AgendaComponent,
     PlanningComponent,
     EventEditComponent,
     LoginComponent,
@@ -67,19 +70,23 @@ import { StatusFieldComponent } from './status-field/status-field.component';
     MissionDetailsComponent,
     EstimateDetailsComponent,
     CompanyDetailsComponent,
-    StatusFieldComponent
+    StatusFieldComponent,
+    AccountListComponent,
+    AccountEditComponent,
+    AccountAdminComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(ROUTES),
     CalendarModule.forRoot(),
     AppMaterialModule
   ],
   providers: [InvoiceService, EstimateService, CompanyService, MissionService, 
-    MessageService, EventService, AuthService, AuthGuard],
+    MessageService, EventService, AccountService, AuthService, AuthGuard, RoleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

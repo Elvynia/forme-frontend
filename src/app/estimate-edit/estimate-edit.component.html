@@ -3,7 +3,6 @@
 	<mat-form-field>
 		<mat-select name="clientId" placeholder="Client"
 			[(ngModel)]="estimate.clientId">
-			<mat-option value="">Sélectionner...</mat-option>
 			<mat-option *ngFor="let company of companies" [value]="company.id">
 				{{company.name}} ({{company.trigram}})
 			</mat-option>

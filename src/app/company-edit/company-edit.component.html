@@ -1,23 +1,23 @@
 <h2>{{ new ? 'Créer un nouveau client' : 'Mettre un client à jour' }}</h2>
 <form (ngSubmit)="submit(model)" #model="ngForm" [ngClass]="{'submitted': model.form.valid}">
 	<mat-form-field>
-		<input matInput id="name" name="name" placeholder="Nom"
+		<input matInput name="name" placeholder="Nom"
 			[(ngModel)]="company.name" required>
 	</mat-form-field>
 	<mat-form-field>
-		<input matInput id="tr" name="tr" placeholder="Trigramme"
+		<input matInput name="trigram" placeholder="Trigramme"
 			[(ngModel)]="company.trigram" required>
 	</mat-form-field>
 	<mat-form-field>
-		<input matInput id="siren" name="siren" placeholder="SIREN"
+		<input matInput name="siren" placeholder="SIREN"
 			[(ngModel)]="company.siren" minlength="9" maxlength="9">
 	</mat-form-field>
 	<mat-form-field>
-		<input matInput id="siret" name="siret" placeholder="SIRET"
+		<input matInput name="siret" placeholder="SIRET"
 			[(ngModel)]="company.siret" minlength="14" maxlength="14">
 	</mat-form-field>
 	<mat-form-field>
-		<input matInput id="rcs" name="rcs" placeholder="RCS"
+		<input matInput name="rcs" placeholder="RCS"
 			[(ngModel)]="company.rcs">
 	</mat-form-field>
 	<mat-form-field>

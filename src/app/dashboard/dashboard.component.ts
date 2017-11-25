@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from '../auth.service';
-import { Account, Authority } from '../account';
+import { Account } from '../account';
 
 @Component({
 	selector: 'app-dashboard',
@@ -17,10 +17,8 @@ export class DashboardComponent implements OnInit {
 	ngOnInit() {
 		this.authService.loggedOut.subscribe(() => this.isAdmin = false);
 		this.authService.loggedIn.subscribe((account: Account) => {
-			this.isAdmin = account.authorities
-				.findIndex((auth: Authority) => auth.authority === 'ADMIN') >= 0;
-			this.isClient = account.authorities
-				.findIndex((auth: Authority) => auth.authority === 'CLIENT') >= 0;
+			this.isAdmin = account.role.name === 'ADMIN';
+			this.isClient = account.role.name === 'CLIENT';
 		});
 	}
 

@@ -16,7 +16,8 @@ import {
 	MatCheckboxModule,
 	MatIconModule,
 	MatMenuModule,
-	MatGridListModule
+	MatGridListModule,
+	MatAutocompleteModule
 } from '@angular/material';
 
 @NgModule({
@@ -37,7 +38,8 @@ import {
 	    MatToolbarModule,
 	    MatIconModule,
 	    MatMenuModule,
-		MatGridListModule
+		MatGridListModule,
+		MatAutocompleteModule
 	]
 })
 export class AppMaterialModule {

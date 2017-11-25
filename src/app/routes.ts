@@ -1,6 +1,5 @@
 import { Route } from '@angular/router';
 
-import { AgendaComponent } from './agenda/agenda.component';
 import { PlanningComponent } from './planning/planning.component';
 import { CompanyEditComponent } from './company-edit/company-edit.component';
 import { EstimateEditComponent } from './estimate-edit/estimate-edit.component';
@@ -9,6 +8,7 @@ import { MissionEditComponent } from './mission-edit/mission-edit.component';
 import { EventEditComponent } from './event-edit/event-edit.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
+import { AccountAdminComponent } from './account-admin/account-admin.component';
 
 import { AuthGuard } from './auth-gard';
 
@@ -65,8 +65,8 @@ export const ROUTES: Array<Route> = [
 		component: EventEditComponent,
 		canActivate: [AuthGuard]
 	}, {
-		path: 'agenda',
-		component: AgendaComponent,
+		path: 'account',
+		component: AccountAdminComponent,
 		canActivate: [AuthGuard]
 	}, {
 		path: 'planning',

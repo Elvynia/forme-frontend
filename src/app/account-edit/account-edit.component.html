@@ -1,0 +1,27 @@
+<h2>{{ new ? 'Créer un nouveau compte' : 'Mettre un compte à jour' }}</h2>
+<form (ngSubmit)="submit(model)" #model="ngForm" [ngClass]="{'submitted': model.form.valid}">
+	<mat-form-field>
+		<input matInput name="username" placeholder="Nom d'utilisateur"
+			[(ngModel)]="account.username" required>
+	</mat-form-field>
+	<ng-container *ngIf="!new">
+		<mat-checkbox [(ngModel)]="updatePassword" [ngModelOptions]="{standalone: true}">
+			Changer le mot de passe
+		</mat-checkbox>
+	</ng-container>
+	<ng-container *ngIf="new || updatePassword">
+		<mat-form-field>
+			<input matInput name="password" placeholder="Mot de passe"
+				[(ngModel)]="account.password" required>
+		</mat-form-field>
+	</ng-container>
+	<mat-form-field>
+		<mat-select name="role" [(ngModel)]="account.role" placeholder="Role"
+			[compareWith]="compareRoles">
+			<mat-option *ngFor="let role of roles" [value]="role">
+				{{role.name}}
+			</mat-option>
+		</mat-select>
+	</mat-form-field>
+	<button mat-raised-button color="primary" [disabled]="!model.form.valid">Valider</button>
+</form>

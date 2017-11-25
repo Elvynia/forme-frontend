@@ -14,7 +14,7 @@ export class MissionEvent implements Entity {
 
 	static build(event: any): MissionEvent {
 		let instance: MissionEvent = new MissionEvent();
-		if (instance) {
+		if (event) {
 			if (event.start) {
 				instance.start = event.start;
 			}

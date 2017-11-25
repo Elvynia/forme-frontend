@@ -15,7 +15,7 @@ export class Invoice implements Entity {
 
 	static build(obj: any): Invoice {
 		let instance: Invoice = new Invoice(obj.id);
-		if (instance) {
+		if (obj) {
 			instance.creationDate = obj.creationDate;
 			instance.receptionDate = obj.receptionDate || new Date();
 			instance.amount = obj.amount;
