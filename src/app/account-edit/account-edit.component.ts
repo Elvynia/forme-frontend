@@ -2,7 +2,9 @@ import { Component, OnInit, OnChanges, Input, SimpleChanges, Output, EventEmitte
 
 import { Account } from '../account';
 import { Role } from '../role';
+import { Company } from '../company';
 import { RoleService } from '../role.service';
+import { CompanyService } from '../company.service';
 import { AccountService } from '../account.service';
 
 @Component({
@@ -15,9 +17,11 @@ export class AccountEditComponent implements OnInit, OnChanges {
 	@Output() onSubmit: EventEmitter<any>;
 	@Input() new: boolean;
 	roles: Array<Role>;
+	companies: Array<Company>;
 	updatePassword: boolean;
 
 	constructor(private accountService: AccountService,
+		private companyService: CompanyService,
 		private roleService: RoleService) {
 		this.new = true;
 		this.account = new Account();
@@ -27,6 +31,7 @@ export class AccountEditComponent implements OnInit, OnChanges {
 
 	ngOnInit() {
 		this.roleService.list().subscribe((roles) => this.roles = roles);
+		this.companyService.list().subscribe((companies) => this.companies = companies);
 	}
 
 	ngOnChanges(changes: SimpleChanges) {
@@ -41,11 +46,9 @@ export class AccountEditComponent implements OnInit, OnChanges {
 
 	submit(form) {
 		if (this.new) {
-			console.log('create account');
-			//this.accountService.create(this.account);
+			this.accountService.create(this.account);
 		} else {
-			console.log('update account');
-			//this.accountService.update(this.account);
+			this.accountService.update(this.account);
 		}
 		form.resetForm(new Account());
 		this.onSubmit.next();
