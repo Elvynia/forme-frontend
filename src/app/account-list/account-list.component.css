@@ -6,3 +6,14 @@
 mat-row[matRipple] {
 	cursor: pointer;
 }
+
+div.company-details {
+	opacity: 1;
+	transition: 50ms opacity;
+	transition-delay: 225ms;
+}
+
+div.company-details.expansible {
+	opacity: 0;
+	transition: 50ms opacity;
+}

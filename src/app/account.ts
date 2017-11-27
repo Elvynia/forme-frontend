@@ -1,5 +1,6 @@
 import { Entity } from './entity';
 import { Role } from './role';
+import { Company } from './company';
 
 export class Account implements Entity {
 	id: number;
@@ -7,6 +8,7 @@ export class Account implements Entity {
 	password?: string;
 	token?: string;
 	role?: Role;
+	companies?: Array<Company>;
 
 	static build(account: any): Account {
 		let instance: Account = new Account();
@@ -14,11 +16,13 @@ export class Account implements Entity {
 			instance.id = account.id;
 			instance.username = account.username;
 			instance.role = account.role;
+			instance.companies = account.companies || new Array<Company>();
 		}
 		return instance;
 	}
 
 	constructor(id?: number) {
 		this.id = id;
+		this.companies = new Array();
 	}
 }

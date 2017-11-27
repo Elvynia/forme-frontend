@@ -1,29 +1,33 @@
-<mat-tab-group>
-	<mat-tab label="Default">
-		<mat-grid-list cols="2" rowHeight="750px">
-			<mat-grid-tile>
-				<app-invoice-list></app-invoice-list>
-			</mat-grid-tile>
-			<mat-grid-tile>
-				<app-mission-list></app-mission-list>
-			</mat-grid-tile>
-			<mat-grid-tile>
-				<app-company-list></app-company-list>	
-			</mat-grid-tile>
-			<mat-grid-tile>
-				<app-estimate-list></app-estimate-list>
-			</mat-grid-tile>
-		</mat-grid-list>
-	</mat-tab>
-	<mat-tab label="Client" *ngIf="isAdmin || isClient">
-		<app-client-dashboard></app-client-dashboard>
-	</mat-tab>
-	<mat-tab label="Admin" *ngIf="isAdmin">
-		<app-admin-dashboard></app-admin-dashboard>
-	</mat-tab>
-</mat-tab-group>
-<!-- <ng-template #noAuthTmpl>
+<ng-container *ngIf="isClient; else noAuthTmpl">
+	<mat-tab-group>
+		<ng-container *ngIf="isAdmin">
+			<mat-tab label="Default">
+				<mat-grid-list cols="2" rowHeight="750px">
+					<mat-grid-tile>
+						<app-invoice-list></app-invoice-list>
+					</mat-grid-tile>
+					<mat-grid-tile>
+						<app-mission-list></app-mission-list>
+					</mat-grid-tile>
+					<mat-grid-tile>
+						<app-company-list></app-company-list>	
+					</mat-grid-tile>
+					<mat-grid-tile>
+						<app-estimate-list></app-estimate-list>
+					</mat-grid-tile>
+				</mat-grid-list>
+			</mat-tab>
+			<mat-tab label="Admin">
+				<app-admin-dashboard></app-admin-dashboard>
+			</mat-tab>
+		</ng-container>
+		<mat-tab [label]="account?.username" *ngIf="isClient">
+			<app-client-dashboard></app-client-dashboard>
+		</mat-tab>
+	</mat-tab-group>
+</ng-container>
+<ng-template #noAuthTmpl>
 	<div class="dashboard">
 		<div id="noAuth" class="container alert alert-danger">Veuillez vous authentifier pour voir cette page.</div>
 	</div>
-</ng-template> -->
+</ng-template>

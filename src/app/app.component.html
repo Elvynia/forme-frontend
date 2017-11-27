@@ -33,10 +33,14 @@
 		</div>
 		<div class="user-infos">
 			<ng-container *ngIf="loggedIn; else elseTmpl">
-				<button mat-button color="primary" (click)="logout()" mat-raised-button color="warn">Se déconnecter</button>
+				<button mat-raised-button color="primary" [matMenuTriggerFor]="accountMenu"><h3>{{ account.username }}</h3></button>
+				<mat-menu #accountMenu>
+					<button mat-button>Modifier mon compte</button>
+					<button mat-button color="warn" (click)="logout()">Se déconnecter</button>
+				</mat-menu>
 			</ng-container>
 			<ng-template #elseTmpl>
-				<button mat-button color="primary" routerLink="/login" mat-raised-button color="primary">Se connecter</button>
+				<button mat-raised-button color="primary" routerLink="/login" color="primary">Se connecter</button>
 			</ng-template>
 		</div>
 	</mat-toolbar-row>

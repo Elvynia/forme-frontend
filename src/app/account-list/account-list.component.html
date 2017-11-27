@@ -26,7 +26,17 @@
 
 		<ng-container matColumnDef="expandedDetail">
 			<mat-cell *matCellDef="let row">
- 				{{ row }}
+				<div class="company-details" [ngClass]="{expansible: row.item.id !== expandedElement?.id}">
+					<h3>Responsabilités :</h3>
+	 				<mat-list *ngIf="row.item.companies && row.item.companies.length > 0; else elseTmpl">
+	 					<mat-list-item *ngFor="let company of row.item.companies">
+	 						{{ company.name }} ({{ company.trigram }})
+	 					</mat-list-item>
+	 				</mat-list>
+	 				<ng-template #elseTmpl>
+	 					Aucune
+	 				</ng-template>
+ 				</div>
 			</mat-cell>
 		</ng-container>
 

@@ -41,16 +41,19 @@ export class EditToolbarComponent implements OnInit {
 		}
 	}
 
-	fireAdd() {
+	fireAdd(event: MouseEvent) {
 		this.onAdd.emit(this.data);
+		event.cancelBubble = true;
 	}
 
-	fireModify() {
+	fireModify(event: MouseEvent) {
 		this.onModify.emit(this.data);
+		event.cancelBubble = true;
 	}
 
-	fireDelete() {
+	fireDelete(event: MouseEvent) {
 		this.onDelete.emit(this.data);
+		event.cancelBubble = true;
 	}
 
 	private reloadSelectListeners(oldValue?: string) {

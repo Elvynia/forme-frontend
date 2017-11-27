@@ -23,7 +23,6 @@ export class AccountAdminComponent implements OnInit {
 	}
 
 	endEdit() {
-		console.log('ending edit');
 		this.updateEdit();
 	}
 

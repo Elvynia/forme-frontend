@@ -2,7 +2,7 @@
 <form (ngSubmit)="submit(model)" #model="ngForm" [ngClass]="{'submitted': model.form.valid}">
 	<mat-form-field>
 		<input matInput name="username" placeholder="Nom d'utilisateur"
-			[(ngModel)]="account.username" required>
+			[(ngModel)]="account.username" required />
 	</mat-form-field>
 	<ng-container *ngIf="!new">
 		<mat-checkbox [(ngModel)]="updatePassword" [ngModelOptions]="{standalone: true}">
@@ -12,7 +12,7 @@
 	<ng-container *ngIf="new || updatePassword">
 		<mat-form-field>
 			<input matInput name="password" placeholder="Mot de passe"
-				[(ngModel)]="account.password" required>
+				[(ngModel)]="account.password" required />
 		</mat-form-field>
 	</ng-container>
 	<mat-form-field>
@@ -23,5 +23,13 @@
 			</mat-option>
 		</mat-select>
 	</mat-form-field>
+	<div>
+		<label>Responsabilités</label>
+		<mat-selection-list #companiesSelect>
+			<mat-list-option *ngFor="let company of companies" [value]="company">
+				<span>{{ company.name }} ({{ company.trigram }})</span>
+			</mat-list-option>
+		</mat-selection-list>
+	</div>
 	<button mat-raised-button color="primary" [disabled]="!model.form.valid">Valider</button>
 </form>

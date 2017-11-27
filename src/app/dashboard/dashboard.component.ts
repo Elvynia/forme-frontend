@@ -9,16 +9,28 @@ import { Account } from '../account';
 	styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-	isAdmin: boolean;
-	isClient: boolean;
+	account: Account;
 
-	constructor(private authService: AuthService) { }
+	public get isAdmin(): boolean {
+		return this.account && this.account.role.name === 'ADMIN';
+	}
+
+	public get isClient(): boolean {
+		return this.isAdmin || this.account && this.account.role.name === 'CLIENT';
+	}
+
+	constructor(private authService: AuthService) {
+		if (this.authService.check()) {
+			this.authService.accounts.first((account: Account) => !!account)
+				.subscribe((account: Account) => this.account = account);
+		} else {
+			this.account = null;
+		}
+	}
 
 	ngOnInit() {
-		this.authService.loggedOut.subscribe(() => this.isAdmin = false);
-		this.authService.loggedIn.subscribe((account: Account) => {
-			this.isAdmin = account.role.name === 'ADMIN';
-			this.isClient = account.role.name === 'CLIENT';
+		this.authService.accounts.subscribe((account: any) => {
+			this.account = account;
 		});
 	}
 

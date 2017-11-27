@@ -3,55 +3,56 @@ import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 
+import { Account } from './account';
 import { AuthService } from './auth.service';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+	selector: 'app-root',
+	templateUrl: './app.component.html',
+	styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
 	wideScreen: boolean;
-    loggedIn: boolean;
+	account: Account;
 
-    constructor(private router: Router,
-        private authService: AuthService,
-        private iconService: MatIconRegistry,
-        private domSanitizer: DomSanitizer) {
-        this.wideScreen = false;
-        this.loggedIn = false;
-    }
+	public get loggedIn(): boolean {
+		return this.account != null;
+	}
 
-    ngOnInit() {
-        this.registerIcons();
-        this.router.events
-        .filter(event => event instanceof NavigationEnd)
-        .map(_ => this.router.routerState.root)
-        .map(route => {
-            while (route.firstChild) route = route.firstChild;;
-            return route;
-        })
-        .flatMap((route: ActivatedRoute) => route.data)
-        .subscribe((data:any) => {
-            this.wideScreen = data.wideScreen;
-        });
-        this.authService.accounts.subscribe((account: any) => {
-            if (account) {
-                this.loggedIn = true;
-            } else {
-                this.loggedIn = false;
-            }
-        });
-    }
+	constructor(private router: Router,
+		private authService: AuthService,
+		private iconService: MatIconRegistry,
+		private domSanitizer: DomSanitizer) {
+		this.wideScreen = false;
+		this.account = null;
+	}
 
-    logout() {
-        this.authService.logout();
-        this.router.navigate(['login']);
-    }
+	ngOnInit() {
+		this.registerIcons();
+		this.router.events
+		.filter(event => event instanceof NavigationEnd)
+		.map(_ => this.router.routerState.root)
+		.map(route => {
+			while (route.firstChild) route = route.firstChild;
+			return route;
+		})
+		.flatMap((route: ActivatedRoute) => route.data)
+		.subscribe((data:any) => {
+			this.wideScreen = data.wideScreen;
+		});
+		this.authService.accounts.subscribe((account: any) => {
+			this.account = account;
+		});
+	}
 
-    private registerIcons() {
-        for (let i = 0; i < 3; ++i) {
-            this.iconService.addSvgIcon('brand_' + i, this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/brand_' + i + '.svg'));
-        }
-    }
+	logout() {
+		this.authService.logout();
+		this.router.navigate(['login']);
+	}
+
+	private registerIcons() {
+		for (let i = 0; i < 3; ++i) {
+			this.iconService.addSvgIcon('brand_' + i, this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/brand_' + i + '.svg'));
+		}
+	}
 }

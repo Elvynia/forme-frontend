@@ -42,9 +42,10 @@ div#menu button {
 }
 
 div.user-infos {
-	flex-grow: 1;
+	flex: 1;
 }
 
 div.user-infos button {
 	float: right;
+	width: 80%;
 }

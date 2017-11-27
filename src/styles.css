@@ -74,3 +74,7 @@ mat-table mat-row mat-cell.mat-column-title {
 .mat-row-selected {
 	background-color: lightblue;
 }
+
+div.mat-menu-content button {
+	width: 100%;
+}
