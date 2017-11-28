@@ -23,6 +23,7 @@ import { AuthService } from '../auth.service';
 export class EstimateListComponent implements OnInit {
 	@Input() listTitle: any;
 	@Input() filter: (item) => boolean;
+	@Input() filterContext: any;
 	@Input('columns') displayedColumns;
 	dataSource: FormeDataSource<Estimate>;
 	@ViewChild(MatSort) sort: MatSort;
@@ -32,7 +33,7 @@ export class EstimateListComponent implements OnInit {
 
 	constructor(private estimateService: EstimateService,
 		private authService: AuthService) {
-		this.displayedColumns = ['id', 'clientId', 'amount', 'date', 'signed'];
+		this.displayedColumns = ['id', 'client', 'amount', 'date', 'signed'];
 	}
 
 	ngOnInit() {
@@ -49,6 +50,7 @@ export class EstimateListComponent implements OnInit {
 		this.dataSource = new FormeDataSource(this.paginator, this.sort);
 		if (this.filter) {
 			this.dataSource.filter = this.filter;
+			this.dataSource.filterContext = this.filterContext;
 		}
 	}
 

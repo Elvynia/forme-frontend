@@ -23,6 +23,7 @@ import { EVENT } from '../event';
 export class CompanyListComponent implements OnInit {
 	@Input() listTitle: any;
 	@Input() filter: (item) => boolean;
+	@Input() filterContext: any;
 	@Input('columns') displayedColumns;
 	dataSource: FormeDataSource<Company>;
 	@ViewChild(MatSort) sort: MatSort;
@@ -49,6 +50,7 @@ export class CompanyListComponent implements OnInit {
 		this.dataSource = new FormeDataSource(this.paginator, this.sort);
 		if (this.filter) {
 			this.dataSource.filter = this.filter;
+			this.dataSource.filterContext = this.filterContext;
 		}
 	}
 

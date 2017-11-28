@@ -64,6 +64,14 @@ export class InvoiceEditComponent implements OnInit, OnChanges {
     }
 
     filterCompanies(filter: string) {
-        return this.companies.filter((company: Company) => company.trigram.indexOf(filter.toUpperCase()) >= 0);
+        if (typeof filter === "string") { 
+            return this.companies.filter((company: Company) => 
+            	company.trigram.indexOf(filter.toUpperCase()) >= 0
+                || company.name.toLowerCase().indexOf(filter.toLowerCase()) >= 0);
+        }
+    }
+
+    displayCompany(company: Company) {
+        return company ? company.name + ' (' + company.trigram + ')' : '';
     }
 }

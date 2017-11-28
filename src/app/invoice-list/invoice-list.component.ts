@@ -23,6 +23,7 @@ import { AuthService } from '../auth.service';
 export class InvoiceListComponent implements OnInit {
 	@Input() listTitle: any;
 	@Input() filter: (item) => boolean;
+	@Input() filterContext: any;
 	@Input('columns') displayedColumns;
 	dataSource: FormeDataSource<Invoice>;
 	@ViewChild(MatSort) sort: MatSort;
@@ -34,7 +35,7 @@ export class InvoiceListComponent implements OnInit {
 	constructor(private invoiceService: InvoiceService,
 		private authService: AuthService,
 		private renderer: Renderer) {
-		this.displayedColumns = ['id', 'clientId', 'label', 'amount', 'pending', 'received'];
+		this.displayedColumns = ['id', 'client', 'label', 'amount', 'pending', 'received'];
 	}
 
 	ngOnInit() {
@@ -51,6 +52,7 @@ export class InvoiceListComponent implements OnInit {
 		this.dataSource = new FormeDataSource(this.paginator, this.sort);
 		if (this.filter) {
 			this.dataSource.filter = this.filter;
+			this.dataSource.filterContext = this.filterContext;
 		}
 	}
 

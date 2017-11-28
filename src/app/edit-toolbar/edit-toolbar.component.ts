@@ -3,6 +3,7 @@ import { Component, OnInit, OnChanges, SimpleChanges, Input, Output } from '@ang
 import * as $ from 'jquery';
 
 import { AngularSubject } from '../angular-subject';
+import { AuthService } from '../auth.service';
 
 @Component({
 	selector: 'app-edit-toolbar',
@@ -16,11 +17,13 @@ export class EditToolbarComponent implements OnInit {
 	shouldAdd: boolean;
 	shouldModify: boolean;
 	shouldDelete: boolean;
+	isAdmin: boolean;
 	@Output() onAdd: AngularSubject;
 	@Output() onModify: AngularSubject;
 	@Output() onDelete: AngularSubject;
 
-	constructor() {
+
+	constructor(private authService: AuthService) {
 		this.shouldAdd = false;
 		this.shouldModify = false;
 		this.shouldDelete = false;
@@ -30,6 +33,7 @@ export class EditToolbarComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		this.authService.accounts.subscribe((account) => this.isAdmin = account && account.role.name === 'ADMIN');
 		this.onAdd.onSubscribe((isSubscribed) => this.shouldAdd = isSubscribed);
 		this.onModify.onSubscribe((isSubscribed) => this.shouldModify = isSubscribed);
 		this.onDelete.onSubscribe((isSubscribed) => this.shouldDelete = isSubscribed);

@@ -22,7 +22,7 @@
 			</mat-tab>
 		</ng-container>
 		<mat-tab [label]="account?.username" *ngIf="isClient">
-			<app-client-dashboard></app-client-dashboard>
+			<app-client-dashboard [account]="account"></app-client-dashboard>
 		</mat-tab>
 	</mat-tab-group>
 </ng-container>

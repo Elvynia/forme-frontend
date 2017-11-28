@@ -1,11 +1,12 @@
 import { Entity } from './entity';
+import { Company } from './company';
 
 import * as moment from 'moment';
 
 export class Invoice implements Entity {
 	id: number;
 	amount: number;
-	clientId: number;
+	client: Company;
 	creationDate: Date;
 	pending: boolean;
 	received: boolean;
@@ -19,7 +20,7 @@ export class Invoice implements Entity {
 			instance.creationDate = obj.creationDate;
 			instance.receptionDate = obj.receptionDate || new Date();
 			instance.amount = obj.amount;
-			instance.clientId = obj.clientId;
+			instance.client = obj.client;
 			instance.pending = obj.pending;
 			instance.received = obj.received;
 			instance.travelCosts = obj.travelCosts;

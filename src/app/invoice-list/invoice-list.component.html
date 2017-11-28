@@ -9,10 +9,10 @@
 			<mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
 			<mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
 		</ng-container>
-		<ng-container matColumnDef="clientId">
+		<ng-container matColumnDef="client">
 			<mat-header-cell *matHeaderCellDef mat-sort-header> Client </mat-header-cell>
 			<mat-cell *matCellDef="let row">
-				<app-company-ref [id]="row.clientId"></app-company-ref>
+				<app-company-ref [id]="row.client.id"></app-company-ref>
 			</mat-cell>
 		</ng-container>
 		<ng-container matColumnDef="label">

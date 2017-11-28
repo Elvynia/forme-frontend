@@ -24,6 +24,7 @@ import { EVENT } from '../event';
 export class MissionListComponent implements OnInit {
 	@Input() listTitle: any;
 	@Input() filter: (item) => boolean;
+	@Input() filterContext: any;
 	@Input('columns') displayedColumns;
 	dataSource: FormeDataSource<Mission>;
 	@ViewChild(MatSort) sort: MatSort;
@@ -34,7 +35,7 @@ export class MissionListComponent implements OnInit {
 	constructor(private missionService: MissionService,
 		private authService: AuthService,
 		private router: Router) {
-		this.displayedColumns = ['id', 'clientId', 'type', 'duration', 'tjm', 'label', 'title'];
+		this.displayedColumns = ['id', 'client', 'type', 'duration', 'tjm', 'label', 'title'];
 	}
 
 	ngOnInit() {
@@ -51,6 +52,7 @@ export class MissionListComponent implements OnInit {
 		this.dataSource = new FormeDataSource(this.paginator, this.sort);
 		if (this.filter) {
 			this.dataSource.filter = this.filter;
+			this.dataSource.filterContext = this.filterContext;
 		}
 	}
 

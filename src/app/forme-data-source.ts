@@ -10,6 +10,7 @@ export class FormeDataSource<E extends Entity> extends DataSource<E> {
 	private data: BehaviorSubject<E[]>;
 	private _filter: BehaviorSubject<(item) => boolean>;
 	private _length: BehaviorSubject<number>;
+	public filterContext: any;
 
 	public get length(): Observable<number> {
 		return this._length.asObservable();
@@ -68,7 +69,7 @@ export class FormeDataSource<E extends Entity> extends DataSource<E> {
 		];
 
 		return Observable.merge(...displayDataChanges).map(() => {
-			let data = this.data.value.slice().filter(this.filter);
+			let data = this.data.value.slice().filter(this.filter, this.filterContext);
 			this._length.next(data.length);
 			if (this.sort.active) {
 				data.sort((a, b) => {

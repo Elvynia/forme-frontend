@@ -1,1 +1,8 @@
-CLI
+<div class="dashboard">
+	<app-invoice-list listTitle="Factures à payer" [filter]="pendingInvoices" [filterContext]="this"
+		[columns]="['client', 'label', 'amount']"></app-invoice-list>
+	<app-estimate-list listTitle="Devis à signer" [filter]="pendingEstimates" [filterContext]="this"
+		[columns]="['client', 'amount', 'date']"></app-estimate-list>
+	<app-mission-list listTitle="Missions en cours" [filter]="pendingMissions" [filterContext]="this"
+		[columns]="['client', 'title', 'duration', 'tjm']"></app-mission-list>
+</div>

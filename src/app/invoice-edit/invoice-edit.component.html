@@ -1,9 +1,10 @@
 <h2>{{ new ? 'Créer une nouvelle facture' : 'Mettre une facture à jour' }}</h2>
 <form (ngSubmit)="submit(model)" #model="ngForm" [ngClass]="{'submitted': model.form.valid}">
 	<mat-form-field>
-		<input matInput name="clientId" placeholder="Client" [matAutocomplete]="clientAC" [formControl]="clientControl" />
-		<mat-autocomplete #clientAC="matAutocomplete">
-			<mat-option *ngFor="let company of filteredCompanies | async" [value]="company.id">
+		<input matInput name="clientId" placeholder="Client" [(ngModel)]="invoice.client"
+			 [matAutocomplete]="clientAC" [formControl]="clientControl" />
+		<mat-autocomplete #clientAC="matAutocomplete" [displayWith]="displayCompany">
+			<mat-option *ngFor="let company of filteredCompanies | async" [value]="company">
 				<span>{{company.name}}</span>
 				<small>({{company.trigram}})</small>
 				</mat-option>
