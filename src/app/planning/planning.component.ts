@@ -64,14 +64,12 @@ export class PlanningComponent implements OnInit {
 			} else {
 				this.newEvent.start = m;
 			}
-			console.log(day, this.newEvent);
 		}
 	}
 
 	addEvent() {
 		if (this.newEvent.start && this.newEvent.end) {
 			this.eventService.create(this.newEvent).subscribe((event: MissionEvent) => {
-				console.log('WTF ?', event);
 				this.router.navigate(['event', event.id]);
 			});
 		}
