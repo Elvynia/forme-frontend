@@ -1,15 +1,17 @@
 <div id="status" #container>
 	<hr />
-	<div class="invoice-wrapper" *ngFor="let invoiceGroup of invoices"
-		[ngStyle]="{'left': getMonthPos(container.clientWidth, invoiceGroup[0])}">
-		<div class="invoice" *ngFor="let invoice of invoiceGroup[1]; index as i;">
-			{{ invoice.id }}
+	<ng-container *ngIf="loaded">
+		<div class="invoice-wrapper" *ngFor="let invoiceGroup of invoices"
+			[ngStyle]="{'left': getMonthPos(container.clientWidth, invoiceGroup[0])}">
+			<div class="invoice" *ngFor="let invoice of invoiceGroup[1]; index as i;">
+				{{ invoice.id }}
+			</div>
 		</div>
-	</div>
-	<div class="month" *ngFor="let month of months; index as i;"
-		[ngStyle]="{'left': getMonthPos(container.clientWidth, i), 'width': container.clientWidth / months.length + 'px' }">
-		<span>{{ month }}</span>
-	</div>
+		<div class="month" *ngFor="let month of months; index as i;"
+			[ngStyle]="{'left': getMonthPos(container.clientWidth, i), 'width': container.clientWidth / months.length + 'px' }">
+			<span>{{ month }}</span>
+		</div>
+	</ng-container>
 	<div id="turnovers">
 		<div id="last" class="turnover">
 			Année {{ currentYear - 1 }} : {{ calculateTurnover(currentYear - 1) | currency:'EUR':'symbol':'4.2-2' }}

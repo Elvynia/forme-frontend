@@ -14,6 +14,12 @@ import { InvoiceService } from '../invoice.service';
 	styleUrls: ['./admin-dashboard.component.css']
 })
 export class AdminDashboardComponent implements OnInit {
+	months: Array<string>;
+	invoices: Array<[number, Array<Invoice>]>;
+	invoiceList: Array<Invoice>;
+	currentYear: number;
+	loaded: boolean;
+	missionFilter = (mission: Mission) => mission.closed ? null : mission;
 	pendingFilter = (invoice: Invoice) => invoice.pending ? invoice : null;
 	toDeclareFilter = (invoice: Invoice) => {
 		if (!invoice.travelCosts) {
@@ -25,15 +31,11 @@ export class AdminDashboardComponent implements OnInit {
 		}
 		return null;
 	};
-	missionFilter = (mission: Mission) => mission.closed ? null : mission;
-	months: Array<string>;
-	invoices: Array<[number, Array<Invoice>]>;
-	invoiceList: Array<Invoice>;
-	currentYear: number;
 
 	constructor(private invoiceService: InvoiceService) {
 		this.months = moment.months();
 		this.currentYear = moment().year();
+		this.loaded = false;
 	}
 
 	ngOnInit() {
@@ -61,6 +63,10 @@ export class AdminDashboardComponent implements OnInit {
 					}
 				})
 			});
+	}
+
+	ngAfterViewInit() {
+		setTimeout(() => this.loaded = true);
 	}
 
 	getMonthPos(width: number, i: number): string {

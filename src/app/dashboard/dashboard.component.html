@@ -1,30 +1,18 @@
-<ng-container *ngIf="isClient; else noAuthTmpl">
-	<mat-tab-group>
-		<ng-container *ngIf="isAdmin">
-			<mat-tab label="Default">
-				<mat-grid-list cols="2" rowHeight="750px">
-					<mat-grid-tile>
-						<app-invoice-list></app-invoice-list>
-					</mat-grid-tile>
-					<mat-grid-tile>
-						<app-mission-list></app-mission-list>
-					</mat-grid-tile>
-					<mat-grid-tile>
-						<app-company-list></app-company-list>	
-					</mat-grid-tile>
-					<mat-grid-tile>
-						<app-estimate-list></app-estimate-list>
-					</mat-grid-tile>
-				</mat-grid-list>
-			</mat-tab>
-			<mat-tab label="Admin">
-				<app-admin-dashboard></app-admin-dashboard>
-			</mat-tab>
-		</ng-container>
-		<mat-tab [label]="account?.username" *ngIf="isClient">
-			<app-client-dashboard [account]="account"></app-client-dashboard>
-		</mat-tab>
-	</mat-tab-group>
+<ng-container *ngIf="account.isAdmin; else noAuthTmpl">
+	<mat-grid-list cols="2" rowHeight="750px">
+		<mat-grid-tile>
+			<app-invoice-list></app-invoice-list>
+		</mat-grid-tile>
+		<mat-grid-tile>
+			<app-mission-list></app-mission-list>
+		</mat-grid-tile>
+		<mat-grid-tile>
+			<app-company-list></app-company-list>	
+		</mat-grid-tile>
+		<mat-grid-tile>
+			<app-estimate-list></app-estimate-list>
+		</mat-grid-tile>
+	</mat-grid-list>
 </ng-container>
 <ng-template #noAuthTmpl>
 	<div class="dashboard">

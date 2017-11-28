@@ -41,7 +41,7 @@ export class AppComponent implements OnInit {
 			this.wideScreen = data.wideScreen;
 		});
 		this.authService.accounts.subscribe((account: any) => {
-			this.account = account;
+			this.account = account ? Account.build(account) : null;
 		});
 	}
 

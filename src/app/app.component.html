@@ -44,6 +44,16 @@
 			</ng-template>
 		</div>
 	</mat-toolbar-row>
+	<mat-toolbar-row *ngIf="account?.isAdmin || account?.isClient">
+		<nav mat-tab-nav-bar>
+			<a mat-tab-link [routerLink]="['dashboard/default']" [active]="rla1.isActive"
+				routerLinkActive #rla1="routerLinkActive">Tableau de bord</a>
+			<a mat-tab-link [routerLink]="['dashboard/overview']" [active]="rla2.isActive"
+				routerLinkActive #rla2="routerLinkActive">Synthèse</a>
+			<a mat-tab-link [routerLink]="['dashboard/clientboard']" [active]="rla3.isActive"
+				routerLinkActive #rla3="routerLinkActive">Espace client</a>
+		</nav>
+	</mat-toolbar-row>
 </mat-toolbar>
 <div id="main" [ngClass]="{ 'container': !wideScreen }">
 	<router-outlet></router-outlet>

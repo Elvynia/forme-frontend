@@ -11,18 +11,10 @@ import { Account } from '../account';
 export class DashboardComponent implements OnInit {
 	account: Account;
 
-	public get isAdmin(): boolean {
-		return this.account && this.account.role.name === 'ADMIN';
-	}
-
-	public get isClient(): boolean {
-		return this.isAdmin || this.account && this.account.role.name === 'CLIENT';
-	}
-
 	constructor(private authService: AuthService) {
 		if (this.authService.check()) {
 			this.authService.accounts.first((account: Account) => !!account)
-				.subscribe((account: Account) => this.account = account);
+				.subscribe((account: Account) => this.account = Account.build(account));
 		} else {
 			this.account = null;
 		}
@@ -30,7 +22,7 @@ export class DashboardComponent implements OnInit {
 
 	ngOnInit() {
 		this.authService.accounts.subscribe((account: any) => {
-			this.account = account;
+			this.account = account ? Account.build(account) : null;
 		});
 	}
 

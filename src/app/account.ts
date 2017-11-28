@@ -21,6 +21,14 @@ export class Account implements Entity {
 		return instance;
 	}
 
+	public get isAdmin(): boolean {
+		return this.role && this.role.name === 'ADMIN';
+	}
+
+	public get isClient(): boolean {
+		return this.isAdmin || this.role.name === 'CLIENT';
+	}
+	
 	constructor(id?: number) {
 		this.id = id;
 		this.companies = new Array();
