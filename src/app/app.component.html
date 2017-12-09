@@ -1,6 +1,6 @@
 <mat-toolbar class="navbar-collapse">
 	<mat-toolbar-row>
-		<div id="brand" routerLink="/">
+		<div id="brand" routerLink="/dashboard">
 			<mat-icon svgIcon="brand_1"></mat-icon>
 			<div>
 				Forme application
@@ -44,15 +44,27 @@
 			</ng-template>
 		</div>
 	</mat-toolbar-row>
-	<mat-toolbar-row *ngIf="account?.isAdmin || account?.isClient">
+	<mat-toolbar-row *ngIf="account?.isClient && isDashboard">
 		<nav mat-tab-nav-bar>
 			<a mat-tab-link [routerLink]="['dashboard/default']" [active]="rla1.isActive"
-				routerLinkActive #rla1="routerLinkActive">Tableau de bord</a>
+				routerLinkActive #rla1="routerLinkActive"
+				*ngIf="account?.isAdmin">Tableau de bord</a>
 			<a mat-tab-link [routerLink]="['dashboard/overview']" [active]="rla2.isActive"
-				routerLinkActive #rla2="routerLinkActive">Synthèse</a>
+				routerLinkActive #rla2="routerLinkActive"
+				*ngIf="account?.isAdmin">Synthèse</a>
 			<a mat-tab-link [routerLink]="['dashboard/clientboard']" [active]="rla3.isActive"
-				routerLinkActive #rla3="routerLinkActive">Espace client</a>
+			routerLinkActive #rla3="routerLinkActive">Espace client</a>
 		</nav>
+		<div id="seeAs" *ngIf="account?.isAdmin && isClientboard">
+			<mat-form-field>
+				<mat-select placeholder="Voir comme" #seeAs>
+					<mat-option [value]="null"></mat-option>
+					<mat-option *ngFor="let client of clients" [value]="client">
+						{{ client.username }}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</div>
 	</mat-toolbar-row>
 </mat-toolbar>
 <div id="main" [ngClass]="{ 'container': !wideScreen }">

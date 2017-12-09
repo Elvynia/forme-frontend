@@ -49,3 +49,12 @@ div.user-infos button {
 	float: right;
 	width: 80%;
 }
+
+div#seeAs {
+	width: 100%;
+	height: 64px;
+}
+
+div#seeAs mat-form-field {
+	float: right;
+}
