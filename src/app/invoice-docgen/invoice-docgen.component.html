@@ -3,7 +3,7 @@
 	<mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
 		<mat-expansion-panel-header>
 			<mat-panel-title>Prestations</mat-panel-title>
-			<mat-panel-description>lignes à facturer</mat-panel-description>
+			<mat-panel-description>Lignes à facturer</mat-panel-description>
 		</mat-expansion-panel-header>
 		<form (ngSubmit)="submit(model)" #model="ngForm">
 			<mat-form-field>
@@ -30,22 +30,8 @@
 			<mat-panel-title>Prestataire et client</mat-panel-title>
 			<mat-panel-description>Nom, SIREN/SIRET, Adresse</mat-panel-description>
 		</mat-expansion-panel-header>
-		<mat-form-field>
-			<mat-select name="freelance" placeholder="Prestataire"
-				[(ngModel)]="invoice.freelance">
-				<mat-option *ngFor="let company of companies" [value]="company">
-					{{company.name}} ({{company.trigram}})
-				</mat-option>
-			</mat-select>
-		</mat-form-field>
-		<mat-form-field>
-			<mat-select name="client" placeholder="Client"
-				[(ngModel)]="invoice.client" [compareWith]="compareCompany">
-				<mat-option *ngFor="let company of companies" [value]="company">
-					{{company.name}} ({{company.trigram}})
-				</mat-option>
-			</mat-select>
-		</mat-form-field>
+		<app-company-combobox [(selection)]="invoice.freelance"></app-company-combobox>
+		<app-company-combobox [(selection)]="invoice.clientDoc"></app-company-combobox>
 		<mat-action-row>
 			<button mat-button color="warn" (click)="setStep(step - 1)">Précédent</button>
       		<button mat-button color="primary" (click)="setStep(step + 1)">Suivant</button>
@@ -86,10 +72,10 @@
 				<div *ngFor="let addrLine of invoice.freelance?.address">{{ addrLine }}</div>
 			</div>
 			<div id="client" class="contact">
-				<div>{{ invoice.client?.name }}</div>
-				<div>SIREN : {{ invoice.client?.siren }}</div>
-				<div>SIRET : {{ invoice.client?.siret }}</div>
-				<div *ngFor="let addrLine of invoice.client?.address">{{ addrLine }}</div>
+				<div>{{ invoice.clientDoc?.name }}</div>
+				<div>SIREN : {{ invoice.clientDoc?.siren }}</div>
+				<div>SIRET : {{ invoice.clientDoc?.siret }}</div>
+				<div *ngFor="let addrLine of invoice.clientDoc?.address">{{ addrLine }}</div>
 			</div>
 			<div id="date">Date : {{ invoice.creationDate | date:'dd/MM/yyyy' }}</div>
 			<div id="label">{{ invoice.label }}</div>

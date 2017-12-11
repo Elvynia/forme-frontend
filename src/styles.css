@@ -20,7 +20,7 @@ form {
 	flex-direction: column;
 }
 
-form > *.mat-form-field {
+form *.mat-form-field {
 	width: 100%;
 	margin-bottom: 10px;
 }

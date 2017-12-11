@@ -25,6 +25,9 @@ export class InvoiceDocgenComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		if (this.invoice) {
+			this.invoice['clientDoc'] = this.invoice.client ? Invoice.build(this.invoice.client) : null;
+		}
 		this.companyService.list().subscribe((list) => this.companies = list);
 	}
 

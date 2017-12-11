@@ -1,0 +1,10 @@
+<mat-form-field>
+	<input matInput name="clientId" placeholder="Client" [(ngModel)]="selection"
+				 [matAutocomplete]="clientAC" [formControl]="clientControl" />
+	<mat-autocomplete #clientAC="matAutocomplete" [displayWith]="displayCompany" (optionSelected)="updateSelection($event)">
+		<mat-option *ngFor="let company of filteredCompanies | async" [value]="company">
+			<span>{{company.name}}</span>
+			<small>({{company.trigram}})</small>
+			</mat-option>
+	</mat-autocomplete>
+</mat-form-field>
