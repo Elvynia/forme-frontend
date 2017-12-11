@@ -1,13 +1,6 @@
 <h2>{{ new ? 'Créer un nouveau devis' : 'Mettre un devis à jour' }}</h2>
 <form (ngSubmit)="submit(model)" #model="ngForm">
-	<mat-form-field>
-		<mat-select name="clientId" placeholder="Client"
-			[(ngModel)]="estimate.clientId">
-			<mat-option *ngFor="let company of companies" [value]="company.id">
-				{{company.name}} ({{company.trigram}})
-			</mat-option>
-		</mat-select>
-	</mat-form-field>
+	<app-company-combobox [(selection)]="estimate.client"></app-company-combobox>
 	<mat-form-field>
 		<input matInput type="number" name="amount" placeholder="Montant"
 			[(ngModel)]="estimate.amount" min="O" step=0.05 required />

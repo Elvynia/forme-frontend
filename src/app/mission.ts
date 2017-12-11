@@ -1,9 +1,11 @@
 import { Entity } from './entity';
 
+import { Company } from './company';
+
 export class Mission implements Entity {
 	id: number;
 	duration: number;
-	clientId: number;
+	client: Company;
 	tjm: number;
 	label: string;
 	title: string;

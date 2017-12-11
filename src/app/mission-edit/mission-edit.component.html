@@ -1,13 +1,6 @@
 <h2>{{ new ? 'Créer une nouvelle mission' : 'Mettre une mission à jour' }}</h2>
 <form (ngSubmit)="submit(model)" #model="ngForm" [ngClass]="{'submitted': model.form.valid}">
-	<mat-form-field>
-		<mat-select name="clientId" placeholder="Client"
-			[(ngModel)]="mission.clientId">
-			<mat-option *ngFor="let company of companies" [value]="company.id">
-				{{company.name}} ({{company.trigram}})
-			</mat-option>
-		</mat-select>
-	</mat-form-field>
+	<app-company-combobox [(selection)]="mission.client"></app-company-combobox>
 	<mat-form-field>
 		<input matInput type="number" id="duration" name="duration" placeholder="Durée" 
 			[(ngModel)]="duration" min="O" required />

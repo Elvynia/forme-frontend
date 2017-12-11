@@ -5,7 +5,6 @@ import { Event, EVENT } from '../event';
 import { Company } from '../company';
 import { Estimate } from '../estimate';
 import { EstimateService } from '../estimate.service';
-import { CompanyService } from '../company.service';
 
 @Component({
 	selector: 'app-estimate-edit',
@@ -15,20 +14,14 @@ import { CompanyService } from '../company.service';
 export class EstimateEditComponent implements OnInit {
 	@Input() estimate: Estimate;
 	@Input() new: boolean;
-	companies: Array<Company>;
 
 	constructor(private estimateService: EstimateService,
-		private companyService: CompanyService,
 		private route: ActivatedRoute) {
 		this.new = true;
 		this.estimate = new Estimate();
 	}
 
 	ngOnInit() {
-		this.companyService.list()
-		.subscribe((data: Array<Company>) => {
-			this.companies = data;
-		});
 		this.route.paramMap.subscribe((paramMap: ParamMap) => {
             if (paramMap.has('id')) {
                 this.new = false;

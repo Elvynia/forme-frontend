@@ -1,11 +1,13 @@
 import { Entity } from './entity';
 
+import { Company } from './company';
+
 export class Estimate implements Entity {
 	id: number;
 	amount: number;
 	date: Date;
 	signed: boolean;
-	clientId: number;
+	client: Company;
 
 	constructor(id?: number) {
 		this.id = id;

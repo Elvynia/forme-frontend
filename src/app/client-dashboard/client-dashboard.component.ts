@@ -32,10 +32,10 @@ export class ClientDashboardComponent implements OnInit {
 	}
 
 	public pendingEstimates(estimate: Estimate): boolean {
-		return this.account && !estimate.signed && this.account.companies.findIndex((company: Company) => company.id === estimate.clientId) >= 0;
+		return this.account && !estimate.signed && this.account.companies.findIndex((company: Company) => company.id === estimate.client.id) >= 0;
 	}
 
 	public pendingMissions(mission: Mission): boolean {
-		return this.account && !mission.closed && this.account.companies.findIndex((company: Company) => company.id === mission.clientId) >= 0;
+		return this.account && !mission.closed && this.account.companies.findIndex((company: Company) => company.id === mission.client.id) >= 0;
 	}
 }

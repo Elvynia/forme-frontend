@@ -4,11 +4,13 @@ import { Observable } from 'rxjs/Rx';
 
 import * as moment from 'moment';
 
+import { Company } from './company';
+
 export class MissionEvent implements Entity {
 	id: number;
 	start: Date;
 	end: Date;
-	missionId: number;
+	mission: Company;
 	color: any;
 	missionLabel?: Observable<string>;
 
@@ -22,7 +24,7 @@ export class MissionEvent implements Entity {
 				instance.end = event.end;
 			}
 			instance.id = event.id;
-			instance.missionId = event.missionId;
+			instance.mission = event.mission;
 		}
 		return instance;
 	}

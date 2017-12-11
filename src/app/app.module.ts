@@ -48,6 +48,7 @@ import { AccountEditComponent } from './account-edit/account-edit.component';
 import { AccountAdminComponent } from './account-admin/account-admin.component';
 import { InvoiceDocgenComponent } from './invoice-docgen/invoice-docgen.component';
 import { CompanyComboboxComponent } from './company-combobox/company-combobox.component';
+import { MissionComboboxComponent } from './mission-combobox/mission-combobox.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { CompanyComboboxComponent } from './company-combobox/company-combobox.co
     AccountEditComponent,
     AccountAdminComponent,
     InvoiceDocgenComponent,
-    CompanyComboboxComponent
+    CompanyComboboxComponent,
+    MissionComboboxComponent
   ],
   imports: [
     BrowserModule,
