@@ -1,0 +1,132 @@
+<h2>Générer la facture :</h2>
+<mat-accordion>
+	<mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
+		<mat-expansion-panel-header>
+			<mat-panel-title>Prestations</mat-panel-title>
+			<mat-panel-description>lignes à facturer</mat-panel-description>
+		</mat-expansion-panel-header>
+		<form (ngSubmit)="submit(model)" #model="ngForm">
+			<mat-form-field>
+				<input matInput name="title" placeholder="Titre prestation" 
+					[(ngModel)]="line.title" required />
+			</mat-form-field>
+			<mat-form-field>
+				<input matInput name="quantity" placeholder="Quantité" 
+					[(ngModel)]="line.quantity" min="O" required />
+			</mat-form-field>
+			<mat-form-field>
+				<input matInput name="unitCost" placeholder="Prix unitaire" 
+					[(ngModel)]="line.unitCost" min="O" step=0.05 required />
+			</mat-form-field>
+			<div><button mat-raised-button [disabled]="!model.form.valid">Ajouter</button></div>
+		</form>
+		<mat-action-row>
+			<button mat-button color="warn" (click)="setStep(step - 1)">Réinitialiser</button>
+      		<button mat-button color="primary" (click)="setStep(step + 1)">Suivant</button>
+		</mat-action-row>
+	</mat-expansion-panel>
+	<mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle="true">
+		<mat-expansion-panel-header>
+			<mat-panel-title>Prestataire et client</mat-panel-title>
+			<mat-panel-description>Nom, SIREN/SIRET, Adresse</mat-panel-description>
+		</mat-expansion-panel-header>
+		<mat-form-field>
+			<mat-select name="freelance" placeholder="Prestataire"
+				[(ngModel)]="invoice.freelance">
+				<mat-option *ngFor="let company of companies" [value]="company">
+					{{company.name}} ({{company.trigram}})
+				</mat-option>
+			</mat-select>
+		</mat-form-field>
+		<mat-form-field>
+			<mat-select name="client" placeholder="Client"
+				[(ngModel)]="invoice.client" [compareWith]="compareCompany">
+				<mat-option *ngFor="let company of companies" [value]="company">
+					{{company.name}} ({{company.trigram}})
+				</mat-option>
+			</mat-select>
+		</mat-form-field>
+		<mat-action-row>
+			<button mat-button color="warn" (click)="setStep(step - 1)">Précédent</button>
+      		<button mat-button color="primary" (click)="setStep(step + 1)">Suivant</button>
+		</mat-action-row>
+	</mat-expansion-panel>
+	<mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle="true">
+		<mat-expansion-panel-header>
+			<mat-panel-title>Conditions du règlement</mat-panel-title>
+			<mat-panel-description>Dates de prestation, paiement, limite de paiement</mat-panel-description>
+		</mat-expansion-panel-header>
+		<mat-form-field>
+			<input matInput type="date" name="paymentDate" placeholder="Date de règlement" 
+				[(ngModel)]="invoice.paymentDate" required />
+		</mat-form-field>
+		<mat-form-field>
+			<input matInput type="date" name="executionDate" placeholder="Date de la prestation" 
+				[(ngModel)]="invoice.executionDate" required />
+		</mat-form-field>
+		<mat-form-field>
+			<input matInput type="date" name="paymentLimitDate" placeholder="Date limite de paiement" 
+				[(ngModel)]="invoice.paymentLimitDate" required />
+		</mat-form-field>
+		<mat-action-row>
+			<button mat-button color="warn" (click)="setStep(step - 1)">Précédent</button>
+      		<button mat-button color="accent" (click)="previsualizeDoc(true)">Prévisualiser</button>
+			<button mat-button color="primary" (click)="generateDoc()">Générer</button>
+		</mat-action-row>
+	</mat-expansion-panel>
+</mat-accordion>
+<div class="print" [hidden]="!previsualize">
+	<span id="close" (click)="previsualizeDoc(false)">X</span>
+	<div class="body">
+		<header>
+			<div id="freelance" class="contact">
+				<div>{{ invoice.freelance?.name }}</div>
+				<div>SIREN : {{ invoice.freelance?.siren }}</div>
+				<div>SIRET : {{ invoice.freelance?.siret }}</div>
+				<div *ngFor="let addrLine of invoice.freelance?.address">{{ addrLine }}</div>
+			</div>
+			<div id="client" class="contact">
+				<div>{{ invoice.client?.name }}</div>
+				<div>SIREN : {{ invoice.client?.siren }}</div>
+				<div>SIRET : {{ invoice.client?.siret }}</div>
+				<div *ngFor="let addrLine of invoice.client?.address">{{ addrLine }}</div>
+			</div>
+			<div id="date">Date : {{ invoice.creationDate | date:'dd/MM/yyyy' }}</div>
+			<div id="label">{{ invoice.label }}</div>
+		</header>
+		<table>
+			<thead>
+				<tr>
+					<th>Désignation</th>
+					<th>Quantité</th>
+					<th>Prix unitaire HT</th>
+					<th>Total HT</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let line of lines">
+					<td>{{ line.title }}</td>
+					<td>{{ line.quantity }}</td>
+					<td>{{ line.unitCost }} €</td>
+					<td>{{ line.totalCost }} €</td>
+				</tr>
+			</tbody>
+		</table>
+		<div id="total">
+			<img src="http://localhost:4200/assets/total_ht.png" />
+			<span>{{ invoice.amount }} €</span>
+		</div>
+		<ul id="conditions">
+			<div>Date de règlement : {{ invoice.paymentDate | date:'dd/MM/yyyy' }}</div>
+			<div>Date d’exécution de la prestation : {{ invoice.executionDate | date:'dd/MM/yyyy' }}</div>
+			<div title="paiement comptant à réception de la facture">Date limite de paiement : {{ invoice.paymentLimitDate | date:'dd/MM/yyyy' }}</div>
+			<div>Conditions d’escompte : pas d’escompte pour règlement anticipé</div>
+		</ul>
+		<footer>
+			<ul>Mention légales :
+				<li>Dispensé d’immatriculation au registre du commerce et des sociétés (RCS) et au répertoire des métiers (RM)</li>
+				<li>Indemnité forfaitaire pour frais de recouvrement en cas de retard de paiment (loi du 22 mars 2012) : 40€</li>
+			</ul>
+		</footer>
+	</div>
+</div>

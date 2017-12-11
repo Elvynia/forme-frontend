@@ -46,6 +46,7 @@ import { StatusFieldComponent } from './status-field/status-field.component';
 import { AccountListComponent } from './account-list/account-list.component';
 import { AccountEditComponent } from './account-edit/account-edit.component';
 import { AccountAdminComponent } from './account-admin/account-admin.component';
+import { InvoiceDocgenComponent } from './invoice-docgen/invoice-docgen.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { AccountAdminComponent } from './account-admin/account-admin.component';
     StatusFieldComponent,
     AccountListComponent,
     AccountEditComponent,
-    AccountAdminComponent
+    AccountAdminComponent,
+    InvoiceDocgenComponent
   ],
   imports: [
     BrowserModule,

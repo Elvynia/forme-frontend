@@ -36,6 +36,10 @@ form > section > mat-checkbox {
 	margin: 0 10px;
 }
 
+div.mat-expansion-panel-content div.mat-expansion-panel-body {
+	padding-bottom: 0;
+}
+
 mat-table mat-header-row mat-header-cell.mat-column-id,
 mat-table mat-row mat-cell.mat-column-id {
 	flex: 0.5;

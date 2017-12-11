@@ -11,7 +11,7 @@ export class Invoice implements Entity {
 	pending: boolean;
 	received: boolean;
 	receptionDate: Date;
-	travelCosts: boolean;
+	_travelCosts: boolean;
 	label: string;
 
 	static build(obj: any): Invoice {
@@ -29,9 +29,26 @@ export class Invoice implements Entity {
 		return instance;
 	}
 
+	public get travelCosts() {
+		return this._travelCosts;
+	}
+
+	public set travelCosts(val: boolean) {
+		this._travelCosts = val;
+		this.prefixLabel();
+	}
+
 	constructor(id?: number) {
 		this.id = id;
 		this.creationDate = new Date();
 		this.receptionDate = new Date();
+		this.prefixLabel();
+	}
+
+	prefixLabel() {
+		this.label = this.travelCosts ? 'Frais' : 'Facture';
+		this.label += '-';
+		this.label += moment().year();
+		this.label += '-';
 	}
 }

@@ -18,7 +18,8 @@ import {
 	MatMenuModule,
 	MatGridListModule,
 	MatAutocompleteModule,
-	MatListModule
+	MatListModule,
+	MatExpansionModule
 } from '@angular/material';
 
 @NgModule({
@@ -41,7 +42,8 @@ import {
 	    MatMenuModule,
 		MatGridListModule,
 		MatAutocompleteModule,
-		MatListModule
+		MatListModule,
+		MatExpansionModule
 	]
 })
 export class AppMaterialModule {

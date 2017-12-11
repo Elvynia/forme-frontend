@@ -1,7 +1,3 @@
 form {
 	padding: 10px;
 }
-
-form.submitted input.ng-invalid {
-	border-color: red;
-}
