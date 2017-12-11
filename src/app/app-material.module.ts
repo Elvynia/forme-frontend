@@ -19,7 +19,10 @@ import {
 	MatGridListModule,
 	MatAutocompleteModule,
 	MatListModule,
-	MatExpansionModule
+	MatExpansionModule,
+	MatDatepickerModule,
+	MatNativeDateModule,
+	MAT_DATE_LOCALE
 } from '@angular/material';
 
 @NgModule({
@@ -43,9 +46,14 @@ import {
 		MatGridListModule,
 		MatAutocompleteModule,
 		MatListModule,
-		MatExpansionModule
+		MatExpansionModule,
+		MatDatepickerModule,
+		MatNativeDateModule
+	],
+	providers: [
+		{provide: MAT_DATE_LOCALE, useValue: 'fr-FR'}
 	]
 })
 export class AppMaterialModule {
-
+	// TODO: Switch to MatMomentDateModule !
 }

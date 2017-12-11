@@ -2,12 +2,16 @@
 <form (ngSubmit)="submit(model)" #model="ngForm">
 	<app-mission-combobox [(selection)]="event.mission"></app-mission-combobox>
 	<mat-form-field>
-		<input matInput type="date" name="start" placeholder="Début" 
-			[ngModel]="event.start | date:'yyyy-MM-dd'" (ngModelChange)="event.start = $event"/>
+		<input matInput [matDatepicker]="pickerStart" placeholder="Date de début"
+			[(ngModel)]="event.start" name="start" disabled required>
+		<mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+		<mat-datepicker disabled="false" #pickerStart></mat-datepicker>
 	</mat-form-field>
 	<mat-form-field>
-		<input matInput type="date" name="end" placeholder="Fin" 
-			[ngModel]="event.end | date:'yyyy-MM-dd'" (ngModelChange)="event.end = $event"/>
+		<input matInput [matDatepicker]="pickerEnd" placeholder="Date de fin"
+			[(ngModel)]="event.end" name="end" disabled required>
+		<mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+		<mat-datepicker disabled="false" #pickerEnd></mat-datepicker>
 	</mat-form-field>
 	<button mat-raised-button color="primary" [disabled]="!model.form.valid">Valider</button>
 </form>

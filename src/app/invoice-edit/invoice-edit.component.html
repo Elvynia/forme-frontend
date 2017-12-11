@@ -6,18 +6,20 @@
 			[(ngModel)]="invoice.amount" min="O" step=0.05 required />
 	</mat-form-field>
 	<mat-form-field>
-		<input matInput type="date" id="creationDate" name="creationDate" placeholder="Date de création" 
-			[ngModel]="invoice.creationDate | date:'yyyy-MM-dd'" (ngModelChange)="invoice.creationDate = $event"
-			required />
+		<input matInput [matDatepicker]="pickerCrea" placeholder="Date de création"
+			[(ngModel)]="invoice.creationDate" name="creationDate" disabled required>
+		<mat-datepicker-toggle matSuffix [for]="pickerCrea"></mat-datepicker-toggle>
+		<mat-datepicker disabled="false" #pickerCrea></mat-datepicker>
 	</mat-form-field>
 	<mat-form-field>
 		<input matInput id="label" name="label" placeholder="Label" 
 			[(ngModel)]="invoice.label" required />
 	</mat-form-field>
 	<mat-form-field *ngIf="invoice.received">
-		<input matInput type="date" id="receptionDate" name="receptionDate" placeholder="Reception du paiement" 
-			[ngModel]="invoice.receptionDate | date:'yyyy-MM-dd'" (ngModelChange)="invoice.receptionDate = $event"
-			required />
+		<input matInput [matDatepicker]="pickerRec" placeholder="Reception du paiement"
+			[(ngModel)]="invoice.receptionDate" name="receptionDate" disabled required>
+		<mat-datepicker-toggle matSuffix [for]="pickerRec"></mat-datepicker-toggle>
+		<mat-datepicker disabled="false" #pickerRec></mat-datepicker>
 	</mat-form-field>
 	<section>
 		<mat-checkbox id="pending" name="pending" [(ngModel)]="invoice.pending">
