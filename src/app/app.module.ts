@@ -49,6 +49,7 @@ import { AccountAdminComponent } from './account-admin/account-admin.component';
 import { InvoiceDocgenComponent } from './invoice-docgen/invoice-docgen.component';
 import { CompanyComboboxComponent } from './company-combobox/company-combobox.component';
 import { MissionComboboxComponent } from './mission-combobox/mission-combobox.component';
+import { DatepickerComponent } from './datepicker/datepicker.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { MissionComboboxComponent } from './mission-combobox/mission-combobox.co
     AccountAdminComponent,
     InvoiceDocgenComponent,
     CompanyComboboxComponent,
-    MissionComboboxComponent
+    MissionComboboxComponent,
+    DatepickerComponent
   ],
   imports: [
     BrowserModule,

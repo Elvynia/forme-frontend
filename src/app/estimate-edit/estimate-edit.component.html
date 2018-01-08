@@ -5,12 +5,8 @@
 		<input matInput type="number" name="amount" placeholder="Montant"
 			[(ngModel)]="estimate.amount" min="O" step=0.05 required />
 	</mat-form-field>
-	<mat-form-field>
-		<input matInput [matDatepicker]="pickerCrea" placeholder="Date de création"
-			[(ngModel)]="estimate.mdCreation" name="creationDate" disabled required>
-		<mat-datepicker-toggle matSuffix [for]="pickerCrea"></mat-datepicker-toggle>
-		<mat-datepicker disabled="false" #pickerCrea></mat-datepicker>
-	</mat-form-field>
+	<app-datepicker [(selection)]="estimate.mdCreation" label="Date de création"
+		name="creationDate"></app-datepicker>
 	<section>
 		<mat-checkbox name="signed" [(ngModel)]="estimate.signed">
 			Signé

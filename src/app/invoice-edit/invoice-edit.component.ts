@@ -44,6 +44,8 @@ export class InvoiceEditComponent implements OnInit, OnChanges {
     submit(form) {
         if (this.new) {
             this.invoiceService.create(this.invoice);
+            console.log(this.invoice);
+            console.log(JSON.stringify(this.invoice));
         } else {
             this.invoiceService.update(this.invoice);
         }

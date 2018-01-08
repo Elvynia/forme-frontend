@@ -32,4 +32,17 @@ export class Estimate implements Entity {
 	public set date(time: number) {
 		this.mdCreation = moment(time);
 	}
+
+	toJSON() {
+		let json = {
+			amount: this.amount,
+			date: this.date,
+			signed: this.signed,
+			client: this.client
+		};
+		if (this.id) {
+			json["id"] = this.id;
+		}
+		return json;
+	}
 }

@@ -1,17 +1,9 @@
 <h2>{{ new ? 'Créer un nouvel événement' : 'Mettre un événement à jour' }}</h2>
 <form (ngSubmit)="submit(model)" #model="ngForm">
 	<app-mission-combobox [(selection)]="event.mission"></app-mission-combobox>
-	<mat-form-field>
-		<input matInput [matDatepicker]="pickerStart" placeholder="Date de début"
-			[(ngModel)]="event.mdStart" name="start" disabled required>
-		<mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
-		<mat-datepicker disabled="false" #pickerStart></mat-datepicker>
-	</mat-form-field>
-	<mat-form-field>
-		<input matInput [matDatepicker]="pickerEnd" placeholder="Date de fin"
-			[(ngModel)]="event.mdEnd" name="end" disabled required>
-		<mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
-		<mat-datepicker disabled="false" #pickerEnd></mat-datepicker>
-	</mat-form-field>
+	<app-datepicker [(selection)]="invoice.mdStart" label="Date de début"
+		name="start"></app-datepicker>
+	<app-datepicker [(selection)]="invoice.mdEnd" label="Date de fin"
+		name="end"></app-datepicker>
 	<button mat-raised-button color="primary" [disabled]="!model.form.valid">Valider</button>
 </form>

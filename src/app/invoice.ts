@@ -63,10 +63,27 @@ export class Invoice implements Entity {
 	}
 
 	public get receptionDate() {
-		return this.mdReception ? this.mdReception.valueOf() : undefined;
+		return this.received && this.mdReception ? this.mdReception.valueOf() : undefined;
 	}
 
 	public set receptionDate(time: number) {
 		this.mdReception = moment(time);
+	}
+
+	toJSON() {
+		let json = {
+			client: this.client,
+			amount: this.amount,
+			creationDate: this.creationDate,
+			receptionDate: this.receptionDate,
+			received: this.received,
+			travelCosts: this._travelCosts,
+			pending: this.pending,
+			label: this.label
+		};
+		if (this.id) {
+			json["id"] = this.id;
+		}
+		return json;
 	}
 }

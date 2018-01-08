@@ -54,4 +54,16 @@ export class MissionEvent implements Entity {
 	public set end(time: number) {
 		this.mdEnd = moment(time);
 	}
+
+	toJSON() {
+		let json = {
+			mission: this.mission,
+			start: this.start,
+			end: this.end
+		};
+		if (this.id) {
+			json["id"] = this.id;
+		}
+		return json;
+	}
 }
