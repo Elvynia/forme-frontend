@@ -8,8 +8,8 @@ import { Company } from './company';
 
 export class MissionEvent implements Entity {
 	id: number;
-	start: Date;
-	end: Date;
+	mdStart: moment.Moment;
+	mdEnd: moment.Moment;
 	mission: Company;
 	color: any;
 	missionLabel?: Observable<string>;
@@ -17,25 +17,19 @@ export class MissionEvent implements Entity {
 	static build(event: any): MissionEvent {
 		let instance: MissionEvent = new MissionEvent();
 		if (event) {
-			if (event.start) {
-				instance.start = event.start;
-			}
-			if (event.end) {
-				instance.end = event.end;
-			}
+			instance.start = event.start;
+			instance.end = event.end;
 			instance.id = event.id;
 			instance.mission = event.mission;
 		}
 		return instance;
 	}
 
-	constructor(id?: number, initDates: boolean = true) {
+	constructor(id?: number) {
 		this.id = id;
 		this.buildColor('#71B340', '#3C5A14');
-		if (initDates) {
-			this.start = new Date();
-			this.end = new Date();
-		}
+		this.mdStart = moment();
+		this.mdEnd = moment();
 	}
 
 	public buildColor(primary: string, secondary: string) {
@@ -45,4 +39,19 @@ export class MissionEvent implements Entity {
 		};
 	}
 
+	public get start() {
+		return this.mdStart ? this.mdStart.valueOf() : undefined;
+	}
+
+	public set start(time: number) {
+		this.mdStart = moment(time);
+	}
+
+	public get end() {
+		return this.mdEnd ? this.mdEnd.valueOf() : undefined;
+	}
+
+	public set end(time: number) {
+		this.mdEnd = moment(time);
+	}
 }

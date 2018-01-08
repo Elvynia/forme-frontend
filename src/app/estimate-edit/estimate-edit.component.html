@@ -7,7 +7,7 @@
 	</mat-form-field>
 	<mat-form-field>
 		<input matInput [matDatepicker]="pickerCrea" placeholder="Date de création"
-			[(ngModel)]="estimate.date" name="creationDate" disabled required>
+			[(ngModel)]="estimate.mdCreation" name="creationDate" disabled required>
 		<mat-datepicker-toggle matSuffix [for]="pickerCrea"></mat-datepicker-toggle>
 		<mat-datepicker disabled="false" #pickerCrea></mat-datepicker>
 	</mat-form-field>

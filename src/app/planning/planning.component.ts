@@ -28,7 +28,9 @@ export class PlanningComponent implements OnInit {
 		this.monthOffset = 0;
 		this.calendars = new Array();
 		this.selectedEvents = new Array();
-		this.newEvent = new MissionEvent(null, false);
+		this.newEvent = new MissionEvent();
+		this.newEvent.mdStart = null;
+		this.newEvent.mdEnd = null;
 	}
 
 	ngOnInit() {
@@ -58,11 +60,11 @@ export class PlanningComponent implements OnInit {
 	onDaySelect(event: any, calendar: Calendar) {
 		if (event.target.children.length === 1) {
 			let day = event.target.children[0].textContent;
-			let m: Date = moment(calendar.viewDate).date(day).toDate();
+			let m = moment(calendar.viewDate).date(day);
 			if (this.newEvent.start) {
-				this.newEvent.end = m;
+				this.newEvent.mdEnd = m;
 			} else {
-				this.newEvent.start = m;
+				this.newEvent.mdStart = m;
 			}
 		}
 	}

@@ -7,10 +7,10 @@ export class Invoice implements Entity {
 	id: number;
 	amount: number;
 	client: Company;
-	creationDate: Date;
+	mdCreation: moment.Moment;
 	pending: boolean;
 	received: boolean;
-	receptionDate: Date;
+	mdReception: moment.Moment;
 	_travelCosts: boolean;
 	label: string;
 
@@ -18,7 +18,7 @@ export class Invoice implements Entity {
 		let instance: Invoice = new Invoice(obj.id);
 		if (obj) {
 			instance.creationDate = obj.creationDate;
-			instance.receptionDate = obj.receptionDate || new Date();
+			instance.receptionDate = obj.receptionDate;
 			instance.amount = obj.amount;
 			instance.client = obj.client;
 			instance.pending = obj.pending;
@@ -27,6 +27,22 @@ export class Invoice implements Entity {
 			instance.label = obj.label;
 		}
 		return instance;
+	}
+
+	constructor(id?: number) {
+		this.id = id;
+		this.mdCreation = moment();
+		this.mdReception = moment();
+		this.prefixLabel();
+	}
+
+	prefixLabel() {
+		if (!this.label) {
+			this.label = this.travelCosts ? 'Frais' : 'Facture';
+			this.label += '-';
+			this.label += moment().year();
+			this.label += '-';
+		}
 	}
 
 	public get travelCosts() {
@@ -38,17 +54,19 @@ export class Invoice implements Entity {
 		this.prefixLabel();
 	}
 
-	constructor(id?: number) {
-		this.id = id;
-		this.creationDate = new Date();
-		this.receptionDate = new Date();
-		this.prefixLabel();
+	public get creationDate() {
+		return this.mdCreation ? this.mdCreation.valueOf() : undefined;
 	}
 
-	prefixLabel() {
-		this.label = this.travelCosts ? 'Frais' : 'Facture';
-		this.label += '-';
-		this.label += moment().year();
-		this.label += '-';
+	public set creationDate(time: number) {
+		this.mdCreation = moment(time);
+	}
+
+	public get receptionDate() {
+		return this.mdReception ? this.mdReception.valueOf() : undefined;
+	}
+
+	public set receptionDate(time: number) {
+		this.mdReception = moment(time);
 	}
 }

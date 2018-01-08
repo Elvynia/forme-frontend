@@ -21,9 +21,9 @@ import {
 	MatListModule,
 	MatExpansionModule,
 	MatDatepickerModule,
-	MatNativeDateModule,
-	MAT_DATE_LOCALE
+	MAT_DATE_FORMATS
 } from '@angular/material';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 @NgModule({
 	exports: [
@@ -48,12 +48,21 @@ import {
 		MatListModule,
 		MatExpansionModule,
 		MatDatepickerModule,
-		MatNativeDateModule
+		MatMomentDateModule
 	],
 	providers: [
-		{provide: MAT_DATE_LOCALE, useValue: 'fr-FR'}
+		{provide: MAT_DATE_FORMATS, useValue: {
+			parse: {
+				dateInput: 'DD/MM/YYYY'
+			},
+			display: {
+				dateInput: 'DD/MM/YYYY',
+				monthYearLabel: 'MMM YYYY',
+    			dateA11yLabel: 'LL',
+    			monthYearA11yLabel: 'MMMM YYYY'
+			}
+		}}
 	]
 })
 export class AppMaterialModule {
-	// TODO: Switch to MatMomentDateModule !
 }

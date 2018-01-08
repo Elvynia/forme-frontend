@@ -26,7 +26,7 @@ export class EstimateEditComponent implements OnInit {
             if (paramMap.has('id')) {
                 this.new = false;
                 this.estimateService.get(parseInt(paramMap.get('id')))
-                    .subscribe((estimate: Estimate) => this.estimate = estimate);
+                    .subscribe((estimate: Estimate) => this.estimate = Estimate.build(estimate));
             }
         });
 	}

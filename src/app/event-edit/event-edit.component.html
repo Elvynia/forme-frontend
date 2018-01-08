@@ -3,13 +3,13 @@
 	<app-mission-combobox [(selection)]="event.mission"></app-mission-combobox>
 	<mat-form-field>
 		<input matInput [matDatepicker]="pickerStart" placeholder="Date de début"
-			[(ngModel)]="event.start" name="start" disabled required>
+			[(ngModel)]="event.mdStart" name="start" disabled required>
 		<mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
 		<mat-datepicker disabled="false" #pickerStart></mat-datepicker>
 	</mat-form-field>
 	<mat-form-field>
 		<input matInput [matDatepicker]="pickerEnd" placeholder="Date de fin"
-			[(ngModel)]="event.end" name="end" disabled required>
+			[(ngModel)]="event.mdEnd" name="end" disabled required>
 		<mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
 		<mat-datepicker disabled="false" #pickerEnd></mat-datepicker>
 	</mat-form-field>
