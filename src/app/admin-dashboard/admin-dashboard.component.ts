@@ -79,7 +79,7 @@ export class AdminDashboardComponent implements OnInit {
 			(invoice: Invoice) => !invoice.travelCosts && invoice.received
 				&& moment(invoice.receptionDate).year() === year)
 			.map((invoice: Invoice) => invoice.amount)
-			.reduce((prev, cur) => prev + cur);
+			.reduce((prev, cur) => prev + cur, 0);
 		} else {
 			return 0;
 		}
