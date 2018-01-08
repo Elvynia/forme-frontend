@@ -57,7 +57,7 @@ export class AppComponent implements OnInit {
 		.subscribe((event: NavigationEnd) => {
 			this.isDashboard = event.url.indexOf('/dashboard') === 0;
 			this.isClientboard = event.url.indexOf('/dashboard/clientboard') === 0;
-			if (event.url === '/dashboard') {
+			if (event.url === '/dashboard' && this.account) {
 				this.router.navigate(['dashboard', this.account.isAdmin ?
 					'overview' : this.account.isClient ? 'clientboard' : 'default']);
 			}
