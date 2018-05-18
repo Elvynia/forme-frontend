@@ -1,16 +1,16 @@
 <ng-container *ngIf="account.isAdmin; else noAuthTmpl">
-	<mat-grid-list cols="2" rowHeight="750px">
+	<mat-grid-list cols="2" rowHeight="3:1">
 		<mat-grid-tile>
-			<app-invoice-list></app-invoice-list>
+			<invoice-list></invoice-list>
 		</mat-grid-tile>
 		<mat-grid-tile>
-			<app-mission-list></app-mission-list>
+			<mission-list></mission-list>
 		</mat-grid-tile>
 		<mat-grid-tile>
-			<app-company-list></app-company-list>	
+			<company-list></company-list>	
 		</mat-grid-tile>
 		<mat-grid-tile>
-			<app-estimate-list></app-estimate-list>
+			<estimate-list></estimate-list>
 		</mat-grid-tile>
 	</mat-grid-list>
 </ng-container>

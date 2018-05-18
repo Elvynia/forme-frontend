@@ -1,58 +1,32 @@
-<div class="table-wrapper">
-	<div class="header">		
-		<h2>
-			{{ listTitle || 'Toutes les missions' }}
-		</h2>
-	</div>
-	<mat-table id="missionTable-{{listTitle}}" [dataSource]="dataSource" matSort>
-		<ng-container matColumnDef="id">
-			<mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
-			<mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
-		</ng-container>
-		<ng-container matColumnDef="client">
-			<mat-header-cell *matHeaderCellDef mat-sort-header> Client </mat-header-cell>
-			<mat-cell *matCellDef="let row">
-				<app-company-ref [id]="row.client.id"></app-company-ref>
-			</mat-cell>
-		</ng-container>
-		<ng-container matColumnDef="type">
-			<mat-header-cell *matHeaderCellDef mat-sort-header> Type </mat-header-cell>
-			<mat-cell *matCellDef="let row"> {{row.type === 0 ? 'DEV' : 'Formation'}} </mat-cell>
-		</ng-container>
-		<ng-container matColumnDef="duration">
-			<mat-header-cell *matHeaderCellDef mat-sort-header> Durée </mat-header-cell>
-			<mat-cell *matCellDef="let row"> {{row.duration}}h ({{(row.duration / 7)}}j) </mat-cell>
-		</ng-container>
-		<ng-container matColumnDef="tjm">
-			<mat-header-cell *matHeaderCellDef mat-sort-header> TJM (€/j) </mat-header-cell>
-			<mat-cell *matCellDef="let row"> {{row.tjm }} </mat-cell>
-		</ng-container>
-		<ng-container matColumnDef="label">
-			<mat-header-cell *matHeaderCellDef mat-sort-header> Label </mat-header-cell>
-			<mat-cell *matCellDef="let row"> {{row.label }} </mat-cell>
-		</ng-container>
-		<ng-container matColumnDef="title">
-			<mat-header-cell *matHeaderCellDef mat-sort-header> Titre </mat-header-cell>
-			<mat-cell *matCellDef="let row"> {{row.title }} </mat-cell>
-		</ng-container>
-
-		<ng-container matColumnDef="expandedDetail">
-			<mat-cell *matCellDef="let row">
-				<app-mission-details [ngClass]="{expansible: row.item.id !== expandedElement?.id}"
-					[id]="row.item.id"></app-mission-details>
-			</mat-cell>
-		</ng-container>
-
-		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-		<mat-row matRipple [title]="row.id" [class.expanded]="expandedElement == row"
-			*matRowDef="let row; columns: displayedColumns;"
-			(click)="handleExpanded($event, row)"></mat-row>
-		<mat-row [@detailExpand]="row.item === expandedElement ? 'expanded' : 'collapsed'"
-			style="height: 0px; min-height: 0px; visibility: hidden;"
-			*matRowDef="let row; columns: ['expandedDetail']; when:isExpansionDetailRow"></mat-row>
-	</mat-table>
-	<mat-paginator [length]="dataSource.length | async"
-		[pageIndex]="0"
-		[pageSize]="5">
-	</mat-paginator>
-</div>		
+<entity-list [entityColumns]="displayedColumns" [listTitle]="listTitle" [filter]="filter" [filterContext]="filterContext">
+	<ng-template let-entity #colId>
+		{{ entity.id }}
+	</ng-template>
+	<ng-template let-entity #colClient>
+		<app-company-ref [id]="entity.client.id"></app-company-ref>
+	</ng-template>
+	<ng-template let-entity #colLabel>
+		{{ entity.label }}
+	</ng-template>
+	<ng-template let-entity #colTitle>
+		{{ entity.title }}
+	</ng-template>
+	<ng-template let-entity #colDuration>
+		{{ entity.duration / 7 }} ({{ entity.duration }}h)
+	</ng-template>
+	<ng-template let-entity #colTjm>
+		{{ entity.tjm }} €/j
+	</ng-template>
+	<ng-template let-entity #colType>
+		{{ entity.type }}
+	</ng-template>
+	<ng-template let-entity #colTravelCosts>
+		<app-status-field [status]="entity.travelCosts"></app-status-field>
+	</ng-template>
+	<ng-template let-entity #colClosed>
+		<app-status-field [status]="entity.closed"></app-status-field>
+	</ng-template>
+	<ng-template let-entity #colPlace>
+		{{ entity.place }}
+	</ng-template>
+</entity-list>

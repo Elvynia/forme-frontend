@@ -3,8 +3,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { BehaviorSubject, Observable } from 'rxjs/Rx';
 
-import { Account } from './account';
-import { environment as ENV } from '../environments/environment';
+import { Account } from './../account';
+import { environment as ENV } from '../../environments/environment';
 
 export const LSK_ACCOUNT = 'account';
 

@@ -2,5 +2,10 @@ div.dashboard {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
-	/*overflow: hidden;*/
+	justify-content: space-evenly;
+}
+
+div.dashboard div {
+	position: relative;
+	width: 32%;
 }

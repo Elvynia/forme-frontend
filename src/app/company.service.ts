@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Company } from './company';
-import { BaseService } from './base.service';
-import { AuthService } from './auth.service';
+import { EntityService } from './core/entity.service';
+import { AuthService } from './core/auth.service';
 
 @Injectable()
-export class CompanyService extends BaseService<Company> {
+export class CompanyService extends EntityService<Company> {
 
   constructor(httpClient: HttpClient, authService: AuthService) {
   	super();

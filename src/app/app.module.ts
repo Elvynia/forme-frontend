@@ -21,7 +21,7 @@ import { MissionService } from './mission.service';
 import { MessageService } from './message.service';
 import { EventService } from './event.service';
 import { AccountService } from './account.service';
-import { AuthService } from './auth.service';
+import { AuthService } from './core/auth.service';
 import { RoleService } from './role.service';
 
 import { AuthGuard } from './auth-gard';
@@ -50,6 +50,7 @@ import { InvoiceDocgenComponent } from './invoice-docgen/invoice-docgen.componen
 import { CompanyComboboxComponent } from './company-combobox/company-combobox.component';
 import { MissionComboboxComponent } from './mission-combobox/mission-combobox.component';
 import { DatepickerComponent } from './datepicker/datepicker.component';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -91,7 +92,8 @@ import { DatepickerComponent } from './datepicker/datepicker.component';
     ReactiveFormsModule,
     RouterModule.forRoot(ROUTES),
     CalendarModule.forRoot(),
-    AppMaterialModule
+    AppMaterialModule,
+    CoreModule
   ],
   providers: [InvoiceService, EstimateService, CompanyService, MissionService, 
     MessageService, EventService, AccountService, AuthService, AuthGuard, RoleService],

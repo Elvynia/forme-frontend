@@ -2,10 +2,10 @@ import { Component, OnInit, Input, Output, ViewChild, EventEmitter } from '@angu
 import { MatSort, MatPaginator } from '@angular/material';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
-import { FormeDataSource } from '../forme-data-source';
+import { FormeDataSource } from '../core/forme-data-source';
 import { Account } from '../account';
 import { AccountService } from '../account.service';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../core/auth.service';
 import { EVENT } from '../event';
 
 @Component({

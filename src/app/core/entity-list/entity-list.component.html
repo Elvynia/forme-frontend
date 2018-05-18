@@ -1,0 +1,30 @@
+<div class="table-wrapper">
+	<div class="header">
+		<h2>
+			{{ listTitle || 'Tous les éléments' }}
+		</h2>
+	</div>
+	<mat-table class="entityTable" [dataSource]="dataSource" matSort>
+		<ng-container *ngFor="let column of columns" [matColumnDef]="column.name">
+				<mat-header-cell *matHeaderCellDef mat-sort-header>{{ column.label }}</mat-header-cell>
+				<mat-cell *matCellDef="let row">
+					<ng-container *ngTemplateOutlet="getTemplate(column.template); context: { $implicit: row }"></ng-container>
+				</mat-cell>
+		</ng-container>
+		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+		<mat-row matRipple [title]="row.id"
+			*matRowDef="let row; columns: displayedColumns;"></mat-row>
+	</mat-table>
+	<ng-container *ngIf="dataSource.loading | async">
+		<div class="loading">
+			<mat-spinner></mat-spinner>
+		</div>
+	</ng-container>
+	<div class="noData" [hidden]="dataSource._length.value > 0">No elements to display</div>
+	<div [hidden]="dataSource._length.value === 0">
+		<mat-paginator [length]="dataSource.length | async"
+			[pageIndex]="0"
+			[pageSize]="5">
+		</mat-paginator>
+	</div>
+</div>

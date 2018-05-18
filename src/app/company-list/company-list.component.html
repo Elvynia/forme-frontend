@@ -1,52 +1,26 @@
-<div class="table-wrapper">
-	<div class="header">
-		<h2>
-			{{ listTitle || 'Toutes les sociétés' }}
-		</h2>
-	</div>
-	<mat-table id="companyTable-{{listTitle}}" [dataSource]="dataSource" matSort>
-		<ng-container matColumnDef="id">
-			<mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
-			<mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
-		</ng-container>
-		<ng-container matColumnDef="trigram">
-			<mat-header-cell *matHeaderCellDef mat-sort-header> Trigramme </mat-header-cell>
-			<mat-cell *matCellDef="let row"> {{row.trigram}} </mat-cell>
-		</ng-container>
-		<ng-container matColumnDef="name">
-			<mat-header-cell *matHeaderCellDef mat-sort-header> Nom </mat-header-cell>
-			<mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
-		</ng-container>
-		<ng-container matColumnDef="siren">
-			<mat-header-cell *matHeaderCellDef mat-sort-header> SIREN </mat-header-cell>
-			<mat-cell *matCellDef="let row"> {{row.siren }} </mat-cell>
-		</ng-container>
-		<ng-container matColumnDef="rcs">
-			<mat-header-cell *matHeaderCellDef mat-sort-header> RCS </mat-header-cell>
-			<mat-cell *matCellDef="let row"> {{row.rcs }} </mat-cell>
-		</ng-container>
-		<ng-container matColumnDef="travelCosts">
-			<mat-header-cell *matHeaderCellDef mat-sort-header> Frais </mat-header-cell>
-			<mat-cell *matCellDef="let row"> {{row.travelCosts || 'false' }} </mat-cell>
-		</ng-container>
-
-		<ng-container matColumnDef="expandedDetail">
-			<mat-cell *matCellDef="let row">
-				<app-company-details [ngClass]="{expansible: row.item.id !== expandedElement?.id}"
-					[id]="row.item.id"></app-company-details>
-			</mat-cell>
-		</ng-container>
-
-		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-		<mat-row matRipple [title]="row.id" [class.expanded]="expandedElement == row"
-			*matRowDef="let row; columns: displayedColumns;"
-			(click)="handleExpanded($event, row)"></mat-row>
-		<mat-row [@detailExpand]="row.item === expandedElement ? 'expanded' : 'collapsed'"
-			style="height: 0px; min-height: 0px; visibility: hidden;"
-			*matRowDef="let row; columns: ['expandedDetail']; when:isExpansionDetailRow"></mat-row>
-	</mat-table>
-	<mat-paginator [length]="dataSource.length | async"
-		[pageIndex]="0"
-		[pageSize]="5">
-	</mat-paginator>
-</div>
+<entity-list [entityColumns]="displayedColumns" [listTitle]="listTitle" [filter]="filter" [filterContext]="filterContext">
+	<ng-template let-entity #colId>
+		{{ entity.id }}
+	</ng-template>
+	<ng-template let-entity #colTrigram>
+		{{ entity.trigram }}
+	</ng-template>
+	<ng-template let-entity #colName>
+		{{ entity.name }}
+	</ng-template>
+	<ng-template let-entity #colSiren>
+		{{ entity.siren }}
+	</ng-template>
+	<ng-template let-entity #colSiret>
+		{{ entity.siret }}
+	</ng-template>
+	<ng-template let-entity #colRcs>
+		{{ entity.rcs }}
+	</ng-template>
+	<ng-template let-entity #colAddress>
+			{{ entity.address }}
+		</ng-template>
+	<ng-template let-entity #colTravelCosts>
+		<app-status-field [status]="entity.travelCosts"></app-status-field>
+	</ng-template>
+</entity-list>

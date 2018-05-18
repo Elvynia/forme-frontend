@@ -1,0 +1,26 @@
+:host {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+mat-row[matRipple] {
+	cursor: pointer;
+}
+
+div.noData {
+	padding: 5px;
+	text-align: center;
+}
+
+div.loading {
+	position: relative;
+}
+
+div.loading {
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, 0);
+}

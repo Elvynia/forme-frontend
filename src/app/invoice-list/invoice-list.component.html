@@ -1,67 +1,29 @@
-<div class="table-wrapper">
-	<div class="header">
-		<h2>
-			{{ listTitle || 'Toutes les factures' }}
-		</h2>
-	</div>
-	<mat-table id="invoiceTable-{{listTitle}}" [dataSource]="dataSource" matSort>
-		<ng-container matColumnDef="id">
-			<mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
-			<mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
-		</ng-container>
-		<ng-container matColumnDef="client">
-			<mat-header-cell *matHeaderCellDef mat-sort-header> Client </mat-header-cell>
-			<mat-cell *matCellDef="let row">
-				<app-company-ref [id]="row.client.id"></app-company-ref>
-			</mat-cell>
-		</ng-container>
-		<ng-container matColumnDef="label">
-			<mat-header-cell *matHeaderCellDef mat-sort-header> Label </mat-header-cell>
-			<mat-cell *matCellDef="let row"> {{row.label}} </mat-cell>
-		</ng-container>
-		<ng-container matColumnDef="amount">
-			<mat-header-cell *matHeaderCellDef mat-sort-header> Montant </mat-header-cell>
-			<mat-cell *matCellDef="let row"> {{row.amount | currency:'€'}} </mat-cell>
-		</ng-container>
-		<ng-container matColumnDef="creationDate">
-			<mat-header-cell *matHeaderCellDef mat-sort-header> Création </mat-header-cell>
-			<mat-cell *matCellDef="let row"> {{row.creationDate | date:'dd/MM/yyyy'}} </mat-cell>
-		</ng-container>
-		<ng-container matColumnDef="receptionDate">
-			<mat-header-cell *matHeaderCellDef mat-sort-header> Réception </mat-header-cell>
-			<mat-cell *matCellDef="let row"> {{row.receptionDate | date:'dd/MM/yyyy'}} </mat-cell>
-		</ng-container>
-		<ng-container matColumnDef="pending">
-			<mat-header-cell *matHeaderCellDef mat-sort-header> En attente </mat-header-cell>
-			<mat-cell *matCellDef="let row">
-				<app-status-field [status]="row.pending"></app-status-field>
-			</mat-cell>
-		</ng-container>
-		<ng-container matColumnDef="received">
-			<mat-header-cell *matHeaderCellDef mat-sort-header> Payée </mat-header-cell>
-			<mat-cell *matCellDef="let row">
-				<app-status-field [status]="row.received"></app-status-field>
-			</mat-cell>
-		</ng-container>
-
-		<ng-container matColumnDef="expandedDetail">
-			<mat-cell *matCellDef="let row">
-				<app-invoice-details [ngClass]="{expansible: row.item.id !== expandedElement?.id}"
-					[id]="row.item.id"></app-invoice-details>
-			</mat-cell>
-		</ng-container>
-
-		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-		<mat-row matRipple [title]="row.id"
-			[class.expanded]="expandedElement == row"
-			*matRowDef="let row; columns: displayedColumns;"
-			(click)="handleExpanded($event, row)" #rippleRow></mat-row>
-		<mat-row [@detailExpand]="row.item === expandedElement ? 'expanded' : 'collapsed'"
-			style="height: 0px; min-height: 0px; visibility: hidden;"
-			*matRowDef="let row; columns: ['expandedDetail']; when:isExpansionDetailRow"></mat-row>
-	</mat-table>
-	<mat-paginator [length]="dataSource.length | async"
-		[pageIndex]="0"
-		[pageSize]="5">
-	</mat-paginator>
-</div>
+<entity-list [listTitle]="listTitle" [entityColumns]="displayedColumns" [filter]="filter" [filterContext]="filterContext">
+    <ng-template let-entity #colId>
+        {{ entity.id }}
+    </ng-template>
+    <ng-template let-entity #colLabel>
+        {{ entity.label }}
+    </ng-template>
+    <ng-template let-entity #colClient>
+        <app-company-ref [id]="entity.client.id"></app-company-ref>
+    </ng-template>
+    <ng-template let-entity #colCreationDate>
+        {{ entity.creationDate | date:'dd/MM/yyyy' }}
+    </ng-template>
+    <ng-template let-entity #colAmount>
+        {{ entity.amount | currency:'€' }}
+    </ng-template>
+    <ng-template let-entity #colPending>
+        <app-status-field [status]="entity.pending"></app-status-field>
+    </ng-template>
+    <ng-template let-entity #colReceived>
+        <app-status-field [status]="entity.received"></app-status-field>
+    </ng-template>
+    <ng-template let-entity #colReceptionDate>
+        {{ entity.receptionDate | date:'dd/MM/yyyy' }}
+    </ng-template>
+    <ng-template let-entity #colTravelCosts>
+        <app-status-field [status]="entity.travelCosts"></app-status-field>
+    </ng-template>
+</entity-list>

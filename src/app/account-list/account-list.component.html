@@ -4,7 +4,7 @@
 			{{ listTitle || 'Tous les comptes' }}
 		</h2>
 	</div>
-	<mat-table id="companyTable-{{listTitle}}" [dataSource]="dataSource" matSort>
+	<mat-table id="accountTable-{{listTitle}}" [dataSource]="dataSource" matSort>
 		<ng-container matColumnDef="id">
 			<mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
 			<mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>

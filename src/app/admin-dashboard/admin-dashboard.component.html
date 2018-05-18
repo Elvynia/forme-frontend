@@ -1,14 +1,12 @@
 <div id="status" #container>
 	<hr />
 	<ng-container *ngIf="loaded">
-		<div class="invoice-wrapper" *ngFor="let invoiceGroup of invoices"
-			[ngStyle]="{'left': getMonthPos(container.clientWidth, invoiceGroup[0])}">
+		<div class="invoice-wrapper" *ngFor="let invoiceGroup of invoices" [ngStyle]="{'left': getMonthPos(container.clientWidth, invoiceGroup[0])}">
 			<div class="invoice" *ngFor="let invoice of invoiceGroup[1]; index as i;">
 				{{ invoice.id }}
 			</div>
 		</div>
-		<div class="month" *ngFor="let month of months; index as i;"
-			[ngStyle]="{'left': getMonthPos(container.clientWidth, i), 'width': container.clientWidth / months.length + 'px' }">
+		<div class="month" *ngFor="let month of months; index as i;" [ngStyle]="{'left': getMonthPos(container.clientWidth, i), 'width': container.clientWidth / months.length + 'px' }">
 			<span>{{ month }}</span>
 		</div>
 	</ng-container>
@@ -22,10 +20,13 @@
 	</div>
 </div>
 <div class="dashboard">
-	<app-invoice-list listTitle="Factures à déclarer" [filter]="toDeclareFilter"
-		[columns]="['label', 'amount', 'received']"></app-invoice-list>
-	<app-invoice-list listTitle="Factures en attente" [filter]="pendingFilter"
-		[columns]="['client', 'label', 'creationDate']"></app-invoice-list>
-	<app-mission-list listTitle="Mission en cours" [filter]="missionFilter"
-		[columns]="['client', 'title', 'duration', 'tjm']"></app-mission-list>
+	<div>
+		<invoice-list listTitle="Factures à déclarer" [columns]="['label', 'amount', 'received']" [filter]="toDeclareFilter"></invoice-list>
+	</div>
+	<div>
+		<invoice-list listTitle="Factures en attente" [columns]="['client', 'label', 'creationDate']" [filter]="pendingFilter"></invoice-list>
+	</div>
+	<div>
+		<mission-list listTitle="Mission en cours" [columns]="['client', 'title', 'duration', 'tjm']" [filter]="missionFilter"></mission-list>
+	</div>
 </div>

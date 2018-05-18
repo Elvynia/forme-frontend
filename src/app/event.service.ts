@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { MissionEvent } from './mission-event';
-import { AuthService } from './auth.service';
-import { BaseService } from './base.service';
+import { AuthService } from './core/auth.service';
+import { EntityService } from './core/entity.service';
 
 @Injectable()
-export class EventService extends BaseService<MissionEvent> {
+export class EventService extends EntityService<MissionEvent> {
 
 	constructor(HttpClient: HttpClient, authService: AuthService) {
 		super();

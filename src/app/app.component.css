@@ -58,3 +58,7 @@ div#seeAs {
 div#seeAs mat-form-field {
 	float: right;
 }
+
+div#main {
+	height: 100%;
+}

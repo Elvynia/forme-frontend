@@ -21,7 +21,8 @@ import {
 	MatListModule,
 	MatExpansionModule,
 	MatDatepickerModule,
-	MAT_DATE_FORMATS
+	MAT_DATE_FORMATS,
+	MatProgressSpinnerModule
 } from '@angular/material';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
@@ -48,7 +49,8 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
 		MatListModule,
 		MatExpansionModule,
 		MatDatepickerModule,
-		MatMomentDateModule
+		MatMomentDateModule,
+		MatProgressSpinnerModule
 	],
 	providers: [
 		{provide: MAT_DATE_FORMATS, useValue: {

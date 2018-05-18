@@ -4,6 +4,10 @@
 /*@import '~@angular/material/prebuilt-themes/purple-green.css';*/
 @import '~angular-calendar/dist/css/angular-calendar.css';
 
+html, body {
+	height: 100%;
+}
+
 .cal-month-view .cal-cell-top {
 	height: 55px;
 	min-height: 0 !important;

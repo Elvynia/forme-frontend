@@ -3,7 +3,7 @@ import { Component, OnInit, OnChanges, SimpleChanges, Input, Output } from '@ang
 import * as $ from 'jquery';
 
 import { AngularSubject } from '../angular-subject';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../core/auth.service';
 
 @Component({
 	selector: 'app-edit-toolbar',
