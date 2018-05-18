@@ -1,9 +1,11 @@
 <div class="wrapper">
-	<app-account-list (onEdit)="startEdit($event)"></app-account-list>
+	<div>
+		<account-list (onEdit)="startEdit($event)"></account-list>
+	</div>
 	<ng-container *ngIf="editing; else elseTmpl">
-		<app-account-edit [account]="account" (onSubmit)="endEdit()"></app-account-edit>
+		<account-edit [account]="account" (onSubmit)="endEdit()"></account-edit>
 	</ng-container>
 	<ng-template #elseTmpl>
-		<app-account-edit></app-account-edit>	
+		<account-edit></account-edit>
 	</ng-template>
 </div>

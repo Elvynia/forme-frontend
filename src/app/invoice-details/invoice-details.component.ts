@@ -5,7 +5,7 @@ import { Invoice } from '../invoice';
 import { InvoiceService } from '../invoice.service';
 
 @Component({
-	selector: 'app-invoice-details',
+	selector: 'invoice-details',
 	templateUrl: './invoice-details.component.html',
 	styleUrls: ['./invoice-details.component.css']
 })

@@ -11,7 +11,7 @@ import { CompanyService } from '../company.service';
 import { Observable } from 'rxjs/Rx';
 
 @Component({
-    selector: 'app-invoice-edit',
+    selector: 'invoice-edit',
     templateUrl: './invoice-edit.component.html',
     styleUrls: ['./invoice-edit.component.css']
 })
@@ -44,8 +44,6 @@ export class InvoiceEditComponent implements OnInit, OnChanges {
     submit(form) {
         if (this.new) {
             this.invoiceService.create(this.invoice);
-            console.log(this.invoice);
-            console.log(JSON.stringify(this.invoice));
         } else {
             this.invoiceService.update(this.invoice);
         }

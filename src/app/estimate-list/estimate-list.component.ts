@@ -12,7 +12,7 @@ import { ListColumn } from '../core/entity-list/entity-list.component';
   templateUrl: './estimate-list.component.html',
   styleUrls: ['./estimate-list.component.css'],
   providers: [
-	  { provide: EntityService, useClass: EstimateService}
+	  { provide: EntityService, useExisting: EstimateService}
   ]
 })
 export class EstimateListComponent {

@@ -12,7 +12,7 @@ import { EntityService } from '../core/entity.service';
 	templateUrl: './invoice-list.component.html',
 	styleUrls: ['./invoice-list.component.css'],
 	providers: [
-		{ provide: EntityService, useClass: InvoiceService }
+		{ provide: EntityService, useExisting: InvoiceService }
 	]
 })
 export class InvoiceListComponent {

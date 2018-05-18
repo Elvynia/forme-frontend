@@ -7,7 +7,7 @@ import { EntityService } from '../core/entity.service';
   templateUrl: './company-list.component.html',
   styleUrls: ['./company-list.component.css'],
   providers: [
-	  { provide: EntityService, useClass: CompanyService }
+	  { provide: EntityService, useExisting: CompanyService }
   ]
 })
 export class CompanyListComponent {

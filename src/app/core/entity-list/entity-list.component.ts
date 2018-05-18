@@ -48,7 +48,7 @@ export class EntityListComponent implements OnInit, OnChanges, OnDestroy {
             this.subscriptions.push(this.entityService.list()
                 .subscribe((data: any) => this.dataSource && this.dataSource.publish(data)));
             this.subscriptions.push(this.entityService.eventsByType(EVENT.ADD)
-                .subscribe((data: any) => this.dataSource && this.dataSource.add(data)));
+                .subscribe((data: any) => this.dataSource.add(data)));
             this.subscriptions.push(this.entityService.eventsByType(EVENT.DELETE)
                 .subscribe((data: any) => this.dataSource && this.dataSource.update(data.id)));
             this.subscriptions.push(this.entityService.eventsByType(EVENT.UPDATE)

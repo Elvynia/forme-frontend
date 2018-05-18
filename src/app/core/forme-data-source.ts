@@ -68,8 +68,7 @@ export class FormeDataSource<E extends Entity> extends DataSource<E> {
 	}
 
 	connect(): Observable<E[]> {
-		this._loading.next(true)
-		// setTimeout(() => this._loading.next(true));
+		setTimeout(() => this._loading.next(true));
 		const displayDataChanges = [
 			this.data.asObservable(),
 			this.paginator.page,

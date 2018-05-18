@@ -11,7 +11,7 @@ import { CompanyService } from '../company.service';
 import { AccountService } from '../account.service';
 
 @Component({
-	selector: 'app-account-edit',
+	selector: 'account-edit',
 	templateUrl: './account-edit.component.html',
 	styleUrls: ['./account-edit.component.css']
 })

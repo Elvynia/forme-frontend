@@ -51,6 +51,7 @@ import { CompanyComboboxComponent } from './company-combobox/company-combobox.co
 import { MissionComboboxComponent } from './mission-combobox/mission-combobox.component';
 import { DatepickerComponent } from './datepicker/datepicker.component';
 import { CoreModule } from './core/core.module';
+import { InvoiceManagementComponent } from './invoice-management/invoice-management.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { CoreModule } from './core/core.module';
     InvoiceDocgenComponent,
     CompanyComboboxComponent,
     MissionComboboxComponent,
-    DatepickerComponent
+    DatepickerComponent,
+    InvoiceManagementComponent
   ],
   imports: [
     BrowserModule,

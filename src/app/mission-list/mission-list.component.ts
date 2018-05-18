@@ -7,7 +7,7 @@ import { MissionService } from '../mission.service';
 	templateUrl: './mission-list.component.html',
 	styleUrls: ['./mission-list.component.css'],
 	providers: [
-		{ provide: EntityService, useClass: MissionService }
+		{ provide: EntityService, useExisting: MissionService }
 	]
 })
 export class MissionListComponent {

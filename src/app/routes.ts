@@ -13,6 +13,8 @@ import { LoginComponent } from './login/login.component';
 import { AccountAdminComponent } from './account-admin/account-admin.component';
 
 import { AuthGuard } from './auth-gard';
+import { InvoiceListComponent } from './invoice-list/invoice-list.component';
+import { InvoiceManagementComponent } from './invoice-management/invoice-management.component';
 
 export const ROUTES: Array<Route> = [
 	{
@@ -37,12 +39,8 @@ export const ROUTES: Array<Route> = [
 	},
 	{
 		path: 'invoice',
-		component: InvoiceEditComponent,
-		canActivate: [AuthGuard]
-	}, {
-		path: 'invoice/:id',
-		component: InvoiceEditComponent,
-		canActivate: [AuthGuard]
+		component: InvoiceManagementComponent,
+		canActivate: [AuthGuard],
 	}, {
 		path: 'company',
 		component: CompanyEditComponent,
