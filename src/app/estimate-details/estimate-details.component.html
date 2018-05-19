@@ -37,15 +37,14 @@
 					<tr>
 						<td>Signé</td>
 						<td>
-						<app-status-field [status]="estimate.signed"></app-status-field>
+						<field-check [checked]="estimate.signed"></field-check>
 						</td>
 					</tr>
 				</tbody>
 			</table>
 		</mat-card-content>
 		<mat-card-actions>
-			<app-edit-toolbar (onModify)="modifySelected()"
-				(onDelete)="deleteSelected()"></app-edit-toolbar>
+				ACTIONS...
 		</mat-card-actions>
 	</mat-card>
 </ng-container>

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { FormeDataSource } from '../core/forme-data-source';
 import { Event, EVENT } from '../event';
@@ -20,9 +20,15 @@ export class InvoiceListComponent {
 	@Input() filter: (item) => boolean;
 	@Input() filterContext: any;
 	@Input('columns') displayedColumns;
+	@Output() onSelect: EventEmitter<Invoice>;
 
 	constructor() {
 		this.listTitle = 'Toutes les factures';
-		this.displayedColumns = ['id', 'client', 'amount', 'creationDate', 'pending', 'received', 'receptionDate'];
+		this.displayedColumns = ['id', 'client', 'label', 'amount', 'creationDate', 'pending', 'received', 'receptionDate'];
+		this.onSelect = new EventEmitter();
+	}
+
+	select(invoice: Invoice) {
+		this.onSelect.next(invoice);
 	}
 }

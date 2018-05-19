@@ -13,7 +13,7 @@
 		</ng-container>
 		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
 		<mat-row matRipple [title]="row.id"
-			*matRowDef="let row; columns: displayedColumns;"></mat-row>
+			*matRowDef="let row; columns: displayedColumns;" (click)="select(row)"></mat-row>
 	</mat-table>
 	<ng-container *ngIf="dataSource.loading | async">
 		<div class="loading">

@@ -60,12 +60,10 @@ export abstract class EntityService<ENTITY extends Entity> {
   }
 
   get(id: number): Observable<ENTITY> {
-    this.httpClient.get(this.apiPath + '/' + id, {headers: this.headers})
-      .subscribe((data: ENTITY) => {
-        this.subject.next(new Event(EVENT.GET, data));
-      });
-    return this.eventsByType(EVENT.GET)
-      .filter((data:ENTITY) => data.id === id);
+    return Observable.merge(
+      this.eventsByType(EVENT.LIST).map((list) => list.find((entity) => entity.id === id)),
+      this.eventsByType(EVENT.UPDATE)
+    );
   }
 
   list(): Observable<Array<ENTITY>> {

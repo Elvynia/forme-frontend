@@ -1,11 +1,11 @@
-<mat-grid-list cols="2" rowHeight="3:2">
+<mat-grid-list cols="2" rowHeight="3:2" (click)="$event.stopPropagation()">
     <mat-grid-tile colspan="2">
-        <invoice-list></invoice-list>
+        <invoice-list (onSelect)="showDetails($event)"></invoice-list>
     </mat-grid-tile>
     <mat-grid-tile rowspan="2">
-        <invoice-edit></invoice-edit>
+        <invoice-edit [id]="selectedId"></invoice-edit>
     </mat-grid-tile>
-    <mat-grid-tile rowspan="2">
-        <invoice-details></invoice-details>
+    <mat-grid-tile rowspan="1">
+        <invoice-details [id]="selectedId" [actions]="['delete']"></invoice-details>
     </mat-grid-tile>
 </mat-grid-list>

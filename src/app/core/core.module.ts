@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { EntityListComponent } from './entity-list/entity-list.component';
 import { AppMaterialModule } from '../app-material.module';
 import { EntityColumnsDirective } from './entity-columns.directive';
+import { FieldCheckComponent } from './field-check/field-check.component';
 
 @NgModule({
     imports: [
@@ -11,11 +12,13 @@ import { EntityColumnsDirective } from './entity-columns.directive';
     ],
     declarations: [
         EntityListComponent,
-        EntityColumnsDirective
+        EntityColumnsDirective,
+        FieldCheckComponent
     ],
     exports: [
         EntityListComponent,
-        EntityColumnsDirective
+        EntityColumnsDirective,
+        FieldCheckComponent
     ]
 })
 export class CoreModule { }

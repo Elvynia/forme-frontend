@@ -21,10 +21,10 @@
 		{{ entity.type }}
 	</ng-template>
 	<ng-template let-entity #colTravelCosts>
-		<app-status-field [status]="entity.travelCosts"></app-status-field>
+		<field-check [checked]="entity.travelCosts"></field-check>
 	</ng-template>
 	<ng-template let-entity #colClosed>
-		<app-status-field [status]="entity.closed"></app-status-field>
+		<field-check [checked]="entity.closed"></field-check>
 	</ng-template>
 	<ng-template let-entity #colPlace>
 		{{ entity.place }}

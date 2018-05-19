@@ -40,7 +40,7 @@ export const ROUTES: Array<Route> = [
 	{
 		path: 'invoice',
 		component: InvoiceManagementComponent,
-		canActivate: [AuthGuard],
+		canActivate: [AuthGuard]
 	}, {
 		path: 'company',
 		component: CompanyEditComponent,

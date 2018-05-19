@@ -21,6 +21,6 @@
 			{{ entity.address }}
 		</ng-template>
 	<ng-template let-entity #colTravelCosts>
-		<app-status-field [status]="entity.travelCosts"></app-status-field>
+		<field-check [checked]="entity.travelCosts"></field-check>
 	</ng-template>
 </entity-list>

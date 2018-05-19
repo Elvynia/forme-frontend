@@ -2,10 +2,20 @@
 	background-color: #fafafa;
 	display: block;
 	padding: 20px;
+	position: absolute;
+	top: 0;
+	left:0;
+	right: 0;
+	bottom: 0;
 }
 
 mat-card {
-	height: 250px;
+	height: 100%;
+}
+
+div.invoice-details-icon {
+	background-image: url('/assets/invoice.svg');
+	background-size: cover;
 }
 
 mat-card-title {
@@ -13,34 +23,27 @@ mat-card-title {
 	font-size: 16px;
 }
 
-div.invoice-details-icon {
-	background-image: url("/assets/continue.png");
-	background-repeat: no-repeat;
-    background-size: cover;
+mat-card-content {
+	display: flex;
+	flex-flow: column;
+	padding: 2px 10px;
 }
 
-table {
-	float: left;
-	width: 50%;
+mat-card-content div {
+	display: flex;
 }
 
-td {
-	padding: 10px;
+mat-card-content div label {
+	flex: 1;
 }
 
-td:nth-child(1) {
-	font-weight: bold;
-	text-align: right;
+mat-card-actions {
+	display: flex;
+	justify-content: center;
+	padding: 0 20px;
 }
 
-td:nth-child(2) {
-	text-align: left;
-}
-
-th.labels {
-	width: 30%;
-}
-
-th.values {
-	width: 60%;
+mat-icon {
+	font-size: 48px;
+	cursor: pointer;
 }

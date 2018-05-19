@@ -11,7 +11,7 @@
 		<input matInput id="label" name="label" placeholder="Label" 
 			[(ngModel)]="invoice.label" required />
 	</mat-form-field>
-	<app-datepicker [(selection)]="invoice.mdReception" label="Date de réception"
+	<app-datepicker *ngIf="invoice.received" [(selection)]="invoice.mdReception" label="Date de réception"
 		name="receptionDate"></app-datepicker>
 	<section>
 		<mat-checkbox id="pending" name="pending" [(ngModel)]="invoice.pending">

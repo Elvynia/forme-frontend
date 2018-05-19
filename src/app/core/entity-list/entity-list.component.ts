@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, SimpleChanges, OnChanges, OnDestroy, ContentChildren, TemplateRef, QueryList } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, SimpleChanges, OnChanges, OnDestroy, ContentChildren, TemplateRef, QueryList, Output, EventEmitter } from '@angular/core';
 import { FormeDataSource } from '../forme-data-source';
 import { Entity } from '../../entity';
 import { MatSort, MatPaginator } from '@angular/material';
@@ -29,6 +29,8 @@ export class EntityListComponent implements OnInit, OnChanges, OnDestroy {
     @Input() filter: (item) => boolean;
     @Input() filterContext: any;
 
+    @Output() onSelect: EventEmitter<Entity>;
+
     @ViewChild(MatSort) sort: MatSort;
     @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -41,6 +43,7 @@ export class EntityListComponent implements OnInit, OnChanges, OnDestroy {
     constructor(private authService: AuthService, private entityService: EntityService<Entity>) {
         this.columns = new Array();
         this.subscriptions = new Array();
+        this.onSelect = new EventEmitter();
     }
 
     ngOnInit() {
@@ -72,6 +75,10 @@ export class EntityListComponent implements OnInit, OnChanges, OnDestroy {
     getTemplate(id: string): TemplateRef<Entity> {
         // FIXME: Should not use private API...
         return this.templates ? this.templates.find((template: any) => template._def.references[id]) : null;
+    }
+
+    select(entity: Entity) {
+        this.onSelect.next(entity);
     }
 
     private refreshFilter() {

@@ -6,63 +6,38 @@
 			<mat-card-subtitle>{{ invoice.creationDate | date:'dd/MM/yyyy' }}</mat-card-subtitle>
 		</mat-card-header>
 		<mat-card-content>
-			<table>
-				<thead>
-					<tr>
-						<th class="labels"></th>
-						<th class="values"></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>Client</td>
-						<td>
-							<app-company-ref [id]="invoice.client.id"></app-company-ref>
-						</td>
-					</tr>
-					<tr>
-						<td>Montant</td>
-						<td>{{ invoice.amount | currency:'€' }}</td>
-					</tr>
-					<tr>
-						<td>Reception</td>
-						<td *ngIf="invoice.received; else elseTmpl"> le {{ invoice.receptionDate | date:'dd/MM/yyyy' }}</td>
-						<ng-template #elseTmpl>
-							<td>false</td>
-						</ng-template>
-					</tr>
-				</tbody>
-			</table>
-			<table>
-				<thead>
-					<tr>
-						<th class="labels"></th>
-						<th class="values"></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>Label</td>
-						<td>{{ invoice.label }}</td>
-					</tr>
-					<tr>
-						<td>En attente</td>
-						<td>
-							<app-status-field [status]="invoice.pending"></app-status-field>
-						</td>
-					</tr>
-					<tr>
-						<td>Payée</td>
-						<td>
-							<app-status-field [status]="invoice.received"></app-status-field>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+			<div>
+				<label>Client</label>
+				<app-company-ref [id]="invoice.client.id"></app-company-ref>
+			</div>
+			<div>
+				<label>Montant</label>
+				<span>{{ invoice.amount | currency:'€' }}</span>
+			</div>
+			<div>
+				<label>Paiement</label>
+				<field-check [checked]="invoice.received"></field-check>
+			</div>
+			<div *ngIf="invoice.received">
+				<label>Reçu le</label>
+				{{ invoice.receptionDate | date:'dd/MM/yyyy' }}
+			</div>
+			<div>
+				<label>Label</label>
+				<span>{{ invoice.label }}</span>
+			</div>
+			<div>
+				<label>En attente</label>
+				<field-check [checked]="invoice.pending"></field-check>
+			</div>
+			<div>
+				<label>Frais</label>
+				<field-check [checked]="invoice.travelCosts"></field-check>
+			</div>
 		</mat-card-content>
-		<mat-card-actions>
-			<app-edit-toolbar (onModify)="modifySelected()"
-				(onDelete)="deleteSelected()"></app-edit-toolbar>
+		<mat-card-actions *ngIf="actions && actions.length > 0">
+			<mat-icon [color]="action === 'delete' ? 'error' : 'primary'" *ngFor="let action of actions"
+				(click)="handleAction($event, action)">{{ action }}</mat-icon>
 		</mat-card-actions>
 	</mat-card>
 </ng-container>

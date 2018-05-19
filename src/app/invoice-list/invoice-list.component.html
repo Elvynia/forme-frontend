@@ -1,4 +1,5 @@
-<entity-list [listTitle]="listTitle" [entityColumns]="displayedColumns" [filter]="filter" [filterContext]="filterContext">
+<entity-list [listTitle]="listTitle" [entityColumns]="displayedColumns" (onSelect)="select($event)"
+    [filter]="filter" [filterContext]="filterContext">
     <ng-template let-entity #colId>
         {{ entity.id }}
     </ng-template>
@@ -15,15 +16,15 @@
         {{ entity.amount | currency:'€' }}
     </ng-template>
     <ng-template let-entity #colPending>
-        <app-status-field [status]="entity.pending"></app-status-field>
+        <field-check [checked]="entity.pending"></field-check>
     </ng-template>
     <ng-template let-entity #colReceived>
-        <app-status-field [status]="entity.received"></app-status-field>
+        <field-check [checked]="entity.received"></field-check>
     </ng-template>
     <ng-template let-entity #colReceptionDate>
         {{ entity.receptionDate | date:'dd/MM/yyyy' }}
     </ng-template>
     <ng-template let-entity #colTravelCosts>
-        <app-status-field [status]="entity.travelCosts"></app-status-field>
+        <field-check [checked]="entity.travelCosts"></field-check>
     </ng-template>
 </entity-list>

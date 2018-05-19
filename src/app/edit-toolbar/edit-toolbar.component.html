@@ -1,5 +1,0 @@
-<span [ngStyle]="{'float': float || 'right'}" *ngIf="isAdmin">
-	<img [hidden]="!shouldAdd" src="/assets/add.png" (click)="fireAdd($event)">
-	<img [hidden]="!shouldModify" src="/assets/modify.png" (click)="fireModify($event)">
-	<img [hidden]="!shouldDelete" src="/assets/delete.png" (click)="fireDelete($event)">
-</span>

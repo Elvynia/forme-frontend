@@ -1,14 +1,10 @@
 import { Component, OnInit, OnChanges, Input, SimpleChanges } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { FormControl } from '@angular/forms';
 
-import { Event, EVENT } from '../event';
-import { Company } from '../company';
 import { Invoice } from '../invoice';
 import { InvoiceService } from '../invoice.service';
-import { CompanyService } from '../company.service';
 
 import { Observable } from 'rxjs/Rx';
+import { NgForm } from '@angular/forms';
 
 @Component({
     selector: 'invoice-edit',
@@ -16,37 +12,38 @@ import { Observable } from 'rxjs/Rx';
     styleUrls: ['./invoice-edit.component.css']
 })
 export class InvoiceEditComponent implements OnInit, OnChanges {
-    @Input() invoice: Invoice;
-    @Input() new: boolean;
+    @Input() id: number;
+    invoice: Invoice;
 
-    constructor(private invoiceService: InvoiceService,
-        private route: ActivatedRoute) {
-        this.new = true;
+    constructor(private invoiceService: InvoiceService) {
         this.invoice = new Invoice();
     }
 
     ngOnInit() {
-        this.route.paramMap.subscribe((paramMap: ParamMap) => {
-            if (paramMap.has('id')) {
-                this.new = false;
-                this.invoiceService.get(parseInt(paramMap.get('id')))
-                .subscribe((invoice: any) => this.invoice = Invoice.build(invoice));
-            }
-        });
+        this.refresh();
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        if (changes['invoice']) {
-            this.new = this.invoice.id === undefined || this.invoice.id === null;
+        if (changes.id) {
+            this.refresh();
         }
     }
 
-    submit(form) {
-        if (this.new) {
-            this.invoiceService.create(this.invoice);
-        } else {
+    submit(form: NgForm) {
+        if (this.invoice.id) {
             this.invoiceService.update(this.invoice);
+        } else {
+            this.invoiceService.create(this.invoice);
         }
-        form.resetForm(new Invoice());
+        // FIXME: Input? form.resetForm(new Invoice());
     }
+
+    private refresh() {
+		if (this.id) {
+			this.invoiceService.get(this.id).take(1)
+				.subscribe((invoice: Invoice) => this.invoice = Invoice.build(invoice));
+		} else {
+			this.invoice = new Invoice();
+		}
+	}
 }

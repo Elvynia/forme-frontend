@@ -1,0 +1,6 @@
+<ng-template [ngIf]="checked" [ngIfElse]="elseTpl">
+        <mat-icon color="primary">done</mat-icon>
+</ng-template>
+<ng-template #elseTpl>
+    <mat-icon color="error">highlight_off</mat-icon>
+</ng-template>

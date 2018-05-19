@@ -31,7 +31,6 @@ import { CompanyRefComponent } from './company-ref/company-ref.component';
 import { MissionEditComponent } from './mission-edit/mission-edit.component';
 import { MissionListComponent } from './mission-list/mission-list.component';
 import { CompanyListComponent } from './company-list/company-list.component';
-import { EditToolbarComponent } from './edit-toolbar/edit-toolbar.component';
 import { PlanningComponent } from './planning/planning.component';
 import { EventEditComponent } from './event-edit/event-edit.component';
 import { LoginComponent } from './login/login.component';
@@ -42,7 +41,6 @@ import { InvoiceDetailsComponent } from './invoice-details/invoice-details.compo
 import { MissionDetailsComponent } from './mission-details/mission-details.component';
 import { EstimateDetailsComponent } from './estimate-details/estimate-details.component';
 import { CompanyDetailsComponent } from './company-details/company-details.component';
-import { StatusFieldComponent } from './status-field/status-field.component';
 import { AccountListComponent } from './account-list/account-list.component';
 import { AccountEditComponent } from './account-edit/account-edit.component';
 import { AccountAdminComponent } from './account-admin/account-admin.component';
@@ -65,7 +63,6 @@ import { InvoiceManagementComponent } from './invoice-management/invoice-managem
     MissionEditComponent,
     MissionListComponent,
     CompanyListComponent,
-    EditToolbarComponent,
     PlanningComponent,
     EventEditComponent,
     LoginComponent,
@@ -76,7 +73,6 @@ import { InvoiceManagementComponent } from './invoice-management/invoice-managem
     MissionDetailsComponent,
     EstimateDetailsComponent,
     CompanyDetailsComponent,
-    StatusFieldComponent,
     AccountListComponent,
     AccountEditComponent,
     AccountAdminComponent,

@@ -53,19 +53,18 @@
 					<tr>
 						<td class="checkbox-group">
 							Frais : 
-							<app-status-field [status]="mission.travelCosts"></app-status-field>
+							<field-check [checked]="mission.travelCosts"></field-check>
 						</td>
 						<td class="checkbox-group">
 							Terminée :
-							<app-status-field [status]="mission.closed"></app-status-field>
+							<field-check [checked]="mission.closed"></field-check>
 						</td>
 					</tr>
 				</tbody>
 			</table>
 		</mat-card-content>
 		<mat-card-actions>
-			<app-edit-toolbar (onModify)="modifySelected()"
-				(onDelete)="deleteSelected()"></app-edit-toolbar>
+				ACTIONS...
 		</mat-card-actions>
 	</mat-card>
 </ng-container>
