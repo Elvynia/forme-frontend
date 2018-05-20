@@ -1,4 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Invoice } from '../invoice';
 import { InvoiceService } from '../invoice.service';
 import { EVENT } from '../event';
@@ -11,9 +12,14 @@ import { EVENT } from '../event';
 export class InvoiceManagementComponent implements OnInit {
     selectedId: number;
 
-    constructor(private invoiceService: InvoiceService) { }
+    constructor(private invoiceService: InvoiceService, private route: ActivatedRoute) { }
 
     ngOnInit() {
+        this.route.queryParamMap.subscribe((params) => {
+            if (params.has('invoiceId')) {
+                this.selectedId = parseInt(params.get('invoiceId'));
+            }
+        });
         this.invoiceService.eventsByType(EVENT.DELETE)
             .filter((invoice) => this.selectedId && invoice.id === this.selectedId)
             .subscribe(() => this.selectedId = undefined);
