@@ -16,4 +16,8 @@ export class AccountService extends EntityService<Account> {
 		this.initialize();
 	}
 
+	getNew(): Account {
+		return new Account();
+	}
+
 }

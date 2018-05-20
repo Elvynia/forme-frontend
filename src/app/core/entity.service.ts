@@ -60,16 +60,19 @@ export abstract class EntityService<ENTITY extends Entity> {
   }
 
   get(id: number): Observable<ENTITY> {
-    return Observable.merge(
-      this.eventsByType(EVENT.LIST).map((list) => list.find((entity) => entity.id === id)),
-      this.eventsByType(EVENT.UPDATE)
-    );
+    this.httpClient.get(this.apiPath + '/' + id, { headers: this.headers})
+        .subscribe((entity) => {
+      this.subject.next(new Event(EVENT.GET, this.getNew().clone(entity)));
+    });
+    return Observable.merge(this.eventsByType(EVENT.GET), this.eventsByType(EVENT.UPDATE));
   }
+
+  abstract getNew(): ENTITY;
 
   list(): Observable<Array<ENTITY>> {
     this.httpClient.get(this.apiPath, {headers: this.headers})
       .subscribe((list: Array<Entity>) => {
-        this.subject.next(new Event(EVENT.LIST, list));
+        this.subject.next(new Event(EVENT.LIST, list.map((entity) => this.getNew().clone(entity))));
       });
   	return this.eventsByType(EVENT.LIST);
   }
@@ -77,7 +80,7 @@ export abstract class EntityService<ENTITY extends Entity> {
   update(entity: ENTITY): Observable<ENTITY> {
     this.httpClient.put(this.apiPath, entity, {headers: this.headers})
       .subscribe((entity: Entity) => {
-        this.subject.next(new Event(EVENT.UPDATE, entity));
+        this.subject.next(new Event(EVENT.UPDATE, this.getNew().clone(entity)));
       })
     return this.eventsByType(EVENT.LIST)
       .filter((data:ENTITY) => data.id === entity.id);

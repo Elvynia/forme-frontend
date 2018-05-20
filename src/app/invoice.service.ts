@@ -15,4 +15,8 @@ export class InvoiceService extends EntityService<Invoice> {
 		this.apiPath += '/invoice';
 		this.initialize();
 	}
+
+	getNew(): Invoice {
+		return new Invoice();
+	}
 }

@@ -16,4 +16,8 @@ export class RoleService extends EntityService<Role> {
 		this.initialize();
 	}
 
+	getNew(): Role {
+		return new Role();
+	}
+
 }

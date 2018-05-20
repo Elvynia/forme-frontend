@@ -16,6 +16,10 @@ export class EventService extends EntityService<MissionEvent> {
 		this.initialize();
 	}
 
+	getNew(): MissionEvent {
+		return new MissionEvent();
+	}
+
 	listByMission(missionId: number) {
 		let params = new HttpParams();
 		params.set('missionId', missionId.toString());

@@ -15,14 +15,13 @@ export class Estimate implements Entity {
 		this.mdCreation = moment();
 	}
 
-	public clone(mission: Estimate): Estimate {
-		let clone: Estimate = new Estimate();
-		clone.id = mission.id;
-		clone.amount = mission.amount;
-		clone.date = mission.date;
-		clone.signed = mission.signed;
-		clone.client = mission.client;
-		return clone;
+	public clone(estimate: Estimate): Estimate {
+		this.id = estimate.id;
+		this.amount = estimate.amount;
+		this.date = estimate.date;
+		this.signed = estimate.signed;
+		this.client = estimate.client;
+		return this;
 	}
 
 	public get date() {

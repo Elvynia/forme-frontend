@@ -16,4 +16,8 @@ export class MissionService extends EntityService<Mission> {
   	this.initialize();
   }
 
+  getNew(): Mission {
+	  return new Mission();
+  }
+
 }

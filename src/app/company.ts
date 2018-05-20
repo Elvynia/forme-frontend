@@ -14,7 +14,14 @@ export class Company implements Entity {
 	}
 
 	public clone(company: Company): Company {
-		// TODO implements.
-		return null;
+		this.id = company.id;
+		this.address = company.address;
+		this.name = company.name;
+		this.trigram = company.trigram;
+		this.siren = company.trigram;
+		this.siren = company.siren;
+		this.siret = company.siret;
+		this.rcs = company.rcs
+		return this;
 	}
 }

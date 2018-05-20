@@ -1,0 +1,9 @@
+<h2>
+    <ng-container *ngIf="entity; else elseTpl">{{ updateTitle }}</ng-container>
+    <ng-template #elseTpl>{{ createTitle }}</ng-template>
+</h2>
+<form (ngSubmit)="submit(model)" #model="ngForm">
+    <ng-container *ngTemplateOutlet="formContent; context: { $implicit: entity }"></ng-container>
+    <button type="reset" mat-raised-button>Annuler</button>
+    <button mat-raised-button color="primary">Valider</button>
+</form>

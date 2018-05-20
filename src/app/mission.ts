@@ -19,7 +19,16 @@ export class Mission implements Entity {
 	}
 
 	public clone(mission: Mission): Mission {
-		// TODO implements.
-		return null;
+		this.id = mission.id;
+		this.duration = mission.duration;
+		this.client = mission.client;
+		this.tjm = mission.tjm;
+		this.label = mission.label;
+		this.title = mission.title;
+		this.place = mission.place;
+		this.travelCosts = mission.travelCosts;
+		this.type = mission.type;
+		this.closed = mission.closed;
+		return this;
 	}
 }

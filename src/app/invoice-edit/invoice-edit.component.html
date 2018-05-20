@@ -1,28 +1,28 @@
-<h2>{{ new ? 'Créer une nouvelle facture' : 'Mettre une facture à jour' }}</h2>
-<form (ngSubmit)="submit(model)" #model="ngForm" [ngClass]="{'submitted': model.form.valid}">
-	<app-company-combobox [(selection)]="invoice.client"></app-company-combobox>
-	<mat-form-field>
-		<input matInput type="number" id="amount" name="amount" placeholder="Montant" 
-			[(ngModel)]="invoice.amount" min="O" step="0.05" required />
-	</mat-form-field>
-	<app-datepicker [(selection)]="invoice.mdCreation" label="Date de création"
-		name="creationDate"></app-datepicker>
-	<mat-form-field>
-		<input matInput id="label" name="label" placeholder="Label" 
-			[(ngModel)]="invoice.label" required />
-	</mat-form-field>
-	<app-datepicker *ngIf="invoice.received" [(selection)]="invoice.mdReception" label="Date de réception"
-		name="receptionDate"></app-datepicker>
-	<section>
-		<mat-checkbox id="pending" name="pending" [(ngModel)]="invoice.pending">
-			En attente
-		</mat-checkbox>
-		<mat-checkbox id="received" name="received" [(ngModel)]="invoice.received">
-			Payée
-		</mat-checkbox>
-		<mat-checkbox id="travelC" name="travelC" [(ngModel)]="invoice.travelCosts">
-			Frais
-		</mat-checkbox>
-	</section>
-	<button mat-raised-button color="primary" [disabled]="!model.form.valid">Valider</button>
-</form>
+<entity-edit [id]="id">
+	<ng-template let-invoice #formContent>
+		<app-company-combobox [(selection)]="invoice.client"></app-company-combobox>
+		<mat-form-field>
+			<input matInput type="number" id="amount" name="amount" placeholder="Montant" 
+				[(ngModel)]="invoice.amount" min="O" step="0.05" required />
+		</mat-form-field>
+		<app-datepicker [(selection)]="invoice.mdCreation" label="Date de création"
+			name="creationDate"></app-datepicker>
+		<mat-form-field>
+			<input matInput id="label" name="label" placeholder="Label" 
+				[(ngModel)]="invoice.label" required />
+		</mat-form-field>
+		<app-datepicker *ngIf="invoice.received" [(selection)]="invoice.mdReception" label="Date de réception"
+			name="receptionDate"></app-datepicker>
+		<section>
+			<mat-checkbox id="pending" name="pending" [(ngModel)]="invoice.pending">
+				En attente
+			</mat-checkbox>
+			<mat-checkbox id="received" name="received" [(ngModel)]="invoice.received">
+				Payée
+			</mat-checkbox>
+			<mat-checkbox id="travelC" name="travelC" [(ngModel)]="invoice.travelCosts">
+				Frais
+			</mat-checkbox>
+		</section>
+	</ng-template>
+</entity-edit>

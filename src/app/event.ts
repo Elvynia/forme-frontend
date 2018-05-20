@@ -1,5 +1,5 @@
 export enum EVENT {
-	LIST, UPDATE, DELETE, ADD, INIT
+	LIST, UPDATE, DELETE, ADD, INIT, GET
 }
 
 export class Event {

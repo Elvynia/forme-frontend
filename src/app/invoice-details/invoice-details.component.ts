@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Invoice } from '../invoice';
 import { InvoiceService } from '../invoice.service';
 import { Subscription } from 'rxjs';
+import { SimpleChanges } from '@angular/core';
 
 @Component({
 	selector: 'invoice-details',
@@ -13,7 +14,6 @@ import { Subscription } from 'rxjs';
 export class InvoiceDetailsComponent {
 	@Input() id: number;
 
-	constructor() {
-	}
+	constructor() { }
 
 }	

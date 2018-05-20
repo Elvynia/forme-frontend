@@ -16,4 +16,8 @@ export class EstimateService extends EntityService<Estimate> {
 		this.initialize();
 	}
 
+	getNew(): Estimate {
+		return new Estimate();
+	}
+
 }

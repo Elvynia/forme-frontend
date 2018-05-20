@@ -22,18 +22,16 @@ export class Invoice implements Entity {
 	}
 
 	public clone(invoice: any): Invoice {
-		let clone: Invoice = new Invoice(invoice.id);
-		if (invoice) {
-			clone.creationDate = invoice.creationDate;
-			clone.receptionDate = invoice.receptionDate;
-			clone.amount = invoice.amount;
-			clone.client = invoice.client;
-			clone.pending = invoice.pending;
-			clone.received = invoice.received;
-			clone.travelCosts = invoice.travelCosts;
-			clone.label = invoice.label;
-		}
-		return clone;
+		this.id = invoice.id;
+		this.creationDate = invoice.creationDate;
+		this.receptionDate = invoice.receptionDate;
+		this.amount = invoice.amount;
+		this.client = invoice.client;
+		this.pending = invoice.pending;
+		this.received = invoice.received;
+		this.travelCosts = invoice.travelCosts;
+		this.label = invoice.label;
+		return this;
 	}
 
 	prefixLabel() {

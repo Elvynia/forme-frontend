@@ -16,4 +16,8 @@ export class CompanyService extends EntityService<Company> {
   	this.initialize();
   }
 
+  getNew(): Company {
+	  return new Company();
+  }
+
 }
