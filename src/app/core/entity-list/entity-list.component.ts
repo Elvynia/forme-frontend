@@ -18,10 +18,7 @@ export interface ListColumn {
 @Component({
     selector: 'entity-list',
     templateUrl: './entity-list.component.html',
-    styleUrls: ['./entity-list.component.css'],
-	providers: [
-		{ provide: EntityService, useExisting: InvoiceService }
-	]
+    styleUrls: ['./entity-list.component.css']
 })
 export class EntityListComponent implements OnInit, OnChanges, OnDestroy {
     private subscriptions: Array<Subscription>;

@@ -1,5 +1,6 @@
 import { Directive, Input, SimpleChanges, OnChanges, HostBinding } from '@angular/core';
 import { ListColumn, EntityListComponent } from './entity-list/entity-list.component';
+import { EntityService } from './entity.service';
 
 @Directive({
     selector: '[entityColumns]'
@@ -7,7 +8,8 @@ import { ListColumn, EntityListComponent } from './entity-list/entity-list.compo
 export class EntityColumnsDirective implements OnChanges {
     @Input('entityColumns') displayedColumns: Array<string>;
 
-    constructor(protected host: EntityListComponent) { }
+    constructor(protected host: EntityListComponent,
+        private entityService: EntityService<any>) { }
 
     ngOnInit() {
         if (!this.displayedColumns) {
@@ -33,7 +35,7 @@ export class EntityColumnsDirective implements OnChanges {
                 this.host.columns.push({
                     name: name,
                     label: name.toUpperCase(),
-                    template: 'col' + name.charAt(0).toUpperCase() + name.slice(1),
+                    template: 'col' + this.entityService.getNew().constructor.name + name.charAt(0).toUpperCase() + name.slice(1),
                     display: true
                 });
             }

@@ -1,14 +1,14 @@
 <entity-list [listTitle]="listTitle" [entityColumns]="displayedColumns" [filter]="filter" [filterContext]="filterContext">
-	<ng-template let-entity #colId>
+	<ng-template let-entity #colAccountId>
 		{{ entity.id }}
 	</ng-template>
-	<ng-template let-entity #colUsername>
+	<ng-template let-entity #colAccountUsername>
 		{{ entity.username }}
 	</ng-template>
-	<ng-template let-entity #colRole>
+	<ng-template let-entity #colAccountRole>
 		{{ entity.role.name }}
 	</ng-template>
-	<ng-template let-entity #colActions>
+	<ng-template let-entity #colAccountActions>
 		ACTIONS...
 	</ng-template>
 </entity-list>

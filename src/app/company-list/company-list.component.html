@@ -1,26 +1,26 @@
 <entity-list [entityColumns]="displayedColumns" [listTitle]="listTitle" [filter]="filter" [filterContext]="filterContext">
-	<ng-template let-entity #colId>
+	<ng-template let-entity #colCompanyId>
 		{{ entity.id }}
 	</ng-template>
-	<ng-template let-entity #colTrigram>
+	<ng-template let-entity #colCompanyTrigram>
 		{{ entity.trigram }}
 	</ng-template>
-	<ng-template let-entity #colName>
+	<ng-template let-entity #colCompanyName>
 		{{ entity.name }}
 	</ng-template>
-	<ng-template let-entity #colSiren>
+	<ng-template let-entity #colCompanySiren>
 		{{ entity.siren }}
 	</ng-template>
-	<ng-template let-entity #colSiret>
+	<ng-template let-entity #colCompanySiret>
 		{{ entity.siret }}
 	</ng-template>
-	<ng-template let-entity #colRcs>
+	<ng-template let-entity #colCompanyRcs>
 		{{ entity.rcs }}
 	</ng-template>
-	<ng-template let-entity #colAddress>
+	<ng-template let-entity #colCompanyAddress>
 			{{ entity.address }}
 		</ng-template>
-	<ng-template let-entity #colTravelCosts>
+	<ng-template let-entity #colCompanyTravelCosts>
 		<field-check [checked]="entity.travelCosts"></field-check>
 	</ng-template>
 </entity-list>

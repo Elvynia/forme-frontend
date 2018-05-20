@@ -1,32 +1,32 @@
 <entity-list [entityColumns]="displayedColumns" [listTitle]="listTitle" [filter]="filter" [filterContext]="filterContext">
-	<ng-template let-entity #colId>
+	<ng-template let-entity #colMissionId>
 		{{ entity.id }}
 	</ng-template>
-	<ng-template let-entity #colClient>
+	<ng-template let-entity #colMissionClient>
 		<app-company-ref [id]="entity.client.id"></app-company-ref>
 	</ng-template>
-	<ng-template let-entity #colLabel>
+	<ng-template let-entity #colMissionLabel>
 		{{ entity.label }}
 	</ng-template>
-	<ng-template let-entity #colTitle>
+	<ng-template let-entity #colMissionTitle>
 		{{ entity.title }}
 	</ng-template>
-	<ng-template let-entity #colDuration>
+	<ng-template let-entity #colMissionDuration>
 		{{ entity.duration / 7 }} ({{ entity.duration }}h)
 	</ng-template>
-	<ng-template let-entity #colTjm>
+	<ng-template let-entity #colMissionTjm>
 		{{ entity.tjm }} €/j
 	</ng-template>
-	<ng-template let-entity #colType>
+	<ng-template let-entity #colMissionType>
 		{{ entity.type }}
 	</ng-template>
-	<ng-template let-entity #colTravelCosts>
+	<ng-template let-entity #colMissionTravelCosts>
 		<field-check [checked]="entity.travelCosts"></field-check>
 	</ng-template>
-	<ng-template let-entity #colClosed>
+	<ng-template let-entity #colMissionClosed>
 		<field-check [checked]="entity.closed"></field-check>
 	</ng-template>
-	<ng-template let-entity #colPlace>
+	<ng-template let-entity #colMissionPlace>
 		{{ entity.place }}
 	</ng-template>
 </entity-list>
