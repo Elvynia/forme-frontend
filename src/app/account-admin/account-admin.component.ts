@@ -27,7 +27,7 @@ export class AccountAdminComponent implements OnInit {
 	}
 
 	private updateEdit(account?: Account) {
-		this.account = Account.build(account);
+		this.account = account.clone(account);
 		this.editing = account ? true : false;
 	}
 

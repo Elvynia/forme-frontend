@@ -37,7 +37,7 @@ export class AppComponent implements OnInit {
 	ngOnInit() {
 		this.accountService.list()
 		.map((accounts: Account[]) => 
-			accounts.filter((account: Account) => Account.build(account).isClient))
+			accounts.filter((account: Account) => new Account().clone(account).isClient))
 		.subscribe((accounts) =>
 			this.clients = accounts);
 		this.registerIcons();
@@ -63,7 +63,7 @@ export class AppComponent implements OnInit {
 			}
 		});
 		this.authService.accounts.subscribe((account: any) => {
-			this.account = account ? Account.build(account) : null;
+			this.account = account ? new Account().clone(account) : null;
 		});
 	}
 

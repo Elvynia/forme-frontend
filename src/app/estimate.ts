@@ -10,19 +10,19 @@ export class Estimate implements Entity {
 	signed: boolean;
 	client: Company;
 
-	static build(obj) {
-		let instance: Estimate = new Estimate();
-		instance.id = obj.id;
-		instance.amount = obj.amount;
-		instance.date = obj.date;
-		instance.signed = obj.signed;
-		instance.client = obj.client;
-		return instance;
-	}
-
 	constructor(id?: number) {
 		this.id = id;
 		this.mdCreation = moment();
+	}
+
+	public clone(mission: Estimate): Estimate {
+		let clone: Estimate = new Estimate();
+		clone.id = mission.id;
+		clone.amount = mission.amount;
+		clone.date = mission.date;
+		clone.signed = mission.signed;
+		clone.client = mission.client;
+		return clone;
 	}
 
 	public get date() {

@@ -31,7 +31,7 @@ export class EventEditComponent implements OnInit, OnChanges {
             if (paramMap.has('id')) {
                 this.new = false;
                 this.eventService.get(parseInt(paramMap.get('id')))
-                .subscribe((event: MissionEvent) => this.event = MissionEvent.build(event));
+                .subscribe((event: MissionEvent) => this.event = this.event.clone(event));
             }
         });
 	}

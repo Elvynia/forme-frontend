@@ -1,0 +1,19 @@
+<ng-container *ngIf="entity">
+    <mat-card>
+        <mat-card-header [hidden]="hideTitle">
+            <div mat-card-avatar class="entity-details-icon" [ngStyle]="{ 'background-image': 'url(' + avatarUrl + ')'}"></div>
+            <mat-card-title>
+                <ng-container *ngTemplateOutlet="cardTitle; context: { $implicit: entity }"></ng-container>
+            </mat-card-title>
+            <mat-card-subtitle>
+                <ng-container *ngTemplateOutlet="cardSubtitle; context: { $implicit: entity }"></ng-container>
+            </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <ng-container *ngTemplateOutlet="cardContent; context: { $implicit: entity }"></ng-container>
+        </mat-card-content>
+        <mat-card-actions *ngIf="actions && actions.length > 0">
+            <mat-icon [color]="action === 'delete' ? 'error' : 'primary'" *ngFor="let action of actions" (click)="handleAction($event, action)">{{ action }}</mat-icon>
+        </mat-card-actions>
+    </mat-card>
+</ng-container>

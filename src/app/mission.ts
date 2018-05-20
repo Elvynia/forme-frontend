@@ -17,4 +17,9 @@ export class Mission implements Entity {
 	constructor(id?: number) {
 		this.id = id;
 	}
+
+	public clone(mission: Mission): Mission {
+		// TODO implements.
+		return null;
+	}
 }

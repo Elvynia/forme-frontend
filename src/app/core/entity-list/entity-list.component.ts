@@ -1,12 +1,11 @@
-import { Component, OnInit, Input, ViewChild, SimpleChanges, OnChanges, OnDestroy, ContentChildren, TemplateRef, QueryList, Output, EventEmitter } from '@angular/core';
-import { FormeDataSource } from '../forme-data-source';
+import { Component, ContentChildren, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, QueryList, SimpleChanges, TemplateRef, ViewChild } from '@angular/core';
+import { MatPaginator, MatSort } from '@angular/material';
+import { Subscription } from 'rxjs';
 import { Entity } from '../../entity';
-import { MatSort, MatPaginator } from '@angular/material';
+import { EVENT } from '../../event';
 import { AuthService } from '../auth.service';
 import { EntityService } from '../entity.service';
-import { EVENT } from '../../event';
-import { Subscription } from 'rxjs';
-import { Observable } from 'rxjs';
+import { FormeDataSource } from '../forme-data-source';
 
 export interface ListColumn {
     display: boolean
@@ -22,7 +21,7 @@ export interface ListColumn {
 })
 export class EntityListComponent implements OnInit, OnChanges, OnDestroy {
     private subscriptions: Array<Subscription>;
-    private dataSource: FormeDataSource<Entity>;
+    private dataSource: FormeDataSource<any>;
 
     @Input() listTitle: string;
     @Input() columns: Array<ListColumn>;
@@ -40,7 +39,7 @@ export class EntityListComponent implements OnInit, OnChanges, OnDestroy {
         return this.columns.filter((col) => col.display).map((col) => col.name);
     }
 
-    constructor(private authService: AuthService, private entityService: EntityService<Entity>) {
+    constructor(private authService: AuthService, private entityService: EntityService<any>) {
         this.columns = new Array();
         this.subscriptions = new Array();
         this.onSelect = new EventEmitter();

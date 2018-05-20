@@ -10,17 +10,6 @@ export class Account implements Entity {
 	role?: Role;
 	companies?: Array<Company>;
 
-	static build(account: any): Account {
-		let instance: Account = new Account();
-		if (account) {
-			instance.id = account.id;
-			instance.username = account.username;
-			instance.role = account.role;
-			instance.companies = account.companies || new Array<Company>();
-		}
-		return instance;
-	}
-
 	public get isAdmin(): boolean {
 		return this.role && this.role.name === 'ADMIN';
 	}
@@ -32,5 +21,16 @@ export class Account implements Entity {
 	constructor(id?: number) {
 		this.id = id;
 		this.companies = new Array();
+	}
+	
+	public clone(account: Account): Account {
+		let clone: Account = new Account();
+		if (account) {
+			clone.id = account.id;
+			clone.username = account.username;
+			clone.role = account.role;
+			clone.companies = account.companies || new Array<Company>();
+		}
+		return clone;
 	}
 }

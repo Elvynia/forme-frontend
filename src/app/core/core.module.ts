@@ -4,6 +4,7 @@ import { EntityListComponent } from './entity-list/entity-list.component';
 import { AppMaterialModule } from '../app-material.module';
 import { EntityColumnsDirective } from './entity-columns.directive';
 import { FieldCheckComponent } from './field-check/field-check.component';
+import { EntityCardComponent } from './entity-card/entity-card.component';
 
 @NgModule({
     imports: [
@@ -13,12 +14,14 @@ import { FieldCheckComponent } from './field-check/field-check.component';
     declarations: [
         EntityListComponent,
         EntityColumnsDirective,
-        FieldCheckComponent
+        FieldCheckComponent,
+        EntityCardComponent
     ],
     exports: [
         EntityListComponent,
         EntityColumnsDirective,
-        FieldCheckComponent
+        FieldCheckComponent,
+        EntityCardComponent
     ]
 })
 export class CoreModule { }

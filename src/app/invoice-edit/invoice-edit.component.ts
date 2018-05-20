@@ -41,7 +41,7 @@ export class InvoiceEditComponent implements OnInit, OnChanges {
     private refresh() {
 		if (this.id) {
 			this.invoiceService.get(this.id).take(1)
-				.subscribe((invoice: Invoice) => this.invoice = Invoice.build(invoice));
+				.subscribe((invoice: Invoice) => this.invoice = this.invoice.clone(invoice));
 		} else {
 			this.invoice = new Invoice();
 		}

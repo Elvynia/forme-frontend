@@ -118,7 +118,7 @@ export class PlanningComponent implements OnInit {
 	private recalculateView() {
 		let events = [];
 		for (let i = 0; i < this.events.length; ++i) {
-			events[i] = MissionEvent.build(this.events[i]);
+			events[i] = this.events[i].clone(this.events[i]);
 			if (events[i].missionId) {
 				events[i].missionLabel = this.missionService.get(events[i].missionId).pluck('label');
 			}

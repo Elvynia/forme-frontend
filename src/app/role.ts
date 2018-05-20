@@ -7,4 +7,9 @@ export class Role implements Entity {
 	constructor(id?: number) {
 		this.id = id;
 	}
+
+	public clone(mission: Role): Role {
+		// TODO implements.
+		return null;
+	}
 }

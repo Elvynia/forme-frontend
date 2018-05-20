@@ -1,43 +1,38 @@
-<ng-container *ngIf="invoice">
-	<mat-card>
-		<mat-card-header [hidden]="hideTitle">
-			<div mat-card-avatar class="invoice-details-icon"></div>
-			<mat-card-title>Détails de la facture n°{{invoice.id}}</mat-card-title>
-			<mat-card-subtitle>{{ invoice.creationDate | date:'dd/MM/yyyy' }}</mat-card-subtitle>
-		</mat-card-header>
-		<mat-card-content>
-			<div>
-				<label>Client</label>
-				<app-company-ref [id]="invoice.client.id"></app-company-ref>
-			</div>
-			<div>
-				<label>Montant</label>
-				<span>{{ invoice.amount | currency:'€' }}</span>
-			</div>
-			<div>
-				<label>Paiement</label>
-				<field-check [checked]="invoice.received"></field-check>
-			</div>
-			<div *ngIf="invoice.received">
-				<label>Reçu le</label>
-				{{ invoice.receptionDate | date:'dd/MM/yyyy' }}
-			</div>
-			<div>
-				<label>Label</label>
-				<span>{{ invoice.label }}</span>
-			</div>
-			<div>
-				<label>En attente</label>
-				<field-check [checked]="invoice.pending"></field-check>
-			</div>
-			<div>
-				<label>Frais</label>
-				<field-check [checked]="invoice.travelCosts"></field-check>
-			</div>
-		</mat-card-content>
-		<mat-card-actions *ngIf="actions && actions.length > 0">
-			<mat-icon [color]="action === 'delete' ? 'error' : 'primary'" *ngFor="let action of actions"
-				(click)="handleAction($event, action)">{{ action }}</mat-icon>
-		</mat-card-actions>
-	</mat-card>
-</ng-container>
+<entity-card [id]="id" avatarUrl="/assets/invoice.svg" [actions]="['delete']">
+	<ng-template let-entity #cardTitle>
+		Détails de la facture n° {{ entity.id }}
+	</ng-template>
+	<ng-template let-entity #cardSubtitle>
+		{{ entity.creationDate | date:'dd/MM/yyyy' }}
+	</ng-template>
+	<ng-template let-entity #cardContent>
+		<div>
+			<label>Client</label>
+			<app-company-ref [id]="entity.client.id"></app-company-ref>
+		</div>
+		<div>
+			<label>Montant</label>
+			<span>{{ entity.amount | currency:'€' }}</span>
+		</div>
+		<div>
+			<label>Paiement</label>
+			<field-check [checked]="entity.received"></field-check>
+		</div>
+		<div *ngIf="entity.received">
+			<label>Reçu le</label>
+			{{ entity.receptionDate | date:'dd/MM/yyyy' }}
+		</div>
+		<div>
+			<label>Label</label>
+			<span>{{ entity.label }}</span>
+		</div>
+		<div>
+			<label>En attente</label>
+			<field-check [checked]="entity.pending"></field-check>
+		</div>
+		<div>
+			<label>Frais</label>
+			<field-check [checked]="entity.travelCosts"></field-check>
+		</div>
+	</ng-template>
+</entity-card>

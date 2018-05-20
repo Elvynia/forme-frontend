@@ -14,7 +14,7 @@ export class DashboardComponent implements OnInit {
 	constructor(private authService: AuthService) {
 		if (this.authService.check()) {
 			this.authService.accounts.first((account: Account) => !!account)
-				.subscribe((account: Account) => this.account = Account.build(account));
+				.subscribe((account: Account) => this.account = account.clone(account));
 		} else {
 			this.account = null;
 		}
@@ -22,7 +22,7 @@ export class DashboardComponent implements OnInit {
 
 	ngOnInit() {
 		this.authService.accounts.subscribe((account: any) => {
-			this.account = account ? Account.build(account) : null;
+			this.account = account ? account.clone(account) : null;
 		});
 	}
 

@@ -12,4 +12,9 @@ export class Company implements Entity {
 	constructor(id?: number) {
 		this.id = id;
 	}
+
+	public clone(company: Company): Company {
+		// TODO implements.
+		return null;
+	}
 }

@@ -14,7 +14,14 @@ export class MissionEvent implements Entity {
 	color: any;
 	missionLabel?: Observable<string>;
 
-	static build(event: any): MissionEvent {
+	constructor(id?: number) {
+		this.id = id;
+		this.buildColor('#71B340', '#3C5A14');
+		this.mdStart = moment();
+		this.mdEnd = moment();
+	}
+
+	public clone(event: any): MissionEvent {
 		let instance: MissionEvent = new MissionEvent();
 		if (event) {
 			instance.start = event.start;
@@ -24,14 +31,7 @@ export class MissionEvent implements Entity {
 		}
 		return instance;
 	}
-
-	constructor(id?: number) {
-		this.id = id;
-		this.buildColor('#71B340', '#3C5A14');
-		this.mdStart = moment();
-		this.mdEnd = moment();
-	}
-
+	
 	public buildColor(primary: string, secondary: string) {
 		this.color = {
 			primary: primary,

@@ -10,10 +10,7 @@ import { EntityService } from '../core/entity.service';
 @Component({
 	selector: 'invoice-list',
 	templateUrl: './invoice-list.component.html',
-	styleUrls: ['./invoice-list.component.css'],
-	providers: [
-		{ provide: EntityService, useExisting: InvoiceService }
-	]
+	styleUrls: ['./invoice-list.component.css']
 })
 export class InvoiceListComponent {
 	@Input() listTitle: any;
