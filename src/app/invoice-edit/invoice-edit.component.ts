@@ -1,15 +1,15 @@
-import { Component, OnInit, OnChanges, Input, SimpleChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
-import { Invoice } from '../invoice';
 import { InvoiceService } from '../invoice.service';
-
-import { Observable } from 'rxjs/Rx';
-import { NgForm } from '@angular/forms';
+import { EntityService } from '../core/entity.service';
 
 @Component({
     selector: 'invoice-edit',
     templateUrl: './invoice-edit.component.html',
-    styleUrls: ['./invoice-edit.component.css']
+    styleUrls: ['./invoice-edit.component.css'],
+	providers: [
+		{ provide: EntityService, useExisting: InvoiceService }
+	]
 })
 export class InvoiceEditComponent {
     @Input() id: number;

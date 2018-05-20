@@ -2,15 +2,11 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { Invoice } from '../invoice';
 import { InvoiceService } from '../invoice.service';
 import { EVENT } from '../event';
-import { EntityService } from '../core/entity.service';
 
 @Component({
     selector: 'invoice-management',
     templateUrl: './invoice-management.component.html',
-    styleUrls: ['./invoice-management.component.css'],
-	providers: [
-		{ provide: EntityService, useExisting: InvoiceService }
-	]
+    styleUrls: ['./invoice-management.component.css']
 })
 export class InvoiceManagementComponent implements OnInit {
     selectedId: number;

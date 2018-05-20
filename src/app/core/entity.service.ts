@@ -61,7 +61,7 @@ export abstract class EntityService<ENTITY extends Entity> {
 
   get(id: number): Observable<ENTITY> {
     this.httpClient.get(this.apiPath + '/' + id, { headers: this.headers})
-        .subscribe((entity) => {
+        .subscribe((entity: any) => {
       this.subject.next(new Event(EVENT.GET, this.getNew().clone(entity)));
     });
     return Observable.merge(this.eventsByType(EVENT.GET), this.eventsByType(EVENT.UPDATE));
