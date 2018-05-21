@@ -13,6 +13,5 @@ import { EntityService } from '../../core';
 })
 export class InvoiceEditComponent {
     @Input() id: number;
-
-    constructor() { }
+    
 }

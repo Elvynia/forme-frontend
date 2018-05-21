@@ -7,7 +7,7 @@ import * as moment from 'moment';
 
 import { Calendar } from '../calendar';
 import { MissionEvent } from '../mission-event';
-import { MissionService } from '../mission.service';
+import { MissionService } from '../mission/mission.service';
 import { EventService } from '../event.service';
 
 @Component({

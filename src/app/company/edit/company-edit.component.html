@@ -1,0 +1,30 @@
+<entity-edit [id]="id" createTitle="Créer une société" updateTitle="Mettre une société à jour">
+	<ng-template let-company #formContent>
+		<mat-form-field>
+			<input matInput name="name" placeholder="Nom"
+				[(ngModel)]="company.name" required>
+		</mat-form-field>
+		<mat-form-field>
+			<input matInput name="trigram" placeholder="Trigramme"
+				[(ngModel)]="company.trigram" required>
+		</mat-form-field>
+		<mat-form-field>
+			<input matInput name="siren" placeholder="SIREN"
+				[(ngModel)]="company.siren" minlength="9" maxlength="9">
+		</mat-form-field>
+		<mat-form-field>
+			<input matInput name="siret" placeholder="SIRET"
+				[(ngModel)]="company.siret" minlength="14" maxlength="14">
+		</mat-form-field>
+		<mat-form-field>
+			<input matInput name="rcs" placeholder="RCS"
+				[(ngModel)]="company.rcs">
+		</mat-form-field>
+		<mat-form-field>
+			<textarea matInput name="address" class="address-line" placeholder="Adresse" 
+				[ngModel]="company.address ? company.address.join('\n') : company.address"
+				(ngModelChange)="company.address = $event.length > 0 ? $event.split('\n') : $event">
+			</textarea>
+		</mat-form-field>
+	</ng-template>
+</entity-edit>

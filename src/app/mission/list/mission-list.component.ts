@@ -1,6 +1,7 @@
-import { Component, Input} from '@angular/core';
-import { EntityService } from '../core';
+import { Component, Input, EventEmitter, Output} from '@angular/core';
+import { EntityService } from '../../core';
 import { MissionService } from '../mission.service';
+import { Mission } from '../mission';
 
 @Component({
 	selector: 'mission-list',
@@ -16,8 +17,15 @@ export class MissionListComponent {
 	@Input() filterContext: any;
 	@Input('columns') displayedColumns;
 
+	@Output() onSelect: EventEmitter<Mission>;
+
 	constructor() {
 		this.listTitle = 'Toutes les missions';
 		this.displayedColumns = ['id', 'client', 'label', 'title', 'type', 'duration', 'tjm', 'travelCosts', 'closed'];
+		this.onSelect = new EventEmitter();
+	}
+
+	select(mission: Mission) {
+		this.onSelect.next(mission);
 	}
 }

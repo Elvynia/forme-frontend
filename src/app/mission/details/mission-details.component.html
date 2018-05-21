@@ -1,0 +1,42 @@
+<entity-card [id]="id" avatarUrl="/assets/mission.svg" [actions]="['delete']">
+	<ng-template let-mission #cardTitle>
+			Détails de la mission n°{{mission.id}}
+	</ng-template>
+	<ng-template let-mission #cardSubtitle>
+			{{ mission.title }}
+	</ng-template>
+	<ng-template let-mission #cardContent>
+		<div>
+			<label>Client</label>
+			<app-company-ref [id]="mission.client.id"></app-company-ref>
+		</div>
+		<div>
+			<label>Label</label>
+			<span>{{ mission.label }}</span>
+		</div>
+		<div>
+			<label>Type</label>
+			{{ mission.type }}
+		</div>
+		<div>
+			<label>Lieu</label>
+			<span>{{ mission.place }}</span>
+		</div>
+		<div>
+			<label>Durée</label>
+			<span>{{ mission.duration /7 }}j ({{ mission.duration }}h)</span>
+		</div>
+		<div>
+			<label>TJM</label>
+			<span>{{ mission.tjm }} €/j</span>
+		</div>
+		<div>
+			<label>Frais</label>
+			<field-check [checked]="mission.travelCosts"></field-check>
+		</div>
+		<div>
+			<label>Terminée</label>
+			<field-check [checked]="mission.closed"></field-check>
+		</div>
+	</ng-template>
+</entity-card>

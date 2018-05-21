@@ -5,7 +5,7 @@ import * as moment from 'moment';
 import { Observable } from 'rxjs/Rx';
 
 import { Invoice } from '../invoice/invoice';
-import { Mission } from '../mission';
+import { Mission } from '../mission/mission';
 import { InvoiceService } from '../invoice/invoice.service';
 
 @Component({

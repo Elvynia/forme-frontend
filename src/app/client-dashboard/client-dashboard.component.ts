@@ -1,12 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Company } from '../company';
+import { Company } from '../company/company';
 import { Invoice } from '../invoice/invoice';
 import { InvoiceService } from '../invoice/invoice.service';
 import { Estimate } from '../estimate/estimate';
 import { EstimateService } from '../estimate/estimate.service';
-import { Mission } from '../mission';
-import { MissionService } from '../mission.service';
+import { Mission } from '../mission/mission';
+import { MissionService } from '../mission/mission.service';
 import { FormeAccount } from '../forme-account';
 
 @Component({

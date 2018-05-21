@@ -1,9 +1,39 @@
+<entity-card [id]="id" avatarUrl="/assets/company.svg" [actions]="['delete']">
+	<ng-template let-company #cardTitle>
+		Détails du client n°{{company.id}}
+	</ng-template>
+	<ng-template let-company #cardSubtitle>
+		{{ company.name }}
+	</ng-template>
+	<ng-template let-company #cardContent>
+		<div>
+			<label>Trigramme</label>
+			<span>{{ company.trigram }}</span>
+		</div>
+		<div>
+			<label>Adresse</label>
+			<span>{{ company.address }}</span>
+		</div>
+		<div>
+			<label>SIREN</label>
+			<span>{{ company.siren }}</span>
+		</div>
+		<div>
+			<label>SIRET</label>
+			<span>{{ company.siret }}</span>
+		</div>
+		<div>
+			<label>RCS</label>
+			<span>{{ company.rcs }}</span>
+		</div>
+	</ng-template>
+</entity-card>
 <ng-container *ngIf="company">
 	<mat-card>
 		<mat-card-header [hidden]="hideTitle">
 			<div mat-card-avatar class="company-details-icon"></div>
-			<mat-card-title>Détails du client n°{{company.id}}</mat-card-title>
-			<mat-card-subtitle>{{ company.name }}</mat-card-subtitle>
+			<mat-card-title></mat-card-title>
+			<mat-card-subtitle></mat-card-subtitle>
 		</mat-card-header>
 		<mat-card-content>
 			<table>
@@ -15,11 +45,11 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td>Trigramme</td>
+						<td></td>
 						<td>{{ company.trigram }}</td>
 					</tr>
 					<tr>
-						<td>Adresse</td>
+						<td></td>
 						<td>{{ company.address }}</td>
 					</tr>
 				</tbody>

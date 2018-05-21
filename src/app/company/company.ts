@@ -1,4 +1,4 @@
-import { Entity } from './core';
+import { Entity } from '../core';
 
 export class Company implements Entity {
 	id: number;

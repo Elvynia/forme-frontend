@@ -1,4 +1,5 @@
-<entity-list [entityColumns]="displayedColumns" [listTitle]="listTitle" [filter]="filter" [filterContext]="filterContext">
+<entity-list [entityColumns]="displayedColumns" [listTitle]="listTitle" (onSelect)="select($event)"
+	[filter]="filter" [filterContext]="filterContext">
 	<ng-template let-entity #colCompanyId>
 		{{ entity.id }}
 	</ng-template>

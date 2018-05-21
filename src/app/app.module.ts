@@ -21,23 +21,25 @@ import { InvoiceListComponent } from './invoice/list/invoice-list.component';
 import { InvoiceManagementComponent } from './invoice/management/invoice-management.component';
 import { InvoiceService } from './invoice/invoice.service';
 
-import { CompanyEditComponent } from './company-edit/company-edit.component';
-import { CompanyComboboxComponent } from './company-combobox/company-combobox.component';
-import { CompanyDetailsComponent } from './company-details/company-details.component';
-import { CompanyListComponent } from './company-list/company-list.component';
-import { CompanyService } from './company.service';
+import { CompanyEditComponent } from './company/edit/company-edit.component';
+import { CompanyComboboxComponent } from './company/combobox/company-combobox.component';
+import { CompanyDetailsComponent } from './company/details/company-details.component';
+import { CompanyListComponent } from './company/list/company-list.component';
+import { CompanyManagementComponent } from './company/management/company-management.component';
+import { CompanyService } from './company/company.service';
 
-import { MissionEditComponent } from './mission-edit/mission-edit.component';
-import { MissionComboboxComponent } from './mission-combobox/mission-combobox.component';
-import { MissionDetailsComponent } from './mission-details/mission-details.component';
-import { MissionListComponent } from './mission-list/mission-list.component';
-import { MissionService } from './mission.service';
+import { MissionEditComponent } from './mission/edit/mission-edit.component';
+import { MissionComboboxComponent } from './mission/combobox/mission-combobox.component';
+import { MissionDetailsComponent } from './mission/details/mission-details.component';
+import { MissionListComponent } from './mission/list/mission-list.component';
+import { MissionManagementComponent } from './mission/management/mission-management.component';
+import { MissionService } from './mission/mission.service';
 
 import { EventService } from './event.service';
 import { CoreModule, AuthGuard, AuthService, Account } from './core';
 
 import { ROUTES } from './routes';
-import { CompanyRefComponent } from './company-ref/company-ref.component';
+import { CompanyRefComponent } from './company/ref/company-ref.component';
 import { PlanningComponent } from './planning/planning.component';
 import { EventEditComponent } from './event-edit/event-edit.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -72,7 +74,9 @@ import { FormeAccount } from './forme-account';
     CompanyComboboxComponent,
     MissionComboboxComponent,
     InvoiceManagementComponent,
-    EstimateManagementComponent
+    EstimateManagementComponent,
+    MissionManagementComponent,
+    CompanyManagementComponent
   ],
   imports: [
     BrowserModule,

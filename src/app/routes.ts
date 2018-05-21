@@ -1,10 +1,10 @@
 import { Route } from '@angular/router';
 
 import { PlanningComponent } from './planning/planning.component';
-import { CompanyEditComponent } from './company-edit/company-edit.component';
+import { CompanyManagementComponent } from './company/management/company-management.component';
 import { EstimateManagementComponent } from './estimate/management/estimate-management.component';
 import { InvoiceManagementComponent } from './invoice/management/invoice-management.component';
-import { MissionEditComponent } from './mission-edit/mission-edit.component';
+import { MissionManagementComponent } from './mission/management/mission-management.component';
 import { EventEditComponent } from './event-edit/event-edit.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
@@ -44,19 +44,11 @@ export const ROUTES: Array<Route> = [
 		canActivate: [AuthGuard]
 	}, {
 		path: 'company',
-		component: CompanyEditComponent,
-		canActivate: [AuthGuard]
-	}, {
-		path: 'company/:id',
-		component: CompanyEditComponent,
+		component: CompanyManagementComponent,
 		canActivate: [AuthGuard]
 	}, {
 		path: 'mission',
-		component: MissionEditComponent,
-		canActivate: [AuthGuard]
-	}, {
-		path: 'mission/:id',
-		component: MissionEditComponent,
+		component: MissionManagementComponent,
 		canActivate: [AuthGuard]
 	}, {
 		path: 'event',

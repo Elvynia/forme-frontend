@@ -14,6 +14,4 @@ import { EntityService } from '../../core';
 export class InvoiceDetailsComponent {
 	@Input() id: number;
 
-	constructor() { }
-
 }	

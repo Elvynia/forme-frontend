@@ -1,0 +1,47 @@
+<entity-edit [id]="id" createTitle="Créer une mission" updateTitle="Mettre une mission à jour">
+	<ng-template let-mission #formContent>
+		<app-company-combobox [(selection)]="mission.client"></app-company-combobox>
+		<mat-form-field>
+			<input matInput type="number" id="duration" name="duration" placeholder="Durée" 
+				[ngModel]="durationH ? mission.duration : mission.duration / 7"
+				(ngModelChange)="mission.duration = durationH ? $event : $event * 7" min="O" required />
+			<mat-hint>
+				<a id="swapDurationType" (click)="durationH = !durationH"
+					[title]="'cliquer pour ' + (durationH ? 'changer en jours' : 'changer en heures')">
+					{{ durationH ? 'en heures' : 'en jours' }}
+				</a>
+			</mat-hint>
+		</mat-form-field>
+		<mat-form-field>
+			<input matInput type="number" name="tjm" placeholder="TJM (€/j)" 
+				[(ngModel)]="mission.tjm" min="O" required />
+		</mat-form-field>
+		<mat-form-field>
+			<input matInput name="label" placeholder="Label" 
+				[(ngModel)]="mission.label" required />
+		</mat-form-field>
+		<mat-form-field>
+			<input matInput name="title" placeholder="Titre" 
+				[(ngModel)]="mission.title" required />
+		</mat-form-field>
+		<mat-form-field>
+			<input matInput name="place" placeholder="Lieu" 
+				[(ngModel)]="mission.place" required />
+		</mat-form-field>
+		<mat-form-field>
+			<mat-select name="type" placeholder="Type"
+				[(ngModel)]="mission.type">
+				<mat-option value="0">DEV</mat-option>
+				<mat-option value="1" selected>Formation</mat-option>
+			</mat-select>
+		</mat-form-field>
+		<section>
+			<mat-checkbox name="travelCosts" [(ngModel)]="mission.travelCosts">
+				Frais de déplacement
+			</mat-checkbox>
+			<mat-checkbox name="closed" [(ngModel)]="mission.closed">
+				Terminée
+			</mat-checkbox>
+		</section>
+	</ng-template>
+</entity-edit>

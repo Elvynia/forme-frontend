@@ -1,6 +1,7 @@
-import { Component, Input} from '@angular/core';
+import { Component, Input, Output, EventEmitter} from '@angular/core';
 import { CompanyService } from '../company.service';
-import { EntityService } from '../core';
+import { EntityService } from '../../core';
+import { Company } from '../company';
 
 @Component({
   selector: 'company-list',
@@ -16,9 +17,16 @@ export class CompanyListComponent {
 	@Input() filterContext: any;
 	@Input('columns') displayedColumns;
 
+	@Output() onSelect: EventEmitter<Company>;
+
 	constructor() {
 		this.listTitle = 'Toutes les sociétés';
 		this.displayedColumns = ['id', 'trigram', 'name', 'siren', 'siret', 'rcs', 'address'];
+		this.onSelect = new EventEmitter();
+	}
+
+	select(invoice: Company) {
+		this.onSelect.next(invoice);
 	}
 
 }

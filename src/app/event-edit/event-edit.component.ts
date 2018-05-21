@@ -1,10 +1,10 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
-import { Mission } from '../mission';
+import { Mission } from '../mission/mission';
 import { MissionEvent } from '../mission-event';
 import { EventService } from '../event.service';
-import { MissionService } from '../mission.service';
+import { MissionService } from '../mission/mission.service';
 
 @Component({
 	selector: 'app-event-edit',

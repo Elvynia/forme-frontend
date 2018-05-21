@@ -1,5 +1,5 @@
 import { Account } from "./core";
-import { Company } from './company';
+import { Company } from './company/company';
 import { Injectable } from "@angular/core";
 
 @Injectable()

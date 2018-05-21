@@ -1,0 +1,7 @@
+div {
+	display: flex;
+}
+
+div label {
+	flex: 1;
+}

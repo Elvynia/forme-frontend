@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Rx';
 
 import * as moment from 'moment';
 
-import { Company } from './company';
+import { Company } from './company/company';
 
 export class MissionEvent implements Entity {
 	id: number;

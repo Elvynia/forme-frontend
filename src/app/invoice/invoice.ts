@@ -1,5 +1,5 @@
 import { Entity } from '../core';
-import { Company } from '../company';
+import { Company } from '../company/company';
 
 import * as moment from 'moment';
 

@@ -1,7 +1,7 @@
 import * as moment from 'moment';
 
 import { Entity } from '../core';
-import { Company } from '../company';
+import { Company } from '../company/company';
 
 export class Estimate implements Entity {
 	id: number;

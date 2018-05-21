@@ -1,6 +1,6 @@
-import { Entity } from './core';
+import { Entity } from '../core';
 
-import { Company } from './company';
+import { Company } from '../company/company';
 
 export class Mission implements Entity {
 	id: number;

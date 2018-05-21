@@ -79,6 +79,11 @@ mat-table mat-row mat-cell.mat-column-title {
 	flex: 2;
 }
 
+mat-table mat-header-row mat-header-cell.mat-column-address,
+mat-table mat-row mat-cell.mat-column-address {
+	flex: 2;
+}
+
 .mat-row-selected {
 	background-color: lightblue;
 }
