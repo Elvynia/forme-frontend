@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 import { InvoiceService } from '../invoice.service';
-import { EntityService } from '../core';
+import { EntityService } from '../../core';
 
 @Component({
     selector: 'invoice-edit',

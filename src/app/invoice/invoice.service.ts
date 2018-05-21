@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Invoice } from './invoice';
-import { EntityService } from './core';
+import { EntityService } from '../core';
 
 @Injectable()
 export class InvoiceService extends EntityService<Invoice> {

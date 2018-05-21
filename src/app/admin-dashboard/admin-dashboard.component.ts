@@ -4,9 +4,9 @@ import * as moment from 'moment';
 
 import { Observable } from 'rxjs/Rx';
 
-import { Invoice } from '../invoice';
+import { Invoice } from '../invoice/invoice';
 import { Mission } from '../mission';
-import { InvoiceService } from '../invoice.service';
+import { InvoiceService } from '../invoice/invoice.service';
 
 @Component({
 	selector: 'app-admin-dashboard',

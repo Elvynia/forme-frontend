@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, HostListener } from '@angular/core';
 
 import { Invoice } from '../invoice';
-import { Company } from '../company';
-import { CompanyService } from '../company.service';
+import { Company } from '../../company';
+import { CompanyService } from '../../company.service';
 
 @Component({
 	selector: 'app-invoice-docgen',

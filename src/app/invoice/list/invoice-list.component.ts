@@ -1,9 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { FormeDataSource } from '../core/forme-data-source';
 import { Invoice } from '../invoice';
 import { InvoiceService } from '../invoice.service';
-import { EntityService, AuthService } from '../core';
+import { EntityService, AuthService, FormeDataSource } from '../../core';
 
 @Component({
 	selector: 'invoice-list',

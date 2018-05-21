@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { Company } from '../company';
-import { Invoice } from '../invoice';
-import { InvoiceService } from '../invoice.service';
+import { Invoice } from '../invoice/invoice';
+import { InvoiceService } from '../invoice/invoice.service';
 import { Estimate } from '../estimate';
 import { EstimateService } from '../estimate.service';
 import { Mission } from '../mission';
