@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs/Rx';
 
 import { Entity } from './entity';
-import { Event, EVENT } from './../event';
+import { Event, EVENT } from './event';
 import { environment as ENV } from '../../environments/environment';
 import { AuthService } from './auth.service';
 

@@ -1,7 +1,6 @@
 import { Component, OnInit, OnChanges, Input, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
-import { Event, EVENT } from '../event';
 import { Company } from '../company';
 import { Estimate } from '../estimate';
 import { EstimateService } from '../estimate.service';

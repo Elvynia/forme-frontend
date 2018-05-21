@@ -2,7 +2,7 @@ import { Component, ContentChildren, EventEmitter, Input, OnChanges, OnDestroy, 
 import { MatPaginator, MatSort } from '@angular/material';
 import { Subscription } from 'rxjs';
 import { Entity } from '../../entity';
-import { EVENT } from '../../event';
+import { EVENT } from '../event';
 import { AuthService } from '../auth.service';
 import { EntityService } from '../entity.service';
 import { FormeDataSource } from '../forme-data-source';

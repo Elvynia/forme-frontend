@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 
 import { FormeDataSource } from '../core/forme-data-source';
-import { Event, EVENT } from '../event';
 import { Estimate } from '../estimate';
 import { EstimateService } from '../estimate.service';
 import { EntityService } from '../core/entity.service';
