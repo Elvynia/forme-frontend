@@ -3,9 +3,8 @@ import { Router, RouterEvent, ActivatedRoute, NavigationEnd } from '@angular/rou
 import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 
-import { Account } from './account';
-import { AuthService } from './core';
-import { AccountService } from './account.service';
+import { AuthService, AccountService } from './core';
+import { FormeAccount } from './forme-account';
 
 @Component({
 	selector: 'app-root',
@@ -16,8 +15,8 @@ export class AppComponent implements OnInit {
 	wideScreen: boolean;
 	isDashboard: boolean;
 	isClientboard: boolean;
-	account: Account;
-	clients: Array<Account>;
+	account: FormeAccount;
+	clients: Array<FormeAccount>;
 
 	public get loggedIn(): boolean {
 		return this.account != null;
@@ -36,8 +35,8 @@ export class AppComponent implements OnInit {
 
 	ngOnInit() {
 		this.accountService.list()
-		.map((accounts: Account[]) => 
-			accounts.filter((account: Account) => new Account().clone(account).isClient))
+		.map((accounts: FormeAccount[]) => 
+			accounts.filter((account: FormeAccount) => account.isClient))
 		.subscribe((accounts) =>
 			this.clients = accounts);
 		this.registerIcons();
@@ -63,7 +62,7 @@ export class AppComponent implements OnInit {
 			}
 		});
 		this.authService.accounts.subscribe((account: any) => {
-			this.account = account ? new Account().clone(account) : null;
+			this.account = account ? account : null;
 		});
 	}
 

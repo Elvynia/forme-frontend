@@ -9,8 +9,7 @@ import { EventEditComponent } from './event-edit/event-edit.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { ClientDashboardComponent } from './client-dashboard/client-dashboard.component';
-import { LoginComponent } from './login/login.component';
-import { AccountAdminComponent } from './account-admin/account-admin.component';
+import { LoginComponent, AccountAdminComponent } from './core';
 
 import { AuthGuard } from './core';
 import { InvoiceListComponent } from './invoice-list/invoice-list.component';

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from '../core';
-import { Account } from '../account';
+import { FormeAccount } from '../forme-account';
 
 @Component({
 	selector: 'app-dashboard',
@@ -9,12 +9,12 @@ import { Account } from '../account';
 	styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-	account: Account;
+	account: FormeAccount;
 
 	constructor(private authService: AuthService) {
 		if (this.authService.check()) {
-			this.authService.accounts.first((account: Account) => !!account)
-				.subscribe((account: Account) => this.account = new Account().clone(account));
+			this.authService.accounts.first((account: FormeAccount) => !!account)
+				.subscribe((account: FormeAccount) => this.account = new FormeAccount().clone(account));
 		} else {
 			this.account = null;
 		}
@@ -22,7 +22,7 @@ export class DashboardComponent implements OnInit {
 
 	ngOnInit() {
 		this.authService.accounts.subscribe((account: any) => {
-			this.account = account ? new Account().clone(account) : null;
+			this.account = account ? new FormeAccount().clone(account) : null;
 		});
 	}
 

@@ -3,21 +3,21 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { BehaviorSubject, Observable } from 'rxjs/Rx';
 
-import { Account } from './../../account';
+import { Account } from '../account/account';
 import { Config } from '../config';
 
 export const LSK_ACCOUNT = 'account';
 
 @Injectable()
 export class AuthService {
-	private _account: BehaviorSubject<Account>;
+	private subject: BehaviorSubject<Account>;
 
 	private get storageAccount(): Account {
-		return JSON.parse(localStorage.getItem(LSK_ACCOUNT));
+		return this.account.clone(JSON.parse(localStorage.getItem(LSK_ACCOUNT)));
 	}
 
 	public get accounts(): Observable<Account> {
-		return this._account.asObservable();
+		return this.subject.asObservable();
 	}
 
 	public get loggedIn(): Observable<Account> {
@@ -28,9 +28,9 @@ export class AuthService {
 		return this.accounts.filter((account: Account) => account == null);
 	}
 
-	constructor(private httpClient: HttpClient, private config: Config) {
-		this._account = new BehaviorSubject(this.check() ? this.storageAccount : null);
-		this._account.subscribe((account: Account) => {
+	constructor(private httpClient: HttpClient, private config: Config, private account: Account) {
+		this.subject = new BehaviorSubject(this.check() ? this.storageAccount : null);
+		this.subject.subscribe((account: Account) => {
 			if (account) {
 				localStorage.setItem(LSK_ACCOUNT, JSON.stringify(account));
 			} else {
@@ -42,7 +42,7 @@ export class AuthService {
 	login(user: Account): Observable<Account> {
 		this.httpClient.post(this.config.loginUrl, user)
 			.subscribe((account: Account) => {
-				this._account.next(account);
+				this.subject.next(this.account.clone(account));
 			});
 			return this.accounts;
 	}
@@ -52,7 +52,7 @@ export class AuthService {
 	}
 
 	logout(): Observable<Account> {
-		this._account.next(null);
+		this.subject.next(null);
 		return this.accounts;
 	}
 }

@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Account } from '../account';
 
 @Component({
-	selector: 'app-account-admin',
+	selector: 'account-admin',
 	templateUrl: './account-admin.component.html',
 	styleUrls: ['./account-admin.component.css']
 })

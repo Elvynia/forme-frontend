@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Account } from '../account';
 import { Company } from '../company';
 import { Invoice } from '../invoice';
 import { InvoiceService } from '../invoice.service';
@@ -8,6 +7,7 @@ import { Estimate } from '../estimate';
 import { EstimateService } from '../estimate.service';
 import { Mission } from '../mission';
 import { MissionService } from '../mission.service';
+import { FormeAccount } from '../forme-account';
 
 @Component({
 	selector: 'app-client-dashboard',
@@ -15,7 +15,7 @@ import { MissionService } from '../mission.service';
 	styleUrls: ['./client-dashboard.component.css']
 })
 export class ClientDashboardComponent implements OnInit {
-	@Input() account: Account;
+	@Input() account: FormeAccount;
 
 	constructor(private invoiceService: InvoiceService,
 		private estimateService: EstimateService,

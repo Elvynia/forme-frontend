@@ -5,6 +5,14 @@ import { FieldCheckComponent, FieldDateComponent } from './field';
 import { AppMaterialModule } from '../app-material.module';
 import { FormsModule } from '@angular/forms';
 import { Config } from './config';
+import { AccountService } from './account/account.service';
+import { AccountAdminComponent } from './account/admin/account-admin.component';
+import { AccountEditComponent } from './account/edit/account-edit.component';
+import { AccountListComponent } from './account/list/account-list.component';
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './auth/auth-gard';
+import { AuthService } from './auth/auth.service';
+import { Account } from './account/account';
 
 @NgModule({
     imports: [
@@ -18,7 +26,11 @@ import { Config } from './config';
         EntityCardComponent,
         EntityEditComponent,
         FieldCheckComponent,
-        FieldDateComponent
+        FieldDateComponent,
+        AccountAdminComponent,
+        AccountEditComponent,
+        AccountListComponent,
+        LoginComponent
     ],
     exports: [
         EntityListComponent,
@@ -26,19 +38,24 @@ import { Config } from './config';
         EntityCardComponent,
         EntityEditComponent,
         FieldCheckComponent,
-        FieldDateComponent
+        FieldDateComponent,
+        AccountAdminComponent,
+        AccountEditComponent,
+        AccountListComponent,
+        LoginComponent
     ]
 })
 export class CoreModule {
 
-    public static forRoot(apiUrl: string, loginUrl: string): ModuleWithProviders {
-        let config = new Config();
-        config.apiUrl = apiUrl;
-        config.loginUrl = loginUrl;
+    public static forRoot(config: Config): ModuleWithProviders {
         return {
             ngModule: CoreModule,
             providers: [
-                { provide: Config, useValue: config }
+                { provide: Config, useValue: config },
+                AccountService,
+                AuthGuard,
+                AuthService,
+                Account
             ]
         };
     }

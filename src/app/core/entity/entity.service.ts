@@ -4,7 +4,7 @@ import { Observable, BehaviorSubject } from 'rxjs/Rx';
 
 import { Entity } from './entity';
 import { Event, EVENT } from '../event';
-import { AuthService } from '../auth';
+import { AuthService } from '../auth/auth.service';
 import { Config } from '../config';
 import { Injectable } from '@angular/core';
 
