@@ -6,7 +6,6 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CalendarModule } from 'angular-calendar';
 
-import { AppMaterialModule } from './app-material.module';
 import { AppComponent } from './app.component';
 import { EstimateListComponent } from './estimate-list/estimate-list.component';
 import { EstimateEditComponent } from './estimate-edit/estimate-edit.component';
@@ -78,7 +77,6 @@ import { FormeAccount } from './forme-account';
     ReactiveFormsModule,
     RouterModule.forRoot(ROUTES),
     CalendarModule.forRoot(),
-    AppMaterialModule,
     CoreModule.forRoot({ apiUrl: ENV.apiUrl, loginUrl: ENV.loginUrl }),
   ],
   providers: [

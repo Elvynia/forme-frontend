@@ -1,33 +1,33 @@
-import {NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
 import {
-	MatToolbarModule,
-	MatButtonModule,
-	MatCardModule,
-	MatRippleModule,
-	MatSortModule,
-	MatPaginatorModule,
-	MatTableModule,
-	MatTabsModule,
-	MatFormFieldModule,
-	MatInputModule,
-	MatDialogModule,
-	MatSelectModule,
-	MatOptionModule,
-	MatCheckboxModule,
-	MatIconModule,
-	MatMenuModule,
-	MatGridListModule,
-	MatAutocompleteModule,
-	MatListModule,
-	MatExpansionModule,
-	MatDatepickerModule,
-	MAT_DATE_FORMATS,
-	MatProgressSpinnerModule
+    MatToolbarModule,
+    MatButtonModule,
+    MatCardModule,
+    MatRippleModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatTabsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDialogModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatMenuModule,
+    MatGridListModule,
+    MatAutocompleteModule,
+    MatListModule,
+    MatExpansionModule,
+    MatDatepickerModule,
+    MAT_DATE_FORMATS,
+    MatProgressSpinnerModule
 } from '@angular/material';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 @NgModule({
-	exports: [
+    exports: [
 		MatFormFieldModule,
 	    MatInputModule,
 	    MatDialogModule,
@@ -66,5 +66,4 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
 		}}
 	]
 })
-export class AppMaterialModule {
-}
+export class CoreMaterialModule { }
