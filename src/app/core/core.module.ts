@@ -7,6 +7,7 @@ import { FieldCheckComponent } from './field-check/field-check.component';
 import { EntityCardComponent } from './entity-card/entity-card.component';
 import { EntityEditComponent } from './entity-edit/entity-edit.component';
 import { FormsModule } from '@angular/forms';
+import { FieldDateComponent } from './field-date/field-date.component';
 
 @NgModule({
     imports: [
@@ -17,16 +18,18 @@ import { FormsModule } from '@angular/forms';
     declarations: [
         EntityListComponent,
         EntityColumnsDirective,
-        FieldCheckComponent,
         EntityCardComponent,
-        EntityEditComponent
+        EntityEditComponent,
+        FieldCheckComponent,
+        FieldDateComponent
     ],
     exports: [
         EntityListComponent,
         EntityColumnsDirective,
-        FieldCheckComponent,
         EntityCardComponent,
-        EntityEditComponent
+        EntityEditComponent,
+        FieldCheckComponent,
+        FieldDateComponent
     ]
 })
 export class CoreModule { }

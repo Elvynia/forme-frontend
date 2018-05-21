@@ -4,11 +4,11 @@ import { MatDatepicker } from '@angular/material';
 import * as moment from 'moment';
 
 @Component({
-	selector: 'app-datepicker',
-	templateUrl: './datepicker.component.html',
-	styleUrls: ['./datepicker.component.css']
+	selector: 'field-date',
+	templateUrl: './field-date.component.html',
+	styleUrls: ['./field-date.component.css']
 })
-export class DatepickerComponent {
+export class FieldDateComponent {
 	@Input() selection: moment.Moment;
 	@Output() selectionChange: EventEmitter<moment.Moment>;
 	@Input() name: string;

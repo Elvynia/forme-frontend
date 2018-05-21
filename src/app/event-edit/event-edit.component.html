@@ -1,9 +1,9 @@
 <h2>{{ new ? 'Créer un nouvel événement' : 'Mettre un événement à jour' }}</h2>
 <form (ngSubmit)="submit(model)" #model="ngForm">
 	<app-mission-combobox [(selection)]="event.mission"></app-mission-combobox>
-	<app-datepicker [(selection)]="event.mdStart" label="Date de début"
-		name="start"></app-datepicker>
-	<app-datepicker [(selection)]="event.mdEnd" label="Date de fin"
-		name="end"></app-datepicker>
+	<field-date [(selection)]="event.mdStart" label="Date de début"
+		name="start"></field-date>
+	<field-date [(selection)]="event.mdEnd" label="Date de fin"
+		name="end"></field-date>
 	<button mat-raised-button color="primary" [disabled]="!model.form.valid">Valider</button>
 </form>

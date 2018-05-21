@@ -47,7 +47,6 @@ import { AccountAdminComponent } from './account-admin/account-admin.component';
 import { InvoiceDocgenComponent } from './invoice-docgen/invoice-docgen.component';
 import { CompanyComboboxComponent } from './company-combobox/company-combobox.component';
 import { MissionComboboxComponent } from './mission-combobox/mission-combobox.component';
-import { DatepickerComponent } from './datepicker/datepicker.component';
 import { CoreModule } from './core/core.module';
 import { InvoiceManagementComponent } from './invoice-management/invoice-management.component';
 
@@ -79,7 +78,6 @@ import { InvoiceManagementComponent } from './invoice-management/invoice-managem
     InvoiceDocgenComponent,
     CompanyComboboxComponent,
     MissionComboboxComponent,
-    DatepickerComponent,
     InvoiceManagementComponent
   ],
   imports: [
