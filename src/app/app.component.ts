@@ -4,7 +4,7 @@ import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { Account } from './account';
-import { AuthService } from './core/auth.service';
+import { AuthService } from './core';
 import { AccountService } from './account.service';
 
 @Component({

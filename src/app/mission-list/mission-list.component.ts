@@ -1,5 +1,5 @@
 import { Component, Input} from '@angular/core';
-import { EntityService } from '../core/entity.service';
+import { EntityService } from '../core';
 import { MissionService } from '../mission.service';
 
 @Component({

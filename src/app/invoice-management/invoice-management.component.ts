@@ -2,7 +2,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Invoice } from '../invoice';
 import { InvoiceService } from '../invoice.service';
-import { EVENT } from '../core/event';
+import { EVENT } from '../core';
 
 @Component({
     selector: 'invoice-management',

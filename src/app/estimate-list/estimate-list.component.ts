@@ -1,10 +1,8 @@
 import { Component, Input } from '@angular/core';
 
-import { FormeDataSource } from '../core/forme-data-source';
+import { EntityService, ListColumn, FormeDataSource } from '../core';
 import { Estimate } from '../estimate';
 import { EstimateService } from '../estimate.service';
-import { EntityService } from '../core/entity.service';
-import { ListColumn } from '../core/entity-list/entity-list.component';
 
 @Component({
   selector: 'estimate-list',

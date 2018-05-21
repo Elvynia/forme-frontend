@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { Account } from '../account';
 import { AccountService } from '../account.service';
-import { EntityService } from '../core/entity.service';
+import { EntityService } from '../core';
 
 @Component({
   selector: 'account-list',

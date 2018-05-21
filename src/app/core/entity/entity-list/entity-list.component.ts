@@ -1,12 +1,11 @@
 import { Component, ContentChildren, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, QueryList, SimpleChanges, TemplateRef, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
 import { Subscription } from 'rxjs';
-import { Entity } from '../../entity';
-import { EVENT } from '../event';
-import { AuthService } from '../auth.service';
+import { Entity } from '../entity';
 import { EntityService } from '../entity.service';
-import { FormeDataSource } from '../forme-data-source';
-import { InvoiceService } from '../../invoice.service';
+import { AuthService } from '../../auth';
+import { EVENT } from '../../event';
+import { FormeDataSource } from '../../forme-data-source';
 
 export interface ListColumn {
     display: boolean

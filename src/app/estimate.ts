@@ -1,6 +1,6 @@
 import * as moment from 'moment';
 
-import { Entity } from './entity';
+import { Entity } from './core';
 import { Company } from './company';
 
 export class Estimate implements Entity {

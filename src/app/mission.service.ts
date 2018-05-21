@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Mission } from './mission';
-import { EntityService } from './core/entity.service';
-import { AuthService } from './core/auth.service';
+import { EntityService, AuthService } from './core';
 
 @Injectable()
 export class MissionService extends EntityService<Mission> {

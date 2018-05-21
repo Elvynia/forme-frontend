@@ -1,4 +1,4 @@
-import { Entity } from './entity';
+import { Entity } from './core';
 
 export class Role implements Entity {
 	id: number;

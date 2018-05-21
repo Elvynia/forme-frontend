@@ -3,8 +3,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormeDataSource } from '../core/forme-data-source';
 import { Invoice } from '../invoice';
 import { InvoiceService } from '../invoice.service';
-import { AuthService } from '../core/auth.service';
-import { EntityService } from '../core/entity.service';
+import { EntityService, AuthService } from '../core';
 
 @Component({
 	selector: 'invoice-list',

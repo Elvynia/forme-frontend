@@ -18,13 +18,10 @@ import { InvoiceService } from './invoice.service';
 import { EstimateService } from './estimate.service';
 import { CompanyService } from './company.service';
 import { MissionService } from './mission.service';
-import { MessageService } from './message.service';
 import { EventService } from './event.service';
 import { AccountService } from './account.service';
-import { AuthService } from './core/auth.service';
+import { AuthGuard, AuthService } from './core';
 import { RoleService } from './role.service';
-
-import { AuthGuard } from './auth-gard';
 
 import { ROUTES } from './routes';
 import { CompanyRefComponent } from './company-ref/company-ref.component';
@@ -92,7 +89,7 @@ import { InvoiceManagementComponent } from './invoice-management/invoice-managem
     CoreModule
   ],
   providers: [InvoiceService, EstimateService, CompanyService, MissionService, 
-    MessageService, EventService, AccountService, AuthService, AuthGuard, RoleService],
+    EventService, AccountService, AuthService, AuthGuard, RoleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -12,7 +12,7 @@ import { ClientDashboardComponent } from './client-dashboard/client-dashboard.co
 import { LoginComponent } from './login/login.component';
 import { AccountAdminComponent } from './account-admin/account-admin.component';
 
-import { AuthGuard } from './auth-gard';
+import { AuthGuard } from './core';
 import { InvoiceListComponent } from './invoice-list/invoice-list.component';
 import { InvoiceManagementComponent } from './invoice-management/invoice-management.component';
 

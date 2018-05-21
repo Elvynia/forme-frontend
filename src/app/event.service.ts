@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { MissionEvent } from './mission-event';
-import { AuthService } from './core/auth.service';
-import { EntityService } from './core/entity.service';
+import { EntityService, AuthService } from './core';
 
 @Injectable()
 export class EventService extends EntityService<MissionEvent> {

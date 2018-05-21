@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { EntityService } from './core/entity.service';
-import { AuthService } from './core/auth.service';
+import { EntityService, AuthService } from './core';
 import { Estimate } from './estimate';
 
 @Injectable()

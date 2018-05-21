@@ -1,6 +1,6 @@
 import { Component, Input} from '@angular/core';
 import { CompanyService } from '../company.service';
-import { EntityService } from '../core/entity.service';
+import { EntityService } from '../core';
 
 @Component({
   selector: 'company-list',

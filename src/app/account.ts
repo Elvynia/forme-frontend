@@ -1,4 +1,4 @@
-import { Entity } from './entity';
+import { Entity } from './core';
 import { Role } from './role';
 import { Company } from './company';
 

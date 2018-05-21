@@ -3,9 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs/Rx';
 
 import { Entity } from './entity';
-import { Event, EVENT } from './event';
-import { environment as ENV } from '../../environments/environment';
-import { AuthService } from './auth.service';
+import { Event, EVENT } from '../event';
+import { AuthService } from '../auth';
+import { environment as ENV } from '../../../environments/environment';
 
 export abstract class EntityService<ENTITY extends Entity> {
   protected apiPath: string;
