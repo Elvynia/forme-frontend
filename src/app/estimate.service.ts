@@ -7,12 +7,9 @@ import { Estimate } from './estimate';
 @Injectable()
 export class EstimateService extends EntityService<Estimate> {
 
-	constructor(HttpClient: HttpClient, authService: AuthService) {
-		super();
-		this.httpClient = HttpClient;
-		this.authService = authService;
+	protected initialize() {
 		this.apiPath += '/estimate';
-		this.initialize();
+		super.initialize();
 	}
 
 	getNew(): Estimate {

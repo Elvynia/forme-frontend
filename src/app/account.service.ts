@@ -8,12 +8,9 @@ import {  } from './core/entity.service';
 @Injectable()
 export class AccountService extends EntityService<Account> {
 
-	constructor(httpClient: HttpClient, authService: AuthService) {
-		super();
-		this.httpClient = httpClient;
-		this.authService = authService;
+	protected initialize() {
 		this.apiPath += '/account';
-		this.initialize();
+		super.initialize();
 	}
 
 	getNew(): Account {

@@ -47,6 +47,8 @@ import { MissionComboboxComponent } from './mission-combobox/mission-combobox.co
 import { CoreModule } from './core/core.module';
 import { InvoiceManagementComponent } from './invoice-management/invoice-management.component';
 
+import { environment as ENV } from '../environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -86,7 +88,7 @@ import { InvoiceManagementComponent } from './invoice-management/invoice-managem
     RouterModule.forRoot(ROUTES),
     CalendarModule.forRoot(),
     AppMaterialModule,
-    CoreModule
+    CoreModule.forRoot(ENV.apiUrl, ENV.loginUrl)
   ],
   providers: [InvoiceService, EstimateService, CompanyService, MissionService, 
     EventService, AccountService, AuthService, AuthGuard, RoleService],

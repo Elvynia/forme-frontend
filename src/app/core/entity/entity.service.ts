@@ -5,12 +5,12 @@ import { Observable, BehaviorSubject } from 'rxjs/Rx';
 import { Entity } from './entity';
 import { Event, EVENT } from '../event';
 import { AuthService } from '../auth';
-import { environment as ENV } from '../../../environments/environment';
+import { Config } from '../config';
+import { Injectable } from '@angular/core';
 
+@Injectable()
 export abstract class EntityService<ENTITY extends Entity> {
   protected apiPath: string;
-  protected httpClient: HttpClient;
-  protected authService: AuthService;
   private subject: BehaviorSubject<Event>;
   private _headers: HttpHeaders;
 
@@ -22,10 +22,11 @@ export abstract class EntityService<ENTITY extends Entity> {
     return this._headers;
   }
 
-  constructor() {
-    this.apiPath = ENV.apiUrl;
+  constructor(protected httpClient: HttpClient, protected authService: AuthService, protected config: Config) {
+    this.apiPath = this.config.apiUrl;
     this.subject = new BehaviorSubject<Event>(new Event(EVENT.INIT));
     this._headers = new HttpHeaders();
+    this.initialize();
   }
 
   protected initialize() {

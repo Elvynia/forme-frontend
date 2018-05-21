@@ -7,12 +7,9 @@ import { EntityService, AuthService } from './core';
 @Injectable()
 export class EventService extends EntityService<MissionEvent> {
 
-	constructor(HttpClient: HttpClient, authService: AuthService) {
-		super();
-		this.httpClient = HttpClient;
-		this.authService = authService;
+	protected initialize() {
 		this.apiPath += '/event';
-		this.initialize();
+		super.initialize();
 	}
 
 	getNew(): MissionEvent {

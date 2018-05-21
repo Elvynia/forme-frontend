@@ -1,18 +1,30 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
-import { EntityService, AuthService } from './core';
+import { Mission } from './mission';
+import { EntityService } from './core';
+
+@Injectable()
+export class MissionService extends EntityService<Mission> {
+
+  getNew(): Mission {
+	  return new Mission();
+  }
+
+  protected initialize() {
+	this.apiPath += '/mission';
+	super.initialize();
+  }
+
+}
+
 import { Role } from './role';
 
 @Injectable()
 export class RoleService extends EntityService<Role> {
 
-	constructor(httpClient: HttpClient, authService: AuthService) {
-		super();
-		this.httpClient = httpClient;
-		this.authService = authService;
+	protected initialize() {
 		this.apiPath += '/account/role';
-		this.initialize();
+		super.initialize();
 	}
 
 	getNew(): Role {

@@ -7,16 +7,13 @@ import { EntityService, AuthService } from './core';
 @Injectable()
 export class CompanyService extends EntityService<Company> {
 
-  constructor(httpClient: HttpClient, authService: AuthService) {
-  	super();
-  	this.httpClient = httpClient;
-  	this.authService = authService;
-  	this.apiPath += '/company';
-  	this.initialize();
-  }
+	getNew(): Company {
+		return new Company();
+	}
 
-  getNew(): Company {
-	  return new Company();
-  }
+	protected initialize() {
+		this.apiPath += '/company';
+		super.initialize();
+	}
 
 }

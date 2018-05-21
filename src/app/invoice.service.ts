@@ -1,18 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
 import { Invoice } from './invoice';
-import { EntityService, AuthService } from './core';
+import { EntityService } from './core';
 
 @Injectable()
 export class InvoiceService extends EntityService<Invoice> {
-	
-	constructor(httpClient: HttpClient, authService: AuthService) {
-		super();
-		this.httpClient = httpClient;
-		this.authService = authService
+
+	protected initialize() {
 		this.apiPath += '/invoice';
-		this.initialize();
+		super.initialize();
 	}
 
 	getNew(): Invoice {
