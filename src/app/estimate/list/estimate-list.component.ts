@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { EntityService, ListColumn, FormeDataSource } from '../core';
+import { EntityService, ListColumn, FormeDataSource } from '../../core';
 import { Estimate } from '../estimate';
 import { EstimateService } from '../estimate.service';
 
@@ -17,10 +17,16 @@ export class EstimateListComponent {
 	@Input() filter: (item) => boolean;
 	@Input() filterContext: any;
 	@Input('columns') displayedColumns;
+	@Output() onSelect: EventEmitter<Estimate>;
 
 	constructor() {
 		this.listTitle = 'Tous les devis';
 		this.displayedColumns = ['id', 'client', 'amount', 'date', 'signed'];
+		this.onSelect = new EventEmitter();
+	}
+
+	select(estimate: Estimate) {
+		this.onSelect.next(estimate);
 	}
 	
 }

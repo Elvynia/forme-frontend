@@ -1,0 +1,11 @@
+<mat-grid-list cols="2" rowHeight="4:3" (click)="$event.stopPropagation()">
+    <mat-grid-tile colspan="2">
+        <estimate-list (onSelect)="showDetails($event)"></estimate-list>
+    </mat-grid-tile>
+    <mat-grid-tile rowspan="2">
+        <estimate-edit [id]="selectedId"></estimate-edit>
+    </mat-grid-tile>
+    <mat-grid-tile rowspan="1">
+        <estimate-details [id]="selectedId"></estimate-details>
+    </mat-grid-tile>
+</mat-grid-list>

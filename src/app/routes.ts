@@ -2,7 +2,7 @@ import { Route } from '@angular/router';
 
 import { PlanningComponent } from './planning/planning.component';
 import { CompanyEditComponent } from './company-edit/company-edit.component';
-import { EstimateEditComponent } from './estimate-edit/estimate-edit.component';
+import { EstimateManagementComponent } from './estimate/management/estimate-management.component';
 import { InvoiceManagementComponent } from './invoice/management/invoice-management.component';
 import { MissionEditComponent } from './mission-edit/mission-edit.component';
 import { EventEditComponent } from './event-edit/event-edit.component';
@@ -39,20 +39,16 @@ export const ROUTES: Array<Route> = [
 		component: InvoiceManagementComponent,
 		canActivate: [AuthGuard]
 	}, {
+		path: 'estimate',
+		component: EstimateManagementComponent,
+		canActivate: [AuthGuard]
+	}, {
 		path: 'company',
 		component: CompanyEditComponent,
 		canActivate: [AuthGuard]
 	}, {
 		path: 'company/:id',
 		component: CompanyEditComponent,
-		canActivate: [AuthGuard]
-	}, {
-		path: 'estimate',
-		component: EstimateEditComponent,
-		canActivate: [AuthGuard]
-	}, {
-		path: 'estimate/:id',
-		component: EstimateEditComponent,
 		canActivate: [AuthGuard]
 	}, {
 		path: 'mission',

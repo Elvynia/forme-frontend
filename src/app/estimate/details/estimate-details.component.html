@@ -1,0 +1,22 @@
+<entity-card [id]="id" avatarUrl="/assets/estimate.svg" [actions]="['delete']">
+	<ng-template let-estimate #cardTitle>
+		Détails du devis n°{{ estimate.id }}
+	</ng-template>
+	<ng-template let-estimate #cardSubtitle>
+		{{ estimate.date | date:'dd/MM/yyyy' }}
+	</ng-template>
+	<ng-template let-estimate #cardContent>
+		<div>
+			<label>Client</label>
+			<app-company-ref [id]="estimate.client.id"></app-company-ref>
+		</div>
+		<div>
+			<label>Montant</label>
+			<span>{{ estimate.amount | currency:'€' }}</span>
+		</div>
+		<div>
+			<label>Signé</label>
+			<field-check [checked]="estimate.signed"></field-check>
+		</div>
+	</ng-template>
+</entity-card>

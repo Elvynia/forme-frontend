@@ -1,4 +1,4 @@
-<entity-edit [id]="id">
+<entity-edit [id]="id" createTitle="Créer une facture" updateTitle="Mettre une facture à jour">
 	<ng-template let-invoice #formContent>
 		<app-company-combobox [(selection)]="invoice.client"></app-company-combobox>
 		<mat-form-field>

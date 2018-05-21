@@ -8,10 +8,11 @@ import { CalendarModule } from 'angular-calendar';
 
 import { AppComponent } from './app.component';
 
-import { EstimateDetailsComponent } from './estimate-details/estimate-details.component';
-import { EstimateEditComponent } from './estimate-edit/estimate-edit.component';
-import { EstimateListComponent } from './estimate-list/estimate-list.component';
-import { EstimateService } from './estimate.service';
+import { EstimateDetailsComponent } from './estimate/details/estimate-details.component';
+import { EstimateEditComponent } from './estimate/edit/estimate-edit.component';
+import { EstimateListComponent } from './estimate/list/estimate-list.component';
+import { EstimateManagementComponent } from './estimate/management/estimate-management.component';
+import { EstimateService } from './estimate/estimate.service';
 
 import { InvoiceDetailsComponent } from './invoice/details/invoice-details.component';
 import { InvoiceDocgenComponent } from './invoice/docgen/invoice-docgen.component';
@@ -70,7 +71,8 @@ import { FormeAccount } from './forme-account';
     InvoiceDocgenComponent,
     CompanyComboboxComponent,
     MissionComboboxComponent,
-    InvoiceManagementComponent
+    InvoiceManagementComponent,
+    EstimateManagementComponent
   ],
   imports: [
     BrowserModule,
