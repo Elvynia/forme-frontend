@@ -1,54 +1,32 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { MatAutocompleteSelectedEvent } from '@angular/material';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 
 import { Company } from '../company';
+import { EntityService } from '../../core';
 import { CompanyService } from '../company.service';
 
-import { Observable } from 'rxjs/Rx';
-
 @Component({
-	selector: 'app-company-combobox',
+	selector: 'company-combobox',
 	templateUrl: './company-combobox.component.html',
-	styleUrls: ['./company-combobox.component.css']
+	styleUrls: ['./company-combobox.component.css'],
+	providers: [
+		{ provide: EntityService, useExisting: CompanyService }
+	]
 })
-export class CompanyComboboxComponent implements OnInit {
+export class CompanyComboboxComponent {
 	@Input() selection: Company;
-	@Output() selectionChange: EventEmitter<Company>;
-	clientControl: FormControl;
-	companies: Array<Company>;
-	filteredCompanies: Observable<Company[]>;
 
-	constructor(private companyService: CompanyService) {
-		this.selectionChange = new EventEmitter();
-		this.companies = [];
-        this.clientControl = new FormControl();
-        this.filteredCompanies = this.clientControl.valueChanges
-            .startWith(null)
-            .map((value: string) => value ? this.filterCompanies(value) : this.companies.slice());
+	filterCompany = function(company: Company) {
+		let context: any = this;
+		if (context.value && context.value.id) {
+			return context.value.id !== company.id;
+		} else if (typeof context.value === 'string') {
+			return company.trigram.indexOf(context.value.toUpperCase()) >= 0
+				|| company.name.toLowerCase().indexOf(context.value.toLowerCase()) >= 0;
+		}
 	}
 
-	ngOnInit() {
-		this.companyService.list()
-	        .subscribe((data: Array<Company>) => {
-	            this.companies = data;
-	        });
-	}
-
-    filterCompanies(filter: string) {
-        if (typeof filter === "string") { 
-            return this.companies.filter((company: Company) => 
-            	company.trigram.indexOf(filter.toUpperCase()) >= 0
-                || company.name.toLowerCase().indexOf(filter.toLowerCase()) >= 0);
-        }
-    }
-
-    displayCompany(company: Company) {
+    displayCompany = function(company: Company) {
         return company ? company.name + ' (' + company.trigram + ')' : '';
-    }
-
-    updateSelection(event: MatAutocompleteSelectedEvent) {
-    	this.selectionChange.next(event.option.value);
     }
 
 }

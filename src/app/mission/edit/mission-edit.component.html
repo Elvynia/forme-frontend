@@ -1,6 +1,6 @@
 <entity-edit [id]="id" createTitle="Créer une mission" updateTitle="Mettre une mission à jour">
 	<ng-template let-mission #formContent>
-		<app-company-combobox [(selection)]="mission.client"></app-company-combobox>
+		<company-combobox [(selection)]="mission.client"></company-combobox>
 		<mat-form-field>
 			<input matInput type="number" id="duration" name="duration" placeholder="Durée" 
 				[ngModel]="durationH ? mission.duration : mission.duration / 7"

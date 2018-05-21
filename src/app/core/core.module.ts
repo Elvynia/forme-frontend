@@ -2,7 +2,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EntityColumnsDirective, EntityListComponent, EntityCardComponent, EntityEditComponent } from './entity';
 import { FieldCheckComponent, FieldDateComponent } from './field';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Config } from './config';
 import { AccountService } from './account/account.service';
 import { AccountManagementComponent } from './account/management/account-management.component';
@@ -14,11 +14,13 @@ import { AuthService } from './auth/auth.service';
 import { Account } from './account/account';
 import { CoreMaterialModule } from './core-material.module';
 import { RoleService } from './role/role.service';
+import { FieldComboboxComponent } from './field/combobox/field-combobox.component';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
+        ReactiveFormsModule,
         CoreMaterialModule
     ],
     declarations: [
@@ -28,6 +30,7 @@ import { RoleService } from './role/role.service';
         EntityEditComponent,
         FieldCheckComponent,
         FieldDateComponent,
+        FieldComboboxComponent,
         AccountManagementComponent,
         AccountEditComponent,
         AccountListComponent,
@@ -35,7 +38,6 @@ import { RoleService } from './role/role.service';
     ],
     exports: [
         // Modules
-        FormsModule,
         CoreMaterialModule,
         // Components
         EntityListComponent,
@@ -43,6 +45,7 @@ import { RoleService } from './role/role.service';
         EntityEditComponent,
         FieldCheckComponent,
         FieldDateComponent,
+        FieldComboboxComponent,
         AccountManagementComponent,
         AccountEditComponent,
         AccountListComponent,

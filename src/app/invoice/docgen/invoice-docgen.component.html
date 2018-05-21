@@ -30,8 +30,8 @@
 			<mat-panel-title>Prestataire et client</mat-panel-title>
 			<mat-panel-description>Nom, SIREN/SIRET, Adresse</mat-panel-description>
 		</mat-expansion-panel-header>
-		<app-company-combobox [(selection)]="invoice.freelance"></app-company-combobox>
-		<app-company-combobox [(selection)]="invoice.clientDoc"></app-company-combobox>
+		<company-combobox [(selection)]="invoice.freelance"></company-combobox>
+		<company-combobox [(selection)]="invoice.clientDoc"></company-combobox>
 		<mat-action-row>
 			<button mat-button color="warn" (click)="setStep(step - 1)">Précédent</button>
       		<button mat-button color="primary" (click)="setStep(step + 1)">Suivant</button>

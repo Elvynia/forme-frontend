@@ -1,10 +1,7 @@
-<mat-form-field>
-	<input matInput name="missionId" placeholder="Mission" [(ngModel)]="selection"
-				 [matAutocomplete]="clientAC" [formControl]="clientControl" />
-	<mat-autocomplete #clientAC="matAutocomplete" [displayWith]="displayMission" (optionSelected)="updateSelection($event)">
-		<mat-option *ngFor="let mission of filteredMissions | async" [value]="mission">
-			<span>{{mission.title}}</span>
-			<small>({{mission.label}})</small>
-			</mat-option>
-	</mat-autocomplete>
-</mat-form-field>
+<field-combobox [(selection)]="selection" label="Mission"
+	[filter]="filterMission" [display]="displayMission">
+	<ng-template let-company #fieldOption>
+		<span>{{ company.title }}</span>
+		<small>({{ company.label }})</small>
+	</ng-template>
+</field-combobox>

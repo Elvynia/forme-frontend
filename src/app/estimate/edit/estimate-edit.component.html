@@ -1,6 +1,6 @@
 <entity-edit [id]="id" createTitle="Créer un devis" updateTitle="Mettre un devis à jour">
 	<ng-template let-estimate #formContent>
-		<app-company-combobox [(selection)]="estimate.client"></app-company-combobox>
+		<company-combobox [(selection)]="estimate.client"></company-combobox>
 		<mat-form-field>
 			<input matInput type="number" name="amount" placeholder="Montant"
 				[(ngModel)]="estimate.amount" min="O" step=0.05 required />

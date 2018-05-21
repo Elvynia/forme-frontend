@@ -1,0 +1,9 @@
+<mat-form-field>
+    <input matInput name="entityId" [placeholder]="label" [(ngModel)]="selection"
+        [matAutocomplete]="entityAC" [formControl]="entityControl" />
+    <mat-autocomplete #entityAC="matAutocomplete" [displayWith]="display" (optionSelected)="updateSelection($event)">
+        <mat-option *ngFor="let entity of filteredEntities | async" [value]="entity">
+            <ng-container *ngTemplateOutlet="fieldOption; context: { $implicit: entity }"></ng-container>
+        </mat-option>
+    </mat-autocomplete>
+</mat-form-field>

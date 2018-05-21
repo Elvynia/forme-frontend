@@ -1,6 +1,6 @@
 <h2>{{ new ? 'Créer un nouvel événement' : 'Mettre un événement à jour' }}</h2>
 <form (ngSubmit)="submit(model)" #model="ngForm">
-	<app-mission-combobox [(selection)]="event.mission"></app-mission-combobox>
+	<mission-combobox [(selection)]="event.mission"></mission-combobox>
 	<field-date [(selection)]="event.mdStart" label="Date de début"
 		name="start"></field-date>
 	<field-date [(selection)]="event.mdEnd" label="Date de fin"

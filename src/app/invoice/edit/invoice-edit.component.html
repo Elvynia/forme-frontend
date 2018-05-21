@@ -1,6 +1,6 @@
 <entity-edit [id]="id" createTitle="Créer une facture" updateTitle="Mettre une facture à jour">
 	<ng-template let-invoice #formContent>
-		<app-company-combobox [(selection)]="invoice.client"></app-company-combobox>
+		<company-combobox [(selection)]="invoice.client"></company-combobox>
 		<mat-form-field>
 			<input matInput type="number" id="amount" name="amount" placeholder="Montant" 
 				[(ngModel)]="invoice.amount" min="O" step="0.05" required />
