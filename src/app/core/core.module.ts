@@ -5,7 +5,7 @@ import { FieldCheckComponent, FieldDateComponent } from './field';
 import { FormsModule } from '@angular/forms';
 import { Config } from './config';
 import { AccountService } from './account/account.service';
-import { AccountAdminComponent } from './account/admin/account-admin.component';
+import { AccountManagementComponent } from './account/management/account-management.component';
 import { AccountEditComponent } from './account/edit/account-edit.component';
 import { AccountListComponent } from './account/list/account-list.component';
 import { LoginComponent } from './login/login.component';
@@ -13,6 +13,7 @@ import { AuthGuard } from './auth/auth-gard';
 import { AuthService } from './auth/auth.service';
 import { Account } from './account/account';
 import { CoreMaterialModule } from './core-material.module';
+import { RoleService } from './role/role.service';
 
 @NgModule({
     imports: [
@@ -27,7 +28,7 @@ import { CoreMaterialModule } from './core-material.module';
         EntityEditComponent,
         FieldCheckComponent,
         FieldDateComponent,
-        AccountAdminComponent,
+        AccountManagementComponent,
         AccountEditComponent,
         AccountListComponent,
         LoginComponent
@@ -42,7 +43,7 @@ import { CoreMaterialModule } from './core-material.module';
         EntityEditComponent,
         FieldCheckComponent,
         FieldDateComponent,
-        AccountAdminComponent,
+        AccountManagementComponent,
         AccountEditComponent,
         AccountListComponent,
         LoginComponent,
@@ -57,6 +58,7 @@ export class CoreModule {
             ngModule: CoreModule,
             providers: [
                 { provide: Config, useValue: config },
+                RoleService,
                 AccountService,
                 AuthGuard,
                 AuthService,

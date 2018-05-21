@@ -1,35 +1,15 @@
-<h2>{{ new ? 'Créer un nouveau compte' : 'Mettre un compte à jour' }}</h2>
-<form (ngSubmit)="submit(model)" #model="ngForm" [ngClass]="{'submitted': model.form.valid}">
-	<mat-form-field>
-		<input matInput name="username" placeholder="Nom d'utilisateur"
-			[(ngModel)]="account.username" required />
-	</mat-form-field>
-	<ng-container *ngIf="!new">
-		<mat-checkbox [(ngModel)]="updatePassword" [ngModelOptions]="{standalone: true}">
-			Changer le mot de passe
-		</mat-checkbox>
-	</ng-container>
-	<ng-container *ngIf="new || updatePassword">
+<entity-edit [id]="id" createTitle="Créer un utilisateur" updateTitle="Mettre un utilisateur à jour">
+	<ng-template let-account #formContent>
 		<mat-form-field>
-			<input matInput name="password" placeholder="Mot de passe"
-				[(ngModel)]="account.password" required />
+			<input matInput name="username" placeholder="Nom d'utilisateur"
+				[(ngModel)]="account.username" required />
 		</mat-form-field>
-	</ng-container>
-	<mat-form-field>
-		<mat-select name="role" [(ngModel)]="account.role" placeholder="Role"
-			[compareWith]="compareRoles">
-			<mat-option *ngFor="let role of roles" [value]="role">
-				{{role.name}}
-			</mat-option>
-		</mat-select>
-	</mat-form-field>
-	<div>
-		<label>Responsabilités</label>
-		<mat-selection-list #companiesSelect>
-			<mat-list-option *ngFor="let company of companies" [value]="company">
-				<span>{{ company.name }} ({{ company.trigram }})</span>
-			</mat-list-option>
-		</mat-selection-list>
-	</div>
-	<button mat-raised-button color="primary" [disabled]="!model.form.valid">Valider</button>
-</form>
+		<ng-container *ngIf="!account.id">
+			<mat-form-field>
+				<input matInput name="password" placeholder="Mot de passe"
+					[(ngModel)]="account.password" required />
+			</mat-form-field>
+		</ng-container>
+		ROLE: {{ account.role?.name }}
+	</ng-template>
+</entity-edit>

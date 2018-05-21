@@ -17,20 +17,16 @@ export class AccountListComponent {
 	@Input() filter: (item) => boolean;
 	@Input() filterContext: any;
 	@Input('columns') displayedColumns;
-	@Output() onEdit: EventEmitter<Account>;
+	@Output() onSelect: EventEmitter<Account>;
 
 	constructor(private accountService: AccountService) {
-		this.onEdit = new EventEmitter();
+		this.onSelect = new EventEmitter();
 		this.listTitle = 'Tous les comptes';
 		this.displayedColumns = ['id', 'username', 'role', 'actions'];
 	}
 
-	editAccount(account: Account) {
-		this.onEdit.next(account);
-	}
-
-	deleteAccount(account: Account) {
-		this.accountService.delete(account);
+	select(account: Account) {
+		this.onSelect.next(account);
 	}
 
 }
