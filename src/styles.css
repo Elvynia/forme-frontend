@@ -91,3 +91,8 @@ mat-table mat-row mat-cell.mat-column-address {
 div.mat-menu-content button {
 	width: 100%;
 }
+
+mat-icon:hover {
+	cursor: pointer;
+	transform: scale(1.1);
+}

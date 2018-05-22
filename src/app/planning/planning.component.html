@@ -12,7 +12,9 @@
 	<span>></span>
 </div>
 <div class="planning-toolbar">
-		ACTIONS...
+	<mat-icon color="primary" (click)="deleteEvent()">delete</mat-icon>
+	<mat-icon color="primary" (click)="modifyEvent()">edit</mat-icon>
+	<mat-icon color="primary" (click)="addEvent()">add</mat-icon>
 </div>
 <ng-template
 	#planningCell

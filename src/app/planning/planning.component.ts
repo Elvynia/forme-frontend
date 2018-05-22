@@ -18,7 +18,7 @@ import { EventService } from '../event.service';
 export class PlanningComponent implements OnInit {
 	calendars: Array<Calendar>;
 	events: Array<MissionEvent>;
-	selectedEvents: Array<MissionEvent>;
+	selectedEvent: MissionEvent;
 	newEvent: MissionEvent;
 	@Input() monthOffset: number;
 
@@ -27,7 +27,6 @@ export class PlanningComponent implements OnInit {
 		private router: Router) {
 		this.monthOffset = 0;
 		this.calendars = new Array();
-		this.selectedEvents = new Array();
 		this.newEvent = new MissionEvent();
 		this.newEvent.mdStart = null;
 		this.newEvent.mdEnd = null;
@@ -48,13 +47,11 @@ export class PlanningComponent implements OnInit {
 	}
 
 	onEventSelect(data: any) {
-		let index = this.selectedEvents.findIndex((event:MissionEvent) => event.id === data.event.id);			
-		if (index && index >= 0) {
-			this.selectedEvents.splice(index, 1);
+		if (this.selectedEvent && this.selectedEvent.id === data.event.id) {
+			this.selectedEvent = null;
 		} else {
-			this.selectedEvents.push(data.event);
+			this.selectedEvent = data.event;
 		}
-		// console.log('Selected events : ' + JSON.stringify(this.selectedEvents));
 	}
 
 	onDaySelect(event: any, calendar: Calendar) {
@@ -78,24 +75,14 @@ export class PlanningComponent implements OnInit {
 	}
 
 	modifyEvent() {
-		if (this.selectedEvents && this.selectedEvents[0]) {
-			this.router.navigate(['/event/', this.selectedEvents[0].id]);
-			let current = this.selectedEvents;
-			current.splice(0, 1);
-			this.selectedEvents = current.slice();
+		if (this.selectedEvent) {
+			this.router.navigate(['/event/', this.selectedEvent.id]);
 		}
 	}
 
-	deleteEvents() {
-		if (this.selectedEvents) {
-			for (let i = 0; i < this.selectedEvents.length; ++i) {
-				let toDelete = this.selectedEvents[i];
-				this.eventService.delete(toDelete);
-				let index = this.events.findIndex((event:MissionEvent) => event.id === toDelete.id);
-				this.events.splice(index, 1);
-			}
-			this.selectedEvents = new Array();
-			this.recalculateView();
+	deleteEvent() {
+		if (this.selectedEvent) {
+			this.eventService.delete(this.selectedEvent).subscribe(() => this.eventService.list());
 		}
 	}
 
