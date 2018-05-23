@@ -7,7 +7,7 @@
         {{ entity.label }}
     </ng-template>
     <ng-template let-entity #colInvoiceClient>
-        <app-company-ref [id]="entity.client.id"></app-company-ref>
+        <app-company-ref [id]="entity.client?.id"></app-company-ref>
     </ng-template>
     <ng-template let-entity #colInvoiceCreationDate>
         {{ entity.creationDate | date:'dd/MM/yyyy' }}

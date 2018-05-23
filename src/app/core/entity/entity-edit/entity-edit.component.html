@@ -1,5 +1,5 @@
 <h2>
-    <ng-container *ngIf="entity; else elseTpl">{{ updateTitle }}</ng-container>
+    <ng-container *ngIf="entity?.id; else elseTpl">{{ updateTitle }}</ng-container>
     <ng-template #elseTpl>{{ createTitle }}</ng-template>
 </h2>
 <form (ngSubmit)="submit(model)" #model="ngForm">

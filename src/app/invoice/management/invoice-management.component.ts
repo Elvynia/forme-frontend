@@ -29,7 +29,7 @@ export class InvoiceManagementComponent implements OnInit {
         this.selectedId = invoice.id;
     }
 
-    @HostListener('body:click', ['$event'])
+    // TODO: Call on edit cancel.
     cancelSelection(event: MouseEvent) {
         this.selectedId = undefined;
     }

@@ -6,6 +6,20 @@
 	bottom: 0;
 }
 
+div.header {
+	display: inline-flex;
+}
+
+div.header mat-icon {
+	font-size: 32px;
+	padding-top: 20px;
+	margin-left: 5px;
+}
+
+input[type=file] {
+	display: none;
+}
+
 mat-row[matRipple] {
 	cursor: pointer;
 }

@@ -14,6 +14,11 @@ import { CompanyService } from '../company.service';
 })
 export class CompanyComboboxComponent {
 	@Input() selection: Company;
+	@Output() selectionChange: EventEmitter<Company>;
+
+	constructor() {
+		this.selectionChange = new EventEmitter();
+	}
 
 	filterCompany = function(company: Company) {
 		let context: any = this;

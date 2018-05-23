@@ -1,4 +1,4 @@
-<field-combobox [(selection)]="selection" label="Société"
+<field-combobox [(selection)]="selection" label="Société" (selectionChange)="selectionChange.emit($event)"
 	[filter]="filterCompany" [display]="displayCompany">
 	<ng-template let-company #fieldOption>
 		<span>{{ company.name }}</span>

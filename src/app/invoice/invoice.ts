@@ -14,10 +14,7 @@ export class Invoice implements Entity {
 	_travelCosts: boolean;
 	label: string;
 
-	constructor(id?: number) {
-		this.id = id;
-		this.mdCreation = moment();
-		this.mdReception = moment();
+	constructor() {
 		this.prefixLabel();
 	}
 
@@ -57,7 +54,9 @@ export class Invoice implements Entity {
 	}
 
 	public set creationDate(time: number) {
-		this.mdCreation = moment(time);
+		if (time) {
+			this.mdCreation = moment(time);
+		}
 	}
 
 	public get receptionDate() {
@@ -65,7 +64,9 @@ export class Invoice implements Entity {
 	}
 
 	public set receptionDate(time: number) {
-		this.mdReception = moment(time);
+		if (time) {
+			this.mdReception = moment(time);
+		}
 	}
 
 	toJSON() {

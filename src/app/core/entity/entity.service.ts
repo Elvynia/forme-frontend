@@ -18,7 +18,7 @@ export abstract class EntityService<ENTITY extends Entity> {
     return this.subject.asObservable();
   }
 
-  public get headers(): HttpHeaders {
+  protected get headers(): HttpHeaders {
     return this._headers;
   }
 
@@ -43,6 +43,16 @@ export abstract class EntityService<ENTITY extends Entity> {
       .map((event: Event) => event.data);
   }
 
+  exportData(entities: Array<ENTITY>): Array<any> {
+    return entities;
+  }
+
+  importData(data: Array<any>) {
+    data.forEach((entity) => {
+      this.create(entity);
+    });
+  }
+
   create(entity: ENTITY): Observable<ENTITY> {
     this.httpClient.post(this.apiPath, entity, {headers: this.headers})
       .subscribe((entity) => {
@@ -65,7 +75,8 @@ export abstract class EntityService<ENTITY extends Entity> {
         .subscribe((entity: any) => {
       this.subject.next(new Event(EVENT.GET, this.getNew().clone(entity)));
     });
-    return Observable.merge(this.eventsByType(EVENT.GET), this.eventsByType(EVENT.UPDATE));
+    return Observable.merge(this.eventsByType(EVENT.GET), this.eventsByType(EVENT.UPDATE))
+      .filter((entity) => entity.id === id);
   }
 
   abstract getNew(): ENTITY;

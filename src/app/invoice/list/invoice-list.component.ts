@@ -21,7 +21,7 @@ export class InvoiceListComponent {
 
 	constructor() {
 		this.listTitle = 'Toutes les factures';
-		this.displayedColumns = ['id', 'client', 'label', 'amount', 'creationDate', 'pending', 'received', 'receptionDate'];
+		this.displayedColumns = ['id', 'client', 'label', 'amount', 'creationDate', 'pending', 'received', 'receptionDate', 'travelCosts'];
 		this.onSelect = new EventEmitter();
 	}
 

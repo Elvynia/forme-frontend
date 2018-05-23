@@ -1,8 +1,9 @@
 <div class="table-wrapper">
 	<div class="header">
-		<h2>
-			{{ listTitle || 'Tous les éléments' }}
-		</h2>
+		<h2>{{ listTitle || 'Tous les éléments' }}</h2>
+		<mat-icon color="primary" (click)="fileInput.click()">attach_file</mat-icon>
+		<mat-icon color="primary" (click)="exportCsv()">move_to_inbox</mat-icon>
+		<input type="file" multiple="false" (change)="onFileChange($event)" #fileInput/>
 	</div>
 	<mat-table class="entityTable" [dataSource]="dataSource" matSort>
 		<ng-container *ngFor="let column of columns" [matColumnDef]="column.name">

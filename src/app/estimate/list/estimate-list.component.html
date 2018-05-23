@@ -4,7 +4,7 @@
 		{{ entity.id }}
 	</ng-template>
 	<ng-template let-entity #colEstimateClient>
-		<app-company-ref [id]="entity.client.id"></app-company-ref>
+		<app-company-ref [id]="entity.client?.id"></app-company-ref>
 	</ng-template>
 	<ng-template let-entity #colEstimateDate>
 		{{ entity.date | date:'dd/MM/yyyy' }}
