@@ -1,16 +1,7 @@
 <entity-list [entityColumns]="displayedColumns" [listTitle]="listTitle" (onSelect)="select($event)"
 	[filter]="filter" [filterContext]="filterContext">
-	<ng-template let-entity #colMissionId>
-		{{ entity.id }}
-	</ng-template>
 	<ng-template let-entity #colMissionClient>
 		<app-company-ref [id]="entity.client?.id"></app-company-ref>
-	</ng-template>
-	<ng-template let-entity #colMissionLabel>
-		{{ entity.label }}
-	</ng-template>
-	<ng-template let-entity #colMissionTitle>
-		{{ entity.title }}
 	</ng-template>
 	<ng-template let-entity #colMissionDuration>
 		{{ entity.duration / 7 }} ({{ entity.duration }}h)
@@ -18,16 +9,10 @@
 	<ng-template let-entity #colMissionTjm>
 		{{ entity.tjm }} €/j
 	</ng-template>
-	<ng-template let-entity #colMissionType>
-		{{ entity.type }}
-	</ng-template>
 	<ng-template let-entity #colMissionTravelCosts>
 		<field-check [checked]="entity.travelCosts"></field-check>
 	</ng-template>
 	<ng-template let-entity #colMissionClosed>
 		<field-check [checked]="entity.closed"></field-check>
-	</ng-template>
-	<ng-template let-entity #colMissionPlace>
-		{{ entity.place }}
 	</ng-template>
 </entity-list>

@@ -1,8 +1,5 @@
 <entity-list [listTitle]="listTitle" [entityColumns]="displayedColumns" (onSelect)="select($event)"
 	[filter]="filter" [filterContext]="filterContext">
-	<ng-template let-entity #colEstimateId>
-		{{ entity.id }}
-	</ng-template>
 	<ng-template let-entity #colEstimateClient>
 		<app-company-ref [id]="entity.client?.id"></app-company-ref>
 	</ng-template>

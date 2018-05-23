@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "postversion": "git push --follow-tags",
-    "start": "ng serve",
-    "gen": "ng generate"
+    "postinstall": "npm run build",
+    "start": "node server.js",
+    "build": "ng build --prod --build-optimizer"
   },
   "private": true,
   "dependencies": {

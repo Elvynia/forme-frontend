@@ -9,7 +9,10 @@
 		<ng-container *ngFor="let column of columns" [matColumnDef]="column.name">
 				<mat-header-cell *matHeaderCellDef mat-sort-header>{{ column.label }}</mat-header-cell>
 				<mat-cell *matCellDef="let row">
-					<ng-container *ngTemplateOutlet="getTemplate(column.template); context: { $implicit: row }"></ng-container>
+					<ng-container *ngTemplateOutlet="getTemplate(column.template) || defaultTpl; context: { $implicit: row, field: column.name }"></ng-container>
+					<ng-template let-entity let-field="field" #defaultTpl>
+						{{ entity[field] }}
+					</ng-template>
 				</mat-cell>
 		</ng-container>
 		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

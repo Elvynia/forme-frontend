@@ -1,5 +1,5 @@
 export const environment = {
-  production: true,
-  apiUrl: 'http://heroku/forme/api',
-  loginUrl: 'http://localhost:8080/forme/login'
+    production: true,
+    apiUrl: 'https://forme-backend.herokuapp.com/api',
+    loginUrl: 'https://forme-backend.herokuapp.com/login'
 };

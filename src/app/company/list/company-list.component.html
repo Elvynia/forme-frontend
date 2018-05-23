@@ -1,26 +1,5 @@
 <entity-list [entityColumns]="displayedColumns" [listTitle]="listTitle" (onSelect)="select($event)"
 	[filter]="filter" [filterContext]="filterContext">
-	<ng-template let-entity #colCompanyId>
-		{{ entity.id }}
-	</ng-template>
-	<ng-template let-entity #colCompanyTrigram>
-		{{ entity.trigram }}
-	</ng-template>
-	<ng-template let-entity #colCompanyName>
-		{{ entity.name }}
-	</ng-template>
-	<ng-template let-entity #colCompanySiren>
-		{{ entity.siren }}
-	</ng-template>
-	<ng-template let-entity #colCompanySiret>
-		{{ entity.siret }}
-	</ng-template>
-	<ng-template let-entity #colCompanyRcs>
-		{{ entity.rcs }}
-	</ng-template>
-	<ng-template let-entity #colCompanyAddress>
-			{{ entity.address }}
-		</ng-template>
 	<ng-template let-entity #colCompanyTravelCosts>
 		<field-check [checked]="entity.travelCosts"></field-check>
 	</ng-template>
