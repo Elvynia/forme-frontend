@@ -34,11 +34,13 @@ export class AppComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.accountService.list()
-		.map((accounts: FormeAccount[]) => 
-			accounts.filter((account: FormeAccount) => account.isClient))
-		.subscribe((accounts) =>
-			this.clients = accounts);
+		this.authService.loggedIn.subscribe(() => {
+			this.accountService.list()
+			.map((accounts: FormeAccount[]) => 
+				accounts.filter((account: FormeAccount) => account.isClient))
+			.subscribe((accounts) =>
+				this.clients = accounts);
+		});
 		this.registerIcons();
 		this.router.events
 		.filter(event => event instanceof NavigationEnd)
@@ -76,5 +78,6 @@ export class AppComponent implements OnInit {
 			this.iconService.addSvgIcon('brand_' + i, 
 				this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/brand_' + i + '.svg'));
 		}
+		// TODO: Register other svg images.
 	}
 }

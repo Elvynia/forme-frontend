@@ -1,7 +1,7 @@
 <entity-list [listTitle]="listTitle" [entityColumns]="displayedColumns" (onSelect)="select($event)"
     [filter]="filter" [filterContext]="filterContext">
     <ng-template let-entity #colInvoiceClient>
-        <app-company-ref [id]="entity.client?.id"></app-company-ref>
+        <company-ref [id]="entity.client?.id"></company-ref>
     </ng-template>
     <ng-template let-entity #colInvoiceCreationDate>
         {{ entity.creationDate | date:'dd/MM/yyyy' }}

@@ -1,7 +1,7 @@
 <entity-list [entityColumns]="displayedColumns" [listTitle]="listTitle" (onSelect)="select($event)"
 	[filter]="filter" [filterContext]="filterContext">
 	<ng-template let-entity #colMissionClient>
-		<app-company-ref [id]="entity.client?.id"></app-company-ref>
+		<company-ref [id]="entity.client?.id"></company-ref>
 	</ng-template>
 	<ng-template let-entity #colMissionDuration>
 		{{ entity.duration / 7 }} ({{ entity.duration }}h)

@@ -6,7 +6,7 @@ import { Company } from '../company';
 import { CompanyService } from '../company.service';
 
 @Component({
-  selector: 'app-company-ref',
+  selector: 'company-ref',
   templateUrl: './company-ref.component.html',
   styleUrls: ['./company-ref.component.css']
 })
