@@ -10,7 +10,7 @@ import { CompanyService } from '../../company/company.service';
 	styleUrls: ['./invoice-docgen.component.css']
 })
 export class InvoiceDocgenComponent implements OnInit {
-	@Input() invoice: Invoice;
+	@Input() invoice: any;
 	line: any;
 	lines: Array<any>;
 	companies: Array<Company>;

@@ -7,6 +7,7 @@ export class Invoice implements Entity {
 	id: number;
 	amount: number;
 	client: Company;
+	freelance: Company;
 	mdCreation: moment.Moment;
 	pending: boolean;
 	received: boolean;

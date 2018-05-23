@@ -11,7 +11,8 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class EntityEditComponent implements OnInit {
     private subscription: Subscription;
-    private entity: any;
+    
+    entity: any;
 
     @Input() id: number;
     @Input() createTitle: string;

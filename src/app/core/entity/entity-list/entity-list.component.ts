@@ -25,9 +25,8 @@ export interface ListColumn {
 })
 export class EntityListComponent implements OnInit, OnChanges, OnDestroy {
     private subscriptions: Array<Subscription>;
-    private dataSource: FormeDataSource<any>;
-    private fileControl: FormControl;
-    private file: any;
+    
+    dataSource: FormeDataSource<any>;
 
     @Input() listTitle: string;
     @Input() columns: Array<ListColumn>;
@@ -49,7 +48,6 @@ export class EntityListComponent implements OnInit, OnChanges, OnDestroy {
         this.columns = new Array();
         this.subscriptions = new Array();
         this.onSelect = new EventEmitter();
-        this.fileControl = new FormControl();
     }
 
     ngOnInit() {

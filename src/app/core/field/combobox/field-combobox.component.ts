@@ -14,12 +14,15 @@ import { EntityService } from '../../entity/entity.service';
 })
 export class FieldComboboxComponent implements OnInit {
     private entities: Array<Entity>;
-    private entityControl: FormControl;
-    private filteredEntities: Observable<Entity[]>;
+
+    entityControl: FormControl;
+    filteredEntities: Observable<Entity[]>;
+
     @Input() label: string;
     @Input() selection: Entity;
     @Input() filter: (entity: Entity) => boolean;
     @Input() display: (entity: Entity) => string;
+    
     @Output() selectionChange: EventEmitter<Entity>;
 
     @ContentChild('fieldOption') fieldOption;

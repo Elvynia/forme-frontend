@@ -10,8 +10,9 @@ import { EntityService } from '../entity.service';
 })
 export class EntityCardComponent implements OnInit, OnChanges {
     private subscription: Subscription;
-    private hideTitle: boolean;
-    private entity: Entity;
+    
+    hideTitle: boolean;
+    entity: Entity;
     
     @Input() id: number;
     @Input() avatarUrl: string;

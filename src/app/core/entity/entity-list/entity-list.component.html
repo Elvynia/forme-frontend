@@ -24,8 +24,8 @@
 			<mat-spinner></mat-spinner>
 		</div>
 	</ng-container>
-	<div class="noData" [hidden]="dataSource._length.value > 0">No elements to display</div>
-	<div [hidden]="dataSource._length.value === 0">
+	<div class="noData" [hidden]="(dataSource.length | async) > 0">No elements to display</div>
+	<div [hidden]="(dataSource.length | async) === 0">
 		<mat-paginator [length]="dataSource.length | async"
 			[pageIndex]="0"
 			[pageSize]="5">
