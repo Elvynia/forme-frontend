@@ -9,11 +9,11 @@
 				[(ngModel)]="company.trigram" required>
 		</mat-form-field>
 		<mat-form-field>
-			<input matInput name="siren" placeholder="SIREN"
+			<input matInput name="siren" placeholder="SIREN" (paste)="removeSpacing($event, 9)"
 				[(ngModel)]="company.siren" minlength="9" maxlength="9">
 		</mat-form-field>
 		<mat-form-field>
-			<input matInput name="siret" placeholder="SIRET"
+			<input matInput name="siret" placeholder="SIRET" (paste)="removeSpacing($event, 14)"
 				[(ngModel)]="company.siret" minlength="14" maxlength="14">
 		</mat-form-field>
 		<mat-form-field>

@@ -14,4 +14,12 @@ import { EntityService } from '../../core';
 export class CompanyEditComponent {
     @Input() id: number;
 
+    removeSpacing(event: ClipboardEvent, maxLength: number) {
+        let data = event.clipboardData.getData("text/plain");
+        let trimmed = data.replace(/\s/g, '');
+        if (trimmed && data !== trimmed) {
+            event.preventDefault();
+            (<HTMLInputElement>event.target).value = trimmed.slice(0, maxLength);
+        }
+    }
 }
