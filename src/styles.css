@@ -2,6 +2,7 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 /*@import '~@angular/material/prebuilt-themes/purple-green.css';*/
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 @import '~angular-calendar/dist/css/angular-calendar.css';
 
 html, body {

@@ -1,7 +1,7 @@
 <ng-container *ngIf="entity">
     <mat-card>
         <mat-card-header [hidden]="hideTitle">
-            <div mat-card-avatar class="entity-details-icon" [ngStyle]="{ 'background-image': 'url(' + avatarUrl + ')'}"></div>
+            <mat-icon mat-card-avatar [svgIcon]="avatar"></mat-icon>
             <mat-card-title>
                 <ng-container *ngTemplateOutlet="cardTitle; context: { $implicit: entity }"></ng-container>
             </mat-card-title>

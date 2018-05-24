@@ -74,10 +74,10 @@ export class AppComponent implements OnInit {
 	}
 
 	private registerIcons() {
-		for (let i = 0; i < 3; ++i) {
-			this.iconService.addSvgIcon('brand_' + i, 
-				this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/brand_' + i + '.svg'));
+		let icons = [ 'company', 'estimate', 'mission', 'invoice', 'brand_1'];
+		for (let icon of icons) {
+			this.iconService.addSvgIcon(icon, 
+				this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/' + icon + '.svg'));
 		}
-		// TODO: Register other svg images.
 	}
 }

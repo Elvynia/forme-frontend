@@ -15,7 +15,7 @@ export class EntityCardComponent implements OnInit, OnChanges {
     entity: Entity;
     
     @Input() id: number;
-    @Input() avatarUrl: string;
+    @Input() avatar: string;
     @Input() actions: Array<string>;
     @Input() deleteAlert: boolean;
 
