@@ -2,7 +2,7 @@ import { EventEmitter} from '@angular/core';
 
 import { BehaviorSubject } from 'rxjs/Rx';
 
-export class AngularSubject extends EventEmitter<any> {
+export class OutputSubject extends EventEmitter<any> {
 	private _onSubscribe: BehaviorSubject<boolean>;
 
 	constructor() {
