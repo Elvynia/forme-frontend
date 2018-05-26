@@ -20,16 +20,16 @@ export class InvoiceService extends EntityService<Invoice> {
 	}
 
 	exportData(data: Array<Invoice>): Array<any> {
-		return data.map((invoice) => <any>{
-			id: invoice.id,
-			client: invoice.client ? invoice.client.name : CELL_DEFAULT_VALUE,
-			label: invoice.label,
-			amount: invoice.amount,
-			creationDate: invoice.mdCreation.format(CELL_DATE_FORMAT),
-			pending: invoice.pending || false,
-			received: invoice.received || false,
-			receptionDate: invoice.mdReception ? invoice.mdReception.format(CELL_DATE_FORMAT) : CELL_DEFAULT_VALUE,
-			travelCosts: invoice.travelCosts || false
+		return data.map((i) => <any>{
+			id: i.id,
+			client: i.client ? i.client.name : CELL_DEFAULT_VALUE,
+			label: i.label,
+			amount: i.amount,
+			creationDate: i.mdCreation.format(CELL_DATE_FORMAT),
+			pending: i.pending || false,
+			received: i.received || false,
+			receptionDate: i.mdReception ? i.mdReception.format(CELL_DATE_FORMAT) : CELL_DEFAULT_VALUE,
+			travelCosts: i.travelCosts || false
 		});
 	}
 
