@@ -9,4 +9,7 @@
 	<ng-template let-entity #colEstimateAmount>
 		{{ entity.amount | currency:'€' }}
 	</ng-template>
+	<ng-template let-entity #colEstimateSigned>
+		<field-check [checked]="entity.signed"></field-check>
+	</ng-template>
 </entity-list>
