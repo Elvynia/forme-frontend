@@ -51,18 +51,21 @@ export class EntityListComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     ngOnInit() {
-        this.subscriptions.push(this.authService.loggedIn.subscribe(() => {
-            this.subscriptions.push(this.entityService.list()
-                .subscribe((data: any) => this.dataSource && this.dataSource.publish(data)));
-            this.subscriptions.push(this.entityService.eventsByType(EVENT.ADD)
-                .subscribe((data: any) => this.dataSource.add(data)));
-            this.subscriptions.push(this.entityService.eventsByType(EVENT.DELETE)
-                .subscribe((data: any) => this.dataSource && this.dataSource.update(data.id)));
-            this.subscriptions.push(this.entityService.eventsByType(EVENT.UPDATE)
-                .subscribe((data: any) => this.dataSource && this.dataSource.update(data.id, data)));
-        }));
         this.dataSource = new FormeDataSource(this.paginator, this.sort);
         this.refreshFilter();
+        setTimeout(() => {
+            // Defer to avoid messing with CD on data source properties.
+            this.subscriptions.push(this.authService.loggedIn.subscribe(() => {
+                this.subscriptions.push(this.entityService.list()
+                    .subscribe((data: any) => this.dataSource && this.dataSource.publish(data)));
+                this.subscriptions.push(this.entityService.eventsByType(EVENT.ADD)
+                    .subscribe((data: any) => this.dataSource.add(data)));
+                this.subscriptions.push(this.entityService.eventsByType(EVENT.DELETE)
+                    .subscribe((data: any) => this.dataSource && this.dataSource.update(data.id)));
+                this.subscriptions.push(this.entityService.eventsByType(EVENT.UPDATE)
+                    .subscribe((data: any) => this.dataSource && this.dataSource.update(data.id, data)));
+            }));
+        });
     }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -105,7 +108,7 @@ export class EntityListComponent implements OnInit, OnChanges, OnDestroy {
             reader.onload = (e: any) => {
                 /* read workbook */
                 const bstr: string = e.target.result;
-                const wb: XLSX.WorkBook = XLSX.read(bstr, {type: 'binary', raw: true});
+                const wb: XLSX.WorkBook = XLSX.read(bstr, {codepage: 65001, type: 'binary', raw: true});
 
                 /* grab first sheet */
                 const wsname: string = wb.SheetNames[0];

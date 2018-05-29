@@ -20,7 +20,7 @@ export class CompanyService extends EntityService<Company> {
 	exportData(data: Array<Company>): Array<any> {
 		return data.map((c) => <any>{
 			id: c.id,
-			address: c.address,
+			address: c.address.join('\n'),
 			name: c.name,
 			trigram: c.trigram,
 			siren: c.siren,
@@ -32,12 +32,13 @@ export class CompanyService extends EntityService<Company> {
 	importData(data: Array<any>) {
 		let companies = data.map((obj) => {
 			let company = new Company();
-			company.address = obj.address;
+			company.address = obj.address.split('\n');
 			company.name = obj.name;
 			company.trigram = obj.trigram;
 			company.siren = obj.siren;
 			company.siret = obj.siret;
 			company.rcs = obj.rcs;
+			return company;
 		});
 		super.importData(companies);
 	}

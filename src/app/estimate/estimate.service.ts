@@ -37,6 +37,7 @@ export class EstimateService extends EntityService<Estimate> {
 			estimate.client.id = obj.clientId;
 			estimate.mdCreation = moment(obj.date, CELL_DATE_FORMAT);
 			estimate.signed = obj.signed;
+			return estimate;
 		});
 		super.importData(estimates);
 	}
