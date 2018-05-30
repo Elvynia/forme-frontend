@@ -15,6 +15,8 @@ import { Account } from './account/account';
 import { CoreMaterialModule } from './core-material.module';
 import { RoleService } from './role/role.service';
 import { FieldComboboxComponent } from './field/combobox/field-combobox.component';
+import { FormeTemplateDirective } from './forme-template.directive';
+import { FormeTemplateService } from './forme-template.service';
 
 @NgModule({
     imports: [
@@ -25,6 +27,7 @@ import { FieldComboboxComponent } from './field/combobox/field-combobox.componen
     ],
     declarations: [
         EntityListComponent,
+        FormeTemplateDirective,
         EntityColumnsDirective,
         EntityCardComponent,
         EntityEditComponent,
@@ -51,7 +54,8 @@ import { FieldComboboxComponent } from './field/combobox/field-combobox.componen
         AccountListComponent,
         LoginComponent,
         // Directives
-        EntityColumnsDirective,
+        FormeTemplateDirective,
+        EntityColumnsDirective
     ]
 })
 export class CoreModule {
@@ -61,6 +65,7 @@ export class CoreModule {
             ngModule: CoreModule,
             providers: [
                 { provide: Config, useValue: config },
+                FormeTemplateService,
                 RoleService,
                 AccountService,
                 AuthGuard,

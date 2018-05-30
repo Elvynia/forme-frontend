@@ -1,24 +1,24 @@
 <entity-list [listTitle]="listTitle" [entityColumns]="displayedColumns" (onSelect)="select($event)"
     [filter]="filter" [filterContext]="filterContext">
-    <ng-template let-entity #colInvoiceClient>
+    <ng-template let-entity formeTemplate="colInvoiceClient">
         <company-ref [id]="entity.client?.id"></company-ref>
     </ng-template>
-    <ng-template let-entity #colInvoiceCreationDate>
+    <ng-template let-entity formeTemplate="colInvoiceCreationDate">
         {{ entity.creationDate | date:'dd/MM/yyyy' }}
     </ng-template>
-    <ng-template let-entity #colInvoiceAmount>
+    <ng-template let-entity formeTemplate="colInvoiceAmount">
         {{ entity.amount | currency:'€' }}
     </ng-template>
-    <ng-template let-entity #colInvoicePending>
+    <ng-template let-entity formeTemplate="colInvoicePending">
         <field-check [checked]="entity.pending"></field-check>
     </ng-template>
-    <ng-template let-entity #colInvoiceReceived>
+    <ng-template let-entity formeTemplate="colInvoiceReceived">
         <field-check [checked]="entity.received"></field-check>
     </ng-template>
-    <ng-template let-entity #colInvoiceReceptionDate>
+    <ng-template let-entity formeTemplate="colInvoiceReceptionDate">
         {{ entity.receptionDate | date:'dd/MM/yyyy' }}
     </ng-template>
-    <ng-template let-entity #colInvoiceTravelCosts>
+    <ng-template let-entity formeTemplate="colInvoiceTravelCosts">
         <field-check [checked]="entity.travelCosts"></field-check>
     </ng-template>
 </entity-list>

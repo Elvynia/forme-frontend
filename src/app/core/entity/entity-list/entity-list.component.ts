@@ -10,6 +10,7 @@ import { FormeDataSource } from '../../forme-data-source';
 import * as XLSX from 'xlsx';
 import * as moment from 'moment';
 import { FormControl } from '@angular/forms';
+import { FormeTemplateService } from '../../forme-template.service';
 
 export interface ListColumn {
     display: boolean
@@ -44,7 +45,8 @@ export class EntityListComponent implements OnInit, OnChanges, OnDestroy {
         return this.columns.filter((col) => col.display).map((col) => col.name);
     }
 
-    constructor(private authService: AuthService, private entityService: EntityService<any>) {
+    constructor(private authService: AuthService, private entityService: EntityService<any>,
+        private templateService: FormeTemplateService) {
         this.columns = new Array();
         this.subscriptions = new Array();
         this.onSelect = new EventEmitter();
@@ -80,8 +82,7 @@ export class EntityListComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     getTemplate(id: string): TemplateRef<Entity> {
-        // FIXME: Should not use private API...
-        return this.templates ? this.templates.find((template: any) => template._def.references[id]) : null;
+        return this.templateService.getTemplateRef(id);
     }
 
     select(entity: Entity) {

@@ -1,15 +1,15 @@
 <entity-list [listTitle]="listTitle" [entityColumns]="displayedColumns" (onSelect)="select($event)"
 	[filter]="filter" [filterContext]="filterContext">
-	<ng-template let-entity #colEstimateClient>
+	<ng-template let-entity formeTemplate="colEstimateClient">
 		<company-ref [id]="entity.client?.id"></company-ref>
 	</ng-template>
-	<ng-template let-entity #colEstimateDate>
+	<ng-template let-entity formeTemplate="colEstimateDate">
 		{{ entity.date | date:'dd/MM/yyyy' }}
 	</ng-template>
-	<ng-template let-entity #colEstimateAmount>
+	<ng-template let-entity formeTemplate="colEstimateAmount">
 		{{ entity.amount | currency:'€' }}
 	</ng-template>
-	<ng-template let-entity #colEstimateSigned>
+	<ng-template let-entity formeTemplate="colEstimateSigned">
 		<field-check [checked]="entity.signed"></field-check>
 	</ng-template>
 </entity-list>

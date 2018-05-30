@@ -1,6 +1,9 @@
 <entity-list [entityColumns]="displayedColumns" [listTitle]="listTitle" (onSelect)="select($event)"
 	[filter]="filter" [filterContext]="filterContext">
-	<ng-template let-entity #colCompanyTravelCosts>
+	<ng-template let-entity formeTemplate="colCompanyAddress">
+		<div *ngFor="let line of entity.address">{{line}}</div>
+	</ng-template>
+	<ng-template let-entity formeTemplate="colCompanyTravelCosts">
 		<field-check [checked]="entity.travelCosts"></field-check>
 	</ng-template>
 </entity-list>

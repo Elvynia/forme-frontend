@@ -1,15 +1,9 @@
 <entity-list [listTitle]="listTitle" [entityColumns]="displayedColumns" (onSelect)="select($event)"
 	[filter]="filter" [filterContext]="filterContext">
-	<ng-template let-entity #colAccountId>
-		{{ entity.id }}
-	</ng-template>
-	<ng-template let-entity #colAccountUsername>
-		{{ entity.username }}
-	</ng-template>
-	<ng-template let-entity #colAccountRole>
+	<ng-template let-entity formeTemplate="colAccountRole">
 		{{ entity.role.name }}
 	</ng-template>
-	<ng-template let-entity #colAccountActions>
-		ACTIONS...
+	<ng-template let-entity formeTemplate="colAccountActions">
+		ACTIONS TODO...
 	</ng-template>
 </entity-list>
