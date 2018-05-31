@@ -35,7 +35,7 @@ export class EntityColumnsDirective implements OnChanges {
                 this.host.columns.push({
                     name: name,
                     label: name.toUpperCase(),
-                    template: 'col' + this.entityService.getNew().constructor.name + name.charAt(0).toUpperCase() + name.slice(1),
+                    template: 'col' + this.entityService.getNew().getClassName() + name.charAt(0).toUpperCase() + name.slice(1),
                     display: true
                 });
             }

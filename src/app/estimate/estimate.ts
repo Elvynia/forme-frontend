@@ -24,6 +24,10 @@ export class Estimate implements Entity {
 		return this;
 	}
 
+	public getClassName(): string {
+		return "Estimate";
+	}
+
 	public get date() {
 		return this.mdCreation ? this.mdCreation.valueOf() : undefined;
 	}

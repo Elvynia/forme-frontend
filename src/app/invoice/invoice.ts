@@ -32,6 +32,10 @@ export class Invoice implements Entity {
 		return this;
 	}
 
+	public getClassName(): string {
+		return "Invoice";
+	}
+
 	prefixLabel() {
 		if (!this.label) {
 			this.label = this.travelCosts ? 'Frais' : 'Facture';

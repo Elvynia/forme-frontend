@@ -18,4 +18,8 @@ export class Account implements Entity {
 		this.role = account.role;
 		return this;
 	}
+
+	public getClassName(): string {
+		return "Account";
+	}
 }

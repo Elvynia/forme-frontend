@@ -18,6 +18,10 @@ export class Mission implements Entity {
 		this.id = id;
 	}
 
+	public getClassName(): string {
+		return "Mission";
+	}
+
 	public clone(mission: Mission): Mission {
 		this.id = mission.id;
 		this.duration = mission.duration;

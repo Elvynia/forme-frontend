@@ -13,6 +13,10 @@ export class Company implements Entity {
 		this.id = id;
 	}
 
+	public getClassName(): string {
+		return "Company";
+	}
+
 	public clone(company: Company): Company {
 		this.id = company.id;
 		this.address = company.address;

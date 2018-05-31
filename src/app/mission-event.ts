@@ -31,6 +31,10 @@ export class MissionEvent implements Entity {
 		}
 		return instance;
 	}
+
+	public getClassName(): string {
+		return "Event";
+	}
 	
 	public buildColor(primary: string, secondary: string) {
 		this.color = {

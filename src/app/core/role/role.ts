@@ -8,8 +8,13 @@ export class Role implements Entity {
 		this.id = id;
 	}
 
-	public clone(mission: Role): Role {
-		// TODO implements.
-		return null;
+	public clone(role: Role): Role {
+		this.id = role.id;
+		this.name = role.name;
+		return this;
+	}
+
+	public getClassName(): string {
+		return "Role";
 	}
 }

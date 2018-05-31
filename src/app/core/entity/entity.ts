@@ -6,4 +6,6 @@ export abstract class Entity {
     }
 
     public abstract clone(entity: Entity): Entity;
+
+    public abstract getClassName(): string;
 }
